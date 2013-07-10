@@ -1,4 +1,5 @@
 ﻿using System.ServiceProcess;
+using Trellendar.Trello._Impl;
 
 namespace Trellendar.Service
 {
@@ -11,7 +12,7 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
-            new TrelloAPI().Test();
+            new TrelloAPI(new TrelloClient()).Test();
         }
 
         protected override void OnStop()
