@@ -11,6 +11,7 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
+            new TrelloAPI().Test();
         }
 
         protected override void OnStop()
