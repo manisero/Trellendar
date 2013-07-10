@@ -42,7 +42,7 @@ namespace Trellendar.Trello._Impl
 
             if (!parameters.ContainsKey("key"))
             {
-                parameters.Add("key", "key");
+                parameters.Add("key", TrelloKeys.APPLICATION_KEY);
             }
         }
 
