@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Reflection;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Trellendar.Service
 {
@@ -14,14 +11,14 @@ namespace Trellendar.Service
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
+#if !DEBUG
+            ServiceBase.Run(new ServiceBase[] { new Trellendar() });
+#else
+            typeof(Trellendar).GetMethod("OnStart", BindingFlags.Instance | BindingFlags.NonPublic)
+                              .Invoke(new Trellendar(), new object[] { null });
 
-            ServicesToRun = new ServiceBase[] 
-            { 
-                new Trellendar() 
-            };
-
-            ServiceBase.Run(ServicesToRun);
+            Thread.Sleep(Timeout.Infinite);
+#endif
         }
     }
 }
