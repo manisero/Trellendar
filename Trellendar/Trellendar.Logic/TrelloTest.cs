@@ -13,7 +13,7 @@ namespace Trellendar
 
         public void Test()
         {
-            var result = _trelloAPI.GetBoard("4d5ea62fd76aa1136000000c");
+            var result = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
         }
     }
 }
