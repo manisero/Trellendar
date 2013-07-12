@@ -47,7 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\TrelloRequestFailedException.cs" />
+    <Compile Include="Calendar\_Impl\CalendarAPI.cs" />
+    <Compile Include="Calendar\_Impl\CalendarClient.cs" />
+    <Compile Include="Calendar\ICalendarAPI.cs" />
+    <Compile Include="Calendar\ICalendarClient.cs" />
+    <Compile Include="Exceptions\RequestFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trello\ITrelloAPI.cs" />
     <Compile Include="Trello\ITrelloClient.cs" />

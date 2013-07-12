@@ -4,15 +4,15 @@ using System.Net.Http;
 using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Exceptions;
 
-namespace Trellendar.DataAccess.Trello._Impl
+namespace Trellendar.DataAccess.Calendar._Impl
 {
-    public class TrelloClient : ITrelloClient
+    public class CalendarClient : ICalendarClient
     {
         private readonly HttpClient _httpClient;
 
-        public TrelloClient()
+        public CalendarClient()
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://api.trello.com/1/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("https://www.googleapis.com/calendar/v3/") };
         }
 
         public string Get(string resource, IDictionary<string, object> parameters = null)
@@ -22,34 +22,15 @@ namespace Trellendar.DataAccess.Trello._Impl
                 throw new ArgumentNullException("resource");
             }
 
-            IncludeKeyAndTokenParameters(ref parameters);
             var requestUri = FormatRequestUri(resource, parameters);
             var response = _httpClient.GetAsync(requestUri).Result;
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 throw new RequestFailedException(response.StatusCode, response.ReasonPhrase);
             }
 
             return response.Content.ReadAsStringAsync().Result;
-        }
-
-        private void IncludeKeyAndTokenParameters(ref IDictionary<string, object> parameters)
-        {
-            if (parameters == null)
-            {
-                parameters = new Dictionary<string, object>();
-            }
-
-            if (!parameters.ContainsKey("key"))
-            {
-                parameters.Add("key", TrelloKeys.APPLICATION_KEY);
-            }
-
-            if (!parameters.ContainsKey("token"))
-            {
-                parameters.Add("token", TrelloKeys.TOKEN);
-            }
         }
 
         private string FormatRequestUri(string resource, IEnumerable<KeyValuePair<string, object>> parameters)
