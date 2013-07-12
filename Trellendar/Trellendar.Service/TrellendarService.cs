@@ -1,6 +1,6 @@
 ﻿using System.ServiceProcess;
-using Trellendar.Core.Serialization._Impl;
-using Trellendar.DataAccess.Trello._Impl;
+using Trellendar.Service.Bootstrap;
+using Ninject;
 
 namespace Trellendar.Service
 {
@@ -13,7 +13,9 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
-            new TrelloTest(new TrelloAPI(new TrelloClient(), new JsonSerializer())).Test();
+            var kernel = new NinjectBootstrapper().Bootstrap();
+
+            kernel.Get<TrelloTest>().Test();
         }
 
         protected override void OnStop()
