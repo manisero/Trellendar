@@ -1,5 +1,6 @@
 ﻿using System.ServiceProcess;
-using Trellendar.Trello._Impl;
+using Trellendar.Core.Serialization._Impl;
+using Trellendar.DataAccess.Trello._Impl;
 
 namespace Trellendar.Service
 {
@@ -12,7 +13,7 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
-            new TrelloAPI(new TrelloClient()).Test();
+            new TrelloTest(new TrelloAPI(new TrelloClient(), new JsonSerializer())).Test();
         }
 
         protected override void OnStop()

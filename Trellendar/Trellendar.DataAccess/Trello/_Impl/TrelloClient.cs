@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Trellendar.Exceptions;
 using Trellendar.Core.Extensions;
+using Trellendar.DataAccess.Exceptions;
 
-namespace Trellendar.Trello._Impl
+namespace Trellendar.DataAccess.Trello._Impl
 {
     public class TrelloClient : ITrelloClient
     {

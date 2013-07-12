@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Trellendar.Exceptions
+namespace Trellendar.DataAccess.Exceptions
 {
     public class TrelloRequestFailedException : Exception
     {
