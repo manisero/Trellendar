@@ -45,6 +45,11 @@ namespace Trellendar.DataAccess.Trello._Impl
             {
                 parameters.Add("key", TrelloKeys.APPLICATION_KEY);
             }
+
+            if (!parameters.ContainsKey("token"))
+            {
+                parameters.Add("token", TrelloKeys.TOKEN);
+            }
         }
 
         private string FormatRequestUri(string resource, IEnumerable<KeyValuePair<string, object>> parameters)
