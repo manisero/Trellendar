@@ -1,4 +1,5 @@
-﻿using Trellendar.Trello.Domain;
+﻿using Newtonsoft.Json;
+using Trellendar.Trello.Domain;
 
 namespace Trellendar.Trello._Impl
 {
@@ -15,7 +16,7 @@ namespace Trellendar.Trello._Impl
         {
             var board = _trelloClient.Get(string.Format("board/{0}", boardId));
 
-            return new Board();
+            return JsonConvert.DeserializeObject<Board>(board);
         }
 
         public void Test()
