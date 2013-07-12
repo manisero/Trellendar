@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\TrelloRequestFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trello\Domain\Board.cs" />
     <Compile Include="Trello\ITrelloAPI.cs" />
     <Compile Include="Trello\ITrelloClient.cs" />
     <Compile Include="Trello\TrelloKeys.cs" />
