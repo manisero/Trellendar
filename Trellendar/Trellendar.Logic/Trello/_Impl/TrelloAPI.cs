@@ -1,4 +1,6 @@
-﻿namespace Trellendar.Trello._Impl
+﻿using Trellendar.Trello.Domain;
+
+namespace Trellendar.Trello._Impl
 {
     public class TrelloAPI : ITrelloAPI
     {
@@ -9,9 +11,16 @@
             _trelloClient = trelloClient;
         }
 
+        public Board GetBoard(string boardId)
+        {
+            var board = _trelloClient.Get(string.Format("board/{0}", boardId));
+
+            return new Board();
+        }
+
         public void Test()
         {
-            _trelloClient.Get(@"board/4d5ea62fd76aa1136000000c");
+            var result = GetBoard("4d5ea62fd76aa1136000000c");
         }
     }
 }
