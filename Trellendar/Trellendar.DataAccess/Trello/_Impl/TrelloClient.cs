@@ -22,7 +22,7 @@ namespace Trellendar.DataAccess.Trello._Impl
                 throw new ArgumentNullException("resource");
             }
 
-            IncludeKeyParameter(ref parameters);
+            IncludeKeyAndTokenParameters(ref parameters);
             var requestUri = FormatRequestUri(resource, parameters);
             var response = _httpClient.GetAsync(requestUri).Result;
             
@@ -34,7 +34,7 @@ namespace Trellendar.DataAccess.Trello._Impl
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        private void IncludeKeyParameter(ref IDictionary<string, object> parameters)
+        private void IncludeKeyAndTokenParameters(ref IDictionary<string, object> parameters)
         {
             if (parameters == null)
             {
