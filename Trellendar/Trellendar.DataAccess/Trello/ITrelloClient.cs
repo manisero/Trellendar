@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Trellendar.Trello
+namespace Trellendar.DataAccess.Trello
 {
     public interface ITrelloClient
     {

@@ -69,6 +69,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
+      <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
+      <Name>Trellendar.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trellendar.DataAccess\Trellendar.DataAccess.csproj">
+      <Project>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</Project>
+      <Name>Trellendar.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trellendar.Logic\Trellendar.Logic.csproj">
       <Project>{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE}</Project>
       <Name>Trellendar.Logic</Name>

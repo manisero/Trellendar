@@ -1,4 +1,4 @@
-﻿namespace Trellendar.Trello.Domain
+﻿namespace Trellendar.Domain.Trello
 {
     public class Board
     {

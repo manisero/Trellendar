@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Trellendar.Exceptions;
+using Trellendar.Core.Extensions;
+using Trellendar.DataAccess.Exceptions;
 
-namespace Trellendar.Trello._Impl
+namespace Trellendar.DataAccess.Trello._Impl
 {
     public class TrelloClient : ITrelloClient
     {
@@ -52,10 +53,10 @@ namespace Trellendar.Trello._Impl
 
             foreach (var parameter in parameters)
             {
-                formattedParameters.Add(string.Format("{0}={1}", parameter.Key, parameter.Value));
+                formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
             }
 
-            return string.Format("{0}?{1}", resource, string.Join("&", formattedParameters));
+            return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
         }
     }
 }

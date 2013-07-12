@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE}</ProjectGuid>
+    <ProjectGuid>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trellendar</RootNamespace>
-    <AssemblyName>Trellendar</AssemblyName>
+    <RootNamespace>Trellendar.DataAccess</RootNamespace>
+    <AssemblyName>Trellendar.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,25 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\TrelloRequestFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrelloTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Trello\ITrelloAPI.cs" />
+    <Compile Include="Trello\ITrelloClient.cs" />
+    <Compile Include="Trello\TrelloKeys.cs" />
+    <Compile Include="Trello\_Impl\TrelloAPI.cs" />
+    <Compile Include="Trello\_Impl\TrelloClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
-      <Project>{e30ffaf5-f4af-46fb-aa26-1930869827f4}</Project>
+      <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
       <Name>Trellendar.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Trellendar.DataAccess\Trellendar.DataAccess.csproj">
-      <Project>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</Project>
-      <Name>Trellendar.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
       <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
       <Name>Trellendar.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />

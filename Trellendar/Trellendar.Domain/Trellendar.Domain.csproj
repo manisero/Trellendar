@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE}</ProjectGuid>
+    <ProjectGuid>{807DB49A-6335-4948-8700-B856A876B019}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trellendar</RootNamespace>
-    <AssemblyName>Trellendar</AssemblyName>
+    <RootNamespace>Trellendar.Domain</RootNamespace>
+    <AssemblyName>Trellendar.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,14 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,27 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrelloTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
-      <Project>{e30ffaf5-f4af-46fb-aa26-1930869827f4}</Project>
-      <Name>Trellendar.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Trellendar.DataAccess\Trellendar.DataAccess.csproj">
-      <Project>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</Project>
-      <Name>Trellendar.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
-      <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
-      <Name>Trellendar.Domain</Name>
-    </ProjectReference>
+    <Compile Include="Trello\Board.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
