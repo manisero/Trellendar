@@ -16,6 +16,18 @@ namespace Trellendar.DataAccess.Calendar._Impl
             _httpClient = new HttpClient { BaseAddress = new Uri("https://www.googleapis.com/calendar/v3/") };
         }
 
+        public string FormatRequestUri(string resource, IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            var formattedParameters = new List<string>();
+
+            foreach (var parameter in parameters)
+            {
+                formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
+            }
+
+            return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
+        }
+
         public string Get(string resource, IDictionary<string, object> parameters = null)
         {
             if (resource == null)
@@ -53,18 +65,6 @@ namespace Trellendar.DataAccess.Calendar._Impl
             }
 
             return response.Content.ReadAsStringAsync().Result;
-        }
-
-        private string FormatRequestUri(string resource, IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            var formattedParameters = new List<string>();
-
-            foreach (var parameter in parameters)
-            {
-                formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
-            }
-
-            return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
         }
     }
 }

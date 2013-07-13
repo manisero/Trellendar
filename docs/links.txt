@@ -1,2 +1,17 @@
 Trello API documentation:
 https://trello.com/docs/index.html
+
+
+Google APIs console:
+https://code.google.com/apis/console/
+
+
+Google OAuth:
+https://developers.google.com/accounts/docs/OAuth2?hl=pl
+https://developers.google.com/accounts/docs/OAuth2Login?hl=pl
+https://developers.google.com/accounts/docs/OAuth2InstalledApp
+https://developers.google.com/oauthplayground/?hl=pl
+
+
+Google Calendar API reference:
+https://developers.google.com/google-apps/calendar/v3/reference/

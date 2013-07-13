@@ -15,16 +15,16 @@ namespace Trellendar.DataAccess.Calendar._Impl
             _jsonSerializer = jsonSerializer;
         }
 
-        public void Authorize()
+        public string GetAuthorizationUri()
         {
-            _calendarClient.Get("https://accounts.google.com/o/oauth2/auth",
-                                new Dictionary<string, object>
-                                    {
-                                        { "client_id", CalendarKeys.CLIENT_ID },
-                                        { "response_type", "code" },
-                                        { "scope", "openid email https://www.googleapis.com/auth/calendar" },
-                                        { "redirect_uri", CalendarKeys.REDIRECT_URI }
-                                    });
+            return _calendarClient.FormatRequestUri("https://accounts.google.com/o/oauth2/auth",
+                                                    new Dictionary<string, object>
+                                                        {
+                                                            { "client_id", CalendarKeys.CLIENT_ID },
+                                                            { "response_type", "code" },
+                                                            { "scope", "openid email https://www.googleapis.com/auth/calendar" },
+                                                            { "redirect_uri", CalendarKeys.REDIRECT_URI }
+                                                        });
         }
 
         public Token GetToken(string authorizationCode)

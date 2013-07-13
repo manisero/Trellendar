@@ -4,7 +4,7 @@ namespace Trellendar.DataAccess.Calendar
 {
     public interface ICalendarAPI
     {
-        void Authorize();
+        string GetAuthorizationUri();
 
         Token GetToken(string authorizationCode);
     }

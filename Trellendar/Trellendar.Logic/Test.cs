@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Trellendar.DataAccess.Calendar;
+﻿using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Trello;
 
 namespace Trellendar
@@ -17,13 +16,13 @@ namespace Trellendar
 
         public void TestTrello()
         {
-            var result = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
+            //var result = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
         }
 
         public void TestCalendar()
         {
-            _calendarAPI.Authorize();
-            _calendarAPI.GetToken("confidential");
+            var authorizationUri = _calendarAPI.GetAuthorizationUri();
+            var token = _calendarAPI.GetToken("confidential");
         }
     }
 }
