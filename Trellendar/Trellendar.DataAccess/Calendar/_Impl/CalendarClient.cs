@@ -28,11 +28,16 @@ namespace Trellendar.DataAccess.Calendar._Impl
             return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
         }
 
-        public string Get(string resource, IDictionary<string, object> parameters = null)
+        public string Get(string resource, IDictionary<string, object> parameters = null, bool includeAuthorizationParameters = true)
         {
             if (resource == null)
             {
                 throw new ArgumentNullException("resource");
+            }
+
+            if (includeAuthorizationParameters)
+            {
+                IncludeAuthorizationParameters(ref parameters);
             }
 
             var requestUri = FormatRequestUri(resource, parameters);
@@ -46,11 +51,16 @@ namespace Trellendar.DataAccess.Calendar._Impl
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public string Post(string resource, IDictionary<string, object> parameters = null)
+        public string Post(string resource, IDictionary<string, object> parameters = null, bool includeAuthorizationParameters = true)
         {
             if (resource == null)
             {
                 throw new ArgumentNullException("resource");
+            }
+
+            if (includeAuthorizationParameters)
+            {
+                IncludeAuthorizationParameters(ref parameters);
             }
 
             var content = parameters != null
@@ -65,6 +75,19 @@ namespace Trellendar.DataAccess.Calendar._Impl
             }
 
             return response.Content.ReadAsStringAsync().Result;
+        }
+
+        private void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, object>();
+            }
+
+            if (!parameters.ContainsKey("access_token"))
+            {
+                parameters.Add("access_token", CalendarKeys.ACCESS_TOKEN);
+            }
         }
     }
 }

@@ -41,5 +41,19 @@ namespace Trellendar.DataAccess.Calendar._Impl
 
             return _jsonSerializer.Deserialize<Token>(token);
         }
+
+        public Token GetNewToken(string refreshToken)
+        {
+            var token = _calendarClient.Post("https://accounts.google.com/o/oauth2/token",
+                                             new Dictionary<string, object>
+                                                 {
+                                                     { "refresh_token", refreshToken },
+                                                     { "client_id", CalendarKeys.CLIENT_ID },
+                                                     { "client_secret", CalendarKeys.CLIENT_SECRET },
+                                                     { "grant_type", "refresh_token" }
+                                                 });
+
+            return _jsonSerializer.Deserialize<Token>(token);
+        }
     }
 }

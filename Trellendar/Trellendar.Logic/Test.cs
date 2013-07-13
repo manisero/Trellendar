@@ -23,6 +23,7 @@ namespace Trellendar
         {
             var authorizationUri = _calendarAPI.GetAuthorizationUri();
             var token = _calendarAPI.GetToken("confidential");
+            var newToken = _calendarAPI.GetNewToken(token.RefreshToken);
         }
     }
 }
