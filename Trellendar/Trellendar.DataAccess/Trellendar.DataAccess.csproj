@@ -61,6 +61,8 @@
     <Compile Include="Trello\TrelloKeys.cs" />
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloClient.cs" />
+    <Compile Include="_Core\IRestClient.cs" />
+    <Compile Include="_Core\_Impl\RestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
