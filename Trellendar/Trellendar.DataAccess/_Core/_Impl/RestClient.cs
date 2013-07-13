@@ -17,7 +17,7 @@ namespace Trellendar.DataAccess._Core._Impl
             HttpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         }
 
-        public string FormatRequestUri(string resource, IDictionary<string, object> parameters)
+        public string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = false)
         {
             if (parameters.IsNullOrEmpty())
             {
@@ -31,7 +31,17 @@ namespace Trellendar.DataAccess._Core._Impl
                 formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
             }
 
-            return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
+            var formattedRequest = "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
+
+            if (includeBaseAddress)
+            {
+                return (HttpClient.BaseAddress.AbsoluteUri.EndsWith("/") ? "{0}{1}" : "{0}/{1}")
+                            .FormatWith(HttpClient.BaseAddress.AbsoluteUri, formattedRequest);
+            }
+            else
+            {
+                return formattedRequest;
+            }
         }
 
         public string Get(string resource, IDictionary<string, object> parameters = null)

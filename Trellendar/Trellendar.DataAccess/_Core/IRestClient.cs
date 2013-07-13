@@ -4,7 +4,7 @@ namespace Trellendar.DataAccess._Core
 {
     public interface IRestClient
     {
-        string FormatRequestUri(string resource, IDictionary<string, object> parameters);
+        string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = false);
 
         string Get(string resource, IDictionary<string, object> parameters = null);
 
