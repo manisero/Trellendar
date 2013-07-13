@@ -1,40 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Exceptions;
+using Trellendar.DataAccess._Core._Impl;
 
 namespace Trellendar.DataAccess.Trello._Impl
 {
-    public class TrelloClient : ITrelloClient
+    public class TrelloClient : RestClient, ITrelloClient
     {
-        private readonly HttpClient _httpClient;
-
-        public TrelloClient()
+        public TrelloClient() : base("https://api.trello.com/1/")
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://api.trello.com/1/") };
         }
 
-        public string Get(string resource, IDictionary<string, object> parameters = null)
-        {
-            if (resource == null)
-            {
-                throw new ArgumentNullException("resource");
-            }
-
-            IncludeKeyAndTokenParameters(ref parameters);
-            var requestUri = FormatRequestUri(resource, parameters);
-            var response = _httpClient.GetAsync(requestUri).Result;
-            
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new RequestFailedException(response.StatusCode, response.ReasonPhrase);
-            }
-
-            return response.Content.ReadAsStringAsync().Result;
-        }
-
-        private void IncludeKeyAndTokenParameters(ref IDictionary<string, object> parameters)
+        protected override void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
         {
             if (parameters == null)
             {
@@ -50,18 +27,6 @@ namespace Trellendar.DataAccess.Trello._Impl
             {
                 parameters.Add("token", TrelloKeys.TOKEN);
             }
-        }
-
-        private string FormatRequestUri(string resource, IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            var formattedParameters = new List<string>();
-
-            foreach (var parameter in parameters)
-            {
-                formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
-            }
-
-            return "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
         }
     }
 }

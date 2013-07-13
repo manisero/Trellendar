@@ -8,25 +8,27 @@ namespace Trellendar
     public class Test
     {
         private readonly ITrelloAPI _trelloAPI;
+        private readonly ICalendarAuthorizationAPI _authorizationAPI;
         private readonly ICalendarAPI _calendarAPI;
 
-        public Test(ITrelloAPI trelloAPI, ICalendarAPI calendarAPI)
+        public Test(ITrelloAPI trelloAPI, ICalendarAuthorizationAPI authorizationAPI, ICalendarAPI calendarAPI)
         {
             _trelloAPI = trelloAPI;
+            _authorizationAPI = authorizationAPI;
             _calendarAPI = calendarAPI;
         }
 
         public void TestTrello()
         {
-            //var board = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
+            var board = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
         }
 
         public void TestCalendar()
         {
-            var authorizationUri = _calendarAPI.GetAuthorizationUri();
-            //var token = _calendarAPI.GetToken("confidential");
-            //var newToken = _calendarAPI.GetNewToken(token.Refresh_Token);
-            //var calendar = _calendarAPI.GetCalendar("5u9ci4r27ortoec3srd1nn264c@group.calendar.google.com");
+            var authorizationUri = _authorizationAPI.GetAuthorizationUri();
+            var token = _authorizationAPI.GetToken("confidential");
+            var newToken = _authorizationAPI.GetNewToken(token.Refresh_Token);
+            var calendar = _calendarAPI.GetCalendar("5u9ci4r27ortoec3srd1nn264c@group.calendar.google.com");
             var events = _calendarAPI.GetEvents("5u9ci4r27ortoec3srd1nn264c@group.calendar.google.com");
 
             _calendarAPI.CreateEvent("5u9ci4r27ortoec3srd1nn264c@group.calendar.google.com",

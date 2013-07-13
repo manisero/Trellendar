@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar\_Impl\CalendarAuthorizationAPI.cs" />
     <Compile Include="Calendar\CalendarKeys.cs" />
+    <Compile Include="Calendar\ICalendarAuthorizationAPI.cs" />
     <Compile Include="Calendar\_Impl\CalendarAPI.cs" />
     <Compile Include="Calendar\_Impl\CalendarClient.cs" />
     <Compile Include="Calendar\ICalendarAPI.cs" />
@@ -59,6 +61,8 @@
     <Compile Include="Trello\TrelloKeys.cs" />
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloClient.cs" />
+    <Compile Include="_Core\IRestClient.cs" />
+    <Compile Include="_Core\_Impl\RestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
