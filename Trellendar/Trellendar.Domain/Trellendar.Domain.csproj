@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar\Calendar.cs" />
+    <Compile Include="Calendar\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trello\Board.cs" />
   </ItemGroup>

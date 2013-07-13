@@ -28,7 +28,7 @@ namespace Trellendar.DataAccess.Trello._Impl
             
             if (!response.IsSuccessStatusCode)
             {
-                throw new TrelloRequestFailedException(response.StatusCode, response.ReasonPhrase);
+                throw new RequestFailedException(response.StatusCode, response.ReasonPhrase);
             }
 
             return response.Content.ReadAsStringAsync().Result;

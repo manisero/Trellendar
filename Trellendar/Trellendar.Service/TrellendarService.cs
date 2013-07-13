@@ -15,7 +15,9 @@ namespace Trellendar.Service
         {
             var kernel = new NinjectBootstrapper().Bootstrap();
 
-            kernel.Get<TrelloTest>().Test();
+            var test = kernel.Get<Test>();
+            test.TestTrello();
+            test.TestCalendar();
         }
 
         protected override void OnStop()
