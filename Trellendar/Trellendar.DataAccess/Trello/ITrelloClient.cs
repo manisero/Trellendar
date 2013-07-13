@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Trellendar.DataAccess._Core;
 
 namespace Trellendar.DataAccess.Trello
 {
-    public interface ITrelloClient
+    public interface ITrelloClient : IRestClient
     {
-        string Get(string resource, IDictionary<string, object> parameters = null);
     }
 }

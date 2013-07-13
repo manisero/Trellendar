@@ -36,6 +36,8 @@ namespace Trellendar.DataAccess._Core._Impl
 
         public string Get(string resource, IDictionary<string, object> parameters = null)
         {
+            IncludeAuthorizationParameters(ref parameters);
+
             var requestUri = FormatRequestUri(resource, parameters);
             var response = HttpClient.GetAsync(requestUri).Result;
 
@@ -53,6 +55,8 @@ namespace Trellendar.DataAccess._Core._Impl
 
         public string Post(string resource, IDictionary<string, object> parameters = null)
         {
+            IncludeAuthorizationParameters(ref parameters);
+
             var content = parameters != null
                               ? new FormUrlEncodedContent(parameters.ToDictionary(x => x.Key, x => x.Value.ToString()))
                               : null;
@@ -60,6 +64,10 @@ namespace Trellendar.DataAccess._Core._Impl
             var response = HttpClient.PostAsync(resource, content).Result;
 
             return GetResponseContent(response);
+        }
+
+        protected virtual void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
+        {
         }
 
         private string GetResponseContent(HttpResponseMessage response)

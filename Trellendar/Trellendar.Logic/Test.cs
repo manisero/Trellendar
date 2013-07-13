@@ -20,7 +20,7 @@ namespace Trellendar
 
         public void TestTrello()
         {
-            //var board = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
+            var board = _trelloAPI.GetBoard("51e072d0f1171f9b1e002b48");
         }
 
         public void TestCalendar()

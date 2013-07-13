@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Trellendar.DataAccess._Core;
 
 namespace Trellendar.DataAccess.Calendar
 {
-    public interface ICalendarClient
+    public interface ICalendarClient : IRestClient
     {
-        string FormatRequestUri(string resource, IDictionary<string, object> parameters);
-
-        string Get(string resource, IDictionary<string, object> parameters = null);
-
-        string Post(string resource, string content);
-        string Post(string resource, IDictionary<string, object> parameters = null);
     }
 }
