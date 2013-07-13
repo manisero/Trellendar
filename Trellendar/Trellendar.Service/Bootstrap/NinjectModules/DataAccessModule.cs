@@ -14,6 +14,7 @@ namespace Trellendar.Service.Bootstrap.NinjectModules
             Bind<ITrelloAPI>().To<TrelloAPI>();
 
             Bind<ICalendarClient>().To<CalendarClient>();
+            Bind<ICalendarAuthorizationAPI>().To<CalendarAuthorizationAPI>();
             Bind<ICalendarAPI>().To<CalendarAPI>();
         }
     }
