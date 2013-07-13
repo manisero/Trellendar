@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar\CalendarKeys.cs" />
     <Compile Include="Calendar\_Impl\CalendarAPI.cs" />
     <Compile Include="Calendar\_Impl\CalendarClient.cs" />
     <Compile Include="Calendar\ICalendarAPI.cs" />
