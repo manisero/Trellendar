@@ -57,7 +57,9 @@
     <Compile Include="Exceptions\RequestFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trello\ITrelloAPI.cs" />
+    <Compile Include="Trello\ITrelloAuthorizationAPI.cs" />
     <Compile Include="Trello\ITrelloClient.cs" />
+    <Compile Include="Trello\_Impl\TrelloAuthorizationAPI.cs" />
     <Compile Include="Trello\TrelloKeys.cs" />
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloClient.cs" />
