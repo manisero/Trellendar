@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Trellendar.DataAccess.Exceptions;
+﻿using System.Collections.Generic;
 using Trellendar.DataAccess._Core._Impl;
 
 namespace Trellendar.DataAccess.Trello._Impl
