@@ -38,8 +38,7 @@ namespace Trellendar.DataAccess.Calendar._Impl
                                                      { "client_secret", CalendarKeys.CLIENT_SECRET },
                                                      { "redirect_uri", CalendarKeys.REDIRECT_URI },
                                                      { "grant_type", "authorization_code" }
-                                                 },
-                                             false);
+                                                 });
 
             return _jsonSerializer.Deserialize<Token>(token);
         }
@@ -53,8 +52,7 @@ namespace Trellendar.DataAccess.Calendar._Impl
                                                      { "client_id", CalendarKeys.CLIENT_ID },
                                                      { "client_secret", CalendarKeys.CLIENT_SECRET },
                                                      { "grant_type", "refresh_token" }
-                                                 },
-                                             false);
+                                                 });
 
             return _jsonSerializer.Deserialize<Token>(token);
         }
@@ -64,6 +62,18 @@ namespace Trellendar.DataAccess.Calendar._Impl
             var calendar = _calendarClient.Get("calendars/{0}".FormatWith(calendarId));
 
             return _jsonSerializer.Deserialize<Domain.Calendar.Calendar>(calendar);
+        }
+
+        public IEnumerable<Event> GetEvents(string calendarId)
+        {
+            var events = _calendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
+
+            return _jsonSerializer.Deserialize<CalendarEvents>(events).Items;
+        }
+
+        public void CreateEvent(string calendarId, Event @event)
+        {
+            _calendarClient.Post("calendars/{0}/events".FormatWith(calendarId), _jsonSerializer.Serialize(@event));
         }
     }
 }

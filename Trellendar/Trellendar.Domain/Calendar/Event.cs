@@ -1,11 +1,13 @@
 ﻿namespace Trellendar.Domain.Calendar
 {
-    public class Calendar
+    public class Event
     {
         public string Id { get; set; }
 
         public string Summary { get; set; }
 
-        public string Description { get; set; }
+        public TimeStamp start { get; set; }
+
+        public TimeStamp end { get; set; }
     }
 }
