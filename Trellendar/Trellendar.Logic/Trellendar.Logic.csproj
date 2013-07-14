@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\AccessTokensProviders\CalendarAccessTokenProvider.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\TrelloAccessTokenProvider.cs" />
+    <Compile Include="DataAccess\IDataAccessSettingsProvider.cs" />
     <Compile Include="DataAccess\_Impl\AccessTokenProviderFactory.cs" />
     <Compile Include="DataAccess\_Impl\CalendarAccessTokenExpirationHandler.cs" />
     <Compile Include="DataAccess\ICalendarAccessTokenExpirationHandler.cs" />
