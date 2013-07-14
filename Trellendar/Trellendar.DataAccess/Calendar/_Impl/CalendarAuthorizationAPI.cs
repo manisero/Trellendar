@@ -55,5 +55,10 @@ namespace Trellendar.DataAccess.Calendar._Impl
 
             return _jsonSerializer.Deserialize<Token>(token);
         }
+
+        public UserInfo GetUserInfo(string idToken)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
