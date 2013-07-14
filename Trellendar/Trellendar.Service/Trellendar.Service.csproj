@@ -88,6 +88,10 @@
       <Project>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</Project>
       <Name>Trellendar.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
+      <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
+      <Name>Trellendar.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trellendar.Logic\Trellendar.Logic.csproj">
       <Project>{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE}</Project>
       <Name>Trellendar.Logic</Name>

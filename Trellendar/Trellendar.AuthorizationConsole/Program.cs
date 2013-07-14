@@ -12,8 +12,8 @@ namespace Trellendar.AuthorizationConsole
     {
         static void Main(string[] args)
         {
-            var trelloAuthorization = new TrelloAuthorizationAPI(new TrelloClient());
-            var calendarAuthorization = new CalendarAuthorizationAPI(new CalendarClient(), new JsonSerializer());
+            var trelloAuthorization = new TrelloAuthorizationAPI(new TrelloClient(null));
+            var calendarAuthorization = new CalendarAuthorizationAPI(new CalendarClient(null), new JsonSerializer());
             var dataContext = new TrellendarDataContext();
 
             // Get Trello token
