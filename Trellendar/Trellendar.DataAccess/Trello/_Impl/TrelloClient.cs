@@ -5,12 +5,20 @@ namespace Trellendar.DataAccess.Trello._Impl
 {
     public class TrelloClient : RestClient, ITrelloClient
     {
-        public TrelloClient() : base("https://api.trello.com/1/")
+        private readonly UserContext _userContext;
+
+        public TrelloClient(UserContext userContext) : base("https://api.trello.com/1/")
         {
+            _userContext = userContext;
         }
 
         protected override void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
         {
+            if (!_userContext.IsFilled())
+            {
+                return;
+            }
+
             if (parameters == null)
             {
                 parameters = new Dictionary<string, object>();
@@ -23,7 +31,7 @@ namespace Trellendar.DataAccess.Trello._Impl
 
             if (!parameters.ContainsKey("token"))
             {
-                parameters.Add("token", ApplicationKeys.TRELLO_ACCESS_TOKEN);
+                parameters.Add("token", _userContext.User.TrelloAccessToken);
             }
         }
     }

@@ -82,10 +82,7 @@ namespace Trellendar.DataAccess._Core._Impl
 
         private string GetResponseContent(HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new RequestFailedException(response.StatusCode, response.ReasonPhrase);
-            }
+            response.EnsureSuccessStatusCode();
 
             return response.Content.ReadAsStringAsync().Result;
         }
