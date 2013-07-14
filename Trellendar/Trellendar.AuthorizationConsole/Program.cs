@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Calendar._Impl;
+using Trellendar.DataAccess.Trellendar;
 using Trellendar.DataAccess.Trello._Impl;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.AuthorizationConsole
 {
@@ -12,6 +14,7 @@ namespace Trellendar.AuthorizationConsole
         {
             var trelloAuthorization = new TrelloAuthorizationAPI(new TrelloClient());
             var calendarAuthorization = new CalendarAuthorizationAPI(new CalendarClient(), new JsonSerializer());
+            var dataContext = new TrellendarDataContext();
 
             // Get Trello token
             Console.WriteLine("You'll be directed to Trello login page.");
@@ -45,6 +48,16 @@ namespace Trellendar.AuthorizationConsole
             Console.WriteLine("The access token is:");
             Console.WriteLine(calendarToken.Access_Token);
             Console.WriteLine();
+
+            dataContext.Users.Add(new User
+                {
+                    Email = "TODO",
+                    TrelloAccessToken = trelloToken,
+                    CalendarAccessToken = calendarToken.Access_Token,
+                    CalendarAccessTokenExpirationTS = DateTime.Now.AddSeconds(calendarToken.Expires_In)
+                });
+
+            dataContext.SaveChanges();
         }
     }
 }
