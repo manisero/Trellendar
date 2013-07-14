@@ -72,7 +72,7 @@
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\RestClients\TrelloClient.cs" />
     <Compile Include="IRestClient.cs" />
-    <Compile Include="_Impl\RestClient.cs" />
+    <Compile Include="RestClientBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">

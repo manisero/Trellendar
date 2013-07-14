@@ -1,8 +1,6 @@
-﻿using Trellendar.DataAccess._Impl;
-
-namespace Trellendar.DataAccess.Calendar.RestClients
+﻿namespace Trellendar.DataAccess.Calendar.RestClients
 {
-    public class CalendarClient : RestClient
+    public class CalendarClient : RestClientBase
     {
         public CalendarClient() : base("https://www.googleapis.com/calendar/v3/")
         {

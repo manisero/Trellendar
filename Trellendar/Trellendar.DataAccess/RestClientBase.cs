@@ -5,13 +5,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.DataAccess._Impl
+namespace Trellendar.DataAccess
 {
-    public class RestClient : IRestClient
+    public class RestClientBase : IRestClient
     {
         protected readonly HttpClient HttpClient;
 
-        public RestClient(string baseAddress)
+        public RestClientBase(string baseAddress)
         {
             HttpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         }
