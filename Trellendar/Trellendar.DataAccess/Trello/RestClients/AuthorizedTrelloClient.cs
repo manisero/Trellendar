@@ -18,16 +18,11 @@ namespace Trellendar.DataAccess.Trello.RestClients
             _accessTokenProviderFactory = accessTokenProviderFactory;
         }
 
-        protected override void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
+        protected override void PreprocessRequest(string resource, IDictionary<string, object> parameters)
         {
-            if (!AccessTokenProvider.CanProvideAccessToken)
+            if (parameters == null || !AccessTokenProvider.CanProvideAccessToken)
             {
                 return;
-            }
-
-            if (parameters == null)
-            {
-                parameters = new Dictionary<string, object>();
             }
 
             if (!parameters.ContainsKey("key"))
