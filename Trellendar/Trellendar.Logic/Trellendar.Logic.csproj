@@ -51,12 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\CalendarAccessTokenProvider.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\TrelloAccessTokenProvider.cs" />
     <Compile Include="DataAccess\IDataAccessSettingsProvider.cs" />
     <Compile Include="DataAccess\_Impl\AccessTokenProviderFactory.cs" />
     <Compile Include="DataAccess\_Impl\CalendarAccessTokenExpirationHandler.cs" />
     <Compile Include="DataAccess\ICalendarAccessTokenExpirationHandler.cs" />
+    <Compile Include="CalendarSynchronization\ISynchronizationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="UserContext.cs" />

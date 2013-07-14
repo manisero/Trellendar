@@ -7,7 +7,7 @@ using Trellendar.DataAccess.Trello;
 using Trellendar.DataAccess.Trello._Impl;
 using Trellendar.DataAccess._Impl;
 
-namespace Trellendar.Service.Bootstrap.NinjectModules
+namespace Trellendar.Service.Ninject.Modules
 {
     internal class DataAccessModule : NinjectModule
     {

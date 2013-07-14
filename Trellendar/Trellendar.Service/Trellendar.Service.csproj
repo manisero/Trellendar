@@ -59,12 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap\NinjectBootstrapper.cs" />
-    <Compile Include="Bootstrap\NinjectModules\CoreModule.cs" />
-    <Compile Include="Bootstrap\NinjectModules\DataAccessModule.cs" />
-    <Compile Include="Bootstrap\NinjectModules\LogicModule.cs" />
-    <Compile Include="Bootstrap\NinjectModules\ServiceModule.cs" />
-    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Ninject\NinjectBootstrapper.cs" />
+    <Compile Include="Ninject\Modules\CoreModule.cs" />
+    <Compile Include="Ninject\Modules\DataAccessModule.cs" />
+    <Compile Include="Ninject\Modules\LogicModule.cs" />
+    <Compile Include="Ninject\Modules\ServiceModule.cs" />
+    <Compile Include="Ninject\DependencyResolver.cs" />
     <Compile Include="SettingsProvider.cs" />
     <Compile Include="TrellendarService.cs">
       <SubType>Component</SubType>

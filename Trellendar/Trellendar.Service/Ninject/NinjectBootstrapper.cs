@@ -1,7 +1,7 @@
 ﻿using Ninject;
-using Trellendar.Service.Bootstrap.NinjectModules;
+using Trellendar.Service.Ninject.Modules;
 
-namespace Trellendar.Service.Bootstrap
+namespace Trellendar.Service.Ninject
 {
     public class NinjectBootstrapper
     {

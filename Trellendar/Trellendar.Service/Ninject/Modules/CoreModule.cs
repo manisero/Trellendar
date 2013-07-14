@@ -2,7 +2,7 @@
 using Trellendar.Core.Serialization;
 using Trellendar.Core.Serialization._Impl;
 
-namespace Trellendar.Service.Bootstrap.NinjectModules
+namespace Trellendar.Service.Ninject.Modules
 {
     internal class CoreModule : NinjectModule
     {

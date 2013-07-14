@@ -2,9 +2,10 @@
 using System.ServiceProcess;
 using Trellendar.DataAccess.Trellendar;
 using Trellendar.Logic;
-using Trellendar.Service.Bootstrap;
 using Ninject;
 using System.Linq;
+using Trellendar.Logic.CalendarSynchronization;
+using Trellendar.Service.Ninject;
 
 namespace Trellendar.Service
 {
@@ -29,9 +30,8 @@ namespace Trellendar.Service
 
             kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
 
-            var test = kernel.Get<Test>();
-            test.TestTrello();
-            test.TestCalendar();
+            var synchronizationService = kernel.Get<ISynchronizationService>();
+            synchronizationService.Synchronize();
         }
 
         protected override void OnStop()
