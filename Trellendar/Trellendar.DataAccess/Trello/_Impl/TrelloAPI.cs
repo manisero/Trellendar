@@ -1,4 +1,5 @@
-﻿using Trellendar.Core.Extensions;
+﻿using System.Collections.Generic;
+using Trellendar.Core.Extensions;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain;
 using Trellendar.Domain.Trello;
@@ -24,7 +25,17 @@ namespace Trellendar.DataAccess.Trello._Impl
 
         public Board GetBoard(string boardId)
         {
-            var board = TrelloClient.Get("board/{0}".FormatWith(boardId));
+            var board = TrelloClient.Get("board/{0}".FormatWith(boardId),
+                                         new Dictionary<string, object>
+                                             {
+                                                 { "fields", "name" },
+                                                 { "lists", "open" },
+                                                 { "list_fields", "name" },
+                                                 { "cards", "all" },
+                                                 { "card_fields", "desc,due,idList,name" }
+                                             });
+
+
 
             return _jsonSerializer.Deserialize<Board>(board);
         }

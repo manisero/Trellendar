@@ -1,4 +1,6 @@
-﻿namespace Trellendar.Domain.Trello
+﻿using System.Collections.Generic;
+
+namespace Trellendar.Domain.Trello
 {
     public class Board
     {
@@ -6,6 +8,8 @@
 
         public string Name { get; set; }
 
-        public string Desc { get; set; }
+        public IEnumerable<List> Lists { get; set; }
+
+        public IEnumerable<Card> Cards { get; set; }
     }
 }
