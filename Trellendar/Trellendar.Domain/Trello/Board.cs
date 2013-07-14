@@ -8,8 +8,8 @@ namespace Trellendar.Domain.Trello
 
         public string Name { get; set; }
 
-        public IEnumerable<List> Lists { get; set; }
+        public IList<List> Lists { get; set; }
 
-        public IEnumerable<Card> Cards { get; set; }
+        public IList<Card> Cards { get; set; }
     }
 }

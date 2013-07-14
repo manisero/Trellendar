@@ -1,7 +1,7 @@
 ﻿using Ninject;
 using Trellendar.Core.DependencyResolution;
 
-namespace Trellendar.Service
+namespace Trellendar.Service.Ninject
 {
     public class DependencyResolver : IDependencyResolver
     {

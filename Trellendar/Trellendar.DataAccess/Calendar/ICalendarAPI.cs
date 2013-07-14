@@ -10,5 +10,9 @@ namespace Trellendar.DataAccess.Calendar
         IEnumerable<Event> GetEvents(string calendarId);
 
         void CreateEvent(string calendarId, Event @event);
+
+        void UpdateEvent(string calendarId, Event @event);
+
+        void DeleteEvent(string calendarId, Event @event);
     }
 }

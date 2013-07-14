@@ -13,5 +13,7 @@ namespace Trellendar.Domain.Trello
         public string Desc { get; set; }
 
         public DateTime? Due { get; set; }
+
+        public bool Closed { get; set; }
     }
 }
