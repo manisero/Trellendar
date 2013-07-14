@@ -17,7 +17,9 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
-            var dataContext = new TrellendarDataContext();
+            var kernel = new NinjectBootstrapper().Bootstrap();
+
+            var dataContext = kernel.Get<TrellendarDataContext>();
             var user = dataContext.Users.FirstOrDefault();
 
             if (user == null)
@@ -25,7 +27,6 @@ namespace Trellendar.Service
                 throw new ObjectNotFoundException("No User found.");
             }
 
-            var kernel = new NinjectBootstrapper().Bootstrap();
             kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
 
             var test = kernel.Get<Test>();
