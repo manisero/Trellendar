@@ -7,7 +7,7 @@ namespace Trellendar.Service.Bootstrap
     {
         public IKernel Bootstrap()
         {
-            return new StandardKernel(new CoreModule(), new DataAccessModule());
+            return new StandardKernel(new CoreModule(), new DataAccessModule(), new LogicModule());
         }
     }
 }

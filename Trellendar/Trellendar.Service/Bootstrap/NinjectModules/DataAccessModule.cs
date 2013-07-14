@@ -10,9 +10,11 @@ namespace Trellendar.Service.Bootstrap.NinjectModules
     {
         public override void Load()
         {
+            // Trello
             Bind<ITrelloClient>().To<TrelloClient>();
             Bind<ITrelloAPI>().To<TrelloAPI>();
 
+            // Calendar
             Bind<ICalendarClient>().To<CalendarClient>();
             Bind<ICalendarAuthorizationAPI>().To<CalendarAuthorizationAPI>();
             Bind<ICalendarAPI>().To<CalendarAPI>();

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Trellendar.Core.Extensions;
-using Trellendar.DataAccess.Exceptions;
 
 namespace Trellendar.DataAccess._Core._Impl
 {

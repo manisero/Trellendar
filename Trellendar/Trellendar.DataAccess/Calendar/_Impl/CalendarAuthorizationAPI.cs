@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain.Calendar;
 using System.Linq;
@@ -30,31 +31,39 @@ namespace Trellendar.DataAccess.Calendar._Impl
 
         public Token GetToken(string authorizationCode)
         {
-            var token = _calendarClient.Post("https://accounts.google.com/o/oauth2/token",
-                                             new Dictionary<string, object>
-                                                 {
-                                                     { "code", authorizationCode },
-                                                     { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
-                                                     { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
-                                                     { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI },
-                                                     { "grant_type", "authorization_code" }
-                                                 });
+            var timeStamp = DateTime.UtcNow;
+            var tokenJson = _calendarClient.Post("https://accounts.google.com/o/oauth2/token",
+                                                 new Dictionary<string, object>
+                                                     {
+                                                         { "code", authorizationCode },
+                                                         { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                         { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
+                                                         { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI },
+                                                         { "grant_type", "authorization_code" }
+                                                     });
 
-            return _jsonSerializer.Deserialize<Token>(token);
+            var token = _jsonSerializer.Deserialize<Token>(tokenJson);
+            token.CreationTS = timeStamp;
+
+            return token;
         }
 
         public Token GetNewToken(string refreshToken)
         {
-            var token = _calendarClient.Post("https://accounts.google.com/o/oauth2/token",
-                                             new Dictionary<string, object>
-                                                 {
-                                                     { "refresh_token", refreshToken },
-                                                     { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
-                                                     { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
-                                                     { "grant_type", "refresh_token" }
-                                                 });
+            var timeStamp = DateTime.UtcNow;
+            var tokenJson = _calendarClient.Post("https://accounts.google.com/o/oauth2/token",
+                                                 new Dictionary<string, object>
+                                                     {
+                                                         { "refresh_token", refreshToken },
+                                                         { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                         { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
+                                                         { "grant_type", "refresh_token" }
+                                                     });
 
-            return _jsonSerializer.Deserialize<Token>(token);
+            var token = _jsonSerializer.Deserialize<Token>(tokenJson);
+            token.CreationTS = timeStamp;
+
+            return token;
         }
 
         public UserInfo GetUserInfo(string idToken)

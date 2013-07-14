@@ -57,7 +57,7 @@ namespace Trellendar.AuthorizationConsole
                     TrelloAccessToken = trelloToken,
                     CalendarID = calendarId,
                     CalendarAccessToken = calendarToken.Access_Token,
-                    CalendarAccessTokenExpirationTS = DateTime.Now.AddSeconds(calendarToken.Expires_In),
+                    CalendarAccessTokenExpirationTS = calendarToken.ExpirationTS,
                     CalendarRefreshToken = calendarToken.Refresh_Token
                 };
 

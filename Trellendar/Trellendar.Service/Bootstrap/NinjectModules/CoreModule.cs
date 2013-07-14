@@ -8,6 +8,7 @@ namespace Trellendar.Service.Bootstrap.NinjectModules
     {
         public override void Load()
         {
+            // Serialization
             Bind<IJsonSerializer>().To<JsonSerializer>();
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace Trellendar.Domain.Calendar
+﻿using System;
+
+namespace Trellendar.Domain.Calendar
 {
     public class Token
     {
@@ -9,5 +11,12 @@
         public int Expires_In { get; set; }
 
         public string Refresh_Token { get; set; }
+
+        public DateTime CreationTS { get; set; }
+
+        public DateTime ExpirationTS
+        {
+            get { return CreationTS.AddSeconds(Expires_In); }
+        }
     }
 }
