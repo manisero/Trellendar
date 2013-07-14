@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Core;
 using Trellendar.DataAccess._Core;
+using Trellendar.Domain;
 
 namespace Trellendar.DataAccess.Trello._Impl
 {
@@ -11,7 +12,7 @@ namespace Trellendar.DataAccess.Trello._Impl
         private IRestClient _trelloClient;
         private IRestClient TrelloClient
         {
-            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateClient(RestClientType.Trello)); }
+            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateClient(DomainType.Trello)); }
         }
 
         public TrelloAuthorizationAPI(IRestClientFactory restClientFactory)

@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
+using Trellendar.Domain;
 
 namespace Trellendar.DataAccess.Trello.RestClients
 {
     public class AuthorizedTrelloClient : TrelloClient
     {
-        private readonly ITrelloAccessTokenProvider _tokenProvider;
+        private readonly IAccessTokenProviderFactory _accessTokenProviderFactory;
 
-        public AuthorizedTrelloClient(ITrelloAccessTokenProvider tokenProvider)
+        private IAccessTokenProvider _accessTokenProvider;
+        private IAccessTokenProvider AccessTokenProvider
         {
-            _tokenProvider = tokenProvider;
+            get { return _accessTokenProvider ?? (_accessTokenProvider = _accessTokenProviderFactory.Create(DomainType.Trello)); }
+        }
+
+        public AuthorizedTrelloClient(IAccessTokenProviderFactory accessTokenProviderFactory)
+        {
+            _accessTokenProviderFactory = accessTokenProviderFactory;
         }
 
         protected override void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
         {
-            if (!_tokenProvider.CanProvideTrelloAccessToken)
+            if (!AccessTokenProvider.CanProvideAccessToken)
             {
                 return;
             }
@@ -30,7 +37,7 @@ namespace Trellendar.DataAccess.Trello.RestClients
 
             if (!parameters.ContainsKey("token"))
             {
-                parameters.Add("token", _tokenProvider.GetTrelloAccessToken());
+                parameters.Add("token", AccessTokenProvider.GetAccessToken());
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Trellendar.Core.Serialization;
 using Trellendar.DataAccess._Core;
+using Trellendar.Domain;
 using Trellendar.Domain.Calendar;
 using System.Linq;
 
@@ -15,7 +16,7 @@ namespace Trellendar.DataAccess.Calendar._Impl
         private IRestClient _calendarClient;
         private IRestClient CalendarClient
         {
-            get { return _calendarClient ?? (_calendarClient = _restClientFactory.CreateClient(RestClientType.Calendar)); }
+            get { return _calendarClient ?? (_calendarClient = _restClientFactory.CreateClient(DomainType.Calendar)); }
         }
 
         public CalendarAuthorizationAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)

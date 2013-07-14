@@ -13,7 +13,7 @@ namespace Trellendar.AuthorizationConsole
     {
         static void Main(string[] args)
         {
-            var restClientFactory = new RestClientFactory(null, null);
+            var restClientFactory = new RestClientFactory(null);
             var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
             var calendarAuthorization = new CalendarAuthorizationAPI(restClientFactory, new JsonSerializer());
             var dataContext = new TrellendarDataContext();

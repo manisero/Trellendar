@@ -1,14 +1,17 @@
 ﻿using System.Net.Http.Headers;
+using Trellendar.Domain;
 
 namespace Trellendar.DataAccess.Calendar.RestClients
 {
-    public class AuthorizedCalendarClient : CalendarClient, IAuthorizedCalendarClient
+    public class AuthorizedCalendarClient : CalendarClient
     {
-        public AuthorizedCalendarClient(ICalendarAccessTokenProvider tokenProvider)
+        public AuthorizedCalendarClient(IAccessTokenProviderFactory accessTokenProviderFactory)
         {
-            if (tokenProvider.CanProvideCalendarAccessToken)
+            var provider = accessTokenProviderFactory.Create(DomainType.Calendar);
+
+            if (provider.CanProvideAccessToken)
             {
-                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenProvider.GetCalendarAccessToken());
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", provider.GetAccessToken());
             }
         }
     }

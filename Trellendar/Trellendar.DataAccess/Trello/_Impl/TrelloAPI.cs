@@ -1,6 +1,7 @@
 ﻿using Trellendar.Core.Extensions;
 using Trellendar.Core.Serialization;
 using Trellendar.DataAccess._Core;
+using Trellendar.Domain;
 using Trellendar.Domain.Trello;
 
 namespace Trellendar.DataAccess.Trello._Impl
@@ -13,7 +14,7 @@ namespace Trellendar.DataAccess.Trello._Impl
         private IRestClient _trelloClient;
         private IRestClient TrelloClient
         {
-            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateAuthorizedClient(RestClientType.Trello)); }
+            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateAuthorizedClient(DomainType.Trello)); }
         }
 
         public TrelloAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)

@@ -1,11 +1,12 @@
 ﻿using Trellendar.DataAccess._Core;
+using Trellendar.Domain;
 
 namespace Trellendar.DataAccess
 {
     public interface IRestClientFactory
     {
-        IRestClient CreateClient(RestClientType clientType);
+        IRestClient CreateClient(DomainType domainType);
 
-        IRestClient CreateAuthorizedClient(RestClientType clientType);
+        IRestClient CreateAuthorizedClient(DomainType domainType);
     }
 }

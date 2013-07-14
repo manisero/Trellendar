@@ -1,6 +1,5 @@
 ﻿using Ninject.Modules;
-using Trellendar.DataAccess.Calendar;
-using Trellendar.DataAccess.Trello;
+using Trellendar.DataAccess;
 using Trellendar.Logic.DataAccess;
 using Trellendar.Logic.DataAccess._Impl;
 
@@ -11,9 +10,8 @@ namespace Trellendar.Service.Bootstrap.NinjectModules
         public override void Load()
         {
             // Data Access
+            Bind<IAccessTokenProviderFactory>().To<AccessTokenProviderFactory>();
             Bind<ICalendarAccessTokenExpirationHandler>().To<CalendarAccessTokenExpirationHandler>();
-            Bind<ITrelloAccessTokenProvider>().To<AccessTokensProvider>();
-            Bind<ICalendarAccessTokenProvider>().To<AccessTokensProvider>();
         }
     }
 }
