@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 
-namespace Trellendar.DataAccess.Calendar._Impl
+namespace Trellendar.DataAccess.Calendar.RestClients
 {
     public class AuthorizedCalendarClient : CalendarClient, IAuthorizedCalendarClient
     {

@@ -1,6 +1,6 @@
 ﻿using Trellendar.DataAccess._Core._Impl;
 
-namespace Trellendar.DataAccess.Calendar._Impl
+namespace Trellendar.DataAccess.Calendar.RestClients
 {
     public class CalendarClient : RestClient, ICalendarClient
     {

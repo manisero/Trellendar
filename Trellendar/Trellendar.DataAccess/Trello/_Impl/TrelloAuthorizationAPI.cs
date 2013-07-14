@@ -1,28 +1,35 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Core;
+using Trellendar.DataAccess._Core;
 
 namespace Trellendar.DataAccess.Trello._Impl
 {
     public class TrelloAuthorizationAPI : ITrelloAuthorizationAPI
     {
-        private readonly ITrelloClient _trelloClient;
+        private readonly IRestClientFactory _restClientFactory;
 
-        public TrelloAuthorizationAPI(ITrelloClient trelloClient)
+        private IRestClient _trelloClient;
+        private IRestClient TrelloClient
         {
-            _trelloClient = trelloClient;
+            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateClient(RestClientType.Trello)); }
+        }
+
+        public TrelloAuthorizationAPI(IRestClientFactory restClientFactory)
+        {
+            _restClientFactory = restClientFactory;
         }
 
         public string GetAuthorizationUri()
         {
-            return _trelloClient.FormatRequestUri("authorize",
-                                                  new Dictionary<string, object>
-                                                      {
-                                                          { "key", ApplicationKeys.TRELLO_APPLICATION_KEY},
-                                                          { "name", ApplicationConstants.APPLICATION_NAME },
-                                                          { "expiration", "never" },
-                                                          { "response_type", "token" }
-                                                      },
-                                                  true);
+            return TrelloClient.FormatRequestUri("authorize",
+                                                 new Dictionary<string, object>
+                                                     {
+                                                         { "key", ApplicationKeys.TRELLO_APPLICATION_KEY },
+                                                         { "name", ApplicationConstants.APPLICATION_NAME },
+                                                         { "expiration", "never" },
+                                                         { "response_type", "token" }
+                                                     },
+                                                 true);
         }
     }
 }

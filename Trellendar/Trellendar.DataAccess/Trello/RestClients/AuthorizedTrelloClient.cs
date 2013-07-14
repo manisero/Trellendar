@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Trellendar.DataAccess.Trello._Impl
+namespace Trellendar.DataAccess.Trello.RestClients
 {
-    public class AuthorizedTrelloClient : TrelloClient, IAuthorizedTrelloClient
+    public class AuthorizedTrelloClient : TrelloClient
     {
         private readonly ITrelloAccessTokenProvider _tokenProvider;
 

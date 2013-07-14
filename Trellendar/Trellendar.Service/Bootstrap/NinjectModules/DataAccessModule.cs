@@ -1,8 +1,10 @@
 ﻿using Ninject.Modules;
+using Trellendar.DataAccess;
 using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Calendar._Impl;
 using Trellendar.DataAccess.Trello;
 using Trellendar.DataAccess.Trello._Impl;
+using Trellendar.DataAccess._Impl;
 
 namespace Trellendar.Service.Bootstrap.NinjectModules
 {
@@ -10,14 +12,13 @@ namespace Trellendar.Service.Bootstrap.NinjectModules
     {
         public override void Load()
         {
+            Bind<IRestClientFactory>().To<RestClientFactory>();
+
             // Trello
-            Bind<ITrelloClient>().To<TrelloClient>();
-            Bind<IAuthorizedTrelloClient>().To<AuthorizedTrelloClient>();
+            Bind<ITrelloAuthorizationAPI>().To<TrelloAuthorizationAPI>();
             Bind<ITrelloAPI>().To<TrelloAPI>();
 
             // Calendar
-            Bind<ICalendarClient>().To<CalendarClient>();
-            Bind<IAuthorizedCalendarClient>().To<AuthorizedCalendarClient>();
             Bind<ICalendarAuthorizationAPI>().To<CalendarAuthorizationAPI>();
             Bind<ICalendarAPI>().To<CalendarAPI>();
         }
