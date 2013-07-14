@@ -10,7 +10,7 @@ namespace Trellendar.DataAccess.Calendar._Impl
         private readonly ICalendarClient _calendarClient;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public CalendarAPI(ICalendarClient calendarClient, IJsonSerializer jsonSerializer)
+        public CalendarAPI(IAuthorizedCalendarClient calendarClient, IJsonSerializer jsonSerializer)
         {
             _calendarClient = calendarClient;
             _jsonSerializer = jsonSerializer;

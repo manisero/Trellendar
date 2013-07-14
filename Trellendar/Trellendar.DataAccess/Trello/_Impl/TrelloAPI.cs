@@ -9,7 +9,7 @@ namespace Trellendar.DataAccess.Trello._Impl
         private readonly ITrelloClient _trelloClient;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public TrelloAPI(ITrelloClient trelloClient, IJsonSerializer jsonSerializer)
+        public TrelloAPI(IAuthorizedTrelloClient trelloClient, IJsonSerializer jsonSerializer)
         {
             _trelloClient = trelloClient;
             _jsonSerializer = jsonSerializer;
