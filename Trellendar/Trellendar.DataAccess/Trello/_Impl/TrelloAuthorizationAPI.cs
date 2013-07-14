@@ -17,7 +17,7 @@ namespace Trellendar.DataAccess.Trello._Impl
             return _trelloClient.FormatRequestUri("authorize",
                                                   new Dictionary<string, object>
                                                       {
-                                                          { "key", TrelloKeys.APPLICATION_KEY },
+                                                          { "key", ApplicationKeys.TRELLO_APPLICATION_KEY},
                                                           { "name", ApplicationConstants.APPLICATION_NAME },
                                                           { "expiration", "never" },
                                                           { "response_type", "token" }

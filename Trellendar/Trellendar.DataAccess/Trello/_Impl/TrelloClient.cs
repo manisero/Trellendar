@@ -18,12 +18,12 @@ namespace Trellendar.DataAccess.Trello._Impl
 
             if (!parameters.ContainsKey("key"))
             {
-                parameters.Add("key", TrelloKeys.APPLICATION_KEY);
+                parameters.Add("key", ApplicationKeys.TRELLO_APPLICATION_KEY);
             }
 
             if (!parameters.ContainsKey("token"))
             {
-                parameters.Add("token", TrelloKeys.TOKEN);
+                parameters.Add("token", ApplicationKeys.TRELLO_ACCESS_TOKEN);
             }
         }
     }

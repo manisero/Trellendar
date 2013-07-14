@@ -9,5 +9,7 @@ namespace Trellendar.DataAccess.Calendar
         Token GetToken(string authorizationCode);
 
         Token GetNewToken(string refreshToken);
+
+        UserInfo GetUserInfo(string idToken);
     }
 }

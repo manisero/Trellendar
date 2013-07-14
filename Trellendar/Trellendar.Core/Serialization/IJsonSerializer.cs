@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Trellendar.Core.Serialization
 {
@@ -8,5 +10,7 @@ namespace Trellendar.Core.Serialization
 
         object Deserialize(string json, Type itemType);
         TItem Deserialize<TItem>(string json);
+
+        IEnumerable<Claim> DeserializeJWT(string jwt);
     }
 }

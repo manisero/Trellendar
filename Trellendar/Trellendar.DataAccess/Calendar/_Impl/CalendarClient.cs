@@ -7,7 +7,7 @@ namespace Trellendar.DataAccess.Calendar._Impl
     {
         public CalendarClient() : base("https://www.googleapis.com/calendar/v3/")
         {
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CalendarKeys.ACCESS_TOKEN);
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApplicationKeys.GOOGLE_API_ACCESS_TOKEN);
         }
     }
 }
