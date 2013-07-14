@@ -25,16 +25,16 @@ namespace Trellendar.Logic
 
         public void TestCalendar()
         {
-            var calendar = _calendarAPI.GetCalendar(_userContext.User.CalendarID);
-            var events = _calendarAPI.GetEvents(_userContext.User.CalendarID);
+            //var calendar = _calendarAPI.GetCalendar(_userContext.User.CalendarID);
+            //var events = _calendarAPI.GetEvents(_userContext.User.CalendarID);
 
-            _calendarAPI.CreateEvent(_userContext.User.CalendarID,
-                                     new Event
-                                         {
-                                             Summary = "Test event 2",
-                                             start = new TimeStamp(DateTime.Now),
-                                             end = new TimeStamp(DateTime.Now.AddHours(3))
-                                         });
+            //_calendarAPI.CreateEvent(_userContext.User.CalendarID,
+            //                         new Event
+            //                             {
+            //                                 Summary = "Test event 2",
+            //                                 start = new TimeStamp(DateTime.Now),
+            //                                 end = new TimeStamp(DateTime.Now.AddHours(3))
+            //                             });
         }
     }
 }
