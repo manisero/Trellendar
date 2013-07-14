@@ -12,8 +12,6 @@ namespace Trellendar.Domain.Trellendar
 
         public string TrelloAccessToken { get; set; }
 
-        public DateTime? TrelloAccessTokenExpirationTS { get; set; }
-
         public string CalendarID { get; set; }
 
         public string CalendarAccessToken { get; set; }
