@@ -1,23 +1,30 @@
 ﻿using Trellendar.Core.Extensions;
 using Trellendar.Core.Serialization;
+using Trellendar.Domain;
 using Trellendar.Domain.Trello;
 
 namespace Trellendar.DataAccess.Trello._Impl
 {
     public class TrelloAPI : ITrelloAPI
     {
-        private readonly ITrelloClient _trelloClient;
+        private readonly IRestClientFactory _restClientFactory;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public TrelloAPI(ITrelloClient trelloClient, IJsonSerializer jsonSerializer)
+        private IRestClient _trelloClient;
+        private IRestClient TrelloClient
         {
-            _trelloClient = trelloClient;
+            get { return _trelloClient ?? (_trelloClient = _restClientFactory.CreateAuthorizedClient(DomainType.Trello)); }
+        }
+
+        public TrelloAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)
+        {
+            _restClientFactory = restClientFactory;
             _jsonSerializer = jsonSerializer;
         }
 
         public Board GetBoard(string boardId)
         {
-            var board = _trelloClient.Get("board/{0}".FormatWith(boardId));
+            var board = TrelloClient.Get("board/{0}".FormatWith(boardId));
 
             return _jsonSerializer.Deserialize<Board>(board);
         }

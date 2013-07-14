@@ -1,5 +1,4 @@
 ﻿using System;
-using Trellendar.DataAccess;
 using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Trello;
 using Trellendar.Domain.Calendar;

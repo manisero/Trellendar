@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Core.Serialization;
+using Trellendar.Domain;
 using Trellendar.Domain.Calendar;
 using Trellendar.Core.Extensions;
 
@@ -7,32 +8,38 @@ namespace Trellendar.DataAccess.Calendar._Impl
 {
     public class CalendarAPI : ICalendarAPI
     {
-        private readonly ICalendarClient _calendarClient;
+        private readonly IRestClientFactory _restClientFactory;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public CalendarAPI(ICalendarClient calendarClient, IJsonSerializer jsonSerializer)
+        private IRestClient _calendarClient;
+        private IRestClient CalendarClient
         {
-            _calendarClient = calendarClient;
+            get { return _calendarClient ?? (_calendarClient = _restClientFactory.CreateAuthorizedClient(DomainType.Calendar)); }
+        }
+
+        public CalendarAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)
+        {
+            _restClientFactory = restClientFactory;
             _jsonSerializer = jsonSerializer;
         }
 
         public Domain.Calendar.Calendar GetCalendar(string calendarId)
         {
-            var calendar = _calendarClient.Get("calendars/{0}".FormatWith(calendarId));
+            var calendar = CalendarClient.Get("calendars/{0}".FormatWith(calendarId));
 
             return _jsonSerializer.Deserialize<Domain.Calendar.Calendar>(calendar);
         }
 
         public IEnumerable<Event> GetEvents(string calendarId)
         {
-            var events = _calendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
+            var events = CalendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
 
             return _jsonSerializer.Deserialize<CalendarEvents>(events).Items;
         }
 
         public void CreateEvent(string calendarId, Event @event)
         {
-            _calendarClient.Post("calendars/{0}/events".FormatWith(calendarId), _jsonSerializer.Serialize(@event));
+            CalendarClient.Post("calendars/{0}/events".FormatWith(calendarId), _jsonSerializer.Serialize(@event));
         }
     }
 }

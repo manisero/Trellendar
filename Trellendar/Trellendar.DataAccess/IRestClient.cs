@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Trellendar.DataAccess._Core
+namespace Trellendar.DataAccess
 {
     public interface IRestClient
     {

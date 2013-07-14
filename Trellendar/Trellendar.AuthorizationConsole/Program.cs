@@ -4,6 +4,7 @@ using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Calendar._Impl;
 using Trellendar.DataAccess.Trellendar;
 using Trellendar.DataAccess.Trello._Impl;
+using Trellendar.DataAccess._Impl;
 using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.AuthorizationConsole
@@ -12,8 +13,9 @@ namespace Trellendar.AuthorizationConsole
     {
         static void Main(string[] args)
         {
-            var trelloAuthorization = new TrelloAuthorizationAPI(new TrelloClient(null));
-            var calendarAuthorization = new CalendarAuthorizationAPI(new CalendarClient(null), new JsonSerializer());
+            var restClientFactory = new RestClientFactory(null);
+            var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
+            var calendarAuthorization = new CalendarAuthorizationAPI(restClientFactory, new JsonSerializer());
             var dataContext = new TrellendarDataContext();
 
             // Get Trello token
@@ -57,7 +59,7 @@ namespace Trellendar.AuthorizationConsole
                     TrelloAccessToken = trelloToken,
                     CalendarID = calendarId,
                     CalendarAccessToken = calendarToken.Access_Token,
-                    CalendarAccessTokenExpirationTS = DateTime.Now.AddSeconds(calendarToken.Expires_In),
+                    CalendarAccessTokenExpirationTS = calendarToken.ExpirationTS,
                     CalendarRefreshToken = calendarToken.Refresh_Token
                 };
 
