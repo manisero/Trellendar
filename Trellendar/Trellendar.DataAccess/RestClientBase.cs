@@ -84,6 +84,32 @@ namespace Trellendar.DataAccess
             return GetResponseContent(response);
         }
 
+        public string Put(string resource, string jsonContent)
+        {
+            PreprocessRequest(resource, null);
+
+            var messageContent = new StringContent(jsonContent);
+            messageContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = HttpClient.PutAsync(resource, messageContent).Result;
+
+            return GetResponseContent(response);
+        }
+
+        public string Delete(string resource, IDictionary<string, object> parameters = null)
+        {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, object>();
+            }
+
+            PreprocessRequest(resource, parameters);
+
+            var requestUri = FormatRequestUri(resource, parameters);
+            var response = HttpClient.DeleteAsync(requestUri).Result;
+
+            return GetResponseContent(response);
+        }
+
         protected virtual void PreprocessRequest(string resource, IDictionary<string, object> parameters)
         {
         }

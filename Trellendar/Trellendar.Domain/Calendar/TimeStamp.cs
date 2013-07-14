@@ -4,16 +4,25 @@ namespace Trellendar.Domain.Calendar
 {
     public class TimeStamp
     {
-        public DateTime dateTime { get; set; }
+        public DateTime? date { get; set; }
+
+        public DateTime? dateTime { get; set; }
 
         public TimeStamp()
         {
             
         }
 
-        public TimeStamp(DateTime dateTime)
+        public TimeStamp(DateTime timeStamp)
         {
-            this.dateTime = dateTime;
+            if (timeStamp.Date == timeStamp)
+            {
+                date = timeStamp;
+            }
+            else
+            {
+                dateTime = timeStamp;
+            }
         }
     }
 }

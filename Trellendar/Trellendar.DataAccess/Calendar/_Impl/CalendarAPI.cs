@@ -41,5 +41,15 @@ namespace Trellendar.DataAccess.Calendar._Impl
         {
             CalendarClient.Post("calendars/{0}/events".FormatWith(calendarId), _jsonSerializer.Serialize(@event));
         }
+
+        public void UpdateEvent(string calendarId, Event @event)
+        {
+            CalendarClient.Put("calendars/{0}/events/{1}".FormatWith(calendarId, @event.Id), _jsonSerializer.Serialize(@event));
+        }
+
+        public void DeleteEvent(string calendarId, Event @event)
+        {
+            CalendarClient.Delete("calendars/{0}/events/{1}".FormatWith(calendarId, @event.Id));
+        }
     }
 }

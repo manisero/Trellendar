@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 
@@ -7,21 +6,25 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
     public class CardProcessor : ICardProcessor
     {
-        public IEnumerable<Event> Process(Card card, string listName)
+        public Event Process(Card card, string listName)
         {
-            if (card.Due == null)
+            if (card.Closed || card.Due == null)
             {
-                return Enumerable.Empty<Event>();
+                return null;
             }
 
             var @event = new Event
                 {
                     summary = card.Name,
                     start = new TimeStamp(card.Due.Value),
-                    end = new TimeStamp(card.Due.Value.AddHours(1))
+                    end = new TimeStamp(card.Due.Value.AddHours(1)),
+                    extendedProperties = new ExtendedProperties
+                        {
+                            @private = new Dictionary<string, string> { { Event.SOURCE_ID_PROPERTY_KEY, card.Id } }
+                        }
                 };
 
-            return new[] { @event };
+            return @event;
         }
     }
 }
