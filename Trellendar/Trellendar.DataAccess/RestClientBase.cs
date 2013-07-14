@@ -18,19 +18,16 @@ namespace Trellendar.DataAccess
 
         public string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = false)
         {
-            if (parameters.IsNullOrEmpty())
-            {
-                return resource;
-            }
-
             var formattedParameters = new List<string>();
 
-            foreach (var parameter in parameters)
+            foreach (var parameter in parameters ?? new Dictionary<string, object>())
             {
                 formattedParameters.Add("{0}={1}".FormatWith(parameter.Key, parameter.Value));
             }
 
-            var formattedRequest = "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"));
+            var formattedRequest = formattedParameters.Any()
+                                       ? "{0}?{1}".FormatWith(resource, formattedParameters.JoinWith("&"))
+                                       : resource;
 
             if (includeBaseAddress)
             {
@@ -45,7 +42,12 @@ namespace Trellendar.DataAccess
 
         public string Get(string resource, IDictionary<string, object> parameters = null)
         {
-            IncludeAuthorizationParameters(ref parameters);
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, object>();
+            }
+
+            PreprocessRequest(resource, parameters);
 
             var requestUri = FormatRequestUri(resource, parameters);
             var response = HttpClient.GetAsync(requestUri).Result;
@@ -55,6 +57,8 @@ namespace Trellendar.DataAccess
 
         public string Post(string resource, string jsonContent)
         {
+            PreprocessRequest(resource, null);
+
             var messageContent = new StringContent(jsonContent);
             messageContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = HttpClient.PostAsync(resource, messageContent).Result;
@@ -64,9 +68,14 @@ namespace Trellendar.DataAccess
 
         public string Post(string resource, IDictionary<string, object> parameters = null)
         {
-            IncludeAuthorizationParameters(ref parameters);
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, object>();
+            }
 
-            var content = parameters != null
+            PreprocessRequest(resource, parameters);
+
+            var content = parameters.IsNotNullOrEmpty()
                               ? new FormUrlEncodedContent(parameters.ToDictionary(x => x.Key, x => x.Value.ToString()))
                               : null;
 
@@ -75,7 +84,7 @@ namespace Trellendar.DataAccess
             return GetResponseContent(response);
         }
 
-        protected virtual void IncludeAuthorizationParameters(ref IDictionary<string, object> parameters)
+        protected virtual void PreprocessRequest(string resource, IDictionary<string, object> parameters)
         {
         }
 
