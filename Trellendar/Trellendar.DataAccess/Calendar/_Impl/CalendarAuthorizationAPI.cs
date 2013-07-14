@@ -20,10 +20,10 @@ namespace Trellendar.DataAccess.Calendar._Impl
             return _calendarClient.FormatRequestUri("https://accounts.google.com/o/oauth2/auth",
                                                     new Dictionary<string, object>
                                                         {
-                                                            { "client_id", CalendarKeys.CLIENT_ID },
+                                                            { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
                                                             { "response_type", "code" },
                                                             { "scope", "openid email https://www.googleapis.com/auth/calendar" },
-                                                            { "redirect_uri", CalendarKeys.REDIRECT_URI }
+                                                            { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI }
                                                         });
         }
 
@@ -33,9 +33,9 @@ namespace Trellendar.DataAccess.Calendar._Impl
                                              new Dictionary<string, object>
                                                  {
                                                      { "code", authorizationCode },
-                                                     { "client_id", CalendarKeys.CLIENT_ID },
-                                                     { "client_secret", CalendarKeys.CLIENT_SECRET },
-                                                     { "redirect_uri", CalendarKeys.REDIRECT_URI },
+                                                     { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                     { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
+                                                     { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI },
                                                      { "grant_type", "authorization_code" }
                                                  });
 
@@ -48,8 +48,8 @@ namespace Trellendar.DataAccess.Calendar._Impl
                                              new Dictionary<string, object>
                                                  {
                                                      { "refresh_token", refreshToken },
-                                                     { "client_id", CalendarKeys.CLIENT_ID },
-                                                     { "client_secret", CalendarKeys.CLIENT_SECRET },
+                                                     { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                     { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
                                                      { "grant_type", "refresh_token" }
                                                  });
 
