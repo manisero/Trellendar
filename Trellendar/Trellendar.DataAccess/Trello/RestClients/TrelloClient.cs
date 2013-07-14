@@ -1,4 +1,4 @@
-﻿using Trellendar.DataAccess._Core._Impl;
+﻿using Trellendar.DataAccess._Impl;
 
 namespace Trellendar.DataAccess.Trello.RestClients
 {

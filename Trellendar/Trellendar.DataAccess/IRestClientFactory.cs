@@ -1,5 +1,4 @@
-﻿using Trellendar.DataAccess._Core;
-using Trellendar.Domain;
+﻿using Trellendar.Domain;
 
 namespace Trellendar.DataAccess
 {

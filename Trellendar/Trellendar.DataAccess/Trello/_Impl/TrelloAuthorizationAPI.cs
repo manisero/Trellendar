@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Core;
-using Trellendar.DataAccess._Core;
 using Trellendar.Domain;
 
 namespace Trellendar.DataAccess.Trello._Impl

@@ -71,8 +71,8 @@
     <Compile Include="Trello\_Impl\TrelloAuthorizationAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\RestClients\TrelloClient.cs" />
-    <Compile Include="_Core\IRestClient.cs" />
-    <Compile Include="_Core\_Impl\RestClient.cs" />
+    <Compile Include="IRestClient.cs" />
+    <Compile Include="_Impl\RestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">

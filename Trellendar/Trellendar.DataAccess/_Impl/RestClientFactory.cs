@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Trellendar.DataAccess.Calendar.RestClients;
 using Trellendar.DataAccess.Trello.RestClients;
-using Trellendar.DataAccess._Core;
 using Trellendar.Domain;
 
 namespace Trellendar.DataAccess._Impl
