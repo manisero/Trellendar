@@ -1,6 +1,6 @@
 ﻿using Trellendar.Domain.Trellendar;
 
-namespace Trellendar.DataAccess
+namespace Trellendar.Logic
 {
     public class UserContext
     {

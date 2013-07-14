@@ -5,11 +5,11 @@ namespace Trellendar.DataAccess.Calendar._Impl
 {
     public class CalendarClient : RestClient, ICalendarClient
     {
-        public CalendarClient(UserContext userContext) : base("https://www.googleapis.com/calendar/v3/")
+        public CalendarClient(ICalendarAccessTokenProvider tokenProvider) : base("https://www.googleapis.com/calendar/v3/")
         {
-            if (userContext.IsFilled())
+            if (tokenProvider.CanProvideCalendarAccessToken)
             {
-                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userContext.User.CalendarAccessToken);
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenProvider.GetCalendarAccessToken());
             }
         }
     }

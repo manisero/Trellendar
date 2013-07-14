@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using System.ServiceProcess;
-using Trellendar.DataAccess;
 using Trellendar.DataAccess.Trellendar;
 using Trellendar.Logic;
 using Trellendar.Service.Bootstrap;

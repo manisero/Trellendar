@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationKeys.cs" />
+    <Compile Include="Calendar\ICalendarAccessTokenProvider.cs" />
     <Compile Include="Calendar\_Impl\CalendarAuthorizationAPI.cs" />
     <Compile Include="Calendar\ICalendarAuthorizationAPI.cs" />
     <Compile Include="Calendar\_Impl\CalendarAPI.cs" />
@@ -64,13 +65,13 @@
     <Compile Include="Trellendar\TrellendarDataContext.cs" />
     <Compile Include="Trello\ITrelloAPI.cs" />
     <Compile Include="Trello\ITrelloAuthorizationAPI.cs" />
+    <Compile Include="Trello\ITrelloAccessTokenProvider.cs" />
     <Compile Include="Trello\ITrelloClient.cs" />
     <Compile Include="Trello\_Impl\TrelloAuthorizationAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloAPI.cs" />
     <Compile Include="Trello\_Impl\TrelloClient.cs" />
     <Compile Include="_Core\IRestClient.cs" />
     <Compile Include="_Core\_Impl\RestClient.cs" />
-    <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
