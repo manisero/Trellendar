@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Trellendar.Core.DependencyResolution;
 using Trellendar.DataAccess;
 using Trellendar.Domain;
 using Trellendar.Logic.DataAccess.AccessTokensProviders;
@@ -11,10 +12,10 @@ namespace Trellendar.Logic.DataAccess._Impl
     {
         private readonly IDictionary<DomainType, Func<IAccessTokenProvider>> _providers = new Dictionary<DomainType, Func<IAccessTokenProvider>>();
 
-        public AccessTokenProviderFactory(UserContext userContext, ICalendarAccessTokenExpirationHandler calendarAccessTokenExpirationHandler)
+        public AccessTokenProviderFactory(IDependencyResolver dependencyResolver)
         {
-            _providers[DomainType.Trello] = () => new TrelloAccessTokenProvider(userContext);
-            _providers[DomainType.Calendar] = () => new CalendarAccessTokenProvider(userContext, calendarAccessTokenExpirationHandler);
+            _providers[DomainType.Trello] = () => new TrelloAccessTokenProvider(dependencyResolver.Resolve<UserContext>());
+            _providers[DomainType.Calendar] = () => new CalendarAccessTokenProvider(dependencyResolver.Resolve<UserContext>(), dependencyResolver.Resolve<ICalendarAccessTokenExpirationHandler>());
         }
 
         public IAccessTokenProvider Create(DomainType domainType)
