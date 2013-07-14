@@ -4,6 +4,6 @@ namespace Trellendar.Domain.Calendar
 {
     public class CalendarEvents : Calendar
     {
-        public IEnumerable<Event> Items { get; set; }
+        public IList<Event> Items { get; set; }
     }
 }

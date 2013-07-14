@@ -13,6 +13,7 @@ namespace Trellendar.Service.Ninject.Modules
         {
             // Calendar Synchronization
             Bind<ISynchronizationService>().To<SynchronizationService>();
+            Bind<ICardProcessor>().To<CardProcessor>();
 
             // Data Access
             Bind<IAccessTokenProviderFactory>().To<AccessTokenProviderFactory>();

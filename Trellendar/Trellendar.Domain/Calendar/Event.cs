@@ -4,7 +4,7 @@
     {
         public string Id { get; set; }
 
-        public string Summary { get; set; }
+        public string summary { get; set; }
 
         public TimeStamp start { get; set; }
 
