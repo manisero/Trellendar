@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain.Calendar;
+using System.Linq;
 
 namespace Trellendar.DataAccess.Calendar._Impl
 {
@@ -58,7 +59,13 @@ namespace Trellendar.DataAccess.Calendar._Impl
 
         public UserInfo GetUserInfo(string idToken)
         {
-            throw new System.NotImplementedException();
+            var claims = _jsonSerializer.DeserializeJWT(idToken);
+            var emailClaim = claims.SingleOrDefault(x => x.Type == "email");
+
+            return new UserInfo
+                {
+                    Email = emailClaim != null ? emailClaim.Value : null
+                };
         }
     }
 }
