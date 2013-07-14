@@ -70,6 +70,7 @@
     <Compile Include="Trello\_Impl\TrelloClient.cs" />
     <Compile Include="_Core\IRestClient.cs" />
     <Compile Include="_Core\_Impl\RestClient.cs" />
+    <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">

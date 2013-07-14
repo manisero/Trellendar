@@ -1,4 +1,5 @@
 ﻿using System.ServiceProcess;
+using Trellendar.Logic;
 using Trellendar.Service.Bootstrap;
 using Ninject;
 

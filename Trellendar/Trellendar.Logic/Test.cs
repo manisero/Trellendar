@@ -3,7 +3,7 @@ using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Trello;
 using Trellendar.Domain.Calendar;
 
-namespace Trellendar
+namespace Trellendar.Logic
 {
     public class Test
     {
