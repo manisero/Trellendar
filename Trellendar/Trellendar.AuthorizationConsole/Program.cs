@@ -32,6 +32,7 @@ namespace Trellendar.AuthorizationConsole
             var trelloBoardId = Console.ReadLine();
 
             // Get Google API token
+            Console.WriteLine();
             Console.WriteLine("Now You'll be directed to Google login page.");
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
@@ -62,7 +63,9 @@ namespace Trellendar.AuthorizationConsole
             dataContext.Users.Add(user);
             dataContext.SaveChanges();
 
+            Console.WriteLine();
             Console.WriteLine("User {0} created.", user.Email);
+            Console.WriteLine();
         }
     }
 }
