@@ -50,14 +50,14 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                         continue;
                     }
 
-                    if (existingEvent != null)
+                    if (existingEvent == null)
                     {
-                        newEvent.Id = existingEvent.Id;
-                        _calendarApi.UpdateEvent(_userContext.User.CalendarID, newEvent);
+                        _calendarApi.CreateEvent(_userContext.User.CalendarID, newEvent);
                     }
                     else 
                     {
-                        _calendarApi.CreateEvent(_userContext.User.CalendarID, newEvent);
+                        newEvent.id = existingEvent.id;
+                        _calendarApi.UpdateEvent(_userContext.User.CalendarID, newEvent);
                     }
                 }
             }

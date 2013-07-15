@@ -18,7 +18,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                     summary = card.Name,
                     start = new TimeStamp(card.Due.Value),
                     end = new TimeStamp(card.Due.Value.AddHours(1)),
-                    extendedProperties = new ExtendedProperties
+                    extendedProperties = new EventExtendedProperties
                         {
                             @private = new Dictionary<string, string> { { Event.SOURCE_ID_PROPERTY_KEY, card.Id } }
                         }

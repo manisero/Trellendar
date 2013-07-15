@@ -44,12 +44,12 @@ namespace Trellendar.DataAccess.Calendar._Impl
 
         public void UpdateEvent(string calendarId, Event @event)
         {
-            CalendarClient.Put("calendars/{0}/events/{1}".FormatWith(calendarId, @event.Id), _jsonSerializer.Serialize(@event));
+            CalendarClient.Put("calendars/{0}/events/{1}".FormatWith(calendarId, @event.id), _jsonSerializer.Serialize(@event));
         }
 
         public void DeleteEvent(string calendarId, Event @event)
         {
-            CalendarClient.Delete("calendars/{0}/events/{1}".FormatWith(calendarId, @event.Id));
+            CalendarClient.Delete("calendars/{0}/events/{1}".FormatWith(calendarId, @event.id));
         }
     }
 }
