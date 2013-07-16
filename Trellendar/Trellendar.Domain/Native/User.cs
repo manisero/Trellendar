@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trellendar.Domain.Trellendar
+namespace Trellendar.Domain.Native
 {
     public class User
     {

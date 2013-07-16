@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.ServiceProcess;
-using Trellendar.DataAccess.Trellendar;
+using Trellendar.DataAccess.Native;
 using Trellendar.Logic;
 using Ninject;
 using System.Linq;
