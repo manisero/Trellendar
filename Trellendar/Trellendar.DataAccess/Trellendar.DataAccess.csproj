@@ -63,13 +63,13 @@
     <Compile Include="IAccessTokenProviderFactory.cs" />
     <Compile Include="IRestClientFactory.cs" />
     <Compile Include="Native\ModelConfiguration\EntityConfigurationBase.cs" />
-    <Compile Include="Native\ModelConfiguration\IEntityConfiguration.cs" />
     <Compile Include="Native\ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="Native\Migrations\201307161814175_InitialCreate.cs" />
     <Compile Include="Native\Migrations\201307161814175_InitialCreate.Designer.cs">
       <DependentUpon>201307161814175_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Native\Migrations\Configuration.cs" />
+    <Compile Include="Native\ModelConfiguration\ModelConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Impl\RestClientFactory.cs" />
     <Compile Include="Native\TrellendarDataContext.cs" />

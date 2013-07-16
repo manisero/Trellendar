@@ -7,7 +7,12 @@ namespace Trellendar.DataAccess.Native.ModelConfiguration.Configurations
     {
         protected override void ConfigureEntity(EntityTypeConfiguration<User> entity)
         {
-            
+            entity.Property(x => x.Email).IsRequired().HasMaxLength(256);
+            entity.Property(x => x.TrelloBoardID).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.TrelloAccessToken).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarID).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarAccessToken).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarRefreshToken).IsRequired().HasMaxLength(100);
         }
     }
 }
