@@ -1,14 +1,14 @@
 ﻿using System.Data.Entity;
 using Ninject.Modules;
-using Trellendar.DataAccess;
-using Trellendar.DataAccess.Calendar;
-using Trellendar.DataAccess.Calendar._Impl;
-using Trellendar.DataAccess.Native;
-using Trellendar.DataAccess.Native.Repository;
-using Trellendar.DataAccess.Native.Repository._Impl;
-using Trellendar.DataAccess.Trello;
-using Trellendar.DataAccess.Trello._Impl;
-using Trellendar.DataAccess._Impl;
+using Trellendar.DataAccess.Local;
+using Trellendar.DataAccess.Local.Repository;
+using Trellendar.DataAccess.Local.Repository._Impl;
+using Trellendar.DataAccess.Remote;
+using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Calendar._Impl;
+using Trellendar.DataAccess.Remote.Trello;
+using Trellendar.DataAccess.Remote.Trello._Impl;
+using Trellendar.DataAccess.Remote._Impl;
 
 namespace Trellendar.Service.Ninject.Modules
 {

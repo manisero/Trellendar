@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Trellendar.Core.DependencyResolution;
-using Trellendar.DataAccess;
+using Trellendar.DataAccess.Remote;
 using Trellendar.Domain;
 using Trellendar.Logic.DataAccess.AccessTokensProviders;
 using Trellendar.Core.Extensions;

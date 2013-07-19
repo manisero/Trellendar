@@ -1,7 +1,7 @@
-using Trellendar.DataAccess.Calendar;
-using Trellendar.DataAccess.Trello;
 using System.Linq;
 using Trellendar.Core.Extensions;
+using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Trello;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.Core", "Trellend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.Domain", "Trellendar.Domain\Trellendar.Domain.csproj", "{807DB49A-6335-4948-8700-B856A876B019}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.DataAccess", "Trellendar.DataAccess\Trellendar.DataAccess.csproj", "{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.DataAccess.Remote", "Trellendar.DataAccess.Remote\Trellendar.DataAccess.Remote.csproj", "{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Core", "0. Core", "{2808CA8A-1D97-4F67-9DF5-8825B3F08AD6}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Presentation", "4. Presentation", "{01B1A08B-E1DE-4BB8-AE2D-50FCFDA066CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.AuthorizationConsole", "Trellendar.AuthorizationConsole\Trellendar.AuthorizationConsole.csproj", "{3B5596C8-B5B4-4133-99A3-0F9BBC0E4D4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.DataAccess.Local", "Trellendar.DataAccess.Local\Trellendar.DataAccess.Local.csproj", "{A844ABEC-7E31-4B20-B209-2185E663B297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{3B5596C8-B5B4-4133-99A3-0F9BBC0E4D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B5596C8-B5B4-4133-99A3-0F9BBC0E4D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B5596C8-B5B4-4133-99A3-0F9BBC0E4D4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A844ABEC-7E31-4B20-B209-2185E663B297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A844ABEC-7E31-4B20-B209-2185E663B297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A844ABEC-7E31-4B20-B209-2185E663B297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A844ABEC-7E31-4B20-B209-2185E663B297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{E30FFAF5-F4AF-46FB-AA26-1930869827F4} = {2808CA8A-1D97-4F67-9DF5-8825B3F08AD6}
 		{807DB49A-6335-4948-8700-B856A876B019} = {855E6D75-DF88-4D9D-9893-AD7A94E4339D}
 		{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7} = {72473A3D-DD35-499C-B5A1-E5A4037BFF52}
+		{A844ABEC-7E31-4B20-B209-2185E663B297} = {72473A3D-DD35-499C-B5A1-E5A4037BFF52}
 		{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE} = {73D4F789-3048-4F3B-9A00-9F4B2F69A0EA}
 		{C69DF65D-BBB1-49E1-9B0E-88590E45E70E} = {01B1A08B-E1DE-4BB8-AE2D-50FCFDA066CE}
 		{3B5596C8-B5B4-4133-99A3-0F9BBC0E4D4B} = {01B1A08B-E1DE-4BB8-AE2D-50FCFDA066CE}

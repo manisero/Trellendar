@@ -66,9 +66,13 @@
       <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
       <Name>Trellendar.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Trellendar.DataAccess\Trellendar.DataAccess.csproj">
+    <ProjectReference Include="..\Trellendar.DataAccess.Local\Trellendar.DataAccess.Local.csproj">
+      <Project>{A844ABEC-7E31-4B20-B209-2185E663B297}</Project>
+      <Name>Trellendar.DataAccess.Local</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trellendar.DataAccess.Remote\Trellendar.DataAccess.Remote.csproj">
       <Project>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</Project>
-      <Name>Trellendar.DataAccess</Name>
+      <Name>Trellendar.DataAccess.Remote</Name>
     </ProjectReference>
     <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
       <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>

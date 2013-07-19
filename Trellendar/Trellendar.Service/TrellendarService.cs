@@ -1,6 +1,6 @@
 ﻿using System.ServiceProcess;
-using Trellendar.DataAccess.Native.Repository;
-using Trellendar.Domain.Native;
+using Trellendar.DataAccess.Local.Repository;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Ninject;
 using Trellendar.Logic.CalendarSynchronization;

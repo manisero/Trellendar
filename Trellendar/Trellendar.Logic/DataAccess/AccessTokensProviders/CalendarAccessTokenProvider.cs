@@ -1,4 +1,4 @@
-﻿using Trellendar.DataAccess;
+﻿using Trellendar.DataAccess.Remote;
 
 namespace Trellendar.Logic.DataAccess.AccessTokensProviders
 {

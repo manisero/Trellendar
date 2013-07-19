@@ -1,5 +1,5 @@
 ﻿using Ninject.Modules;
-using Trellendar.DataAccess;
+using Trellendar.DataAccess.Remote;
 using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.CalendarSynchronization._Impl;
 using Trellendar.Logic.DataAccess;
