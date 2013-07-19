@@ -7,8 +7,8 @@
     <ProjectGuid>{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trellendar.DataAccess</RootNamespace>
-    <AssemblyName>Trellendar.DataAccess</AssemblyName>
+    <RootNamespace>Trellendar.DataAccess.Remote</RootNamespace>
+    <AssemblyName>Trellendar.DataAccess.Remote</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

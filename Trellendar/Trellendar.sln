@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.Core", "Trellend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.Domain", "Trellendar.Domain\Trellendar.Domain.csproj", "{807DB49A-6335-4948-8700-B856A876B019}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.DataAccess", "Trellendar.DataAccess\Trellendar.DataAccess.csproj", "{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellendar.DataAccess.Remote", "Trellendar.DataAccess.Remote\Trellendar.DataAccess.Remote.csproj", "{63D0CA96-2FBB-4E7E-A2C9-81905019FAC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Core", "0. Core", "{2808CA8A-1D97-4F67-9DF5-8825B3F08AD6}"
 EndProject
