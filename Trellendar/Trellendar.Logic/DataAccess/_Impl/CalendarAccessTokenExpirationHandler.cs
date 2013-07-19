@@ -1,6 +1,6 @@
 ﻿using System;
 using Trellendar.DataAccess.Calendar;
-using Trellendar.DataAccess.Native;
+using Trellendar.DataAccess.Native.Repository;
 using Trellendar.Domain.Native;
 
 namespace Trellendar.Logic.DataAccess._Impl
@@ -8,13 +8,13 @@ namespace Trellendar.Logic.DataAccess._Impl
     public class CalendarAccessTokenExpirationHandler : ICalendarAccessTokenExpirationHandler
     {
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationAPI;
-        private readonly TrellendarDataContext _dataContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IDataAccessSettingsProvider _settingsProvider;
 
-        public CalendarAccessTokenExpirationHandler(ICalendarAuthorizationAPI calendarAuthorizationAPI, TrellendarDataContext dataContext, IDataAccessSettingsProvider settingsProvider)
+        public CalendarAccessTokenExpirationHandler(ICalendarAuthorizationAPI calendarAuthorizationAPI, IUnitOfWork unitOfWork, IDataAccessSettingsProvider settingsProvider)
         {
             _calendarAuthorizationAPI = calendarAuthorizationAPI;
-            _dataContext = dataContext;
+            _unitOfWork = unitOfWork;
             _settingsProvider = settingsProvider;
         }
 
@@ -30,7 +30,7 @@ namespace Trellendar.Logic.DataAccess._Impl
             user.CalendarAccessToken = newToken.Access_Token;
             user.CalendarAccessTokenExpirationTS = newToken.ExpirationTS;
 
-            _dataContext.SaveChanges();
+            _unitOfWork.SaveChanges();
         }
     }
 }
