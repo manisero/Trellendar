@@ -2,6 +2,7 @@ using System.Linq;
 using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -11,6 +12,11 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarApi;
         private readonly ICardProcessor _cardProcessor;
+
+        private User User
+        {
+            get { return _userContext.User; }
+        }
 
         public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, ICardProcessor cardProcessor)
         {
@@ -22,18 +28,18 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public void Synchronize()
         {
-            var board = _trelloApi.GetBoard(_userContext.User.TrelloBoardID);
+            var board = _trelloApi.GetBoard(User.TrelloBoardID);
 
             if (board.Lists.IsNullOrEmpty() || board.Cards.IsNullOrEmpty())
             {
                 return;
             }
 
-            var events = _calendarApi.GetEvents(_userContext.User.CalendarID);
+            var events = _calendarApi.GetEvents(User.CalendarID);
 
             foreach (var list in board.Lists)
             {
-                var cards = board.Cards.Where(x => x.IdList == list.Id);
+                var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
 
                 foreach (var card in cards)
                 {
@@ -44,7 +50,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                     {
                         if (existingEvent != null)
                         {
-                            _calendarApi.DeleteEvent(_userContext.User.CalendarID, existingEvent);
+                            _calendarApi.DeleteEvent(User.CalendarID, existingEvent);
                         }
 
                         continue;
@@ -52,12 +58,12 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                     if (existingEvent == null)
                     {
-                        _calendarApi.CreateEvent(_userContext.User.CalendarID, newEvent);
+                        _calendarApi.CreateEvent(User.CalendarID, newEvent);
                     }
                     else 
                     {
                         newEvent.id = existingEvent.id;
-                        _calendarApi.UpdateEvent(_userContext.User.CalendarID, newEvent);
+                        _calendarApi.UpdateEvent(User.CalendarID, newEvent);
                     }
                 }
             }
