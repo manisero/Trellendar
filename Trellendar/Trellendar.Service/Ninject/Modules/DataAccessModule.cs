@@ -3,6 +3,8 @@ using Trellendar.DataAccess;
 using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Calendar._Impl;
 using Trellendar.DataAccess.Native;
+using Trellendar.DataAccess.Repository;
+using Trellendar.DataAccess.Repository._Impl;
 using Trellendar.DataAccess.Trello;
 using Trellendar.DataAccess.Trello._Impl;
 using Trellendar.DataAccess._Impl;
@@ -17,6 +19,8 @@ namespace Trellendar.Service.Ninject.Modules
 
             // Native
             Bind<TrellendarDataContext>().ToConstant(new TrellendarDataContext());
+            Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>();
+            Bind<IRepositoryFactory>().To<EntityFrameworkRepositoryFactory>();
 
             // Trello
             Bind<ITrelloAuthorizationAPI>().To<TrelloAuthorizationAPI>();

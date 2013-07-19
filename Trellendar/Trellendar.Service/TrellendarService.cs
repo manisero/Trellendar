@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.ServiceProcess;
 using Trellendar.DataAccess.Native;
+using Trellendar.DataAccess.Repository;
+using Trellendar.Domain.Native;
 using Trellendar.Logic;
 using Ninject;
 using System.Linq;
@@ -20,18 +22,15 @@ namespace Trellendar.Service
         {
             var kernel = new NinjectBootstrapper().Bootstrap();
 
-            var dataContext = kernel.Get<TrellendarDataContext>();
-            var user = dataContext.Users.FirstOrDefault();
+            var userRepository = kernel.Get<IRepositoryFactory>().Create<User>();
 
-            if (user == null)
+            foreach (var user in userRepository.GetAll())
             {
-                throw new ObjectNotFoundException("No User found.");
+                kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
+
+                var synchronizationService = kernel.Get<ISynchronizationService>();
+                synchronizationService.Synchronize();
             }
-
-            kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
-
-            var synchronizationService = kernel.Get<ISynchronizationService>();
-            synchronizationService.Synchronize();
         }
 
         protected override void OnStop()
