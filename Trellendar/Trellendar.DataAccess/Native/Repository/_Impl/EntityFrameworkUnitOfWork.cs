@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Trellendar.DataAccess.Repository._Impl
+namespace Trellendar.DataAccess.Native.Repository._Impl
 {
     public class EntityFrameworkUnitOfWork : IUnitOfWork
     {

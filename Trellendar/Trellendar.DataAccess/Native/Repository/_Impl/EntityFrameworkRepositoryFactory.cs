@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using Trellendar.Core.DependencyResolution;
 
-namespace Trellendar.DataAccess.Repository._Impl
+namespace Trellendar.DataAccess.Native.Repository._Impl
 {
     public class EntityFrameworkRepositoryFactory : IRepositoryFactory
     {
