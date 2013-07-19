@@ -62,6 +62,10 @@
     <Compile Include="IAccessTokenProvider.cs" />
     <Compile Include="IAccessTokenProviderFactory.cs" />
     <Compile Include="IRestClientFactory.cs" />
+    <Compile Include="Native\Migrations\201307191930256_ConstraintsAndLastSynchronizationTS.cs" />
+    <Compile Include="Native\Migrations\201307191930256_ConstraintsAndLastSynchronizationTS.Designer.cs">
+      <DependentUpon>201307191930256_ConstraintsAndLastSynchronizationTS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Native\ModelConfiguration\EntityConfigurationBase.cs" />
     <Compile Include="Native\ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="Native\Migrations\201307161814175_InitialCreate.cs" />
@@ -101,6 +105,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Native\Migrations\201307161814175_InitialCreate.resx">
       <DependentUpon>201307161814175_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Native\Migrations\201307191930256_ConstraintsAndLastSynchronizationTS.resx">
+      <DependentUpon>201307191930256_ConstraintsAndLastSynchronizationTS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
