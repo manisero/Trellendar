@@ -32,7 +32,7 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
                                                  { "lists", "open" },
                                                  { "list_fields", "name" },
                                                  { "cards", "all" },
-                                                 { "card_fields", "closed,desc,due,idList,name" }
+                                                 { "card_fields", "closed,dateLastActivity,desc,due,idList,name" }
                                              });
 
 

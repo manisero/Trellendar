@@ -15,5 +15,7 @@ namespace Trellendar.Domain.Trello
         public DateTime? Due { get; set; }
 
         public bool Closed { get; set; }
+
+        public DateTime DateLastActivity { get; set; }
     }
 }

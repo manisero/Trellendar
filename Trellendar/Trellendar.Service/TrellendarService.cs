@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
@@ -27,6 +28,9 @@ namespace Trellendar.Service
 
                 var synchronizationService = kernel.Get<ISynchronizationService>();
                 synchronizationService.Synchronize();
+
+                user.LastSynchronizationTS = DateTime.UtcNow;
+                kernel.Get<IUnitOfWork>().SaveChanges();
             }
         }
 

@@ -60,7 +60,8 @@ namespace Trellendar.AuthorizationConsole
                     CalendarID = calendarId,
                     CalendarAccessToken = calendarToken.Access_Token,
                     CalendarAccessTokenExpirationTS = calendarToken.ExpirationTS,
-                    CalendarRefreshToken = calendarToken.Refresh_Token
+                    CalendarRefreshToken = calendarToken.Refresh_Token,
+                    LastSynchronizationTS = new DateTime(1900, 1, 1)
                 };
 
             dataContext.Users.Add(user);
