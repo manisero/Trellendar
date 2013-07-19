@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Trellendar.DataAccess.Native.ModelConfiguration
+namespace Trellendar.DataAccess.Local.ModelConfiguration
 {
     public abstract class EntityConfigurationBase<TEntity> where TEntity : class
     {

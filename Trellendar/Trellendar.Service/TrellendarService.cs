@@ -1,5 +1,5 @@
 ﻿using System.ServiceProcess;
-using Trellendar.DataAccess.Native.Repository;
+using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Native;
 using Trellendar.Logic;
 using Ninject;

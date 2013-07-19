@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess.Native.Repository
+﻿namespace Trellendar.DataAccess.Local.Repository
 {
     public interface IUnitOfWork
     {

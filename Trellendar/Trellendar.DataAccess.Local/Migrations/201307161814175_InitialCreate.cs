@@ -1,8 +1,7 @@
-namespace Trellendar.DataAccess.Native.Migrations
+using System.Data.Entity.Migrations;
+
+namespace Trellendar.DataAccess.Local.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class InitialCreate : DbMigration
     {
         public override void Up()

@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using Trellendar.DataAccess.Native.ModelConfiguration;
+using Trellendar.DataAccess.Local.ModelConfiguration;
 using Trellendar.Domain.Native;
 
-namespace Trellendar.DataAccess.Native
+namespace Trellendar.DataAccess.Local
 {
     public class TrellendarDataContext : DbContext
     {

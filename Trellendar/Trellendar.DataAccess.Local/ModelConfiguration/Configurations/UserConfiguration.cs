@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Trellendar.Domain.Native;
 
-namespace Trellendar.DataAccess.Native.ModelConfiguration.Configurations
+namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
 {
     public class UserConfiguration : EntityConfigurationBase<User>
     {

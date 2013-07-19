@@ -1,13 +1,12 @@
 using System.Data.Entity.Migrations;
 
-namespace Trellendar.DataAccess.Native.Migrations
+namespace Trellendar.DataAccess.Local.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<TrellendarDataContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = "Native\\Migrations";
         }
 
         protected override void Seed(TrellendarDataContext context)

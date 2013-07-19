@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Trellendar.DataAccess.Native.Repository
+namespace Trellendar.DataAccess.Local.Repository
 {
     public interface IRepository<TEntity> where TEntity : class 
     {

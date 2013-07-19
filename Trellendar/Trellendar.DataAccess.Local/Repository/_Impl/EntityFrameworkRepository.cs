@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 
-namespace Trellendar.DataAccess.Native.Repository._Impl
+namespace Trellendar.DataAccess.Local.Repository._Impl
 {
     public class EntityFrameworkRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
