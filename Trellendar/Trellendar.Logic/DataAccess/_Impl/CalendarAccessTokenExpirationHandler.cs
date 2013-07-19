@@ -1,7 +1,7 @@
 ﻿using System;
 using Trellendar.DataAccess.Calendar;
 using Trellendar.DataAccess.Local.Repository;
-using Trellendar.Domain.Native;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.Logic.DataAccess._Impl
 {

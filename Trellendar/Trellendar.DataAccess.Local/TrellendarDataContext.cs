@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using Trellendar.DataAccess.Local.ModelConfiguration;
-using Trellendar.Domain.Native;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.DataAccess.Local
 {

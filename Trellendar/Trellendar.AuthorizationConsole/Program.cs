@@ -5,7 +5,7 @@ using Trellendar.DataAccess.Calendar._Impl;
 using Trellendar.DataAccess.Local;
 using Trellendar.DataAccess.Trello._Impl;
 using Trellendar.DataAccess._Impl;
-using Trellendar.Domain.Native;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.AuthorizationConsole
 {
