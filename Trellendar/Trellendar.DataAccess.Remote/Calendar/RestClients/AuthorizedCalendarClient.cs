@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using Trellendar.Domain;
 
-namespace Trellendar.DataAccess.Calendar.RestClients
+namespace Trellendar.DataAccess.Remote.Calendar.RestClients
 {
     public class AuthorizedCalendarClient : CalendarClient
     {

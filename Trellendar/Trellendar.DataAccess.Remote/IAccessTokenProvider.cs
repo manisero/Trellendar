@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess
+﻿namespace Trellendar.DataAccess.Remote
 {
     public interface IAccessTokenProvider
     {

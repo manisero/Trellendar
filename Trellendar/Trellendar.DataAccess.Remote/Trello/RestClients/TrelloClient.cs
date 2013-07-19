@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess.Trello.RestClients
+﻿namespace Trellendar.DataAccess.Remote.Trello.RestClients
 {
     public class TrelloClient : RestClientBase
     {

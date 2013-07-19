@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess.Calendar.RestClients
+﻿namespace Trellendar.DataAccess.Remote.Calendar.RestClients
 {
     public class CalendarClient : RestClientBase
     {

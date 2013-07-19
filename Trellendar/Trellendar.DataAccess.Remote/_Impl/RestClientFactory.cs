@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Trellendar.Core.DependencyResolution;
-using Trellendar.DataAccess.Calendar.RestClients;
-using Trellendar.DataAccess.Trello.RestClients;
+using Trellendar.DataAccess.Remote.Calendar.RestClients;
+using Trellendar.DataAccess.Remote.Trello.RestClients;
 using Trellendar.Domain;
 
-namespace Trellendar.DataAccess._Impl
+namespace Trellendar.DataAccess.Remote._Impl
 {
     public class RestClientFactory : IRestClientFactory
     {

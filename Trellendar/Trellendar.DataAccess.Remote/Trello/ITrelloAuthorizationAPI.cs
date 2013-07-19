@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess.Trello
+﻿namespace Trellendar.DataAccess.Remote.Trello
 {
     public interface ITrelloAuthorizationAPI
     {

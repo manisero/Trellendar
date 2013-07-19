@@ -1,6 +1,6 @@
 ﻿using Trellendar.Domain.Calendar;
 
-namespace Trellendar.DataAccess.Calendar
+namespace Trellendar.DataAccess.Remote.Calendar
 {
     public interface ICalendarAuthorizationAPI
     {

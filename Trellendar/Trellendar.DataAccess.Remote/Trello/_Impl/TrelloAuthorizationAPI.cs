@@ -2,7 +2,7 @@
 using Trellendar.Core;
 using Trellendar.Domain;
 
-namespace Trellendar.DataAccess.Trello._Impl
+namespace Trellendar.DataAccess.Remote.Trello._Impl
 {
     public class TrelloAuthorizationAPI : ITrelloAuthorizationAPI
     {

@@ -4,7 +4,7 @@ using Trellendar.Core.Serialization;
 using Trellendar.Domain;
 using Trellendar.Domain.Trello;
 
-namespace Trellendar.DataAccess.Trello._Impl
+namespace Trellendar.DataAccess.Remote.Trello._Impl
 {
     public class TrelloAPI : ITrelloAPI
     {

@@ -1,4 +1,4 @@
-﻿namespace Trellendar.DataAccess
+﻿namespace Trellendar.DataAccess.Remote
 {
     internal static class ApplicationKeys
     {

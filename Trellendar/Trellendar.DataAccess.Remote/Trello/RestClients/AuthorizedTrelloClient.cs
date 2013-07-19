@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Domain;
 
-namespace Trellendar.DataAccess.Trello.RestClients
+namespace Trellendar.DataAccess.Remote.Trello.RestClients
 {
     public class AuthorizedTrelloClient : TrelloClient
     {

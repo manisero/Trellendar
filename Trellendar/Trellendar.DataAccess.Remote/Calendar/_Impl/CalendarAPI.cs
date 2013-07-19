@@ -4,7 +4,7 @@ using Trellendar.Domain;
 using Trellendar.Domain.Calendar;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.DataAccess.Calendar._Impl
+namespace Trellendar.DataAccess.Remote.Calendar._Impl
 {
     public class CalendarAPI : ICalendarAPI
     {

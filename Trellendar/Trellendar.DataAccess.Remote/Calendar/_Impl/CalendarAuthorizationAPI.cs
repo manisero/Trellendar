@@ -5,7 +5,7 @@ using Trellendar.Domain;
 using Trellendar.Domain.Calendar;
 using System.Linq;
 
-namespace Trellendar.DataAccess.Calendar._Impl
+namespace Trellendar.DataAccess.Remote.Calendar._Impl
 {
     public class CalendarAuthorizationAPI : ICalendarAuthorizationAPI
     {

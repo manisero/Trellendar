@@ -1,6 +1,6 @@
 ﻿using Trellendar.Domain;
 
-namespace Trellendar.DataAccess
+namespace Trellendar.DataAccess.Remote
 {
     public interface IAccessTokenProviderFactory
     {

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.DataAccess
+namespace Trellendar.DataAccess.Remote
 {
     public class RestClientBase : IRestClient
     {
