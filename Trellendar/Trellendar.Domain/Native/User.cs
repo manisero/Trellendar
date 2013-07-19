@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trellendar.Domain.Trellendar
+namespace Trellendar.Domain.Native
 {
     public class User
     {
@@ -19,5 +19,7 @@ namespace Trellendar.Domain.Trellendar
         public DateTime CalendarAccessTokenExpirationTS { get; set; }
 
         public string CalendarRefreshToken { get; set; }
+
+        public DateTime LastSynchronizationTS { get; set; }
     }
 }

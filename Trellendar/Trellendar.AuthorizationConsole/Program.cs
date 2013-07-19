@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Calendar._Impl;
-using Trellendar.DataAccess.Trellendar;
+using Trellendar.DataAccess.Native;
 using Trellendar.DataAccess.Trello._Impl;
 using Trellendar.DataAccess._Impl;
-using Trellendar.Domain.Trellendar;
+using Trellendar.Domain.Native;
 
 namespace Trellendar.AuthorizationConsole
 {

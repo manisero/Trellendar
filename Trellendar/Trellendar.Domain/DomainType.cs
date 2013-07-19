@@ -2,8 +2,8 @@
 {
     public enum DomainType
     {
+        Native,
         Trello,
-        Calendar,
-        Trellendar
+        Calendar
     }
 }

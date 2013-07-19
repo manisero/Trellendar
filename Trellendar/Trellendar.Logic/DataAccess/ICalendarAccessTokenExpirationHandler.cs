@@ -1,4 +1,4 @@
-﻿using Trellendar.Domain.Trellendar;
+﻿using Trellendar.Domain.Native;
 
 namespace Trellendar.Logic.DataAccess
 {
