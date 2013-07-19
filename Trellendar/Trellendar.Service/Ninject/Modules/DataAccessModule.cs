@@ -16,12 +16,13 @@ namespace Trellendar.Service.Ninject.Modules
     {
         public override void Load()
         {
-            Bind<IRestClientFactory>().To<RestClientFactory>();
-
-            // Native
+            // Local
             Bind<DbContext>().ToConstant(new TrellendarDataContext());
             Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>();
             Bind<IRepositoryFactory>().To<EntityFrameworkRepositoryFactory>();
+
+            // Remote
+            Bind<IRestClientFactory>().To<RestClientFactory>();
 
             // Trello
             Bind<ITrelloAuthorizationAPI>().To<TrelloAuthorizationAPI>();
