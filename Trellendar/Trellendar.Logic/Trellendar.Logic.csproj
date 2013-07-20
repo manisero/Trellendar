@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\ICalendarService.cs" />
     <Compile Include="CalendarSynchronization\ICardProcessor.cs" />
     <Compile Include="CalendarSynchronization\IUserProfileService.cs" />
+    <Compile Include="CalendarSynchronization\_Impl\CalendarService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\CardProcessor.cs" />
     <Compile Include="CalendarSynchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\UserProfileService.cs" />
