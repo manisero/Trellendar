@@ -12,6 +12,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
         private readonly UserContext _userContext;
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarApi;
+        private readonly IUserProfileService _userProfileService;
         private readonly ICardProcessor _cardProcessor;
 
         private User User
@@ -19,11 +20,12 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             get { return _userContext.User; }
         }
 
-        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, ICardProcessor cardProcessor)
+        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, IUserProfileService userProfileService, ICardProcessor cardProcessor)
         {
             _userContext = userContext;
             _trelloApi = trelloApi;
             _calendarApi = calendarApi;
+            _userProfileService = userProfileService;
             _cardProcessor = cardProcessor;
         }
 
@@ -36,7 +38,9 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 return;
             }
 
-            var events = _calendarApi.GetEvents(User.CalendarID);
+            var calendarEvents = _calendarApi.GetEvents(User.CalendarID);
+
+            _userProfileService.UpdateUserProfile(board, calendarEvents);
 
             foreach (var list in board.Lists)
             {
@@ -44,7 +48,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                 foreach (var card in cards)
                 {
-                    var existingEvent = events.Items.SingleOrDefault(x => x.GetExtendedProperty(EventExtensions.SOURCE_ID_PROPERTY_KEY) == card.Id);
+                    var existingEvent = calendarEvents.Items.SingleOrDefault(x => x.GetExtendedProperty(EventExtensions.SOURCE_ID_PROPERTY_KEY) == card.Id);
                     var newEvent = _cardProcessor.Process(card, list.Name);
 
                     if (newEvent == null)

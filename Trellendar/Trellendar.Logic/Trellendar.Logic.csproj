@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalendarSynchronization\ICardProcessor.cs" />
+    <Compile Include="CalendarSynchronization\IUserProfileService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\CardProcessor.cs" />
     <Compile Include="CalendarSynchronization\_Impl\SynchronizationService.cs" />
+    <Compile Include="CalendarSynchronization\_Impl\UserProfileService.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\CalendarAccessTokenProvider.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\TrelloAccessTokenProvider.cs" />
     <Compile Include="DataAccess\IDataAccessSettingsProvider.cs" />
