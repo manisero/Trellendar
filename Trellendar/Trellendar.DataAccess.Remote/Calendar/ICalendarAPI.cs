@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 
 namespace Trellendar.DataAccess.Remote.Calendar
 {
@@ -7,7 +6,7 @@ namespace Trellendar.DataAccess.Remote.Calendar
     {
         Domain.Calendar.Calendar GetCalendar(string calendarId);
 
-        IEnumerable<Event> GetEvents(string calendarId);
+        CalendarEvents GetEvents(string calendarId);
 
         void CreateEvent(string calendarId, Event @event);
 

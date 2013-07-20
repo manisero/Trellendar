@@ -30,11 +30,11 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
             return _jsonSerializer.Deserialize<Domain.Calendar.Calendar>(calendar);
         }
 
-        public IEnumerable<Event> GetEvents(string calendarId)
+        public CalendarEvents GetEvents(string calendarId)
         {
             var events = CalendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
 
-            return _jsonSerializer.Deserialize<CalendarEvents>(events).Items;
+            return _jsonSerializer.Deserialize<CalendarEvents>(events);
         }
 
         public void CreateEvent(string calendarId, Event @event)

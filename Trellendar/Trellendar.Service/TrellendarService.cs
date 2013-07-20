@@ -24,12 +24,13 @@ namespace Trellendar.Service
 
             foreach (var user in userRepository.GetAll())
             {
+                var synchronizationTs = DateTime.UtcNow;
                 kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
 
                 var synchronizationService = kernel.Get<ISynchronizationService>();
                 synchronizationService.Synchronize();
 
-                user.LastSynchronizationTS = DateTime.UtcNow;
+                user.LastSynchronizationTS = synchronizationTs;
                 kernel.Get<IUnitOfWork>().SaveChanges();
             }
         }

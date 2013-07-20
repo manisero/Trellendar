@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -20,7 +21,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                     end = new TimeStamp(card.Due.Value.AddHours(1)),
                     extendedProperties = new EventExtendedProperties
                         {
-                            @private = new Dictionary<string, string> { { Event.SOURCE_ID_PROPERTY_KEY, card.Id } }
+                            @private = new Dictionary<string, string> { { EventConstants.SOURCE_ID_PROPERTY_KEY, card.Id } }
                         }
                 };
 

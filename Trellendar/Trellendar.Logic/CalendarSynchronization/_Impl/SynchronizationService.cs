@@ -3,6 +3,7 @@ using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Trellendar;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -43,7 +44,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                 foreach (var card in cards)
                 {
-                    var existingEvent = events.SingleOrDefault(x => x.SourceID == card.Id);
+                    var existingEvent = events.Items.SingleOrDefault(x => x.GetExtendedProperty(EventConstants.SOURCE_ID_PROPERTY_KEY) == card.Id);
                     var newEvent = _cardProcessor.Process(card, list.Name);
 
                     if (newEvent == null)
