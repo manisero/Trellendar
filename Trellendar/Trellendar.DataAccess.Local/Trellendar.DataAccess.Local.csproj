@@ -53,6 +53,10 @@
     <Compile Include="Migrations\201307191930256_ConstraintsAndLastSynchronizationTS.Designer.cs">
       <DependentUpon>201307191930256_ConstraintsAndLastSynchronizationTS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201307200643272_UserCalendarTimeZone.cs" />
+    <Compile Include="Migrations\201307200643272_UserCalendarTimeZone.Designer.cs">
+      <DependentUpon>201307200643272_UserCalendarTimeZone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\EntityConfigurationBase.cs" />
@@ -72,6 +76,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201307191930256_ConstraintsAndLastSynchronizationTS.resx">
       <DependentUpon>201307191930256_ConstraintsAndLastSynchronizationTS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307200643272_UserCalendarTimeZone.resx">
+      <DependentUpon>201307200643272_UserCalendarTimeZone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

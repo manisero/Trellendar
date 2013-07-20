@@ -14,6 +14,8 @@ namespace Trellendar.Domain.Trellendar
 
         public string CalendarID { get; set; }
 
+        public string CalendarTimeZone { get; set; }
+
         public string CalendarAccessToken { get; set; }
 
         public DateTime CalendarAccessTokenExpirationTS { get; set; }

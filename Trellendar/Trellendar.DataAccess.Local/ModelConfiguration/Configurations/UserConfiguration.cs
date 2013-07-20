@@ -11,6 +11,7 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
             entity.Property(x => x.TrelloBoardID).IsRequired().HasMaxLength(100);
             entity.Property(x => x.TrelloAccessToken).IsRequired().HasMaxLength(100);
             entity.Property(x => x.CalendarID).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarTimeZone).HasMaxLength(50);
             entity.Property(x => x.CalendarAccessToken).IsRequired().HasMaxLength(100);
             entity.Property(x => x.CalendarRefreshToken).IsRequired().HasMaxLength(100);
         }
