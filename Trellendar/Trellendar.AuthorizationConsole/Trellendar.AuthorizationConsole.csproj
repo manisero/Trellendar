@@ -78,6 +78,10 @@
       <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
       <Name>Trellendar.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Trellendar.Logic\Trellendar.Logic.csproj">
+      <Project>{A942EBCD-E98B-419E-BFF1-FD02F6D2E1CE}</Project>
+      <Name>Trellendar.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />

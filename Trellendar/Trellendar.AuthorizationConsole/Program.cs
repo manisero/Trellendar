@@ -6,6 +6,7 @@ using Trellendar.DataAccess.Remote.Calendar._Impl;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 using Trellendar.Domain.Trellendar;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.AuthorizationConsole
 {
@@ -59,7 +60,7 @@ namespace Trellendar.AuthorizationConsole
                     TrelloAccessToken = trelloToken,
                     CalendarID = calendarId,
                     CalendarAccessToken = calendarToken.Access_Token,
-                    CalendarAccessTokenExpirationTS = calendarToken.ExpirationTS,
+                    CalendarAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
                     CalendarRefreshToken = calendarToken.Refresh_Token,
                     LastSynchronizationTS = new DateTime(1900, 1, 1)
                 };

@@ -13,10 +13,5 @@ namespace Trellendar.Domain.Calendar
         public string Refresh_Token { get; set; }
 
         public DateTime CreationTS { get; set; }
-
-        public DateTime ExpirationTS
-        {
-            get { return CreationTS.AddSeconds(Expires_In); }
-        }
     }
 }
