@@ -25,16 +25,16 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
 
         public Domain.Calendar.Calendar GetCalendar(string calendarId)
         {
-            var calendar = CalendarClient.Get("calendars/{0}".FormatWith(calendarId));
+            var calendarJson = CalendarClient.Get("calendars/{0}".FormatWith(calendarId));
 
-            return _jsonSerializer.Deserialize<Domain.Calendar.Calendar>(calendar);
+            return _jsonSerializer.Deserialize<Domain.Calendar.Calendar>(calendarJson);
         }
 
         public CalendarEvents GetEvents(string calendarId)
         {
-            var events = CalendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
+            var eventsJson = CalendarClient.Get("calendars/{0}/events".FormatWith(calendarId));
 
-            return _jsonSerializer.Deserialize<CalendarEvents>(events);
+            return _jsonSerializer.Deserialize<CalendarEvents>(eventsJson);
         }
 
         public void CreateEvent(string calendarId, Event @event)
