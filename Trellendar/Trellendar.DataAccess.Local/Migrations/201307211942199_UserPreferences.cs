@@ -11,20 +11,19 @@ namespace Trellendar.DataAccess.Local.Migrations
                 "dbo.UserPreferences",
                 c => new
                     {
-                        UserPreferencesID = c.Int(nullable: false, identity: true),
+                        UserID = c.Int(nullable: false),
                         CardEventNameTemplate = c.String(maxLength: 50),
-                        User_UserID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.UserPreferencesID)
-                .ForeignKey("dbo.Users", t => t.User_UserID, cascadeDelete: true)
-                .Index(t => t.User_UserID);
+                .PrimaryKey(t => t.UserID)
+                .ForeignKey("dbo.Users", t => t.UserID)
+                .Index(t => t.UserID);
             
         }
         
         public override void Down()
         {
-            DropIndex("dbo.UserPreferences", new[] { "User_UserID" });
-            DropForeignKey("dbo.UserPreferences", "User_UserID", "dbo.Users");
+            DropIndex("dbo.UserPreferences", new[] { "UserID" });
+            DropForeignKey("dbo.UserPreferences", "UserID", "dbo.Users");
             DropTable("dbo.UserPreferences");
         }
     }

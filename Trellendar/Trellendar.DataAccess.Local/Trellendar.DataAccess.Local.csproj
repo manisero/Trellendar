@@ -57,9 +57,9 @@
     <Compile Include="Migrations\201307200643272_UserCalendarTimeZone.Designer.cs">
       <DependentUpon>201307200643272_UserCalendarTimeZone.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201307211932387_UserPreferences.cs" />
-    <Compile Include="Migrations\201307211932387_UserPreferences.Designer.cs">
-      <DependentUpon>201307211932387_UserPreferences.cs</DependentUpon>
+    <Compile Include="Migrations\201307211942199_UserPreferences.cs" />
+    <Compile Include="Migrations\201307211942199_UserPreferences.Designer.cs">
+      <DependentUpon>201307211942199_UserPreferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="Migrations\201307200643272_UserCalendarTimeZone.resx">
       <DependentUpon>201307200643272_UserCalendarTimeZone.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201307211932387_UserPreferences.resx">
-      <DependentUpon>201307211932387_UserPreferences.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201307211942199_UserPreferences.resx">
+      <DependentUpon>201307211942199_UserPreferences.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

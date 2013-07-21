@@ -23,5 +23,7 @@ namespace Trellendar.Domain.Trellendar
         public string CalendarRefreshToken { get; set; }
 
         public DateTime LastSynchronizationTS { get; set; }
+
+        public UserPreferences UserPreferences { get; set; }
     }
 }

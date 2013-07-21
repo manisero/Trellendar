@@ -11,7 +11,7 @@ namespace Trellendar.DataAccess.Local.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201307211932387_UserPreferences"; }
+            get { return "201307211942199_UserPreferences"; }
         }
         
         string IMigrationMetadata.Source
