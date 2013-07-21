@@ -51,11 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\BoardItemsProcessorBase.cs" />
+    <Compile Include="CalendarSynchronization\BoardItemsProcessors\CardsProcessor.cs" />
+    <Compile Include="CalendarSynchronization\IBoardItemsProcessorFactory.cs" />
     <Compile Include="CalendarSynchronization\ICalendarService.cs" />
-    <Compile Include="CalendarSynchronization\ICardProcessor.cs" />
+    <Compile Include="CalendarSynchronization\IBoardItemsProcessor.cs" />
     <Compile Include="CalendarSynchronization\IUserProfileService.cs" />
+    <Compile Include="CalendarSynchronization\_Impl\BoardItemsProcessorFactory.cs" />
     <Compile Include="CalendarSynchronization\_Impl\CalendarService.cs" />
-    <Compile Include="CalendarSynchronization\_Impl\CardProcessor.cs" />
     <Compile Include="CalendarSynchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\UserProfileService.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\CalendarAccessTokenProvider.cs" />
@@ -91,6 +94,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

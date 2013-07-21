@@ -15,7 +15,7 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<ISynchronizationService>().To<SynchronizationService>();
             Bind<IUserProfileService>().To<UserProfileService>();
             Bind<ICalendarService>().To<CalendarService>();
-            Bind<ICardProcessor>().To<CardProcessor>();
+            Bind<IBoardItemsProcessorFactory>().To<BoardItemsProcessorFactory>();
 
             // Data Access
             Bind<IAccessTokenProviderFactory>().To<AccessTokenProviderFactory>();

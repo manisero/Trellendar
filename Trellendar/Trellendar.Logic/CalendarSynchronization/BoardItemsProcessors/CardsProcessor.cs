@@ -1,17 +1,16 @@
-﻿using Trellendar.DataAccess.Remote.Calendar;
+﻿using System.Collections.Generic;
+using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
 {
     public class CardsProcessor : BoardItemsProcessorBase<Card>
     {
-        private readonly ICardProcessor _cardProcessor;
-
-        public CardsProcessor(UserContext userContext, ICalendarAPI calendarApi, ICardProcessor cardProcessor)
+        public CardsProcessor(UserContext userContext, ICalendarAPI calendarApi)
             : base(userContext, calendarApi)
         {
-            _cardProcessor = cardProcessor;
         }
 
         protected override string GetItemID(Card item)
@@ -21,7 +20,23 @@ namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
 
         protected override Event ProcessItem(Card item, string parentName)
         {
-            return _cardProcessor.Process(item, parentName);
+            if (item.Closed || item.Due == null)
+            {
+                return null;
+            }
+
+            var @event = new Event
+            {
+                summary = item.Name,
+                start = new TimeStamp(item.Due.Value),
+                end = new TimeStamp(item.Due.Value.AddHours(1)),
+                extendedProperties = new EventExtendedProperties
+                {
+                    @private = new Dictionary<string, string> { { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id } }
+                }
+            };
+
+            return @event;
         }
     }
 }
