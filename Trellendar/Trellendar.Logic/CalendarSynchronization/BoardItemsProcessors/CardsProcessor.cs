@@ -3,6 +3,7 @@ using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
 {
@@ -27,7 +28,7 @@ namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
 
             var @event = new Event
             {
-                summary = item.Name,
+                summary = User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name), // TODO: extract parent name shortcut
                 start = new TimeStamp(item.Due.Value),
                 end = new TimeStamp(item.Due.Value.AddHours(1)),
                 extendedProperties = new EventExtendedProperties

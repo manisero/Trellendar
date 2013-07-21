@@ -12,7 +12,7 @@ namespace Trellendar.Logic.CalendarSynchronization
         private readonly UserContext _userContext;
         private readonly ICalendarAPI _calendarApi;
 
-        private User User
+        protected User User
         {
             get { return _userContext.User; }
         }
