@@ -25,19 +25,19 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
 
         public Board GetBoard(string boardId)
         {
-            var board = TrelloClient.Get("board/{0}".FormatWith(boardId),
-                                         new Dictionary<string, object>
-                                             {
-                                                 { "fields", "name" },
-                                                 { "lists", "open" },
-                                                 { "list_fields", "name" },
-                                                 { "cards", "all" },
-                                                 { "card_fields", "closed,dateLastActivity,desc,due,idList,name" }
-                                             });
+            var boardJson = TrelloClient.Get("board/{0}".FormatWith(boardId),
+                                             new Dictionary<string, object>
+                                                 {
+                                                     { "fields", "name" },
+                                                     { "lists", "open" },
+                                                     { "list_fields", "name" },
+                                                     { "cards", "all" },
+                                                     { "card_fields", "closed,dateLastActivity,desc,due,idList,name" }
+                                                 });
 
 
 
-            return _jsonSerializer.Deserialize<Board>(board);
+            return _jsonSerializer.Deserialize<Board>(boardJson);
         }
     }
 }

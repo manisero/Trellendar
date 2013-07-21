@@ -4,8 +4,6 @@ namespace Trellendar.Domain.Calendar
 {
     public class Event
     {
-        public const string SOURCE_ID_PROPERTY_KEY = "sourceId";
-
         public string id { get; set; }
 
         public string summary { get; set; }
@@ -15,17 +13,6 @@ namespace Trellendar.Domain.Calendar
         public TimeStamp end { get; set; }
 
         public EventExtendedProperties extendedProperties { get; set; }
-
-        public string SourceID
-        {
-            get
-            {
-                return extendedProperties != null && extendedProperties.@private != null &&
-                       extendedProperties.@private.ContainsKey(SOURCE_ID_PROPERTY_KEY)
-                           ? extendedProperties.@private[SOURCE_ID_PROPERTY_KEY]
-                           : null;
-            }
-        }
     }
 
     public class EventExtendedProperties

@@ -2,6 +2,7 @@
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Trellendar;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.DataAccess._Impl
 {
@@ -28,7 +29,7 @@ namespace Trellendar.Logic.DataAccess._Impl
             var newToken = _calendarAuthorizationAPI.GetNewToken(user.CalendarRefreshToken);
 
             user.CalendarAccessToken = newToken.Access_Token;
-            user.CalendarAccessTokenExpirationTS = newToken.ExpirationTS;
+            user.CalendarAccessTokenExpirationTS = newToken.GetExpirationTS();
 
             _unitOfWork.SaveChanges();
         }

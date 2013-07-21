@@ -1,4 +1,3 @@
-using System.Linq;
 using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
@@ -11,19 +10,21 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
         private readonly UserContext _userContext;
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarApi;
-        private readonly ICardProcessor _cardProcessor;
+        private readonly IUserProfileService _userProfileService;
+        private readonly ICalendarService _calendarService;
 
         private User User
         {
             get { return _userContext.User; }
         }
 
-        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, ICardProcessor cardProcessor)
+        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, IUserProfileService userProfileService, ICalendarService calendarService)
         {
             _userContext = userContext;
             _trelloApi = trelloApi;
             _calendarApi = calendarApi;
-            _cardProcessor = cardProcessor;
+            _userProfileService = userProfileService;
+            _calendarService = calendarService;
         }
 
         public void Synchronize()
@@ -35,38 +36,10 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 return;
             }
 
-            var events = _calendarApi.GetEvents(User.CalendarID);
+            var calendarEvents = _calendarApi.GetEvents(User.CalendarID);
 
-            foreach (var list in board.Lists)
-            {
-                var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
-
-                foreach (var card in cards)
-                {
-                    var existingEvent = events.SingleOrDefault(x => x.SourceID == card.Id);
-                    var newEvent = _cardProcessor.Process(card, list.Name);
-
-                    if (newEvent == null)
-                    {
-                        if (existingEvent != null)
-                        {
-                            _calendarApi.DeleteEvent(User.CalendarID, existingEvent);
-                        }
-
-                        continue;
-                    }
-
-                    if (existingEvent == null)
-                    {
-                        _calendarApi.CreateEvent(User.CalendarID, newEvent);
-                    }
-                    else 
-                    {
-                        newEvent.id = existingEvent.id;
-                        _calendarApi.UpdateEvent(User.CalendarID, newEvent);
-                    }
-                }
-            }
+            _userProfileService.UpdateUserProfile(board, calendarEvents);
+            _calendarService.UpdateCalendar(board, calendarEvents.Items);
         }
     }
 }

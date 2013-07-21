@@ -3,8 +3,8 @@ using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.CalendarSynchronization
 {
-    public interface ICardProcessor
+    public interface IUserProfileService
     {
-        Event Process(Card card, string listName);
+        void UpdateUserProfile(Board userBoard, Calendar userCalendar);
     }
 }
