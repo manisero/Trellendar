@@ -4,7 +4,7 @@ namespace Trellendar.Logic.Domain
 {
     public static class EventExtensions
     {
-        public const string SOURCE_ID_PROPERTY_KEY = "sourceId";    
+        public const string SOURCE_ID_PROPERTY_KEY = "trellendar_sourceId";    
 
         public static string GetExtendedProperty(this Event @event, string key)
         {
