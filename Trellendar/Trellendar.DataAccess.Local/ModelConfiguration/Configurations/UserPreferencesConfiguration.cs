@@ -7,6 +7,8 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
     {
         protected override void ConfigureEntity(EntityTypeConfiguration<UserPreferences> entity)
         {
+            entity.HasRequired(x => x.User);
+
             entity.Property(x => x.CardEventNameTemplate).HasMaxLength(50);
         }
     }

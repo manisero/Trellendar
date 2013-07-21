@@ -2,7 +2,7 @@
 {
     public class UserPreferences
     {
-        public int UserID { get; set; }
+        public int UserPreferencesID { get; set; }
 
         public User User { get; set; }
 
