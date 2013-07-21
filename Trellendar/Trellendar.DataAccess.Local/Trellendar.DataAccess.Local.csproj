@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
+    <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
     <Compile Include="ModelConfiguration\EntityConfigurationBase.cs" />
     <Compile Include="ModelConfiguration\ModelConfigurator.cs" />
     <Compile Include="Repository\IRepository.cs" />
