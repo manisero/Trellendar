@@ -27,9 +27,11 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var @event = new Event
+            var summary = _userContext.User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name); // TODO: extract parent name shortcut
+
+            return new Event
             {
-                summary = _userContext.User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name), // TODO: extract parent name shortcut
+                summary = summary,
                 start = new TimeStamp(item.Due.Value),
                 end = new TimeStamp(item.Due.Value.AddHours(1)),
                 extendedProperties = new EventExtendedProperties
@@ -37,8 +39,6 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     @private = new Dictionary<string, string> { { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id } }
                 }
             };
-
-            return @event;
         }
     }
 }
