@@ -1,5 +1,7 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
+using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.CalendarSynchronization;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
@@ -23,5 +25,20 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         protected abstract object GetExptectedItemKey(TItem item);
+
+        protected Event TestProcess(TItem item, string parentName)
+        {
+            // Act
+            return AutoMoqer.Resolve<TProcessor>().Process(item, parentName);
+        }
+
+        protected Event TestProcess(TItem item, string parentName, User user)
+        {
+            // Arrange
+            AutoMoqer.SetInstance(new UserContext { User = user });
+
+            // Act
+            return AutoMoqer.Resolve<TProcessor>().Process(item, parentName);
+        }
     }
 }

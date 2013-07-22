@@ -8,6 +8,8 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
+        private const int DEFAULT_EVENT_LENGTH = 1;
+
         private readonly UserContext _userContext;
 
         public CardProcessor(UserContext userContext)
@@ -27,18 +29,25 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var summary = _userContext.User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name); // TODO: extract parent name shortcut
-
             return new Event
             {
-                summary = summary,
+                summary = FormatEventSummary(item.Name, parentName),
                 start = new TimeStamp(item.Due.Value),
-                end = new TimeStamp(item.Due.Value.AddHours(1)),
+                end = new TimeStamp(item.Due.Value.AddHours(DEFAULT_EVENT_LENGTH)),
                 extendedProperties = new EventExtendedProperties
                 {
                     @private = new Dictionary<string, string> { { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id } }
                 }
             };
+        }
+
+        private string FormatEventSummary(string cardName, string listName)
+        {
+            var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
+
+            return eventNameTemplate != null
+                       ? eventNameTemplate.FormatWith(listName, cardName) // TODO: extract parent name shortcut
+                       : cardName;
         }
     }
 }
