@@ -7,6 +7,7 @@ namespace Trellendar.DataAccess.Local
     public class TrellendarDataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<UserPreferences> UserPreferences { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
