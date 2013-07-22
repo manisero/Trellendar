@@ -51,13 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSynchronization\BoardItemsProcessorBase.cs" />
-    <Compile Include="CalendarSynchronization\BoardItemsProcessors\CardsProcessor.cs" />
-    <Compile Include="CalendarSynchronization\IBoardItemsProcessorFactory.cs" />
+    <Compile Include="CalendarSynchronization\_Impl\BoardItemsProcessor.cs" />
+    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessor.cs" />
+    <Compile Include="CalendarSynchronization\ISingleBoardItemProcessorFactory.cs" />
     <Compile Include="CalendarSynchronization\ICalendarService.cs" />
     <Compile Include="CalendarSynchronization\IBoardItemsProcessor.cs" />
+    <Compile Include="CalendarSynchronization\ISingleBoardItemProcessor.cs" />
     <Compile Include="CalendarSynchronization\IUserProfileService.cs" />
-    <Compile Include="CalendarSynchronization\_Impl\BoardItemsProcessorFactory.cs" />
+    <Compile Include="CalendarSynchronization\_Impl\SingleBoardItemProcessorFactory.cs" />
     <Compile Include="CalendarSynchronization\_Impl\CalendarService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\UserProfileService.cs" />

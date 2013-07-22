@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
-using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
+namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CardsProcessor : BoardItemsProcessorBase<Card>
+    public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
-        public CardsProcessor(UserContext userContext, ICalendarAPI calendarApi)
-            : base(userContext, calendarApi)
+        private readonly UserContext _userContext;
+
+        public CardProcessor(UserContext userContext)
         {
+            _userContext = userContext;
         }
 
-        protected override string GetItemID(Card item)
+        public string GetItemID(Card item)
         {
             return item.Id;
         }
 
-        protected override Event ProcessItem(Card item, string parentName)
+        public Event Process(Card item, string parentName)
         {
             if (item.Closed || item.Due == null)
             {
@@ -28,7 +29,7 @@ namespace Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors
 
             var @event = new Event
             {
-                summary = User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name), // TODO: extract parent name shortcut
+                summary = _userContext.User.UserPreferences.CardEventNameTemplate.FormatWith(parentName, item.Name), // TODO: extract parent name shortcut
                 start = new TimeStamp(item.Due.Value),
                 end = new TimeStamp(item.Due.Value.AddHours(1)),
                 extendedProperties = new EventExtendedProperties

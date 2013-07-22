@@ -5,11 +5,12 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
 
-namespace Trellendar.Logic.CalendarSynchronization
+namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
-    public abstract class BoardItemsProcessorBase<TItem> : IBoardItemsProcessor<TItem>
+    public abstract class BoardItemsProcessor : IBoardItemsProcessor
     {
         private readonly UserContext _userContext;
+        private readonly ISingleBoardItemProcessorFactory _singleBoardItemProcessorFactory;
         private readonly ICalendarAPI _calendarApi;
 
         protected User User
@@ -17,20 +18,23 @@ namespace Trellendar.Logic.CalendarSynchronization
             get { return _userContext.User; }
         }
 
-        protected BoardItemsProcessorBase(UserContext userContext, ICalendarAPI calendarApi)
+        protected BoardItemsProcessor(UserContext userContext, ISingleBoardItemProcessorFactory singleBoardItemProcessorFactory, ICalendarAPI calendarApi)
         {
             _userContext = userContext;
+            _singleBoardItemProcessorFactory = singleBoardItemProcessorFactory;
             _calendarApi = calendarApi;
         }
 
-        public void Process(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> events)
+        public void Process<TItem>(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> events)
         {
+            var itemProcessor = _singleBoardItemProcessorFactory.Create<TItem>();
+
             foreach (var item in items)
             {
-                var itemId = GetItemID(item);
+                var itemId = itemProcessor.GetItemID(item);
                 var existingEvent = events.SingleOrDefault(x => x.GetExtendedProperty(EventExtensions.SOURCE_ID_PROPERTY_KEY) == itemId);
 
-                var newEvent = ProcessItem(item, itemParentName);
+                var newEvent = itemProcessor.Process(item, itemParentName);
 
                 if (newEvent == null)
                 {
@@ -53,9 +57,5 @@ namespace Trellendar.Logic.CalendarSynchronization
                 }
             }
         }
-
-        protected abstract string GetItemID(TItem item);
-
-        protected abstract Event ProcessItem(TItem item, string parentName);
     }
 }

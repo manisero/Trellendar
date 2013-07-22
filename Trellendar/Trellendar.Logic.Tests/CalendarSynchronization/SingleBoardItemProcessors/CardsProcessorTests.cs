@@ -1,11 +1,10 @@
 ﻿using AutoMoq;
 using FizzWare.NBuilder;
 using NUnit.Framework;
-using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.BoardItemsProcessors;
+using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.BoardItemsProcessors
+namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
     [TestFixture]
     public class CardsProcessorTests
@@ -19,7 +18,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.BoardItemsProcessors
             var card = Builder<Card>.CreateNew().Build();
 
             // Act
-            autoMoqer.Resolve<CardsProcessor>().Process(new[] { card }, "not important", new Event[0]);
+            autoMoqer.Resolve<CardProcessor>().Process(card, "not important");
 
             // Assert
         }
