@@ -24,6 +24,6 @@ namespace Trellendar.Domain.Trellendar
 
         public DateTime LastSynchronizationTS { get; set; }
 
-        public UserPreferences UserPreferences { get; set; }
+        public virtual UserPreferences UserPreferences { get; set; }
     }
 }

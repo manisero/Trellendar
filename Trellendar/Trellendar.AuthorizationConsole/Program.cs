@@ -65,6 +65,13 @@ namespace Trellendar.AuthorizationConsole
                     LastSynchronizationTS = new DateTime(1900, 1, 1)
                 };
 
+            user.UserPreferences = new UserPreferences
+                {
+                    ListShortcutBeginningMarker = "[",
+                    ListShortcutEndMarker = "]",
+                    CardEventNameTemplate = "[{0}] {1}"
+                };
+
             dataContext.Users.Add(user);
             dataContext.SaveChanges();
 

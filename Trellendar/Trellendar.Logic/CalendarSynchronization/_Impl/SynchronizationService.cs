@@ -2,6 +2,8 @@ using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Trellendar;
+using System.Linq;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -39,7 +41,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             var calendarEvents = _calendarApi.GetEvents(User.CalendarID);
 
             _userProfileService.UpdateUserProfile(board, calendarEvents);
-            _calendarService.UpdateCalendar(board, calendarEvents.Items);
+            _calendarService.UpdateCalendar(board, calendarEvents.Items.Where(x => x.IsGeneratedByTrellendar()));
         }
     }
 }

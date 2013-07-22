@@ -27,7 +27,11 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             foreach (var list in board.Lists)
             {
                 var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
-                _boardItemsProcessor.Process(cards, list.Name, events);
+
+                if (cards.Any())
+                {
+                    _boardItemsProcessor.Process(cards, list.Name, events);
+                }
             }
         }
     }

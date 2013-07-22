@@ -4,7 +4,7 @@
     {
         public int UserID { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public string ListShortcutBeginningMarker { get; set; }
 

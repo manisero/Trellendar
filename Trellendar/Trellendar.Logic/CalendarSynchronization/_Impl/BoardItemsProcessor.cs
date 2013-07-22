@@ -7,7 +7,7 @@ using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
-    public abstract class BoardItemsProcessor : IBoardItemsProcessor
+    public class BoardItemsProcessor : IBoardItemsProcessor
     {
         private readonly UserContext _userContext;
         private readonly ISingleBoardItemProcessorFactory _singleBoardItemProcessorFactory;
@@ -18,7 +18,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             get { return _userContext.User; }
         }
 
-        protected BoardItemsProcessor(UserContext userContext, ISingleBoardItemProcessorFactory singleBoardItemProcessorFactory, ICalendarAPI calendarApi)
+        public BoardItemsProcessor(UserContext userContext, ISingleBoardItemProcessorFactory singleBoardItemProcessorFactory, ICalendarAPI calendarApi)
         {
             _userContext = userContext;
             _singleBoardItemProcessorFactory = singleBoardItemProcessorFactory;
@@ -32,7 +32,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             foreach (var item in items)
             {
                 var itemId = itemProcessor.GetItemID(item);
-                var existingEvent = events.SingleOrDefault(x => x.GetExtendedProperty(EventExtensions.SOURCE_ID_PROPERTY_KEY) == itemId);
+                var existingEvent = events.SingleOrDefault(x => x.GetSourceID() == itemId);
 
                 var newEvent = itemProcessor.Process(item, itemParentName);
 

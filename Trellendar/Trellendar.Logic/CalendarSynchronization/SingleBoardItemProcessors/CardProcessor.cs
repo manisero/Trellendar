@@ -30,15 +30,19 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
 
             return new Event
-            {
-                summary = FormatEventSummary(item.Name, parentName),
-                start = new TimeStamp(item.Due.Value),
-                end = new TimeStamp(item.Due.Value.AddHours(DEFAULT_EVENT_LENGTH)),
-                extendedProperties = new EventExtendedProperties
                 {
-                    @private = new Dictionary<string, string> { { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id } }
-                }
-            };
+                    summary = FormatEventSummary(item.Name, parentName),
+                    start = new TimeStamp(item.Due.Value),
+                    end = new TimeStamp(item.Due.Value.AddHours(DEFAULT_EVENT_LENGTH)),
+                    extendedProperties = new EventExtendedProperties
+                        {
+                            @private = new Dictionary<string, string>
+                                {
+                                    { EventExtensions.GENERATED_PROPERTY_KEY, string.Empty },
+                                    { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id }
+                                }
+                        }
+                };
         }
 
         private string FormatEventSummary(string cardName, string listName)
