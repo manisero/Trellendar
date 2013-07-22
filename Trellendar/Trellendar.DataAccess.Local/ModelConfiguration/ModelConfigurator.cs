@@ -8,6 +8,7 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration
         public void Configure(DbModelBuilder modelBuilder)
         {
             new UserConfiguration().Configure(modelBuilder);
+            new UserPreferencesConfiguration().Configure(modelBuilder);
         }
     }
 }

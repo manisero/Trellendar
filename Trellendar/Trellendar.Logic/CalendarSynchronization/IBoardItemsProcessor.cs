@@ -3,8 +3,8 @@ using Trellendar.Domain.Calendar;
 
 namespace Trellendar.Logic.CalendarSynchronization
 {
-    public interface IBoardItemsProcessor<TItem>
+    public interface IBoardItemsProcessor
     {
-        void Process(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> calendarEvents);
+        void Process<TItem>(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> calendarEvents);
     }
 }

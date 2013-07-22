@@ -9,17 +9,17 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
     public class CalendarService : ICalendarService
     {
         private readonly UserContext _userContext;
-        private readonly IBoardItemsProcessorFactory _boardItemsProcessorFactory;
+        private readonly IBoardItemsProcessor _boardItemsProcessor;
 
         private User User
         {
             get { return _userContext.User; }
         }
 
-        public CalendarService(UserContext userContext, IBoardItemsProcessorFactory boardItemsProcessorFactory)
+        public CalendarService(UserContext userContext, IBoardItemsProcessor boardItemsProcessor)
         {
             _userContext = userContext;
-            _boardItemsProcessorFactory = boardItemsProcessorFactory;
+            _boardItemsProcessor = boardItemsProcessor;
         }
 
         public void UpdateCalendar(Board board, IEnumerable<Event> events)
@@ -27,7 +27,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             foreach (var list in board.Lists)
             {
                 var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
-                _boardItemsProcessorFactory.Create<Card>().Process(cards, list.Name, events);
+                _boardItemsProcessor.Process(cards, list.Name, events);
             }
         }
     }

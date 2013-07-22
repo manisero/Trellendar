@@ -1,0 +1,74 @@
+﻿using System.Collections.Generic;
+using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trello;
+using Trellendar.Logic.Domain;
+using Trellendar.Core.Extensions;
+
+namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
+{
+    public class CardProcessor : ISingleBoardItemProcessor<Card>
+    {
+        private const int DEFAULT_EVENT_LENGTH = 1;
+
+        private readonly UserContext _userContext;
+
+        public CardProcessor(UserContext userContext)
+        {
+            _userContext = userContext;
+        }
+
+        public string GetItemID(Card item)
+        {
+            return item.Id;
+        }
+
+        public Event Process(Card item, string parentName)
+        {
+            if (item.Closed || item.Due == null)
+            {
+                return null;
+            }
+
+            return new Event
+            {
+                summary = FormatEventSummary(item.Name, parentName),
+                start = new TimeStamp(item.Due.Value),
+                end = new TimeStamp(item.Due.Value.AddHours(DEFAULT_EVENT_LENGTH)),
+                extendedProperties = new EventExtendedProperties
+                {
+                    @private = new Dictionary<string, string> { { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id } }
+                }
+            };
+        }
+
+        private string FormatEventSummary(string cardName, string listName)
+        {
+            var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
+
+            return eventNameTemplate != null
+                       ? eventNameTemplate.FormatWith(FormatListName(listName), cardName)
+                       : cardName;
+        }
+
+        private string FormatListName(string listName)
+        {
+            var listShortcutMarkers = _userContext.GetPrefferedListShortcutMarkers();
+
+            if (listShortcutMarkers != null &&
+                listShortcutMarkers.Item1 != null && listShortcutMarkers.Item2 != null && 
+                listName.Contains(listShortcutMarkers.Item1) && listName.Contains(listShortcutMarkers.Item2))
+            {
+                var beginningIndex = listName.LastIndexOf(listShortcutMarkers.Item1);
+                var endIndex = listName.LastIndexOf(listShortcutMarkers.Item2);
+
+                if (endIndex > beginningIndex)
+                {
+                    return listName.Substring(beginningIndex + listShortcutMarkers.Item1.Length,
+                                              endIndex - beginningIndex - listShortcutMarkers.Item2.Length);
+                }
+            }
+
+            return listName;
+        }
+    }
+}
