@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201307211942199_UserPreferences.Designer.cs">
       <DependentUpon>201307211942199_UserPreferences.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201307222204582_ListShortcutMarkers.cs" />
+    <Compile Include="Migrations\201307222204582_ListShortcutMarkers.Designer.cs">
+      <DependentUpon>201307222204582_ListShortcutMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201307211942199_UserPreferences.resx">
       <DependentUpon>201307211942199_UserPreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307222204582_ListShortcutMarkers.resx">
+      <DependentUpon>201307222204582_ListShortcutMarkers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
