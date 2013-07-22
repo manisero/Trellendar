@@ -46,8 +46,26 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
 
             return eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(listName, cardName) // TODO: extract parent name shortcut
+                       ? eventNameTemplate.FormatWith(FormatListName(listName), cardName)
                        : cardName;
+        }
+
+        private string FormatListName(string listName)
+        {
+            var listShortcutMarkers = _userContext.GetPrefferedListShortcutMarkers();
+
+            if (listShortcutMarkers != null && listShortcutMarkers.Item1 != null && listShortcutMarkers.Item2 != null)
+            {
+                var beginningIndex = listName.LastIndexOf(listShortcutMarkers.Item1);
+                var endIndex = listName.LastIndexOf(listShortcutMarkers.Item2);
+
+                if (endIndex > beginningIndex)
+                {
+                    return listName.Substring(beginningIndex + 1, endIndex - beginningIndex - 1);
+                }
+            }
+
+            return listName;
         }
     }
 }
