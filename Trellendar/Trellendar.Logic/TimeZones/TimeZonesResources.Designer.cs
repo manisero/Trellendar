@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Trellendar.Logic {
+namespace Trellendar.Logic.TimeZones {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Trellendar.Logic {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class TimeZonesResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal TimeZonesResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Trellendar.Logic {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trellendar.Logic.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trellendar.Logic.TimeZones.TimeZonesResources", typeof(TimeZonesResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,15 +61,22 @@ namespace Trellendar.Logic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Content-Type: multipart/related; start=&lt;op.mhtml.1374604253015.e90b033c410164a6@192.168.1.102&gt;; boundary=----------DcLV3c4PHQKQdrWlcUvwQ1
-        ///Content-Location: http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml
-        ///MIME-Version: 1.0
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+        ///&lt;!--
+        ///Copyright © 1991-2013 Unicode, Inc.
+        ///CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)
+        ///For terms of use, see http://www.unicode.org/copyright.html
+        ///--&gt;
         ///
-        ///------------DcLV3c4PHQKQdrWlcUvwQ1
-        ///Content-Disposition: inline; filename=windowsZones.xml
-        ///Content-Type: text/xml; charset=UTF-8; name=windowsZones.xml
-        ///Content-ID: &lt;op.mhtml.1374604253015.e90b033c410164a6@192.168.1.102&gt;
-        ///Content-Location: http://unicode.org/ [rest of string was truncated]&quot;;.
+        ///&lt;supplementalData&gt;
+        ///	&lt;version number=&quot;$Revision$&quot;/&gt;
+        ///	&lt;generation date=&quot;$Date$&quot;/&gt;
+        ///
+        ///	&lt;windowsZones&gt;
+        ///		&lt;mapTimezones otherVersion=&quot;7dd0000&quot; typeVersion=&quot;2013a&quot;&gt;
+        ///
+        ///			&lt;!-- (UTC-12:00) International Date Line West --&gt;
+        ///			&lt;mapZone other=&quot;Dateline Standard  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TimeZones {
             get {

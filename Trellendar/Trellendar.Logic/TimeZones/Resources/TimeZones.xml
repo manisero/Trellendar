@@ -1,16 +1,4 @@
-Content-Type: multipart/related; start=<op.mhtml.1374604253015.e90b033c410164a6@192.168.1.102>; boundary=----------DcLV3c4PHQKQdrWlcUvwQ1
-Content-Location: http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml
-MIME-Version: 1.0
-
-------------DcLV3c4PHQKQdrWlcUvwQ1
-Content-Disposition: inline; filename=windowsZones.xml
-Content-Type: text/xml; charset=UTF-8; name=windowsZones.xml
-Content-ID: <op.mhtml.1374604253015.e90b033c410164a6@192.168.1.102>
-Content-Location: http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml
-Content-Transfer-Encoding: 8bit
-
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE supplementalData SYSTEM "../../common/dtd/ldmlSupplemental.dtd">
 <!--
 Copyright © 1991-2013 Unicode, Inc.
 CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/)

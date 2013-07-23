@@ -81,6 +81,7 @@
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsBase.cs" />
+    <Compile Include="TimeZones\TimeZoneServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
