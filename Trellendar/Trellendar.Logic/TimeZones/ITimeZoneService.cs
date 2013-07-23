@@ -4,6 +4,6 @@ namespace Trellendar.Logic.TimeZones
 {
     public interface ITimeZoneService
     {
-        TimeSpan GetUtcOffset(string timeZone);
+        TimeSpan? GetUtcOffset(DateTime dateTime, string timeZone);
     }
 }

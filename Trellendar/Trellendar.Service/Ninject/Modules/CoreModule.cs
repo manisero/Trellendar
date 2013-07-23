@@ -10,6 +10,7 @@ namespace Trellendar.Service.Ninject.Modules
         {
             // Serialization
             Bind<IJsonSerializer>().To<JsonSerializer>();
+            Bind<IXmlSerializer>().To<XmlSerializer>();
         }
     }
 }
