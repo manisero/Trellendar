@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Trellendar.Core.Serialization._Impl;
 using Trellendar.Logic.TimeZones._Impl;
 
 namespace Trellendar.Logic.Tests.TimeZones
@@ -15,7 +16,7 @@ namespace Trellendar.Logic.Tests.TimeZones
             var offset = new TimeSpan(expectedOffset, 0, 0);
 
             // Act
-            var result = new TimeZoneService().GetUtcOffset(timeZone);
+            var result = new TimeZoneService(new XmlSerializer()).GetUtcOffset(timeZone);
 
             // Assert
             Assert.AreEqual(offset, result);

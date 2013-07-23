@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
+      <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
+      <Name>Trellendar.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
       <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
       <Name>Trellendar.Domain</Name>

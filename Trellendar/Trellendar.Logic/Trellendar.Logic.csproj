@@ -73,6 +73,9 @@
     <Compile Include="Domain\TokenExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeZones\ITimeZoneService.cs" />
+    <Compile Include="TimeZones\TimeZones.cs">
+      <DependentUpon>TimeZones.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TimeZones\TimeZonesResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TimeZones\TimeZones.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TimeZones\TimeZonesResources.resx">
