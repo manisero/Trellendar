@@ -30,7 +30,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var timeFrame = _eventTimeFrameCreator.Create(item.Due.Value, null, new DateTime());
+            var timeFrame = _eventTimeFrameCreator.Create(item.Due.Value, _userContext.User.CalendarTimeZone, new DateTime());
 
             return new Event
                 {

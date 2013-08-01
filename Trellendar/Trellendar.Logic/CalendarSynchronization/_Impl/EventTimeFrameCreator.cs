@@ -17,7 +17,9 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, DateTime wholeDayIndicator)
         {
-            var timeInZone = _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone);
+            var timeInZone = timeZone != null
+                                 ? _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone)
+                                 : null;
 
             if (timeInZone != null && timeInZone.Value.TimeOfDay == wholeDayIndicator.TimeOfDay)
             {
