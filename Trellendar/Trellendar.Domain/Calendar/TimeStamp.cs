@@ -12,17 +12,5 @@ namespace Trellendar.Domain.Calendar
         {
             
         }
-
-        public TimeStamp(DateTime timeStamp)
-        {
-            if (timeStamp.Date == timeStamp)
-            {
-                date = timeStamp;
-            }
-            else
-            {
-                dateTime = timeStamp;
-            }
-        }
     }
 }

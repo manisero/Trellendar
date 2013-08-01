@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
@@ -8,13 +9,13 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
-        private const int DEFAULT_EVENT_LENGTH = 1;
-
         private readonly UserContext _userContext;
+        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
 
-        public CardProcessor(UserContext userContext)
+        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator)
         {
             _userContext = userContext;
+            _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
         public string GetItemID(Card item)
@@ -29,11 +30,13 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
+            var timeFrame = _eventTimeFrameCreator.Create(item.Due.Value, null, new DateTime());
+
             return new Event
                 {
                     summary = FormatEventSummary(item.Name, parentName),
-                    start = new TimeStamp(item.Due.Value),
-                    end = new TimeStamp(item.Due.Value.AddHours(DEFAULT_EVENT_LENGTH)),
+                    start = timeFrame.Item1,
+                    end = timeFrame.Item2,
                     extendedProperties = new EventExtendedProperties
                         {
                             @private = new Dictionary<string, string>

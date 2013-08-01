@@ -32,7 +32,7 @@ namespace Trellendar.Logic.Tests.TimeZones
             var timeZone = "not existing time zone";
 
             // Act
-            var result = new TimeZoneService(new XmlSerializer()).GetUtcOffset(new DateTime(0), timeZone);
+            var result = new TimeZoneService(new XmlSerializer()).GetUtcOffset(new DateTime(), timeZone);
 
             // Assert
             Assert.IsNull(result);
@@ -46,13 +46,13 @@ namespace Trellendar.Logic.Tests.TimeZones
         {
             // Arrange
             var time = DateTime.Parse(dateTime);
-            var offset = DateTime.Parse(expectedDateTime);
+            var timeInZone = DateTime.Parse(expectedDateTime);
 
             // Act
             var result = new TimeZoneService(new XmlSerializer()).GetDateTimeInZone(time, timeZone);
 
             // Assert
-            Assert.AreEqual(offset, result);
+            Assert.AreEqual(timeInZone, result);
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Trellendar.Logic.Tests.TimeZones
             var timeZone = "not existing time zone";
 
             // Act
-            var result = new TimeZoneService(new XmlSerializer()).GetDateTimeInZone(new DateTime(0), timeZone);
+            var result = new TimeZoneService(new XmlSerializer()).GetDateTimeInZone(new DateTime(), timeZone);
 
             // Assert
             Assert.IsNull(result);
