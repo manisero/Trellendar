@@ -34,5 +34,10 @@ namespace Trellendar.Logic.TimeZones._Impl
                 return null;
             }
         }
+
+        public DateTime? GetDateTimeInZone(DateTime dateTime, string timeZone)
+        {
+            return dateTime + GetUtcOffset(dateTime, timeZone);
+        }
     }
 }
