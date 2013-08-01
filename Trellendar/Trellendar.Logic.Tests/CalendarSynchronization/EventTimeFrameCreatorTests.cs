@@ -18,12 +18,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             // Arrange
             var time = DateTime.Parse(dateTime);
             var timeZone = "time zone";
-            var wholeDayIndicator = new DateTime();
+            var wholeDayIndicator = new TimeSpan(1000);
 
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(wholeDayIndicator.AddHours(2));
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(new DateTime(wholeDayIndicator.Ticks + 1000));
 
             // Act
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, wholeDayIndicator);
@@ -45,13 +45,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
         {
             // Arrange
             var time = DateTime.Parse(dateTime);
-            var wholeDayIndicator = new DateTime();
 
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
             // Act
-            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, null, wholeDayIndicator);
+            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, null, null);
 
             // Assert
             Assert.AreEqual(start, result.Item1.dateTime);
@@ -71,7 +70,6 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             // Arrange
             var time = DateTime.Parse(dateTime);
             var timeZone = "time zone";
-            var wholeDayIndicator = new DateTime();
 
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
@@ -79,7 +77,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns((DateTime?)null);
 
             // Act
-            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, wholeDayIndicator);
+            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, null);
 
             // Assert
             Assert.AreEqual(start, result.Item1.dateTime);
@@ -99,12 +97,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             // Arrange
             var time = DateTime.Parse(dateTime);
             var timeZone = "time zone";
-            var wholeDayIndicator = new DateTime();
+            var wholeDayIndicator = new TimeSpan(1000);
 
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(wholeDayIndicator);
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(new DateTime(wholeDayIndicator.Ticks));
 
             // Act
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, wholeDayIndicator);

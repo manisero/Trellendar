@@ -34,5 +34,12 @@ namespace Trellendar.Logic
                        ? userContext.User.UserPreferences.CardEventNameTemplate
                        : null;
         }
+
+        public static TimeSpan? GetPrefferedWholeDayEventDueTime(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? userContext.User.UserPreferences.WholeDayEventDueTime
+                       : null;
+        }
     }
 }

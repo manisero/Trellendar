@@ -5,6 +5,6 @@ namespace Trellendar.Logic.CalendarSynchronization
 {
     public interface IEventTimeFrameCreator
     {
-        Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, DateTime wholeDayIndicator);
+        Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, TimeSpan? wholeDayIndicator);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
@@ -30,7 +29,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var timeFrame = _eventTimeFrameCreator.Create(item.Due.Value, _userContext.User.CalendarTimeZone, new DateTime());
+            var timeFrame = _eventTimeFrameCreator.Create(item.Due.Value, _userContext.User.CalendarTimeZone, _userContext.GetPrefferedWholeDayEventDueTime());
 
             return new Event
                 {

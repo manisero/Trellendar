@@ -15,13 +15,13 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             _timeZoneService = timeZoneService;
         }
 
-        public Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, DateTime wholeDayIndicator)
+        public Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, TimeSpan? wholeDayIndicator)
         {
             var timeInZone = timeZone != null
                                  ? _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone)
                                  : null;
 
-            if (timeInZone != null && timeInZone.Value.TimeOfDay == wholeDayIndicator.TimeOfDay)
+            if (timeInZone != null && timeInZone.Value - timeInZone.Value.Date == wholeDayIndicator)
             {
                 return Tuple.Create(new TimeStamp { date = utcDateTime.Date }, new TimeStamp { date = utcDateTime.Date });
             }

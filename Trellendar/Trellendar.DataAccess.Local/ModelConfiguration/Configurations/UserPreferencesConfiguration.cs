@@ -14,7 +14,6 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
             entity.Property(x => x.ListShortcutBeginningMarker).HasMaxLength(10);
             entity.Property(x => x.ListShortcutEndMarker).HasMaxLength(10);
             entity.Property(x => x.CardEventNameTemplate).HasMaxLength(50);
-            entity.Property(x => x.WholeDayEventDueTime);
         }
     }
 }
