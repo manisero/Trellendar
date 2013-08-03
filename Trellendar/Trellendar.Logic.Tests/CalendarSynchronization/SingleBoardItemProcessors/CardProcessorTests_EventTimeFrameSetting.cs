@@ -68,8 +68,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreSame(start, result.start);
-            Assert.AreSame(end, result.end);
+            Assert.AreSame(start, result.Start);
+            Assert.AreSame(end, result.End);
         }
     }
 }

@@ -32,10 +32,10 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
             return new Event
                 {
-                    summary = FormatEventSummary(item.Name, parentName),
-                    start = timeFrame.Item1,
-                    end = timeFrame.Item2,
-                    extendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
+                    Summary = FormatEventSummary(item.Name, parentName),
+                    Start = timeFrame.Item1,
+                    End = timeFrame.Item2,
+                    ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }
 

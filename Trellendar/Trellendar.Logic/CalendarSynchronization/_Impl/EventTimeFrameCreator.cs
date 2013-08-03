@@ -23,11 +23,11 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                 if (timeInZone != null && timeInZone.Value - timeInZone.Value.Date == wholeDayIndicator.Value)
                 {
-                    return Tuple.Create(new TimeStamp { date = timeInZone.Value.Date }, new TimeStamp { date = timeInZone.Value.Date });
+                    return Tuple.Create(new TimeStamp { Date = timeInZone.Value.Date }, new TimeStamp { Date = timeInZone.Value.Date });
                 }
             }
             
-            return Tuple.Create(new TimeStamp { dateTime = utcDateTime }, new TimeStamp { dateTime = utcDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
+            return Tuple.Create(new TimeStamp { DateTime = utcDateTime }, new TimeStamp { DateTime = utcDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
         }
     }
 }

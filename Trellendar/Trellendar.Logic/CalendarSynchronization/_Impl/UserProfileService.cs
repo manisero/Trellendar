@@ -17,7 +17,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public void UpdateUserProfile(Board userBoard, Calendar userCalendar)
         {
-            _userContext.User.CalendarTimeZone = userCalendar.timeZone;
+            _userContext.User.CalendarTimeZone = userCalendar.TimeZone;
 
             _unitOfWork.SaveChanges();
         }

@@ -20,7 +20,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(card.Name, result.summary);
+            Assert.AreEqual(card.Name, result.Summary);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(card.Name, result.summary);
+            Assert.AreEqual(card.Name, result.Summary);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(card.Name, result.summary);
+            Assert.AreEqual(card.Name, result.Summary);
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(expectedSummary, result.summary);
+            Assert.AreEqual(expectedSummary, result.Summary);
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(expectedSummary, result.summary);
+            Assert.AreEqual(expectedSummary, result.Summary);
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(expectedSummary, result.summary);
+            Assert.AreEqual(expectedSummary, result.Summary);
         }
     }
 }

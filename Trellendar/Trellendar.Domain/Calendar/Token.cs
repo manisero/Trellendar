@@ -1,17 +1,23 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Trellendar.Domain.Calendar
 {
     public class Token
     {
-        public string Access_Token { get; set; }
+        [JsonProperty("access_token")]
+        public string AccessToken { get; set; }
 
-        public string Id_Token { get; set; }
+        [JsonProperty("id_token")]
+        public string IdToken { get; set; }
 
-        public int Expires_In { get; set; }
+        [JsonProperty("expires_in")]
+        public int ExpiresIn { get; set; }
 
-        public string Refresh_Token { get; set; }
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; set; }
 
+        [JsonIgnore]
         public DateTime CreationTS { get; set; }
     }
 }
