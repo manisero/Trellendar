@@ -1,4 +1,5 @@
-﻿using FizzWare.NBuilder;
+﻿using System;
+using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
@@ -25,6 +26,19 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         protected abstract object GetExptectedItemKey(TItem item);
+
+        protected void MockEventTimeFrameCreator(DateTime itemDue, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        {
+            var timeZone = user != null ? user.CalendarTimeZone : null;
+
+            var wholeDayIndicator = user != null && user.UserPreferences != null
+                                        ? user.UserPreferences.WholeDayEventDueTime
+                                        : null;
+
+            AutoMoqer.GetMock<IEventTimeFrameCreator>()
+                     .Setup(x => x.Create(itemDue, timeZone, wholeDayIndicator))
+                     .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
+        }
 
         protected Event TestProcess(TItem item, string parentName)
         {

@@ -14,6 +14,11 @@ namespace Trellendar.Logic
         {
             return userContext != null && userContext.User != null;
         }
+        
+        public static string GetCalendarTimeZone(this UserContext userContext)
+        {
+            return userContext.IsFilled() ? userContext.User.CalendarTimeZone : null;
+        }
 
         public static bool HasUserPreferences(this UserContext userContext)
         {
@@ -32,6 +37,13 @@ namespace Trellendar.Logic
         {
             return userContext.HasUserPreferences()
                        ? userContext.User.UserPreferences.CardEventNameTemplate
+                       : null;
+        }
+
+        public static TimeSpan? GetPrefferedWholeDayEventDueTime(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? userContext.User.UserPreferences.WholeDayEventDueTime
                        : null;
         }
     }

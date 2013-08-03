@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +55,12 @@
     <Compile Include="Trello\Board.cs" />
     <Compile Include="Trello\Card.cs" />
     <Compile Include="Trello\List.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
+      <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
+      <Name>Trellendar.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

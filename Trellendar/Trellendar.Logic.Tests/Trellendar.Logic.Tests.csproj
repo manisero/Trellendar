@@ -74,18 +74,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventSummaryFormatting.cs">
+      <DependentUpon>CardProcessorTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventTimeFrameSetting.cs">
       <DependentUpon>CardProcessorTests.cs</DependentUpon>
     </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsBase.cs" />
+    <Compile Include="TimeZones\TimeZoneServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">
+      <Project>{E30FFAF5-F4AF-46FB-AA26-1930869827F4}</Project>
+      <Name>Trellendar.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trellendar.Domain\Trellendar.Domain.csproj">
       <Project>{807DB49A-6335-4948-8700-B856A876B019}</Project>
       <Name>Trellendar.Domain</Name>

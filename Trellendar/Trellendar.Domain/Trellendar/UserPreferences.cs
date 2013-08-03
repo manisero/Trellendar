@@ -1,4 +1,6 @@
-﻿namespace Trellendar.Domain.Trellendar
+﻿using System;
+
+namespace Trellendar.Domain.Trellendar
 {
     public class UserPreferences
     {
@@ -11,5 +13,7 @@
         public string ListShortcutEndMarker { get; set; }
 
         public string CardEventNameTemplate { get; set; }
+
+        public TimeSpan? WholeDayEventDueTime { get; set; }
     }
 }
