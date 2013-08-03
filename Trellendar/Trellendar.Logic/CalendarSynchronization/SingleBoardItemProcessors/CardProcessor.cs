@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
