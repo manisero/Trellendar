@@ -114,22 +114,24 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
         [Test]
         [Sequential]
         public void creates_proper_whole_day_time_frame(
-            [Values("2012-03-13 03:30:00", "2013-07-23 18:26:05")] string dateTime,
-            [Values("2012-03-13 00:00:00", "2013-07-23 00:00:00")] string expectedStart,
-            [Values("2012-03-13 00:00:00", "2013-07-23 00:00:00")] string expectedEnd)
+            [Values("2011-05-17 01:30:00", "2012-03-12 23:30:00", "2013-07-24 01:26:05")] string utcDateTime,
+            [Values("2011-05-17 03:30:00", "2012-03-13 03:30:00", "2013-07-23 18:26:05")] string localDateTime,
+            [Values("2011-05-17 00:00:00", "2012-03-13 00:00:00", "2013-07-23 00:00:00")] string expectedStart,
+            [Values("2011-05-17 00:00:00", "2012-03-13 00:00:00", "2013-07-23 00:00:00")] string expectedEnd)
         {
             // Arrange
-            var time = DateTime.Parse(dateTime);
+            var utcTime = DateTime.Parse(utcDateTime);
             var timeZone = "time zone";
-            var wholeDayIndicator = new TimeSpan(1000);
+            var localTime = DateTime.Parse(localDateTime);
+            var wholeDayIndicator = new TimeSpan(localTime.TimeOfDay.Ticks);
 
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(new DateTime(wholeDayIndicator.Ticks));
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(utcTime, timeZone)).Returns(localTime);
 
             // Act
-            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, wholeDayIndicator);
+            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(utcTime, timeZone, wholeDayIndicator);
 
             // Assert
             Assert.AreEqual(start, result.Item1.date);
