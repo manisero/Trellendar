@@ -36,14 +36,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     summary = FormatEventSummary(item.Name, parentName),
                     start = timeFrame.Item1,
                     end = timeFrame.Item2,
-                    extendedProperties = new EventExtendedProperties
-                        {
-                            @private = new Dictionary<string, string>
-                                {
-                                    { EventExtensions.GENERATED_PROPERTY_KEY, string.Empty },
-                                    { EventExtensions.SOURCE_ID_PROPERTY_KEY, item.Id }
-                                }
-                        }
+                    extendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }
 

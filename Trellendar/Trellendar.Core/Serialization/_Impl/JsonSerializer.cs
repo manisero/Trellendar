@@ -3,11 +3,29 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens.JWT;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Trellendar.Core.Serialization._Impl
 {
     public class JsonSerializer : IJsonSerializer
     {
+        public class DateConverter : IsoDateTimeConverter
+        {
+            public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                var dateTime = (DateTime?)value;
+
+                if (dateTime.HasValue)
+                {
+                    writer.WriteValue(dateTime.Value.ToShortDateString());
+                }
+                else
+                {
+                    writer.WriteNull();
+                }
+            }
+        }
+
         public string Serialize(object item)
         {
             return JsonConvert.SerializeObject(item);

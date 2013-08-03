@@ -12,6 +12,8 @@ namespace Trellendar.Domain.Calendar
 
         public TimeStamp end { get; set; }
 
+        public int sequence { get; set; }
+
         public EventExtendedProperties extendedProperties { get; set; }
     }
 
