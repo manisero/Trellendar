@@ -52,8 +52,8 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 }
                 else
                 {
-                    newEvent.id = existingEvent.id;
-                    newEvent.sequence = existingEvent.sequence + 1;
+                    newEvent.Id = existingEvent.Id;
+                    newEvent.Sequence = existingEvent.Sequence + 1;
                     _calendarApi.UpdateEvent(User.CalendarID, newEvent);
                 }
             }

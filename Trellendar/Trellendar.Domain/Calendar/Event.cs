@@ -1,26 +1,35 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Trellendar.Domain.Calendar
 {
     public class Event
     {
-        public string id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
-        public string summary { get; set; }
+        [JsonProperty("summary")]
+        public string Summary { get; set; }
 
-        public TimeStamp start { get; set; }
+        [JsonProperty("start")]
+        public TimeStamp Start { get; set; }
 
-        public TimeStamp end { get; set; }
+        [JsonProperty("end")]
+        public TimeStamp End { get; set; }
 
-        public int sequence { get; set; }
+        [JsonProperty("sequence")]
+        public int Sequence { get; set; }
 
-        public EventExtendedProperties extendedProperties { get; set; }
+        [JsonProperty("extendedProperties")]
+        public EventExtendedProperties ExtendedProperties { get; set; }
     }
 
     public class EventExtendedProperties
     {
-        public IDictionary<string, string> @private { get; set; }
+        [JsonProperty("private")]
+        public IDictionary<string, string> Private { get; set; }
 
-        public IDictionary<string, string> shared { get; set; }
+        [JsonProperty("shared")]
+        public IDictionary<string, string> Shared { get; set; }
     }
 }

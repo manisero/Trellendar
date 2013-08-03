@@ -28,7 +28,7 @@ namespace Trellendar.Logic.DataAccess._Impl
         {
             var newToken = _calendarAuthorizationAPI.GetNewToken(user.CalendarRefreshToken);
 
-            user.CalendarAccessToken = newToken.Access_Token;
+            user.CalendarAccessToken = newToken.AccessToken;
             user.CalendarAccessTokenExpirationTS = newToken.GetExpirationTS();
 
             _unitOfWork.SaveChanges();

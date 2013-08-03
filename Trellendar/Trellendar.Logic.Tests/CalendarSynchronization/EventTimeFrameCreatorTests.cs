@@ -29,11 +29,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, wholeDayIndicator);
 
             // Assert
-            Assert.AreEqual(start, result.Item1.dateTime);
-            Assert.IsNull(result.Item1.date);
+            Assert.AreEqual(start, result.Item1.DateTime);
+            Assert.IsNull(result.Item1.Date);
 
-            Assert.AreEqual(end, result.Item2.dateTime);
-            Assert.IsNull(result.Item2.date);
+            Assert.AreEqual(end, result.Item2.DateTime);
+            Assert.IsNull(result.Item2.Date);
         }
 
         [Test]
@@ -53,11 +53,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, null, null);
 
             // Assert
-            Assert.AreEqual(start, result.Item1.dateTime);
-            Assert.IsNull(result.Item1.date);
+            Assert.AreEqual(start, result.Item1.DateTime);
+            Assert.IsNull(result.Item1.Date);
 
-            Assert.AreEqual(end, result.Item2.dateTime);
-            Assert.IsNull(result.Item2.date);
+            Assert.AreEqual(end, result.Item2.DateTime);
+            Assert.IsNull(result.Item2.Date);
         }
 
         [Test]
@@ -77,11 +77,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, "time zone", null);
 
             // Assert
-            Assert.AreEqual(start, result.Item1.dateTime);
-            Assert.IsNull(result.Item1.date);
+            Assert.AreEqual(start, result.Item1.DateTime);
+            Assert.IsNull(result.Item1.Date);
 
-            Assert.AreEqual(end, result.Item2.dateTime);
-            Assert.IsNull(result.Item2.date);
+            Assert.AreEqual(end, result.Item2.DateTime);
+            Assert.IsNull(result.Item2.Date);
         }
 
         [Test]
@@ -104,11 +104,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, timeZone, null);
 
             // Assert
-            Assert.AreEqual(start, result.Item1.dateTime);
-            Assert.IsNull(result.Item1.date);
+            Assert.AreEqual(start, result.Item1.DateTime);
+            Assert.IsNull(result.Item1.Date);
 
-            Assert.AreEqual(end, result.Item2.dateTime);
-            Assert.IsNull(result.Item2.date);
+            Assert.AreEqual(end, result.Item2.DateTime);
+            Assert.IsNull(result.Item2.Date);
         }
 
         [Test]
@@ -134,11 +134,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(utcTime, timeZone, wholeDayIndicator);
 
             // Assert
-            Assert.AreEqual(start, result.Item1.date);
-            Assert.IsNull(result.Item1.dateTime);
+            Assert.AreEqual(start, result.Item1.Date);
+            Assert.IsNull(result.Item1.DateTime);
 
-            Assert.AreEqual(end, result.Item2.date);
-            Assert.IsNull(result.Item2.dateTime);
+            Assert.AreEqual(end, result.Item2.Date);
+            Assert.IsNull(result.Item2.DateTime);
         }
     }
 }

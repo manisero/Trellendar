@@ -35,9 +35,9 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.extendedProperties);
+            Assert.IsNotNull(result.ExtendedProperties);
 
-            var properties = result.extendedProperties.@private;
+            var properties = result.ExtendedProperties.Private;
             Assert.IsNotNull(properties);
             Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
             Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));

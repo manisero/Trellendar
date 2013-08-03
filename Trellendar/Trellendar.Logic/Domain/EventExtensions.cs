@@ -10,15 +10,15 @@ namespace Trellendar.Logic.Domain
 
         public static bool IsGeneratedByTrellendar(this Event @event)
         {
-            return @event.extendedProperties != null &&
-                   @event.extendedProperties.@private != null &&
-                   @event.extendedProperties.@private.ContainsKey(GENERATED_PROPERTY_KEY);
+            return @event.ExtendedProperties != null &&
+                   @event.ExtendedProperties.Private != null &&
+                   @event.ExtendedProperties.Private.ContainsKey(GENERATED_PROPERTY_KEY);
         }
 
         public static string GetSourceID(this Event @event)
         {
-            return @event.extendedProperties != null && @event.extendedProperties.@private != null && @event.extendedProperties.@private.ContainsKey(SOURCE_ID_PROPERTY_KEY)
-                       ? @event.extendedProperties.@private[SOURCE_ID_PROPERTY_KEY]
+            return @event.ExtendedProperties != null && @event.ExtendedProperties.Private != null && @event.ExtendedProperties.Private.ContainsKey(SOURCE_ID_PROPERTY_KEY)
+                       ? @event.ExtendedProperties.Private[SOURCE_ID_PROPERTY_KEY]
                        : null;
         }
 
@@ -26,7 +26,7 @@ namespace Trellendar.Logic.Domain
         {
             return new EventExtendedProperties
                 {
-                    @private = new Dictionary<string, string>
+                    Private = new Dictionary<string, string>
                         {
                             { GENERATED_PROPERTY_KEY, string.Empty },
                             { SOURCE_ID_PROPERTY_KEY, sourceId }
