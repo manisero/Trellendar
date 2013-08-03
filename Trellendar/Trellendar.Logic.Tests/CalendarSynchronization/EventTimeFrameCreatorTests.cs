@@ -62,6 +62,30 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
 
         [Test]
         [Sequential]
+        public void creates_non_whole_day_time_frame_for_null_whole_day_indicator(
+            [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string dateTime,
+            [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string expectedStart,
+            [Values("2012-03-13 01:00:00", "2013-07-23 19:26:05")] string expectedEnd)
+        {
+            // Arrange
+            var time = DateTime.Parse(dateTime);
+
+            var start = DateTime.Parse(expectedStart);
+            var end = DateTime.Parse(expectedEnd);
+
+            // Act
+            var result = AutoMoqer.Resolve<EventTimeFrameCreator>().Create(time, "time zone", null);
+
+            // Assert
+            Assert.AreEqual(start, result.Item1.dateTime);
+            Assert.IsNull(result.Item1.date);
+
+            Assert.AreEqual(end, result.Item2.dateTime);
+            Assert.IsNull(result.Item2.date);
+        }
+
+        [Test]
+        [Sequential]
         public void creates_non_whole_day_time_frame_for_null_time_in_zone(
             [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string dateTime,
             [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string expectedStart,

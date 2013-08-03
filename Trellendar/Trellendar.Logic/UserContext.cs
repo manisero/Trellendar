@@ -14,6 +14,11 @@ namespace Trellendar.Logic
         {
             return userContext != null && userContext.User != null;
         }
+        
+        public static string GetCalendarTimeZone(this UserContext userContext)
+        {
+            return userContext.IsFilled() ? userContext.User.CalendarTimeZone : null;
+        }
 
         public static bool HasUserPreferences(this UserContext userContext)
         {

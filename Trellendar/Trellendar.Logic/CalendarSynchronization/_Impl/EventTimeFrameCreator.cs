@@ -17,18 +17,17 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public Tuple<TimeStamp, TimeStamp> Create(DateTime utcDateTime, string timeZone, TimeSpan? wholeDayIndicator)
         {
-            var timeInZone = timeZone != null
-                                 ? _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone)
-                                 : null;
+            if (timeZone != null && wholeDayIndicator != null)
+            {
+                var timeInZone = _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone);
 
-            if (timeInZone != null && timeInZone.Value - timeInZone.Value.Date == wholeDayIndicator)
-            {
-                return Tuple.Create(new TimeStamp { date = utcDateTime.Date }, new TimeStamp { date = utcDateTime.Date });
+                if (timeInZone != null && timeInZone.Value - timeInZone.Value.Date == wholeDayIndicator.Value)
+                {
+                    return Tuple.Create(new TimeStamp { date = utcDateTime.Date }, new TimeStamp { date = utcDateTime.Date });
+                }
             }
-            else
-            {
-                return Tuple.Create(new TimeStamp { dateTime = utcDateTime }, new TimeStamp { dateTime = utcDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
-            }
+            
+            return Tuple.Create(new TimeStamp { dateTime = utcDateTime }, new TimeStamp { dateTime = utcDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
         }
     }
 }

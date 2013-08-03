@@ -7,10 +7,5 @@ namespace Trellendar.Domain.Calendar
         public DateTime? date { get; set; }
 
         public DateTime? dateTime { get; set; }
-
-        public TimeStamp()
-        {
-            
-        }
     }
 }
