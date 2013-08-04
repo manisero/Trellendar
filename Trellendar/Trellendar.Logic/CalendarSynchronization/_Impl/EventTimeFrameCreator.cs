@@ -19,11 +19,11 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
         {
             if (timeZone != null && wholeDayIndicator != null)
             {
-                var timeInZone = _timeZoneService.GetDateTimeInZone(utcDateTime, timeZone);
+                var localTime = _timeZoneService.GetLocalDateTime(utcDateTime, timeZone);
 
-                if (timeInZone != null && timeInZone.Value - timeInZone.Value.Date == wholeDayIndicator.Value)
+                if (localTime != null && localTime.Value - localTime.Value.Date == wholeDayIndicator.Value)
                 {
-                    return Tuple.Create(new TimeStamp { Date = timeInZone.Value.Date }, new TimeStamp { Date = timeInZone.Value.Date });
+                    return Tuple.Create(new TimeStamp { Date = localTime.Value.Date }, new TimeStamp { Date = localTime.Value.Date });
                 }
             }
             

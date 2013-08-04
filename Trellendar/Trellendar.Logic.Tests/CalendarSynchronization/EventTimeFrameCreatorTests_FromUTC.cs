@@ -21,10 +21,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns(new DateTime(wholeDayIndicator.Ticks + 1000));
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetLocalDateTime(time, timeZone)).Returns(new DateTime(wholeDayIndicator.Ticks + 1000));
 
             // Act & Assert
-            TestCreate(time, timeZone, wholeDayIndicator, null, start, null, end);
+            TestCreateFromUTC(time, timeZone, wholeDayIndicator, null, start, null, end);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var end = DateTime.Parse(expectedEnd);
 
             // Act & Assert
-            TestCreate(time, null, null, null, start, null, end);
+            TestCreateFromUTC(time, null, null, null, start, null, end);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var end = DateTime.Parse(expectedEnd);
 
             // Act & Assert
-            TestCreate(time, "time zone", null, null, start, null, end);
+            TestCreateFromUTC(time, "time zone", null, null, start, null, end);
         }
 
         [Test]
@@ -75,10 +75,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(time, timeZone)).Returns((DateTime?)null);
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetLocalDateTime(time, timeZone)).Returns((DateTime?)null);
 
             // Act & Assert
-            TestCreate(time, timeZone, null, null, start, null, end);
+            TestCreateFromUTC(time, timeZone, null, null, start, null, end);
         }
 
         [Test]
@@ -98,10 +98,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             var start = DateTime.Parse(expectedStart);
             var end = DateTime.Parse(expectedEnd);
 
-            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetDateTimeInZone(utcTime, timeZone)).Returns(localTime);
+            AutoMoqer.GetMock<ITimeZoneService>().Setup(x => x.GetLocalDateTime(utcTime, timeZone)).Returns(localTime);
 
             // Act & Assert
-            TestCreate(utcTime, timeZone, wholeDayIndicator, start, null, end, null);
+            TestCreateFromUTC(utcTime, timeZone, wholeDayIndicator, start, null, end, null);
         }
     }
 }
