@@ -20,8 +20,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Item1);
             Assert.IsNotNull(result.Item2);
-            Assert.AreEqual(dateTime, result.Item1.Date);
-            Assert.AreEqual(dateTime, result.Item2.Date);
+
+            AssertDateTime(dateTime, result.Item1.Date);
+            AssertDateTime(null, result.Item1.DateTime);
+
+            AssertDateTime(dateTime, result.Item2.Date);
+            AssertDateTime(null, result.Item2.DateTime);
         }
 
         private void TestCreateFromUTC(DateTime utcTime, string timeZone, TimeSpan? wholeDayIndicator,
@@ -36,11 +40,11 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             Assert.IsNotNull(result.Item1);
             Assert.IsNotNull(result.Item2);
 
-            Assert.AreEqual(expectedStartDate, result.Item1.Date);
-            Assert.AreEqual(expectedStartDateTime, result.Item1.DateTime);
+            AssertDateTime(expectedStartDate, result.Item1.Date);
+            AssertDateTime(expectedStartDateTime, result.Item1.DateTime);
 
-            Assert.AreEqual(expectedEndDate, result.Item2.Date);
-            Assert.AreEqual(expectedEndDateTime, result.Item2.DateTime);
+            AssertDateTime(expectedEndDate, result.Item2.Date);
+            AssertDateTime(expectedEndDateTime, result.Item2.DateTime);
         }
 
         private void TestCreateFromLocal(DateTime utcTime, string timeZone, TimeSpan? wholeDayIndicator,
@@ -55,11 +59,21 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             Assert.IsNotNull(result.Item1);
             Assert.IsNotNull(result.Item2);
 
-            Assert.AreEqual(expectedStartDate, result.Item1.Date);
-            Assert.AreEqual(expectedStartDateTime, result.Item1.DateTime);
+            AssertDateTime(expectedStartDate, result.Item1.Date);
+            AssertDateTime(expectedStartDateTime, result.Item1.DateTime);
 
-            Assert.AreEqual(expectedEndDate, result.Item2.Date);
-            Assert.AreEqual(expectedEndDateTime, result.Item2.DateTime);
+            AssertDateTime(expectedEndDate, result.Item2.Date);
+            AssertDateTime(expectedEndDateTime, result.Item2.DateTime);
+        }
+
+        private static void AssertDateTime(DateTime? expected, DateTime? actual)
+        {
+            Assert.AreEqual(expected, actual);
+
+            if (actual != null)
+            {
+                Assert.AreEqual(DateTimeKind.Utc, actual.Value.Kind);
+            }
         }
     }
 }

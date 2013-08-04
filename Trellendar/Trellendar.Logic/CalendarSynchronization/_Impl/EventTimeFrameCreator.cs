@@ -17,21 +17,27 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public Tuple<TimeStamp, TimeStamp> CreateFromUTC(DateTime utcDateTime, string timeZone, TimeSpan? wholeDayIndicator)
         {
+            utcDateTime = DateTime.SpecifyKind(utcDateTime, DateTimeKind.Utc);
+
             if (timeZone != null && wholeDayIndicator != null)
             {
                 var localTime = _timeZoneService.GetLocalDateTime(utcDateTime, timeZone);
 
                 if (localTime != null && localTime.Value - localTime.Value.Date == wholeDayIndicator.Value)
                 {
+                    localTime = DateTime.SpecifyKind(localTime.Value, DateTimeKind.Utc);
+
                     return Tuple.Create(new TimeStamp { Date = localTime.Value.Date }, new TimeStamp { Date = localTime.Value.Date });
                 }
             }
-            
+
             return Tuple.Create(new TimeStamp { DateTime = utcDateTime }, new TimeStamp { DateTime = utcDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
         }
 
         public Tuple<TimeStamp, TimeStamp> CreateFromLocal(DateTime localDateTime, string timeZone, TimeSpan? wholeDayIndicator)
         {
+            localDateTime = DateTime.SpecifyKind(localDateTime, DateTimeKind.Utc);
+
             if (wholeDayIndicator != null && localDateTime - localDateTime.Date == wholeDayIndicator.Value)
             {
                 return Tuple.Create(new TimeStamp { Date = localDateTime.Date }, new TimeStamp { Date = localDateTime.Date });
@@ -39,11 +45,13 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
             if (timeZone != null)
             {
-                var utcTime = _timeZoneService.GetUTCDateTime(localDateTime, timeZone);
+                var utcDateTime = _timeZoneService.GetUTCDateTime(localDateTime, timeZone);
 
-                if (utcTime != null)
+                if (utcDateTime != null)
                 {
-                    return Tuple.Create(new TimeStamp { DateTime = utcTime.Value }, new TimeStamp { DateTime = utcTime.Value.AddHours(DEFAULT_EVENT_LENGTH) });
+                    utcDateTime = DateTime.SpecifyKind(utcDateTime.Value, DateTimeKind.Utc);
+
+                    return Tuple.Create(new TimeStamp { DateTime = utcDateTime.Value }, new TimeStamp { DateTime = utcDateTime.Value.AddHours(DEFAULT_EVENT_LENGTH) });
                 }
             }
 
@@ -52,6 +60,8 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public Tuple<TimeStamp, TimeStamp> CreateWholeDayTimeFrame(DateTime date)
         {
+            date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
+
             return Tuple.Create(new TimeStamp { Date = date }, new TimeStamp { Date = date });
         }
     }
