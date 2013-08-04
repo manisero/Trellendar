@@ -16,7 +16,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 if (endIndex > beginningIndex)
                 {
                     return parentName.Substring(beginningIndex + shortcutMarkers.Item1.Length,
-                                              endIndex - beginningIndex - shortcutMarkers.Item1.Length);
+                                                endIndex - beginningIndex - shortcutMarkers.Item1.Length);
                 }
             }
 

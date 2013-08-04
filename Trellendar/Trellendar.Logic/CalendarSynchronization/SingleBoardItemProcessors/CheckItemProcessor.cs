@@ -1,10 +1,11 @@
-﻿using Trellendar.Domain.Calendar;
+﻿using Trellendar.Core.Extensions;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CheckItemProcessor : ISingleBoardItemProcessor<CheckItem>
+    public class CheckItemProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<CheckItem>
     {
         private readonly UserContext _userContext;
         private readonly IDueParser _dueParser;
@@ -37,18 +38,27 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
             return new Event
                 {
-                    Summary = FormatEventSummary(item),
+                    Summary = FormatEventSummary(item, parentName),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }
 
-        private string FormatEventSummary(CheckItem checkItem)
+        private string FormatEventSummary(CheckItem checkItem, string checkListName)
         {
-            return checkItem.IsDone()
-                       ? checkItem.Name + _userContext.GetPrefferedCheckListEventDoneSuffix()
+            var eventNameTemplate = _userContext.GetPrefferedCheckListEventNameTemplate();
+
+            var summary = eventNameTemplate != null
+                       ? eventNameTemplate.FormatWith(FormatParentName(checkListName, _userContext.GetPrefferedCheckListShortcutMarkers()), checkItem.Name)
                        : checkItem.Name;
+
+            if (checkItem.IsDone())
+            {
+                summary += _userContext.GetPrefferedCheckListEventDoneSuffix();
+            }
+
+            return summary;
         }
     }
 }
