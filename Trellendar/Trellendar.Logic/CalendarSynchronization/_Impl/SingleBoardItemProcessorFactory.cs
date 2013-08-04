@@ -20,6 +20,8 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             _processors[typeof(Card)] = () => new CardProcessor(_dependencyResolver.Resolve<UserContext>(),
                                                                 _dependencyResolver.Resolve<IEventTimeFrameCreator>(),
                                                                 _dependencyResolver.Resolve<IDueParser>());
+
+            _processors[typeof(CheckItem)] = () => new CheckItemProcessor();
         }
 
         public ISingleBoardItemProcessor<TItem> Create<TItem>()
