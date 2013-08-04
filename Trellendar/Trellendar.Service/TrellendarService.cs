@@ -4,7 +4,6 @@ using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Ninject;
-using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Service.Ninject;
 
 namespace Trellendar.Service

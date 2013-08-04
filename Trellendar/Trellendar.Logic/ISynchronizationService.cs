@@ -1,4 +1,4 @@
-﻿namespace Trellendar.Logic.CalendarSynchronization
+﻿namespace Trellendar.Logic
 {
     public interface ISynchronizationService
     {
