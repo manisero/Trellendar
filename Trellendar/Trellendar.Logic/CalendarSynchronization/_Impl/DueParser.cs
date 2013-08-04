@@ -25,26 +25,36 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 return null;
             }
 
-            var beginningIndex = textWithDue.IndexOf(dueTextMarkers.Item1, StringComparison.Ordinal);
+            var searchStartIndex = 0;
 
-            if (beginningIndex < 0)
+            while (true)
             {
-                return null;
+                var beginningIndex = textWithDue.IndexOf(dueTextMarkers.Item1, searchStartIndex, StringComparison.Ordinal);
+
+                if (beginningIndex < 0)
+                {
+                    return null;
+                }
+
+                var endIndex = textWithDue.IndexOf(dueTextMarkers.Item2, beginningIndex, StringComparison.Ordinal);
+
+                if (endIndex < 0)
+                {
+                    return null;
+                }
+
+                searchStartIndex = beginningIndex + 1;
+
+                var dueText = textWithDue.Substring(beginningIndex + dueTextMarkers.Item1.Length,
+                                                    endIndex - beginningIndex - dueTextMarkers.Item1.Length);
+
+                DateTime due;
+
+                if (DateTime.TryParse(dueText, out due))
+                {
+                    return due;
+                }
             }
-
-            var endIndex = textWithDue.IndexOf(dueTextMarkers.Item2, beginningIndex, StringComparison.Ordinal);
-
-            if (endIndex < 0)
-            {
-                return null;
-            }
-
-            var dueText = textWithDue.Substring(beginningIndex + dueTextMarkers.Item1.Length,
-                                                endIndex - beginningIndex - dueTextMarkers.Item2.Length);
-
-            DateTime due;
-
-            return DateTime.TryParse(dueText, out due) ? due : (DateTime?)null;
         }
     }
 }
