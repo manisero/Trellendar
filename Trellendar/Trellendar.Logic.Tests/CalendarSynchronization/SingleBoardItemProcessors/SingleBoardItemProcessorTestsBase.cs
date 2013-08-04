@@ -36,7 +36,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
-                     .Setup(x => x.Create(itemDue, timeZone, wholeDayIndicator))
+                     .Setup(x => x.CreateFromUTC(itemDue, timeZone, wholeDayIndicator))
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
