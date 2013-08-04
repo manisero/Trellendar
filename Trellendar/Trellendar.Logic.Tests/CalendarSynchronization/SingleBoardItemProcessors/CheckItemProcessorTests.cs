@@ -8,7 +8,7 @@ using Trellendar.Logic.Domain;
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
     [TestFixture]
-    public class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
+    public partial class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
     {
         [Test]
         public void sets_event_extended_properties_properly()
