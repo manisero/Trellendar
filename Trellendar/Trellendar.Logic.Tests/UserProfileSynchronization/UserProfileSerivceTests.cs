@@ -37,6 +37,11 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                      .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Desc))
                      .Returns(newPreferences);
 
+            AutoMoqer.GetMock<IRepositoryFactory>()
+                     .Setup(x => x.Create<UserPreferences>())
+                     .Returns(AutoMoqer.GetMock<IRepository<UserPreferences>>().Object);
+
+            AutoMoqer.GetMock<IRepository<UserPreferences>>().Setup(x => x.Remove(user.UserPreferences));
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act

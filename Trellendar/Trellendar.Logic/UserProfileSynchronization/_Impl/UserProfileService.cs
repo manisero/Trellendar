@@ -10,15 +10,18 @@ namespace Trellendar.Logic.UserProfileSynchronization._Impl
     public class UserProfileService : IUserProfileService
     {
         private readonly UserContext _userContext;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IJsonSerializer _jsonSerializer;
+        private readonly IRepositoryFactory _repositoryFactory;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserProfileSynchronizaionSettingsProvider _settingsProvider;
 
-        public UserProfileService(UserContext userContext, IUnitOfWork unitOfWork, IJsonSerializer jsonSerializer, IUserProfileSynchronizaionSettingsProvider settingsProvider)
+        public UserProfileService(UserContext userContext, IJsonSerializer jsonSerializer, IRepositoryFactory repositoryFactory,
+                                  IUnitOfWork unitOfWork, IUserProfileSynchronizaionSettingsProvider settingsProvider)
         {
             _userContext = userContext;
-            _unitOfWork = unitOfWork;
             _jsonSerializer = jsonSerializer;
+            _repositoryFactory = repositoryFactory;
+            _unitOfWork = unitOfWork;
             _settingsProvider = settingsProvider;
         }
 
@@ -50,6 +53,7 @@ namespace Trellendar.Logic.UserProfileSynchronization._Impl
                 return;
             }
 
+            _repositoryFactory.Create<UserPreferences>().Remove(_userContext.User.UserPreferences);
             _userContext.User.UserPreferences = preferences;
             _unitOfWork.SaveChanges();
         }
