@@ -27,7 +27,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
         protected abstract object GetExptectedItemKey(TItem item);
 
-        protected void MockEventTimeFrameCreator(DateTime itemDue, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        protected void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
             var timeZone = user != null ? user.CalendarTimeZone : null;
 
@@ -36,7 +36,27 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
-                     .Setup(x => x.CreateFromUTC(itemDue, timeZone, wholeDayIndicator))
+                     .Setup(x => x.CreateFromUTC(dueDateTime, timeZone, wholeDayIndicator))
+                     .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
+        }
+
+        protected void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        {
+            var timeZone = user != null ? user.CalendarTimeZone : null;
+
+            var wholeDayIndicator = user != null && user.UserPreferences != null
+                                        ? user.UserPreferences.WholeDayEventDueTime
+                                        : null;
+
+            AutoMoqer.GetMock<IEventTimeFrameCreator>()
+                     .Setup(x => x.CreateFromLocal(dueDateTime, timeZone, wholeDayIndicator))
+                     .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
+        }
+
+        protected void MockTimeFrameCreation_WholeDay(DateTime dueDateTime, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        {
+            AutoMoqer.GetMock<IEventTimeFrameCreator>()
+                     .Setup(x => x.CreateWholeDayTimeFrame(dueDateTime))
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 

@@ -1,4 +1,5 @@
-﻿using Trellendar.Domain.Calendar;
+﻿using System;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
@@ -9,11 +10,13 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     {
         private readonly UserContext _userContext;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
+        private readonly IDueParser _dueParser;
 
-        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator, IDueParser dueParser)
         {
             _userContext = userContext;
             _eventTimeFrameCreator = eventTimeFrameCreator;
+            _dueParser = dueParser;
         }
 
         public string GetItemID(Card item)
@@ -23,12 +26,30 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
         public Event Process(Card item, string parentName)
         {
-            if (item.Closed || item.Due == null)
+            if (item.Closed)
             {
                 return null;
             }
 
-            var timeFrame = _eventTimeFrameCreator.CreateFromUTC(item.Due.Value, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime());
+            Tuple<TimeStamp, TimeStamp> timeFrame;
+
+            if (item.Due != null)
+            {
+                timeFrame = _eventTimeFrameCreator.CreateFromUTC(item.Due.Value, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime());
+            }
+            else
+            {
+                var due = _dueParser.Parse(item.Desc);
+
+                if (due == null)
+                {
+                    return null;
+                }
+
+                timeFrame = due.HasTime
+                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime())
+                                : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
+            }
 
             return new Event
                 {

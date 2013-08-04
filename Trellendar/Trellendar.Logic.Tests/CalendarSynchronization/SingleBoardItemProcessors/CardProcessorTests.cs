@@ -28,7 +28,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
 
-            MockEventTimeFrameCreator(card.Due.Value, null);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
 
             // Act
             var result = TestProcess(card, "not important", null);

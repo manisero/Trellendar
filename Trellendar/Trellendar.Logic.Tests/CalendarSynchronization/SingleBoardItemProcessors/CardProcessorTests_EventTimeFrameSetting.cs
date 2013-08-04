@@ -1,8 +1,10 @@
-﻿using FizzWare.NBuilder;
+﻿using System;
+using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.CalendarSynchronization;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
@@ -53,15 +55,55 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             TestEventTimeFrameSetting(user);
         }
 
-        private void TestEventTimeFrameSetting(User user)
+        [Test]
+        public void sets_event_start_and_end_from_parsed_due___non_whole_day()
         {
             // Arrange
-            var card = Builder<Card>.CreateNew().Build();
+            var user = Builder<User>.CreateNew().Build();
+            var due = Builder<Due>.CreateNew().With(x => x.HasTime = true).Build();
+
+            // Act & Assert
+            TestEventTimeFrameSetting(user, due);
+        }
+
+        [Test]
+        public void sets_event_start_and_end_from_parsed_due___whole_day()
+        {
+            // Arrange
+            var user = Builder<User>.CreateNew().Build();
+            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
+
+            // Act & Assert
+            TestEventTimeFrameSetting(user, due);
+        }
+
+        private void TestEventTimeFrameSetting(User user, Due parsedDue = null)
+        {
+            // Arrange
+            var card = Builder<Card>.CreateNew()
+                                    .With(x => x.Due = parsedDue == null ? new DateTime(2012, 07, 8) : (DateTime?)null)
+                                    .Build();
 
             var start = new TimeStamp();
             var end = new TimeStamp();
 
-            MockEventTimeFrameCreator(card.Due.Value, user, start, end);
+            if (parsedDue != null)
+            {
+                AutoMoqer.GetMock<IDueParser>().Setup(x => x.Parse(card.Desc)).Returns(parsedDue);
+            }
+
+            if (parsedDue == null)
+            {
+                MockTimeFrameCreation_FromUTC(card.Due.Value, user, start, end);
+            }
+            else if (parsedDue.HasTime)
+            {
+                MockTimeFrameCreation_FromLocal(parsedDue.DueDateTime, user, start, end);
+            }
+            else
+            {
+                MockTimeFrameCreation_WholeDay(parsedDue.DueDateTime, start, end);
+            }
 
             // Act
             var result = TestProcess(card, "not important", user);

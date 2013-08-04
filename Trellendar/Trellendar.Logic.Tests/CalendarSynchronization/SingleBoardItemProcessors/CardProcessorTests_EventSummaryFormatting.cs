@@ -13,7 +13,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
 
-            MockEventTimeFrameCreator(card.Due.Value, null);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
 
             // Act
             var result = TestProcess(card, "not important", null);
@@ -30,7 +30,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var user = Builder<User>.CreateNew().With(x => x.UserPreferences = null).Build();
             var card = Builder<Card>.CreateNew().Build();
 
-            MockEventTimeFrameCreator(card.Due.Value, user);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, user);
 
             // Act
             var result = TestProcess(card, "not important", user);
@@ -52,7 +52,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var card = Builder<Card>.CreateNew().Build();
 
-            MockEventTimeFrameCreator(card.Due.Value, user);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, user);
 
             // Act
             var result = TestProcess(card, "not important", user);
@@ -78,7 +78,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var expectedSummary = string.Format(eventNameTemplate, listName, card.Name);
 
-            MockEventTimeFrameCreator(card.Due.Value, user);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, user);
 
             // Act
             var result = TestProcess(card, listName, user);
@@ -110,7 +110,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var expectedSummary = string.Format(eventNameTemplate, listName, card.Name);
 
-            MockEventTimeFrameCreator(card.Due.Value, user);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, user);
 
             // Act
             var result = TestProcess(card, listName, user);
@@ -142,7 +142,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var card = Builder<Card>.CreateNew().With(x => x.Name = cardName).Build();
 
-            MockEventTimeFrameCreator(card.Due.Value, user);
+            MockTimeFrameCreation_FromUTC(card.Due.Value, user);
 
             // Act
             var result = TestProcess(card, listName, user);

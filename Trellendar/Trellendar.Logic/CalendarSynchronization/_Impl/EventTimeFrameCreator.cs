@@ -49,5 +49,10 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
             return Tuple.Create(new TimeStamp { DateTime = localDateTime }, new TimeStamp { DateTime = localDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
         }
+
+        public Tuple<TimeStamp, TimeStamp> CreateWholeDayTimeFrame(DateTime date)
+        {
+            return Tuple.Create(new TimeStamp { Date = date }, new TimeStamp { Date = date });
+        }
     }
 }
