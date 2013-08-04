@@ -54,6 +54,8 @@
     <Compile Include="Trellendar\UserPreferences.cs" />
     <Compile Include="Trello\Board.cs" />
     <Compile Include="Trello\Card.cs" />
+    <Compile Include="Trello\CheckList.cs" />
+    <Compile Include="Trello\CheckItem.cs" />
     <Compile Include="Trello\List.cs" />
   </ItemGroup>
   <ItemGroup>
