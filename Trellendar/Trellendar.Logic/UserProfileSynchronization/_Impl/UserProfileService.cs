@@ -2,7 +2,7 @@ using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 
-namespace Trellendar.Logic.CalendarSynchronization._Impl
+namespace Trellendar.Logic.UserProfileSynchronization._Impl
 {
     public class UserProfileService : IUserProfileService
     {

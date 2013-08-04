@@ -3,9 +3,11 @@ using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Trellendar;
 using System.Linq;
+using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.Domain;
+using Trellendar.Logic.UserProfileSynchronization;
 
-namespace Trellendar.Logic.CalendarSynchronization._Impl
+namespace Trellendar.Logic._Impl
 {
     public class SynchronizationService : ISynchronizationService
     {

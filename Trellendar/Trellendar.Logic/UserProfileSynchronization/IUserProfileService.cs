@@ -1,7 +1,7 @@
 ﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 
-namespace Trellendar.Logic.CalendarSynchronization
+namespace Trellendar.Logic.UserProfileSynchronization
 {
     public interface IUserProfileService
     {
