@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201308041034320_DueTextMarkers.Designer.cs">
       <DependentUpon>201308041034320_DueTextMarkers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308041658513_CheckListEventDoneSuffix.cs" />
+    <Compile Include="Migrations\201308041658513_CheckListEventDoneSuffix.Designer.cs">
+      <DependentUpon>201308041658513_CheckListEventDoneSuffix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308041034320_DueTextMarkers.resx">
       <DependentUpon>201308041034320_DueTextMarkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308041658513_CheckListEventDoneSuffix.resx">
+      <DependentUpon>201308041658513_CheckListEventDoneSuffix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

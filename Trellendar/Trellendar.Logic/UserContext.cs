@@ -40,6 +40,13 @@ namespace Trellendar.Logic
                        : null;
         }
 
+        public static string GetPrefferedCheckListEventDoneSuffix(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? userContext.User.UserPreferences.CheckListEventDoneSuffix
+                       : null;
+        }
+
         public static TimeSpan? GetPrefferedWholeDayEventDueTime(this UserContext userContext)
         {
             return userContext.HasUserPreferences()

@@ -36,12 +36,19 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
 
             return new Event
-            {
-                Summary = item.Name,
-                Start = timeFrame.Item1,
-                End = timeFrame.Item2,
-                ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
-            };
+                {
+                    Summary = FormatEventSummary(item),
+                    Start = timeFrame.Item1,
+                    End = timeFrame.Item2,
+                    ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
+                };
+        }
+
+        private string FormatEventSummary(CheckItem checkItem)
+        {
+            return checkItem.IsDone()
+                       ? checkItem.Name + _userContext.GetPrefferedCheckListEventDoneSuffix()
+                       : checkItem.Name;
         }
     }
 }
