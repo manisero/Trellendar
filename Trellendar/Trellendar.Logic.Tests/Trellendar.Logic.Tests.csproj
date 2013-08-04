@@ -89,6 +89,7 @@
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventTimeFrameSetting.cs">
       <DependentUpon>CardProcessorTests.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsBase.cs" />

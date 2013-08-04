@@ -21,7 +21,9 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                                                                 _dependencyResolver.Resolve<IEventTimeFrameCreator>(),
                                                                 _dependencyResolver.Resolve<IDueParser>());
 
-            _processors[typeof(CheckItem)] = () => new CheckItemProcessor();
+            _processors[typeof(CheckItem)] = () => new CheckItemProcessor(_dependencyResolver.Resolve<UserContext>(),
+                                                                          _dependencyResolver.Resolve<IDueParser>(),
+                                                                          _dependencyResolver.Resolve<IEventTimeFrameCreator>());
         }
 
         public ISingleBoardItemProcessor<TItem> Create<TItem>()
