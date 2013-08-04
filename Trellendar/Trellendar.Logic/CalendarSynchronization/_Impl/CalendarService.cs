@@ -32,6 +32,13 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 {
                     _boardItemsProcessor.Process(cards, list.Name, events);
                 }
+
+                var checklists = board.CheckLists.Where(x => cards.Any(card => card.Id == x.IdCard));
+
+                foreach (var checklist in checklists)
+                {
+                    _boardItemsProcessor.Process(checklist.CheckItems, checklist.Name, events);
+                }
             }
         }
     }

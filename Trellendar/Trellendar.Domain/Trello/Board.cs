@@ -11,5 +11,7 @@ namespace Trellendar.Domain.Trello
         public IList<List> Lists { get; set; }
 
         public IList<Card> Cards { get; set; }
+
+        public IList<CheckList> CheckLists { get; set; }
     }
 }

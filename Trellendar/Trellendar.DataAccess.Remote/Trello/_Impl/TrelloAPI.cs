@@ -32,10 +32,10 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
                                                      { "lists", "open" },
                                                      { "list_fields", "name" },
                                                      { "cards", "all" },
-                                                     { "card_fields", "closed,dateLastActivity,desc,due,idList,name" }
+                                                     { "card_fields", "closed,dateLastActivity,desc,due,idList,name" },
+                                                     { "checklists", "all" },
+                                                     { "checklist_fields", "name,idCard" }
                                                  });
-
-
 
             return _jsonSerializer.Deserialize<Board>(boardJson);
         }
