@@ -14,6 +14,8 @@ namespace Trellendar.Domain.Trellendar
 
         public string CardEventNameTemplate { get; set; }
 
+        public string CheckListEventNameTemplate { get; set; }
+
         public string CheckListEventDoneSuffix { get; set; }
 
         public TimeSpan? WholeDayEventDueTime { get; set; }
