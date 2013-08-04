@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201308012154390_WholeDayEventDueTime.Designer.cs">
       <DependentUpon>201308012154390_WholeDayEventDueTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308041034320_DueTextMarkers.cs" />
+    <Compile Include="Migrations\201308041034320_DueTextMarkers.Designer.cs">
+      <DependentUpon>201308041034320_DueTextMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308012154390_WholeDayEventDueTime.resx">
       <DependentUpon>201308012154390_WholeDayEventDueTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308041034320_DueTextMarkers.resx">
+      <DependentUpon>201308041034320_DueTextMarkers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

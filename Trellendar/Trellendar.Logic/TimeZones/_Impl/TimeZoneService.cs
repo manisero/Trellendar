@@ -13,7 +13,7 @@ namespace Trellendar.Logic.TimeZones._Impl
             _xmlSerializer = xmlSerializer;
         }
 
-        public TimeSpan? GetUtcOffset(DateTime dateTime, string timeZone)
+        public TimeSpan? GetUtcOffset(DateTime localDateTime, string timeZone)
         {
             var data = _xmlSerializer.Deserialize<supplementalData>(TimeZonesResources.TimeZones);
             var zoneMaping = data.windowsZones.mapTimezones.mapZone.FirstOrDefault(x => x.type == timeZone);
@@ -27,7 +27,7 @@ namespace Trellendar.Logic.TimeZones._Impl
             {
                 var zoneInfo = TimeZoneInfo.FindSystemTimeZoneById(zoneMaping.other);
 
-                return zoneInfo.GetUtcOffset(dateTime);
+                return zoneInfo.GetUtcOffset(localDateTime);
             }
             catch (Exception)
             {   
@@ -35,9 +35,14 @@ namespace Trellendar.Logic.TimeZones._Impl
             }
         }
 
-        public DateTime? GetDateTimeInZone(DateTime dateTime, string timeZone)
+        public DateTime? GetUTCDateTime(DateTime localDateTime, string timeZone)
         {
-            return dateTime + GetUtcOffset(dateTime, timeZone);
+            return localDateTime - GetUtcOffset(localDateTime, timeZone);
+        }
+
+        public DateTime? GetLocalDateTime(DateTime utcDateTime, string timeZone)
+        {
+            return utcDateTime + GetUtcOffset(utcDateTime, timeZone);
         }
     }
 }

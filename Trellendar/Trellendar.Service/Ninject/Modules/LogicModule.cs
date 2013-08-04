@@ -23,6 +23,7 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<ICalendarService>().To<CalendarService>();
             Bind<IBoardItemsProcessor>().To<BoardItemsProcessor>();
             Bind<ISingleBoardItemProcessorFactory>().To<SingleBoardItemProcessorFactory>();
+            Bind<IDueParser>().To<DueParser>();
             Bind<IEventTimeFrameCreator>().To<EventTimeFrameCreator>();
 
             // User Profile Synchronization

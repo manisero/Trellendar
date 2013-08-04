@@ -4,8 +4,10 @@ namespace Trellendar.Logic.TimeZones
 {
     public interface ITimeZoneService
     {
-        TimeSpan? GetUtcOffset(DateTime dateTime, string timeZone);
+        TimeSpan? GetUtcOffset(DateTime localDateTime, string timeZone);
 
-        DateTime? GetDateTimeInZone(DateTime dateTime, string timeZone);
+        DateTime? GetUTCDateTime(DateTime localDateTime, string timeZone);
+
+        DateTime? GetLocalDateTime(DateTime utcDateTime, string timeZone);
     }
 }

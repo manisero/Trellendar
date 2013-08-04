@@ -20,6 +20,14 @@ namespace Trellendar.Logic.Tests
             AutoMoqer.SetInstance(new UserContext { User = user });
         }
 
+        protected void MockUserContext(UserPreferences userPreferences)
+        {
+            AutoMoqer.SetInstance(new UserContext
+                {
+                    User = new User { UserPreferences = userPreferences }
+                });
+        }
+
         protected void VerifyMock<TMock>() where TMock : class
         {
             AutoMoqer.GetMock<TMock>().VerifyAll();

@@ -74,7 +74,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\DueParserTests.cs" />
     <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests.cs" />
+    <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests_FromLocal.cs">
+      <DependentUpon>EventTimeFrameCreatorTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests_FromUTC.cs">
+      <DependentUpon>EventTimeFrameCreatorTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventSummaryFormatting.cs">
       <DependentUpon>CardProcessorTests.cs</DependentUpon>
