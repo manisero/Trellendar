@@ -43,6 +43,7 @@ namespace Trellendar.Logic._Impl
             var calendarEvents = _calendarApi.GetEvents(User.CalendarID);
 
             _userProfileService.UpdateUser(board, calendarEvents);
+            _userProfileService.UpdateUserPreferences(board);
             _calendarService.UpdateCalendar(board, calendarEvents.Items.Where(x => x.IsGeneratedByTrellendar()));
         }
     }

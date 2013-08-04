@@ -13,5 +13,10 @@ namespace Trellendar.Logic.Tests
         {
             AutoMoqer = new AutoMoqer();
         }
+
+        protected void VerifyMock<TMock>() where TMock : class
+        {
+            AutoMoqer.GetMock<TMock>().VerifyAll();
+        }
     }
 }

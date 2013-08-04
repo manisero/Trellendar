@@ -57,6 +57,7 @@
     <Compile Include="CalendarSynchronization\ICalendarService.cs" />
     <Compile Include="CalendarSynchronization\IBoardItemsProcessor.cs" />
     <Compile Include="CalendarSynchronization\ISingleBoardItemProcessor.cs" />
+    <Compile Include="UserProfileSynchronization\IUserProfileSynchronizaionSettingsProvider.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\EventTimeFrameCreator.cs" />
     <Compile Include="CalendarSynchronization\_Impl\SingleBoardItemProcessorFactory.cs" />
