@@ -63,7 +63,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
 
         [Test]
         [Sequential]
-        public void creates_non_whole_day_time_frame_for_null_time_in_zone___from_UTC(
+        public void creates_non_whole_day_time_frame_for_null_local_time___from_UTC(
             [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string dateTime,
             [Values("2012-03-13 00:00:00", "2013-07-23 18:26:05")] string expectedStart,
             [Values("2012-03-13 01:00:00", "2013-07-23 19:26:05")] string expectedEnd)

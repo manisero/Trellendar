@@ -32,7 +32,22 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
         public Tuple<TimeStamp, TimeStamp> CreateFromLocal(DateTime localDateTime, string timeZone, TimeSpan? wholeDayIndicator)
         {
-            throw new NotImplementedException();
+            if (wholeDayIndicator != null && localDateTime - localDateTime.Date == wholeDayIndicator.Value)
+            {
+                return Tuple.Create(new TimeStamp { Date = localDateTime.Date }, new TimeStamp { Date = localDateTime.Date });
+            }
+
+            if (timeZone != null)
+            {
+                var utcTime = _timeZoneService.GetUTCDateTime(localDateTime, timeZone);
+
+                if (utcTime != null)
+                {
+                    return Tuple.Create(new TimeStamp { DateTime = utcTime.Value }, new TimeStamp { DateTime = utcTime.Value.AddHours(DEFAULT_EVENT_LENGTH) });
+                }
+            }
+
+            return Tuple.Create(new TimeStamp { DateTime = localDateTime }, new TimeStamp { DateTime = localDateTime.AddHours(DEFAULT_EVENT_LENGTH) });
         }
     }
 }
