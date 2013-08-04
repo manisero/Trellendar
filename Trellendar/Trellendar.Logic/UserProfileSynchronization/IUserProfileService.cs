@@ -5,7 +5,7 @@ namespace Trellendar.Logic.UserProfileSynchronization
 {
     public interface IUserProfileService
     {
-        void UpdateUser(Board userBoard, Calendar userCalendar);
+        void UpdateUser(Calendar userCalendar);
 
         void UpdateUserPreferences(Board userBoard);
     }

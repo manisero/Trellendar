@@ -1,5 +1,6 @@
 ﻿using AutoMoq;
 using NUnit.Framework;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.Logic.Tests
 {
@@ -12,6 +13,11 @@ namespace Trellendar.Logic.Tests
         public void SetUp()
         {
             AutoMoqer = new AutoMoqer();
+        }
+
+        protected void MockUserContext(User user)
+        {
+            AutoMoqer.SetInstance(new UserContext { User = user });
         }
 
         protected void VerifyMock<TMock>() where TMock : class

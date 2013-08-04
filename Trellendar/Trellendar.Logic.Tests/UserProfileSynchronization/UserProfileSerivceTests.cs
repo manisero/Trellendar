@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Trellendar.Core.Serialization;
 using Trellendar.DataAccess.Local.Repository;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.UserProfileSynchronization;
@@ -12,6 +13,27 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
     [TestFixture]
     public class UserProfileSerivceTests : TestsBase
     {
+        [Test]
+        public void updates_user_properly()
+        {
+            // Arrange
+            var calendar = Builder<Calendar>.CreateNew()
+                                            .With(x => x.TimeZone = "test time zone")
+                                            .Build();
+
+            var user = Builder<User>.CreateNew().Build();
+
+            MockUserContext(user);
+            AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
+
+            // Act
+            AutoMoqer.Resolve<UserProfileService>().UpdateUser(calendar);
+
+            // Assert
+            Assert.AreEqual(calendar.TimeZone, user.CalendarTimeZone);
+            VerifyMock<IUnitOfWork>();
+        }
+
         [Test]
         public void updates_user_preferences_properly()
         {
@@ -27,7 +49,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
 
             var newPreferences = Builder<UserPreferences>.CreateNew().Build();
 
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            MockUserContext(user);
 
             AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
@@ -68,7 +90,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                                       .With(x => x.Cards = null)
                                       .Build();
 
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            MockUserContext(user);
 
             // Act
             AutoMoqer.Resolve<UserProfileService>().UpdateUserPreferences(board);
@@ -90,7 +112,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                                       .With(x => x.Cards = new[] { Builder<Card>.CreateNew().Build() })
                                       .Build();
 
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            MockUserContext(user);
 
             AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
@@ -119,7 +141,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                                       .With(x => x.Cards = new[] { configurationCard })
                                       .Build();
 
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            MockUserContext(user);
 
             AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
