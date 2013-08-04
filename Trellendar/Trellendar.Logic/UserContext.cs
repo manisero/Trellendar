@@ -46,5 +46,13 @@ namespace Trellendar.Logic
                        ? userContext.User.UserPreferences.WholeDayEventDueTime
                        : null;
         }
+
+        public static Tuple<string, string> GetPrefferedDueTextMarkers(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? Tuple.Create(userContext.User.UserPreferences.DueTextBeginningMarker,
+                                      userContext.User.UserPreferences.DueTextEndMarker)
+                       : null;
+        }
     }
 }
