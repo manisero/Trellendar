@@ -1,9 +1,12 @@
 using System;
+using System.Globalization;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
     public class DueParser : IDueParser
     {
+        private const string DATE_FORMAT = "yyyy-MM-dd";
+
         private readonly UserContext _userContext;
 
         public DueParser(UserContext userContext)
@@ -11,7 +14,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             _userContext = userContext;
         }
 
-        public DateTime? Parse(string textWithDue)
+        public Due Parse(string textWithDue)
         {
             if (textWithDue == null)
             {
@@ -50,9 +53,14 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                 DateTime due;
 
+                if (DateTime.TryParseExact(dueText, DATE_FORMAT, null, DateTimeStyles.None, out due))
+                {
+                    return new Due { DueDateTime = due, HasTime = false };
+                }
+
                 if (DateTime.TryParse(dueText, out due))
                 {
-                    return due;
+                    return new Due { DueDateTime = due, HasTime = true };
                 }
             }
         }

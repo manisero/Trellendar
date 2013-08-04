@@ -2,8 +2,15 @@
 
 namespace Trellendar.Logic.CalendarSynchronization
 {
+    public class Due
+    {
+        public DateTime DueDateTime { get; set; }
+
+        public bool HasTime { get; set; }
+    }
+
     public interface IDueParser
     {
-        DateTime? Parse(string textWithDue);
+        Due Parse(string textWithDue);
     }
 }
