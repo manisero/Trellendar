@@ -49,9 +49,9 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         {
             var eventNameTemplate = _userContext.GetPrefferedCheckListEventNameTemplate();
 
-            var summary = eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(FormatParentName(checkListName, _userContext.GetPrefferedCheckListShortcutMarkers()), checkItem.Name)
-                       : checkItem.Name;
+	        var summary = eventNameTemplate != null
+		                      ? eventNameTemplate.FormatWith(FormatParentName(checkListName, _userContext.GetPrefferedCheckListShortcutMarkers()), checkItem.Name)
+		                      : checkItem.Name;
 
             if (checkItem.IsDone())
             {
