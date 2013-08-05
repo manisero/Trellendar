@@ -33,10 +33,25 @@ namespace Trellendar.Logic
                        : null;
         }
 
+        public static Tuple<string, string> GetPrefferedCheckListShortcutMarkers(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? Tuple.Create(userContext.User.UserPreferences.CheckListShortcutBeginningMarker,
+                                      userContext.User.UserPreferences.CheckListShortcutEndMarker)
+                       : null;
+        }
+
         public static string GetPrefferedCardEventNameTemplate(this UserContext userContext)
         {
             return userContext.HasUserPreferences()
                        ? userContext.User.UserPreferences.CardEventNameTemplate
+                       : null;
+        }
+
+        public static string GetPrefferedCheckListEventNameTemplate(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences()
+                       ? userContext.User.UserPreferences.CheckListEventNameTemplate
                        : null;
         }
 

@@ -6,7 +6,7 @@ using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CardProcessor : ISingleBoardItemProcessor<Card>
+    public class CardProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
@@ -65,29 +65,8 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
 
             return eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(FormatListName(listName), cardName)
+                       ? eventNameTemplate.FormatWith(FormatParentName(listName, _userContext.GetPrefferedListShortcutMarkers()), cardName)
                        : cardName;
-        }
-
-        private string FormatListName(string listName)
-        {
-            var listShortcutMarkers = _userContext.GetPrefferedListShortcutMarkers();
-
-            if (listShortcutMarkers != null &&
-                listShortcutMarkers.Item1 != null && listShortcutMarkers.Item2 != null && 
-                listName.Contains(listShortcutMarkers.Item1) && listName.Contains(listShortcutMarkers.Item2))
-            {
-                var beginningIndex = listName.LastIndexOf(listShortcutMarkers.Item1);
-                var endIndex = listName.LastIndexOf(listShortcutMarkers.Item2);
-
-                if (endIndex > beginningIndex)
-                {
-                    return listName.Substring(beginningIndex + listShortcutMarkers.Item1.Length,
-                                              endIndex - beginningIndex - listShortcutMarkers.Item1.Length);
-                }
-            }
-
-            return listName;
         }
     }
 }

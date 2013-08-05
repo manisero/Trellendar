@@ -12,7 +12,13 @@ namespace Trellendar.Domain.Trellendar
 
         public string ListShortcutEndMarker { get; set; }
 
+        public string CheckListShortcutBeginningMarker { get; set; }
+
+        public string CheckListShortcutEndMarker { get; set; }
+
         public string CardEventNameTemplate { get; set; }
+
+        public string CheckListEventNameTemplate { get; set; }
 
         public string CheckListEventDoneSuffix { get; set; }
 

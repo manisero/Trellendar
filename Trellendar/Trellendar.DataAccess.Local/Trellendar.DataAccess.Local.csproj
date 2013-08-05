@@ -77,6 +77,14 @@
     <Compile Include="Migrations\201308041658513_CheckListEventDoneSuffix.Designer.cs">
       <DependentUpon>201308041658513_CheckListEventDoneSuffix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308041718377_CheckListEventNameTemplate.cs" />
+    <Compile Include="Migrations\201308041718377_CheckListEventNameTemplate.Designer.cs">
+      <DependentUpon>201308041718377_CheckListEventNameTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308041727248_CheckListShortcutMarkers.cs" />
+    <Compile Include="Migrations\201308041727248_CheckListShortcutMarkers.Designer.cs">
+      <DependentUpon>201308041727248_CheckListShortcutMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -115,6 +123,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308041658513_CheckListEventDoneSuffix.resx">
       <DependentUpon>201308041658513_CheckListEventDoneSuffix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308041718377_CheckListEventNameTemplate.resx">
+      <DependentUpon>201308041718377_CheckListEventNameTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308041727248_CheckListShortcutMarkers.resx">
+      <DependentUpon>201308041727248_CheckListShortcutMarkers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
