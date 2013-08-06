@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
 using System.ServiceProcess;
+using Trellendar.DataAccess.Local;
+using Trellendar.DataAccess.Local.Migrations;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
@@ -17,6 +20,8 @@ namespace Trellendar.Service
 
         protected override void OnStart(string[] args)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
+
             var kernel = new NinjectBootstrapper().Bootstrap();
 
             var userRepository = kernel.Get<IRepositoryFactory>().Create<User>();

@@ -2,7 +2,7 @@ using System.Data.Entity.Migrations;
 
 namespace Trellendar.DataAccess.Local.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<TrellendarDataContext>
+    public sealed class Configuration : DbMigrationsConfiguration<TrellendarDataContext>
     {
         public Configuration()
         {
