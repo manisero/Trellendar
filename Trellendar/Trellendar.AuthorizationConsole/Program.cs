@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Local;
+using Trellendar.DataAccess.Local.Migrations;
 using Trellendar.DataAccess.Remote.Calendar._Impl;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
+using UserPreferences = Trellendar.Domain.Trellendar.UserPreferences;
 
 namespace Trellendar.AuthorizationConsole
 {
@@ -14,6 +17,8 @@ namespace Trellendar.AuthorizationConsole
     {
         static void Main(string[] args)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
+
             var restClientFactory = new RestClientFactory(null);
             var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
             var calendarAuthorization = new CalendarAuthorizationAPI(restClientFactory, new JsonSerializer());
@@ -62,14 +67,8 @@ namespace Trellendar.AuthorizationConsole
                     CalendarAccessToken = calendarToken.AccessToken,
                     CalendarAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
                     CalendarRefreshToken = calendarToken.RefreshToken,
-                    LastSynchronizationTS = new DateTime(1900, 1, 1)
-                };
-
-            user.UserPreferences = new UserPreferences
-                {
-                    ListShortcutBeginningMarker = "[",
-                    ListShortcutEndMarker = "]",
-                    CardEventNameTemplate = "[{0}] {1}"
+                    LastSynchronizationTS = new DateTime(1900, 1, 1),
+					UserPreferences = new UserPreferences()
                 };
 
             dataContext.Users.Add(user);

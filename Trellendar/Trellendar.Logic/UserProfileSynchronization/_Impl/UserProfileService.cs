@@ -53,7 +53,11 @@ namespace Trellendar.Logic.UserProfileSynchronization._Impl
                 return;
             }
 
-            _repositoryFactory.Create<UserPreferences>().Remove(_userContext.User.UserPreferences);
+			if (_userContext.HasUserPreferences())
+			{
+				_repositoryFactory.Create<UserPreferences>().Remove(_userContext.User.UserPreferences);
+			}
+			
             _userContext.User.UserPreferences = preferences;
             _unitOfWork.SaveChanges();
         }
