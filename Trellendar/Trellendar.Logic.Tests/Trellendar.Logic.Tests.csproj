@@ -82,6 +82,7 @@
     <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests_FromUTC.cs">
       <DependentUpon>EventTimeFrameCreatorTests.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalendarSynchronization\Parsers\LocationParserTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventSummaryFormatting.cs">
       <DependentUpon>CardProcessorTests.cs</DependentUpon>

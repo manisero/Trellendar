@@ -12,5 +12,13 @@ namespace Trellendar.Logic.Domain
                                       userPreferences.DueTextEndMarker)
                        : null;
         }
+
+        public static Tuple<string, string> GetLocationTextMarkers(this UserPreferences userPreferences)
+        {
+            return userPreferences != null
+                       ? Tuple.Create(userPreferences.LocationTextBeginningMarker,
+                                      userPreferences.LocationTextEndMarker)
+                       : null;
+        }
     }
 }

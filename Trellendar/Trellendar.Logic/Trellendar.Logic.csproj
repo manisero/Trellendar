@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\Parsers\ParserBase.cs" />
     <Compile Include="Domain\Due.cs" />
     <Compile Include="CalendarSynchronization\IDueParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\LocationParser.cs" />

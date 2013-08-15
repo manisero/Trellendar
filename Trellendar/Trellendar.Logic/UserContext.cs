@@ -1,6 +1,5 @@
 ﻿using System;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic
 {
@@ -72,13 +71,6 @@ namespace Trellendar.Logic
         {
             return userContext.HasUserPreferences()
                        ? userContext.User.UserPreferences.WholeDayEventDueTime
-                       : null;
-        }
-
-        public static Tuple<string, string> GetPrefferedDueTextMarkers(this UserContext userContext)
-        {
-            return userContext.HasUserPreferences()
-                       ? userContext.User.UserPreferences.GetDueTextMarkers()
                        : null;
         }
     }
