@@ -16,7 +16,7 @@ namespace Trellendar.Logic.CalendarSynchronization.Parsers
 
             if (outputTextMarkers == null || outputTextMarkers.Item1 == null || outputTextMarkers.Item2 == null)
             {
-                return default(TOutput);
+                return GetDefaultOutput(text);
             }
 
             var searchStartIndex = 0;
@@ -27,14 +27,14 @@ namespace Trellendar.Logic.CalendarSynchronization.Parsers
 
                 if (beginningIndex < 0)
                 {
-                    return default(TOutput);
+                    return GetDefaultOutput(text);
                 }
 
                 var endIndex = text.IndexOf(outputTextMarkers.Item2, beginningIndex, StringComparison.Ordinal);
 
                 if (endIndex < 0)
                 {
-                    return default(TOutput);
+                    return GetDefaultOutput(text);
                 }
 
                 searchStartIndex = beginningIndex + 1;
@@ -49,6 +49,11 @@ namespace Trellendar.Logic.CalendarSynchronization.Parsers
                     return output;
                 }
             }
+        }
+
+        protected virtual TOutput GetDefaultOutput(string text)
+        {
+            return default(TOutput);
         }
 
         protected abstract Tuple<string, string> GetOutputTextMarkers(UserPreferences userPreferences);

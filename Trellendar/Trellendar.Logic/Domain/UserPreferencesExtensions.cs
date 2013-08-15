@@ -5,6 +5,14 @@ namespace Trellendar.Logic.Domain
 {
     public static class UserPreferencesExtensions
     {
+        public static Tuple<string, string> GetListShortcutMarkers(this UserPreferences userPreferences)
+        {
+            return userPreferences != null
+                       ? Tuple.Create(userPreferences.ListShortcutBeginningMarker,
+                                      userPreferences.ListShortcutEndMarker)
+                       : null;
+        }
+
         public static Tuple<string, string> GetDueTextMarkers(this UserPreferences userPreferences)
         {
             return userPreferences != null
