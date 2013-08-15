@@ -20,6 +20,8 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
             entity.Property(x => x.CheckListEventDoneSuffix).HasMaxLength(50);
             entity.Property(x => x.DueTextBeginningMarker).HasMaxLength(10);
             entity.Property(x => x.DueTextEndMarker).HasMaxLength(10);
+            entity.Property(x => x.LocationTextBeginningMarker).HasMaxLength(10);
+            entity.Property(x => x.LocationTextEndMarker).HasMaxLength(10);
         }
     }
 }

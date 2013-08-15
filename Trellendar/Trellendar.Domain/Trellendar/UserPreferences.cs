@@ -27,5 +27,9 @@ namespace Trellendar.Domain.Trellendar
         public string DueTextBeginningMarker { get; set; }
 
         public string DueTextEndMarker { get; set; }
+
+        public string LocationTextBeginningMarker { get; set; }
+
+        public string LocationTextEndMarker { get; set; }
     }
 }

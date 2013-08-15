@@ -16,6 +16,9 @@ namespace Trellendar.Domain.Calendar
 
         [JsonProperty("end")]
         public TimeStamp End { get; set; }
+        
+        [JsonProperty("location")]
+        public string Location { get; set; }
 
         [JsonProperty("sequence")]
         public int Sequence { get; set; }
