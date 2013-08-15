@@ -63,8 +63,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.CheckListShortcutBeginningMarker = null)
-								.With(x => x.CheckListShortcutEndMarker = null)
+								.With(x => x.TrelloItemShortcutBeginningMarker = null)
+								.With(x => x.TrelloItemShortcutEndMarker = null)
 								.Build();
 
 			// Arrange, Act & Assert
@@ -89,8 +89,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
 								.With(x => x.CheckListEventDoneSuffix = doneSuffix)
-								.With(x => x.CheckListShortcutBeginningMarker = null)
-								.With(x => x.CheckListShortcutEndMarker = null)
+								.With(x => x.TrelloItemShortcutBeginningMarker = null)
+								.With(x => x.TrelloItemShortcutEndMarker = null)
 								.Build();
 
 			// Arrange, Act & Assert
@@ -115,8 +115,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.CheckListShortcutBeginningMarker = shortcutBeginningMarker)
-								.With(x => x.CheckListShortcutEndMarker = shortcutEndMarker)
+								.With(x => x.TrelloItemShortcutBeginningMarker = shortcutBeginningMarker)
+								.With(x => x.TrelloItemShortcutEndMarker = shortcutEndMarker)
 								.Build();
 
 			// Arrange, Act & Assert
@@ -142,8 +142,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.CheckListShortcutBeginningMarker = shortcutBeginningMarker)
-								.With(x => x.CheckListShortcutEndMarker = shortcutEndMarker)
+								.With(x => x.TrelloItemShortcutBeginningMarker = shortcutBeginningMarker)
+								.With(x => x.TrelloItemShortcutEndMarker = shortcutEndMarker)
 								.With(x => x.CheckListEventDoneSuffix = doneSuffix)
 								.Build();
 

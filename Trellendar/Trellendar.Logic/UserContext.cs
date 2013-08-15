@@ -33,16 +33,16 @@ namespace Trellendar.Logic
         public static Tuple<string, string> GetPrefferedListShortcutMarkers(this UserContext userContext)
         {
             return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.ListShortcutBeginningMarker,
-                                      userContext.User.UserPreferences.ListShortcutEndMarker)
+                       ? Tuple.Create(userContext.User.UserPreferences.TrelloItemShortcutBeginningMarker,
+                                      userContext.User.UserPreferences.TrelloItemShortcutEndMarker)
                        : null;
         }
 
         public static Tuple<string, string> GetPrefferedCheckListShortcutMarkers(this UserContext userContext)
         {
             return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.CheckListShortcutBeginningMarker,
-                                      userContext.User.UserPreferences.CheckListShortcutEndMarker)
+                       ? Tuple.Create(userContext.User.UserPreferences.TrelloItemShortcutBeginningMarker,
+                                      userContext.User.UserPreferences.TrelloItemShortcutEndMarker)
                        : null;
         }
 

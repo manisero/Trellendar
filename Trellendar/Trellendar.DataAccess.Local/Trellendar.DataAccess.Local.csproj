@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201308152210327_LocationTextMarkers.Designer.cs">
       <DependentUpon>201308152210327_LocationTextMarkers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308152355503_TrelloItemShortcutMarkers.cs" />
+    <Compile Include="Migrations\201308152355503_TrelloItemShortcutMarkers.Designer.cs">
+      <DependentUpon>201308152355503_TrelloItemShortcutMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308152210327_LocationTextMarkers.resx">
       <DependentUpon>201308152210327_LocationTextMarkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308152355503_TrelloItemShortcutMarkers.resx">
+      <DependentUpon>201308152355503_TrelloItemShortcutMarkers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

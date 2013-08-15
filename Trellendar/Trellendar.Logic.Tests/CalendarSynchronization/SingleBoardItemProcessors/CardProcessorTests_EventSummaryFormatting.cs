@@ -99,8 +99,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var user = Builder<User>.CreateNew()
                                     .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew()
-                                        .With(preferences => preferences.ListShortcutBeginningMarker = beginningMarker)
-                                        .With(preferences => preferences.ListShortcutEndMarker = endMarker)
+                                        .With(preferences => preferences.TrelloItemShortcutBeginningMarker = beginningMarker)
+                                        .With(preferences => preferences.TrelloItemShortcutEndMarker = endMarker)
                                         .With(preferences => preferences.CardEventNameTemplate = eventNameTemplate)
                                         .Build())
                                     .Build();
@@ -134,8 +134,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             var user = Builder<User>.CreateNew()
                                     .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew()
-                                        .With(preferences => preferences.ListShortcutBeginningMarker = beginningMarker)
-                                        .With(preferences => preferences.ListShortcutEndMarker = endMarker)
+                                        .With(preferences => preferences.TrelloItemShortcutBeginningMarker = beginningMarker)
+                                        .With(preferences => preferences.TrelloItemShortcutEndMarker = endMarker)
                                         .With(preferences => preferences.CardEventNameTemplate = eventNameTemplate)
                                         .Build())
                                     .Build();

@@ -8,8 +8,8 @@ namespace Trellendar.Logic.Domain
         public static Tuple<string, string> GetListShortcutMarkers(this UserPreferences userPreferences)
         {
             return userPreferences != null
-                       ? Tuple.Create(userPreferences.ListShortcutBeginningMarker,
-                                      userPreferences.ListShortcutEndMarker)
+                       ? Tuple.Create(userPreferences.TrelloItemShortcutBeginningMarker,
+                                      userPreferences.TrelloItemShortcutEndMarker)
                        : null;
         }
 
