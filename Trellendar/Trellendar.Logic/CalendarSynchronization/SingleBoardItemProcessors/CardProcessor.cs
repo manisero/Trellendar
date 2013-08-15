@@ -39,7 +39,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
             else
             {
-                var due = _dueParser.Parse(item.Desc);
+                var due = _dueParser.Parse(item.Desc, _userContext.GetUserPreferences());
 
                 if (due == null)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Trellendar.Domain.Trellendar;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic
 {
@@ -23,6 +24,11 @@ namespace Trellendar.Logic
         public static bool HasUserPreferences(this UserContext userContext)
         {
             return userContext.IsFilled() && userContext.User.UserPreferences != null;
+        }
+
+        public static UserPreferences GetUserPreferences(this UserContext userContext)
+        {
+            return userContext.HasUserPreferences() ? userContext.User.UserPreferences : null;
         }
 
         public static Tuple<string, string> GetPrefferedListShortcutMarkers(this UserContext userContext)
@@ -72,8 +78,7 @@ namespace Trellendar.Logic
         public static Tuple<string, string> GetPrefferedDueTextMarkers(this UserContext userContext)
         {
             return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.DueTextBeginningMarker,
-                                      userContext.User.UserPreferences.DueTextEndMarker)
+                       ? userContext.User.UserPreferences.GetDueTextMarkers()
                        : null;
         }
     }

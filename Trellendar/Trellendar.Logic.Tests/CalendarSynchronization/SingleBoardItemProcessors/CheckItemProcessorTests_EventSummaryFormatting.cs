@@ -157,7 +157,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			MockUserContext(preferences);
 
-			AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name)).Returns(due);
+			AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
 			MockTimeFrameCreation_WholeDay(due.DueDateTime);
 
 			// Act

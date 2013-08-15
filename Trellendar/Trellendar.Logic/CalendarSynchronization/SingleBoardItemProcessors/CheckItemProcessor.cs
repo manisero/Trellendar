@@ -25,7 +25,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
         public Event Process(CheckItem item, string parentName)
         {
-            var due = _dueParser.Parse(item.Name);
+            var due = _dueParser.Parse(item.Name, _userContext.GetUserPreferences());
 
             if (due == null)
             {

@@ -65,6 +65,7 @@
     <Compile Include="CalendarSynchronization\Parsers\DueParser.cs" />
     <Compile Include="Domain\CheckItemExtensions.cs" />
     <Compile Include="Domain\Location.cs" />
+    <Compile Include="Domain\UserPreferencesExtensions.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileSynchronizaionSettingsProvider.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\EventTimeFrameCreator.cs" />

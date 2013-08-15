@@ -23,7 +23,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var end = Builder<TimeStamp>.CreateNew().Build();
 
             MockUserContext(user);
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name)).Returns(due);
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, user.UserPreferences)).Returns(due);
             MockTimeFrameCreation_FromLocal(due.DueDateTime, user, start, end);
 
             // Act
@@ -45,7 +45,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var start = Builder<TimeStamp>.CreateNew().Build();
             var end = Builder<TimeStamp>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name)).Returns(due);
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
             MockTimeFrameCreation_WholeDay(due.DueDateTime, start, end);
 
             // Act

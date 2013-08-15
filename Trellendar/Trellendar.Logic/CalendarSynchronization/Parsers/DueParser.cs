@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.Parsers
@@ -8,21 +9,14 @@ namespace Trellendar.Logic.CalendarSynchronization.Parsers
     {
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
-        private readonly UserContext _userContext;
-
-        public DueParser(UserContext userContext)
-        {
-            _userContext = userContext;
-        }
-
-        public Due Parse(string text)
+        public Due Parse(string text, UserPreferences userPreferences)
         {
             if (text == null)
             {
                 return null;
             }
 
-            var dueTextMarkers = _userContext.GetPrefferedDueTextMarkers();
+            var dueTextMarkers = userPreferences.GetDueTextMarkers();
 
             if (dueTextMarkers == null || dueTextMarkers.Item1 == null || dueTextMarkers.Item2 == null)
             {
