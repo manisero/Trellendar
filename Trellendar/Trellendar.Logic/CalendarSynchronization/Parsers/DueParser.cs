@@ -1,9 +1,10 @@
 using System;
 using System.Globalization;
+using Trellendar.Logic.Domain;
 
-namespace Trellendar.Logic.CalendarSynchronization._Impl
+namespace Trellendar.Logic.CalendarSynchronization.Parsers
 {
-    public class DueParser : IDueParser
+    public class DueParser : IParser<Due>
     {
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
@@ -14,9 +15,9 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             _userContext = userContext;
         }
 
-        public Due Parse(string textWithDue)
+        public Due Parse(string text)
         {
-            if (textWithDue == null)
+            if (text == null)
             {
                 return null;
             }
@@ -32,14 +33,14 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
             while (true)
             {
-                var beginningIndex = textWithDue.IndexOf(dueTextMarkers.Item1, searchStartIndex, StringComparison.Ordinal);
+                var beginningIndex = text.IndexOf(dueTextMarkers.Item1, searchStartIndex, StringComparison.Ordinal);
 
                 if (beginningIndex < 0)
                 {
                     return null;
                 }
 
-                var endIndex = textWithDue.IndexOf(dueTextMarkers.Item2, beginningIndex, StringComparison.Ordinal);
+                var endIndex = text.IndexOf(dueTextMarkers.Item2, beginningIndex, StringComparison.Ordinal);
 
                 if (endIndex < 0)
                 {
@@ -48,7 +49,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
                 searchStartIndex = beginningIndex + 1;
 
-                var dueText = textWithDue.Substring(beginningIndex + dueTextMarkers.Item1.Length,
+                var dueText = text.Substring(beginningIndex + dueTextMarkers.Item1.Length,
                                                     endIndex - beginningIndex - dueTextMarkers.Item1.Length);
 
                 DateTime due;

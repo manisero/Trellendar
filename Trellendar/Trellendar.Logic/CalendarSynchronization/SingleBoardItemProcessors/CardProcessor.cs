@@ -10,9 +10,9 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     {
         private readonly UserContext _userContext;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly IDueParser _dueParser;
+        private readonly IParser<Due> _dueParser;
 
-        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator, IDueParser dueParser)
+        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator, IParser<Due> dueParser)
         {
             _userContext = userContext;
             _eventTimeFrameCreator = eventTimeFrameCreator;

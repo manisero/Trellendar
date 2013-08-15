@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Due.cs" />
     <Compile Include="CalendarSynchronization\IDueParser.cs" />
+    <Compile Include="CalendarSynchronization\Parsers\LocationParser.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessor.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorBase.cs" />
     <Compile Include="CalendarSynchronization\_Impl\BoardItemsProcessor.cs" />
@@ -60,8 +62,9 @@
     <Compile Include="CalendarSynchronization\ICalendarService.cs" />
     <Compile Include="CalendarSynchronization\IBoardItemsProcessor.cs" />
     <Compile Include="CalendarSynchronization\ISingleBoardItemProcessor.cs" />
-    <Compile Include="CalendarSynchronization\_Impl\DueParser.cs" />
+    <Compile Include="CalendarSynchronization\Parsers\DueParser.cs" />
     <Compile Include="Domain\CheckItemExtensions.cs" />
+    <Compile Include="Domain\Location.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileSynchronizaionSettingsProvider.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileService.cs" />
     <Compile Include="CalendarSynchronization\_Impl\EventTimeFrameCreator.cs" />

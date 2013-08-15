@@ -4,6 +4,7 @@ using Trellendar.Core.DependencyResolution;
 using Trellendar.Domain.Trello;
 using Trellendar.Core.Extensions;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -19,10 +20,10 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
 
             _processors[typeof(Card)] = () => new CardProcessor(_dependencyResolver.Resolve<UserContext>(),
                                                                 _dependencyResolver.Resolve<IEventTimeFrameCreator>(),
-                                                                _dependencyResolver.Resolve<IDueParser>());
+                                                                _dependencyResolver.Resolve<IParser<Due>>());
 
             _processors[typeof(CheckItem)] = () => new CheckItemProcessor(_dependencyResolver.Resolve<UserContext>(),
-                                                                          _dependencyResolver.Resolve<IDueParser>(),
+                                                                          _dependencyResolver.Resolve<IParser<Due>>(),
                                                                           _dependencyResolver.Resolve<IEventTimeFrameCreator>());
         }
 

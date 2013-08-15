@@ -8,10 +8,10 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     public class CheckItemProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<CheckItem>
     {
         private readonly UserContext _userContext;
-        private readonly IDueParser _dueParser;
+        private readonly IParser<Due> _dueParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
 
-        public CheckItemProcessor(UserContext userContext, IDueParser dueParser, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CheckItemProcessor(UserContext userContext, IParser<Due> dueParser, IEventTimeFrameCreator eventTimeFrameCreator)
         {
             _userContext = userContext;
             _dueParser = dueParser;

@@ -17,7 +17,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
 
-            AutoMoqer.GetMock<IDueParser>().Setup(x => x.Parse(checkItem.Name)).Returns(due);
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name)).Returns(due);
             MockTimeFrameCreation_WholeDay(due.DueDateTime);
 
             // Act

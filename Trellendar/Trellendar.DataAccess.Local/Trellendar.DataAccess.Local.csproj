@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201308041727248_CheckListShortcutMarkers.Designer.cs">
       <DependentUpon>201308041727248_CheckListShortcutMarkers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308152210327_LocationTextMarkers.cs" />
+    <Compile Include="Migrations\201308152210327_LocationTextMarkers.Designer.cs">
+      <DependentUpon>201308152210327_LocationTextMarkers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308041727248_CheckListShortcutMarkers.resx">
       <DependentUpon>201308041727248_CheckListShortcutMarkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308152210327_LocationTextMarkers.resx">
+      <DependentUpon>201308152210327_LocationTextMarkers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

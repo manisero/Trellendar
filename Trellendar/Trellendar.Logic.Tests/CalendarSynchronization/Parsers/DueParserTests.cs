@@ -2,9 +2,9 @@
 using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.CalendarSynchronization._Impl;
+using Trellendar.Logic.CalendarSynchronization.Parsers;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization
+namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
 {
     [TestFixture]
     public class DueParserTests : TestsBase
