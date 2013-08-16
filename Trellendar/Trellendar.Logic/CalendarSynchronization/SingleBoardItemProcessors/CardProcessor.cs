@@ -1,6 +1,7 @@
 ﻿using System;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
 
@@ -13,15 +14,17 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
+        private readonly ICardEventDescriptionFormatter _eventDescriptionFormatter;
 
-        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser,
-                             IParser<Location> locationParser, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IParser<Location> locationParser,
+                             IEventTimeFrameCreator eventTimeFrameCreator, ICardEventDescriptionFormatter eventDescriptionFormatter)
         {
             _userContext = userContext;
             _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
+            _eventDescriptionFormatter = eventDescriptionFormatter;
         }
 
         public string GetItemID(Card item)
@@ -57,6 +60,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
 
             var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
+            var description = _eventDescriptionFormatter.Format(item);
 
             return new Event
                 {
@@ -64,7 +68,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
-                    Description = item.Description,
+                    Description = description,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }

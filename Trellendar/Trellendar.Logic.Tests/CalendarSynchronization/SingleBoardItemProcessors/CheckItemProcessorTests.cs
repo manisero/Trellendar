@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
+using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
 using Trellendar.Logic.Domain;
 
@@ -32,6 +33,27 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
             Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));
             Assert.AreEqual(checkItem.Id, properties[EventExtensions.SOURCE_ID_PROPERTY_KEY]);
+        }
+
+        [Test]
+        public void sets_event_description_properly()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var descritpion = "descritpion";
+            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
+            
+            AutoMoqer.GetMock<ICheckItemEventDescriptionFormatter>().Setup(x => x.Format(checkItem)).Returns(descritpion);
+
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
+            MockTimeFrameCreation_WholeDay(due.DueDateTime);
+
+            // Act
+            var result = TestProcess(checkItem, "not important", null);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(descritpion, result.Description);
         }
 
         protected override object GetExptectedItemKey(CheckItem item)

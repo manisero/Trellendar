@@ -1,6 +1,7 @@
 ﻿using Trellendar.Core.Extensions;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
@@ -12,15 +13,17 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
+        private readonly ICheckItemEventDescriptionFormatter _eventDescriptionFormatter;
 
-        public CheckItemProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser,
-                                  IParser<Location> locationParser, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CheckItemProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IParser<Location> locationParser,
+                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemEventDescriptionFormatter eventDescriptionFormatter)
         {
             _userContext = userContext;
             _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
+            _eventDescriptionFormatter = eventDescriptionFormatter;
         }
 
         public string GetItemID(CheckItem item)
@@ -42,6 +45,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
 
             var location = _locationParser.Parse(item.Name, _userContext.GetUserPreferences());
+            var description = _eventDescriptionFormatter.Format(item);
 
             return new Event
                 {
@@ -49,6 +53,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
+                    Description = description,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }
