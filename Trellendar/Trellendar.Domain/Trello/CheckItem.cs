@@ -8,7 +8,7 @@ namespace Trellendar.Domain.Trello
         public string Id { get; set; }
 
         [JsonIgnore]
-        public Card Card { get; set; }
+        public CheckList CheckList { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

@@ -74,8 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSynchronization\Formatters\CardEventDescriptionFormatterTests.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\CardEventSummaryFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CardDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CardSummaryFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CheckItemDescriptionFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParserTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\DueParserTests.cs" />
     <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests.cs" />

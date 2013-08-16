@@ -9,7 +9,7 @@ using Trellendar.Logic.Domain;
 namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
 {
     [TestFixture]
-    public class CardEventSummaryFormatterTests : TestsBase
+    public class CardSummaryFormatterTests : TestsBase
     {
         [Test]
         [Sequential]
@@ -95,7 +95,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
             }
 
             // Act
-            var result = AutoMoqer.Resolve<CardEventSummaryFormatter>().Format(card, preferences);
+            var result = AutoMoqer.Resolve<CardSummaryFormatter>().Format(card, preferences);
 
             // Assert
             Assert.AreEqual(expectedSummary, result);

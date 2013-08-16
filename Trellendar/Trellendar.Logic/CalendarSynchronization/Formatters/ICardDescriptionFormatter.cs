@@ -2,8 +2,8 @@
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters
 {
-    public interface ICheckItemEventDescriptionFormatter
+    public interface ICardDescriptionFormatter
     {
-        string Format(CheckItem checkItem);
+        string Format(Card card);
     }
 }

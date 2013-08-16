@@ -6,7 +6,7 @@ using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
 namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
 {
     [TestFixture]
-    public class CardEventDescriptionFormatterTests : TestsBase
+    public class CardDescriptionFormatterTests : TestsBase
     {
         [Test]
         public void appends_card_url(
@@ -21,7 +21,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
                                     .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<CardEventDescriptionFormatter>().Format(card);
+            var result = AutoMoqer.Resolve<CardDescriptionFormatter>().Format(card);
 
             // Assert
             Assert.AreEqual(expectedDescription, result);

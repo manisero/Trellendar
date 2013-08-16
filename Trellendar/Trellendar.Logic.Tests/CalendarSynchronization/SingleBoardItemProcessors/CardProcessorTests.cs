@@ -32,7 +32,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var summary = "summary";
 
-            AutoMoqer.GetMock<ICardEventSummaryFormatter>().Setup(x => x.Format(card, preferences)).Returns(summary);
+            AutoMoqer.GetMock<ICardSummaryFormatter>().Setup(x => x.Format(card, preferences)).Returns(summary);
 
             MockTimeFrameCreation_FromUTC(card.Due.Value, null);
 
@@ -51,7 +51,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var card = Builder<Card>.CreateNew().Build();
             var description = "description";
 
-            AutoMoqer.GetMock<ICardEventDescriptionFormatter>().Setup(x => x.Format(card)).Returns(description);
+            AutoMoqer.GetMock<ICardDescriptionFormatter>().Setup(x => x.Format(card)).Returns(description);
 
             MockTimeFrameCreation_FromUTC(card.Due.Value, null);
 

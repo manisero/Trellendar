@@ -1,5 +1,6 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
@@ -40,16 +41,18 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var preferences = Builder<UserPreferences>.CreateNew().Build();
             var descritpion = "descritpion";
+
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
             
-            AutoMoqer.GetMock<ICheckItemEventDescriptionFormatter>().Setup(x => x.Format(checkItem)).Returns(descritpion);
+            AutoMoqer.GetMock<ICheckItemDescriptionFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(descritpion);
 
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
             MockTimeFrameCreation_WholeDay(due.DueDateTime);
 
             // Act
-            var result = TestProcess(checkItem, "not important", null);
+            var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);

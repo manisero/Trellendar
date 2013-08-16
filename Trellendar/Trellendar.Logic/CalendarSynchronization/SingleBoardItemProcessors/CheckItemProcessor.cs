@@ -13,17 +13,17 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly ICheckItemEventDescriptionFormatter _eventDescriptionFormatter;
+        private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
 
         public CheckItemProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IParser<Location> locationParser,
-                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemEventDescriptionFormatter eventDescriptionFormatter)
+                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemDescriptionFormatter descriptionFormatter)
         {
             _userContext = userContext;
             _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
-            _eventDescriptionFormatter = eventDescriptionFormatter;
+            _descriptionFormatter = descriptionFormatter;
         }
 
         public string GetItemID(CheckItem item)
@@ -45,7 +45,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
 
             var location = _locationParser.Parse(item.Name, _userContext.GetUserPreferences());
-            var description = _eventDescriptionFormatter.Format(item);
+            var description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences());
 
             return new Event
                 {

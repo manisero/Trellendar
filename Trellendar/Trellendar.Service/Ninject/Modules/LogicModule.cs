@@ -35,9 +35,9 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IParser<Location>>().To<LocationParser>();
 
             // Calendar Synchronization > Formatters
-            Bind<ICardEventSummaryFormatter>().To<CardEventSummaryFormatter>();
-            Bind<ICardEventDescriptionFormatter>().To<CardEventDescriptionFormatter>();
-            Bind<ICheckItemEventDescriptionFormatter>().To<CheckItemEventDescriptionFormatter>();
+            Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
+            Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
+            Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
 
             // User Profile Synchronization
             Bind<IUserProfileService>().To<UserProfileService>();

@@ -5,11 +5,11 @@ using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
 {
-    public class CardEventSummaryFormatter : ICardEventSummaryFormatter
+    public class CardSummaryFormatter : ICardSummaryFormatter
     {
         private readonly IParser<BoardItemName> _listNameParser;
 
-        public CardEventSummaryFormatter(IParser<BoardItemName> listNameParser)
+        public CardSummaryFormatter(IParser<BoardItemName> listNameParser)
         {
             _listNameParser = listNameParser;
         }

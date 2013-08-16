@@ -9,21 +9,21 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly ICardEventSummaryFormatter _eventSummaryFormatter;
+        private readonly ICardSummaryFormatter _summaryFormatter;
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly ICardEventDescriptionFormatter _eventDescriptionFormatter;
+        private readonly ICardDescriptionFormatter _descriptionFormatter;
 
-        public CardProcessor(UserContext userContext, ICardEventSummaryFormatter eventSummaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
-                             IEventTimeFrameCreator eventTimeFrameCreator, ICardEventDescriptionFormatter eventDescriptionFormatter)
+        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
+                             IEventTimeFrameCreator eventTimeFrameCreator, ICardDescriptionFormatter descriptionFormatter)
         {
             _userContext = userContext;
-            _eventSummaryFormatter = eventSummaryFormatter;
+            _summaryFormatter = summaryFormatter;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
-            _eventDescriptionFormatter = eventDescriptionFormatter;
+            _descriptionFormatter = descriptionFormatter;
         }
 
         public string GetItemID(Card item)
@@ -58,9 +58,9 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 
-            var summary = _eventSummaryFormatter.Format(item, _userContext.GetUserPreferences());
+            var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
             var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
-            var description = _eventDescriptionFormatter.Format(item);
+            var description = _descriptionFormatter.Format(item);
 
             return new Event
                 {
