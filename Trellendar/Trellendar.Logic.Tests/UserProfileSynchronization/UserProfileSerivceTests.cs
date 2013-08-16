@@ -56,7 +56,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                      .Returns(configurationCard.Name);
 
             AutoMoqer.GetMock<IJsonSerializer>()
-                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Desc))
+                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Description))
                      .Returns(newPreferences);
 
             AutoMoqer.GetMock<IRepositoryFactory>()
@@ -148,7 +148,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                      .Returns(configurationCard.Name);
 
             AutoMoqer.GetMock<IJsonSerializer>()
-                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Desc))
+                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Description))
                      .Returns((UserPreferences)null);
 
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());

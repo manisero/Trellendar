@@ -91,7 +91,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             if (parsedDue != null)
             {
                 AutoMoqer.GetMock<IParser<Due>>()
-                         .Setup(x => x.Parse(card.Desc, user != null ? user.UserPreferences : null))
+                         .Setup(x => x.Parse(card.Description, user != null ? user.UserPreferences : null))
                          .Returns(parsedDue);
             }
 

@@ -46,7 +46,7 @@ namespace Trellendar.Logic.UserProfileSynchronization._Impl
                 return;
             }
 
-            var preferences = _jsonSerializer.Deserialize<UserPreferences>(configurationCard.Desc);
+            var preferences = _jsonSerializer.Deserialize<UserPreferences>(configurationCard.Description);
 
             if (preferences == null)
             {

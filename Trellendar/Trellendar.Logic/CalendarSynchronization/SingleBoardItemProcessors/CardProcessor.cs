@@ -44,7 +44,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
             else
             {
-                var due = _dueParser.Parse(item.Desc, _userContext.GetUserPreferences());
+                var due = _dueParser.Parse(item.Description, _userContext.GetUserPreferences());
 
                 if (due == null)
                 {
@@ -56,7 +56,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 
-            var location = _locationParser.Parse(item.Desc, _userContext.GetUserPreferences());
+            var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
 
             return new Event
                 {
@@ -64,7 +64,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
-                    Description = item.Desc,
+                    Description = item.Description,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }

@@ -18,7 +18,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var expectedLocation = "location";
 
             AutoMoqer.GetMock<IParser<Location>>()
-                     .Setup(x => x.Parse(card.Desc, user.UserPreferences))
+                     .Setup(x => x.Parse(card.Description, user.UserPreferences))
                      .Returns(new Location { Value = expectedLocation });
 
             MockTimeFrameCreation_FromUTC(card.Due.Value, user);
@@ -39,7 +39,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var user = Builder<User>.CreateNew().With(x => x.UserPreferences = new UserPreferences()).Build();
 
             AutoMoqer.GetMock<IParser<Location>>()
-                     .Setup(x => x.Parse(card.Desc, user.UserPreferences))
+                     .Setup(x => x.Parse(card.Description, user.UserPreferences))
                      .Returns((Location)null);
 
             MockTimeFrameCreation_FromUTC(card.Due.Value, user);

@@ -35,7 +35,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(card.Desc, result.Description);
+            Assert.AreEqual(card.Description, result.Description);
         }
 
         [Test]
