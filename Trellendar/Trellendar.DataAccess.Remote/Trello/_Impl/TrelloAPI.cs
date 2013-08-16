@@ -3,6 +3,7 @@ using Trellendar.Core.Extensions;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain;
 using Trellendar.Domain.Trello;
+using Trellendar.Domain.Trello.Extensions;
 
 namespace Trellendar.DataAccess.Remote.Trello._Impl
 {
@@ -37,7 +38,7 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
                                                      { "checklist_fields", "name,idCard" }
                                                  });
 
-            return _jsonSerializer.Deserialize<Board>(boardJson);
+            return _jsonSerializer.Deserialize<Board>(boardJson).SetChildParentRelations();
         }
     }
 }
