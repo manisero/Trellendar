@@ -2,7 +2,7 @@ using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
+namespace Trellendar.Logic.CalendarSynchronization.Formatting.Formatters
 {
     public class CardDescriptionFormatter : IDescriptionFormatter<Card>
     {

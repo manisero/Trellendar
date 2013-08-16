@@ -1,6 +1,6 @@
 ﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatters;
+using Trellendar.Logic.CalendarSynchronization.Formatting;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {

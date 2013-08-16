@@ -4,7 +4,7 @@ using Trellendar.Domain.Trello;
 using Trellendar.Core.Extensions;
 using System.Linq;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
+namespace Trellendar.Logic.CalendarSynchronization.Formatting.Formatters
 {
     public class CheckItemDescriptionFormatter : IDescriptionFormatter<CheckItem>
     {

@@ -3,26 +3,25 @@ using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
-using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
+using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
 using Trellendar.Logic.Domain;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
+namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
 {
-    [TestFixture]
-    public class CardLocationFormatterTests : TestsBase
+    public class CheckItemLocationFormatterTests : TestsBase
     {
         [Test]
         public void returns_parsed_location()
         {
             // Arrange
-            var card = Builder<Card>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
             var userPreferences = Builder<UserPreferences>.CreateNew().Build();
             var location = Builder<Location>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, userPreferences)).Returns(location);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, userPreferences)).Returns(location);
 
             // Acr
-            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, userPreferences);
+            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, userPreferences);
 
             // Assert
             Assert.IsNotNull(result);
@@ -33,13 +32,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
         public void returns_null_for_null_location()
         {
             // Arrange
-            var card = Builder<Card>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
             var userPreferences = Builder<UserPreferences>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, userPreferences)).Returns((Location)null);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, userPreferences)).Returns((Location)null);
 
             // Acr
-            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, userPreferences);
+            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, userPreferences);
 
             // Assert
             Assert.IsNull(result);

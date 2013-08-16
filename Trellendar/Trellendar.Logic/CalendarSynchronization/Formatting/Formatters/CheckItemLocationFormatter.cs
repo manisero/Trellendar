@@ -2,7 +2,7 @@
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
+namespace Trellendar.Logic.CalendarSynchronization.Formatting.Formatters
 {
     public class CheckItemLocationFormatter : ILocationFormatter<CheckItem>
     {

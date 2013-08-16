@@ -3,7 +3,7 @@ using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
+namespace Trellendar.Logic.CalendarSynchronization.Formatting.Formatters
 {
     public class CheckItemSummaryFormatter : ISummaryFormatter<CheckItem>
     {

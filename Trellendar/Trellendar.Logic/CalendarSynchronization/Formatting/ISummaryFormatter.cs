@@ -1,6 +1,6 @@
 ﻿using Trellendar.Domain.Trellendar;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters
+namespace Trellendar.Logic.CalendarSynchronization.Formatting
 {
     public interface ISummaryFormatter<TEntity>
     {

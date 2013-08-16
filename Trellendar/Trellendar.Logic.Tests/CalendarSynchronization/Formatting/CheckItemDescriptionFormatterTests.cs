@@ -2,10 +2,10 @@
 using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
+using Trellendar.Logic.CalendarSynchronization.Formatting;
+using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
+namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
 {
     [TestFixture]
     public class CheckItemDescriptionFormatterTests : TestsBase

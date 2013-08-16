@@ -2,7 +2,7 @@
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 
-namespace Trellendar.Logic.CalendarSynchronization.Formatters
+namespace Trellendar.Logic.CalendarSynchronization.Formatting
 {
     public interface ITimeFrameFormatter<TEntity>
     {
