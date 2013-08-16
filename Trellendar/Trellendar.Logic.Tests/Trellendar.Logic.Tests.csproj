@@ -75,8 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalendarSynchronization\Formatters\CardDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CardExtendedPropertiesFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CardSummaryFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CheckItemDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CheckItemExtendedPropertiesFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CheckItemSummaryFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParserTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\DueParserTests.cs" />

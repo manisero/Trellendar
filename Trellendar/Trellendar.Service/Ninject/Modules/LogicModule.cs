@@ -37,6 +37,8 @@ namespace Trellendar.Service.Ninject.Modules
             // Calendar Synchronization > Formatters
             Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
             Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
+            Bind<ICardExtendedPropertiesFormatter>().To<CardExtendedPropertiesFormatter>();
+            Bind<ICheckItemSummaryFormatter>().To<CheckItemSummaryFormatter>();
             Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
 
             // User Profile Synchronization

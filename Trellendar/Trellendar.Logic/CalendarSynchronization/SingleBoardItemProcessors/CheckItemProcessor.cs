@@ -1,5 +1,4 @@
-﻿using Trellendar.Core.Extensions;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
@@ -14,9 +13,11 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
         private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
+        private readonly ICheckItemExtendedPropertiesFormatter _extendedPropertiesFormatter;
 
         public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
-                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemDescriptionFormatter descriptionFormatter)
+                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemDescriptionFormatter descriptionFormatter,
+                                  ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
@@ -24,6 +25,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
             _descriptionFormatter = descriptionFormatter;
+            _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
 
         public string GetItemID(CheckItem item)
@@ -55,7 +57,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
                     Description = description,
-                    ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
+                    ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }
     }

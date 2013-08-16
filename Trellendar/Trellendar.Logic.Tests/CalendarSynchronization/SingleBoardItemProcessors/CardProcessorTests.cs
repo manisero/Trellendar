@@ -1,10 +1,10 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
@@ -68,7 +68,9 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
+            var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
 
+            AutoMoqer.GetMock<ICardExtendedPropertiesFormatter>().Setup(x => x.Format(card)).Returns(extendedProperties);
             MockTimeFrameCreation_FromUTC(card.Due.Value, null);
 
             // Act
@@ -76,13 +78,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ExtendedProperties);
-
-            var properties = result.ExtendedProperties.Private;
-            Assert.IsNotNull(properties);
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));
-            Assert.AreEqual(card.Id, properties[EventExtensions.SOURCE_ID_PROPERTY_KEY]);
+            Assert.AreSame(extendedProperties, result.ExtendedProperties);
         }
 
         protected override object GetExptectedItemKey(Card item)

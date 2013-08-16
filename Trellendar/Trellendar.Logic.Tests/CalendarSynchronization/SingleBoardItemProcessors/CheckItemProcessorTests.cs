@@ -1,5 +1,6 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
@@ -64,6 +65,9 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
+            var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
+
+            AutoMoqer.GetMock<ICheckItemExtendedPropertiesFormatter>().Setup(x => x.Format(checkItem)).Returns(extendedProperties);
 
             AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
             MockTimeFrameCreation_WholeDay(due.DueDateTime);
@@ -73,13 +77,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ExtendedProperties);
-
-            var properties = result.ExtendedProperties.Private;
-            Assert.IsNotNull(properties);
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));
-            Assert.AreEqual(checkItem.Id, properties[EventExtensions.SOURCE_ID_PROPERTY_KEY]);
+            Assert.AreSame(extendedProperties, result.ExtendedProperties);
         }
 
         protected override object GetExptectedItemKey(CheckItem item)
