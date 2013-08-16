@@ -65,7 +65,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
 
             return eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(FormatParentName(listName, _userContext.GetPrefferedListShortcutMarkers()), cardName)
+                       ? eventNameTemplate.FormatWith(FormatParentName(listName, _userContext.GetPrefferedBoardItemShortcutMarkers()), cardName)
                        : cardName;
         }
     }

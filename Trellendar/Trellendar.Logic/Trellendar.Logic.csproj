@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSynchronization\Parsers\ListNameParser.cs" />
+    <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\ParserBase.cs" />
     <Compile Include="Domain\Due.cs" />
     <Compile Include="CalendarSynchronization\IDueParser.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="CalendarSynchronization\ISingleBoardItemProcessor.cs" />
     <Compile Include="CalendarSynchronization\Parsers\DueParser.cs" />
     <Compile Include="Domain\CheckItemExtensions.cs" />
-    <Compile Include="Domain\ListName.cs" />
+    <Compile Include="Domain\BoardItemName.cs" />
     <Compile Include="Domain\Location.cs" />
     <Compile Include="Domain\UserPreferencesExtensions.cs" />
     <Compile Include="UserProfileSynchronization\IUserProfileSynchronizaionSettingsProvider.cs" />

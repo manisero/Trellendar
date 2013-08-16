@@ -5,7 +5,7 @@ namespace Trellendar.Logic.Domain
 {
     public static class UserPreferencesExtensions
     {
-        public static Tuple<string, string> GetListShortcutMarkers(this UserPreferences userPreferences)
+        public static Tuple<string, string> GetBoardItemShortcutMarkers(this UserPreferences userPreferences)
         {
             return userPreferences != null
                        ? Tuple.Create(userPreferences.TrelloItemShortcutBeginningMarker,
