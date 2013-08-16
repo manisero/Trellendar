@@ -14,7 +14,7 @@ namespace Trellendar.Domain.Trello
         [JsonIgnore]
         public Card Card { get; set; }
 
-        [JsonProperty("idName")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("checkItems")]
