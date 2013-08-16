@@ -14,10 +14,36 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
     public class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
     {
         [Test]
+        public void returns_null_for_closed_card()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                              .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                                  .With(checkList => checkList.Card = Builder<Card>.CreateNew()
+                                                      .With(card => card.Closed = true)
+                                                      .Build())
+                                                  .Build())
+                                              .Build();
+
+            var user = Builder<User>.CreateNew().Build();
+
+            // Act
+            var result = TestProcess(checkItem, user);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [Test]
         public void returns_null_for_null_time_frame()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var user = Builder<User>.CreateNew().Build();
 
             AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
@@ -33,7 +59,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         public void sets_event_start_and_end()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var user = Builder<User>.CreateNew().Build();
             var timeFrame = new Tuple<TimeStamp, TimeStamp>(new TimeStamp(), new TimeStamp());
             
@@ -52,7 +83,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         public void sets_event_summary()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var summary = "summary";
 
@@ -71,7 +107,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         public void sets_event_location()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var location = "location";
 
@@ -90,7 +131,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         public void sets_event_description()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var descritpion = "descritpion";
 
@@ -109,7 +155,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         public void sets_event_extended_properties()
         {
             // Arrange
-            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var checkItem = Builder<CheckItem>.CreateNew()
+                                .With(x => x.CheckList = Builder<CheckList>.CreateNew()
+                                    .With(checkList => checkList.Card = Builder<Card>.CreateNew().Build())
+                                    .Build())
+                                .Build();
+
             var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
 
             AutoMoqer.GetMock<IExtendedPropertiesFormatter<CheckItem>>().Setup(x => x.Format(checkItem)).Returns(extendedProperties);

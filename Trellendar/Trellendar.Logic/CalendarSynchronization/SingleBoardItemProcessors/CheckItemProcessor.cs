@@ -32,6 +32,11 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
         public Event Process(CheckItem item)
         {
+            if (item.CheckList.Card.Closed)
+            {
+                return null;
+            }
+
             var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 
             if (timeFrame == null)
