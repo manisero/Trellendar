@@ -30,14 +30,6 @@ namespace Trellendar.Logic
             return userContext.HasUserPreferences() ? userContext.User.UserPreferences : null;
         }
 
-        public static Tuple<string, string> GetPrefferedBoardItemShortcutMarkers(this UserContext userContext)
-        {
-            return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.TrelloItemShortcutBeginningMarker,
-                                      userContext.User.UserPreferences.TrelloItemShortcutEndMarker)
-                       : null;
-        }
-
         public static string GetPrefferedCardEventNameTemplate(this UserContext userContext)
         {
             return userContext.HasUserPreferences()
