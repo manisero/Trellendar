@@ -23,6 +23,22 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         [Test]
+        public void sets_event_description_properly()
+        {
+            // Arrange
+            var card = Builder<Card>.CreateNew().Build();
+
+            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
+
+            // Act
+            var result = TestProcess(card, "not important", null);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(card.Desc, result.Description);
+        }
+
+        [Test]
         public void sets_event_extended_properties_properly()
         {
             // Arrange

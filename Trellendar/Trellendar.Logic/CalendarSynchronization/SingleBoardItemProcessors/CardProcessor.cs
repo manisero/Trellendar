@@ -64,6 +64,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
+                    Description = item.Desc,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }

@@ -95,7 +95,9 @@
       <DependentUpon>CardProcessorTests.cs</DependentUpon>
     </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests.cs" />
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventLocationSetting.cs" />
+    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventLocationSetting.cs">
+      <DependentUpon>CheckItemProcessorTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventSummaryFormatting.cs">
       <DependentUpon>CheckItemProcessorTests.cs</DependentUpon>
     </Compile>
