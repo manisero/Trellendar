@@ -1,27 +1,29 @@
 ﻿using System;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
-using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly IParser<BoardItemName> _boardItemNameParser;
+        private readonly ICardSummaryFormatter _summaryFormatter;
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
+        private readonly ICardDescriptionFormatter _descriptionFormatter;
 
-        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser,
-                             IParser<Location> locationParser, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
+                             IEventTimeFrameCreator eventTimeFrameCreator, ICardDescriptionFormatter descriptionFormatter)
         {
             _userContext = userContext;
-            _boardItemNameParser = boardItemNameParser;
+            _summaryFormatter = summaryFormatter;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
+            _descriptionFormatter = descriptionFormatter;
         }
 
         public string GetItemID(Card item)
@@ -44,7 +46,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
             else
             {
-                var due = _dueParser.Parse(item.Desc, _userContext.GetUserPreferences());
+                var due = _dueParser.Parse(item.Description, _userContext.GetUserPreferences());
 
                 if (due == null)
                 {
@@ -56,30 +58,19 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 
-            var location = _locationParser.Parse(item.Desc, _userContext.GetUserPreferences());
+            var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
+            var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
+            var description = _descriptionFormatter.Format(item);
 
             return new Event
                 {
-                    Summary = FormatEventSummary(item.Name, parentName),
+                    Summary = summary,
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
+                    Description = description,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
-        }
-
-        private string FormatEventSummary(string cardName, string listName)
-        {
-            var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
-
-            if (eventNameTemplate == null)
-            {
-                return cardName;
-            }
-
-            var parsedlistName = _boardItemNameParser.Parse(listName, _userContext.GetUserPreferences());
-
-            return eventNameTemplate.FormatWith(parsedlistName != null ? parsedlistName.Value : null, cardName);
         }
     }
 }

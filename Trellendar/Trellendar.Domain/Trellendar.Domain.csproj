@@ -56,6 +56,7 @@
     <Compile Include="Trello\Card.cs" />
     <Compile Include="Trello\CheckList.cs" />
     <Compile Include="Trello\CheckItem.cs" />
+    <Compile Include="Trello\Extensions\BoardExtensions.cs" />
     <Compile Include="Trello\List.cs" />
   </ItemGroup>
   <ItemGroup>

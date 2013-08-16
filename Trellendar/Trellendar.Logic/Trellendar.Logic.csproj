@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarSynchronization\Formatters\ICardDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ICardSummaryFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ICheckItemDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\_Impl\CardDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\_Impl\CardSummaryFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\ParserBase.cs" />
     <Compile Include="Domain\Due.cs" />
@@ -131,6 +137,7 @@
   <ItemGroup>
     <None Include="TimeZones\Resources\TimeZones.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

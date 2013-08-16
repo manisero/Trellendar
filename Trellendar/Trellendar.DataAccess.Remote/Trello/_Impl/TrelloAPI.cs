@@ -3,6 +3,7 @@ using Trellendar.Core.Extensions;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain;
 using Trellendar.Domain.Trello;
+using Trellendar.Domain.Trello.Extensions;
 
 namespace Trellendar.DataAccess.Remote.Trello._Impl
 {
@@ -32,12 +33,12 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
                                                      { "lists", "open" },
                                                      { "list_fields", "name" },
                                                      { "cards", "all" },
-                                                     { "card_fields", "closed,dateLastActivity,desc,due,idList,name" },
+                                                     { "card_fields", "closed,dateLastActivity,desc,due,idList,name,shortUrl" },
                                                      { "checklists", "all" },
                                                      { "checklist_fields", "name,idCard" }
                                                  });
 
-            return _jsonSerializer.Deserialize<Board>(boardJson);
+            return _jsonSerializer.Deserialize<Board>(boardJson).SetChildParentRelations();
         }
     }
 }

@@ -2,6 +2,8 @@
 using Trellendar.DataAccess.Remote;
 using Trellendar.Logic;
 using Trellendar.Logic.CalendarSynchronization;
+using Trellendar.Logic.CalendarSynchronization.Formatters;
+using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
 using Trellendar.Logic.CalendarSynchronization.Parsers;
 using Trellendar.Logic.CalendarSynchronization._Impl;
 using Trellendar.Logic.DataAccess;
@@ -31,6 +33,11 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IParser<BoardItemName>>().To<BoardItemNameParser>();
             Bind<IParser<Due>>().To<DueParser>();
             Bind<IParser<Location>>().To<LocationParser>();
+
+            // Calendar Synchronization > Formatters
+            Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
+            Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
+            Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
 
             // User Profile Synchronization
             Bind<IUserProfileService>().To<UserProfileService>();
