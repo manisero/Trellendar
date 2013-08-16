@@ -60,19 +60,19 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
-        protected Event TestProcess(TItem item, string parentName)
+        protected Event TestProcess(TItem item)
         {
             // Act
-            return AutoMoqer.Resolve<TProcessor>().Process(item, parentName);
+            return AutoMoqer.Resolve<TProcessor>().Process(item);
         }
 
-        protected Event TestProcess(TItem item, string parentName, User user)
+        protected Event TestProcess(TItem item, User user)
         {
             // Arrange
             AutoMoqer.SetInstance(new UserContext { User = user });
 
             // Act
-            return AutoMoqer.Resolve<TProcessor>().Process(item, parentName);
+            return AutoMoqer.Resolve<TProcessor>().Process(item);
         }
     }
 }

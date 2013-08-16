@@ -23,7 +23,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
 
             // Act
-            var result = TestProcess(checkItem, "not important", user);
+            var result = TestProcess(checkItem, user);
 
             // Assert
             Assert.IsNull(result);
@@ -40,7 +40,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns(timeFrame);
 
             // Act
-            var result = TestProcess(checkItem, "not important", user);
+            var result = TestProcess(checkItem, user);
 
             // Assert
             Assert.IsNotNull(result);
@@ -60,7 +60,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
+            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);
@@ -79,7 +79,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
+            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);
@@ -97,7 +97,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, "not important", null);
+            var result = TestProcess(checkItem, null);
 
             // Assert
             Assert.IsNotNull(result);

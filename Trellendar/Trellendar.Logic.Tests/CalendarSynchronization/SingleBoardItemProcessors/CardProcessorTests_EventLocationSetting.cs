@@ -24,7 +24,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, "not important", user);
+            var result = TestProcess(card, user);
 
             // Assert
             Assert.NotNull(result);
@@ -45,7 +45,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, "not important", user);
+            var result = TestProcess(card, user);
 
             // Assert
             Assert.NotNull(result);

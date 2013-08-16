@@ -25,7 +25,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
             _calendarApi = calendarApi;
         }
 
-        public void Process<TItem>(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> events)
+        public void Process<TItem>(IEnumerable<TItem> items, IEnumerable<Event> events)
         {
             var itemProcessor = _singleBoardItemProcessorFactory.Create<TItem>();
 
@@ -34,7 +34,7 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
                 var itemId = itemProcessor.GetItemID(item);
                 var existingEvent = events.SingleOrDefault(x => x.GetSourceID() == itemId);
 
-                var newEvent = itemProcessor.Process(item, itemParentName);
+                var newEvent = itemProcessor.Process(item);
 
                 if (newEvent == null)
                 {

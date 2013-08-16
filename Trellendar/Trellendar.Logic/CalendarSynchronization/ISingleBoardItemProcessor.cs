@@ -6,6 +6,6 @@ namespace Trellendar.Logic.CalendarSynchronization
     {
         string GetItemID(TItem item);
 
-        Event Process(TItem item, string parentName);
+        Event Process(TItem item);
     }
 }

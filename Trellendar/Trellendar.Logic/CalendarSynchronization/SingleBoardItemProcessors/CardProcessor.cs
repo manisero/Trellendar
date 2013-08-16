@@ -31,7 +31,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             return item.Id;
         }
 
-        public Event Process(Card item, string parentName)
+        public Event Process(Card item)
         {
             if (item.Closed)
             {

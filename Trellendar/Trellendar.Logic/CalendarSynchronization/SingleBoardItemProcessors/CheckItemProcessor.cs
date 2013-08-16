@@ -30,7 +30,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             return item.Id;
         }
 
-        public Event Process(CheckItem item, string parentName)
+        public Event Process(CheckItem item)
         {
             var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 

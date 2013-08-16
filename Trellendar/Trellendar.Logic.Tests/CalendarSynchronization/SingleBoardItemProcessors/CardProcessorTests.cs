@@ -20,7 +20,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var card = Builder<Card>.CreateNew().With(x => x.Closed = true).Build();
 
             // Act
-            var result = TestProcess(card, "not important");
+            var result = TestProcess(card);
 
             // Assert
             Assert.IsNull(result);
@@ -36,7 +36,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             AutoMoqer.GetMock<ICardTimeFrameFormatter>().Setup(x => x.Format(card, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
 
             // Act
-            var result = TestProcess(card, "not important");
+            var result = TestProcess(card);
 
             // Assert
             Assert.IsNull(result);
@@ -53,7 +53,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             AutoMoqer.GetMock<ICardTimeFrameFormatter>().Setup(x => x.Format(card, user)).Returns(timeFrame);
 
             // Act
-            var result = TestProcess(card, "not important", user);
+            var result = TestProcess(card, user);
 
             // Assert
             Assert.IsNotNull(result);
@@ -73,7 +73,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, "not important", new User { UserPreferences = preferences });
+            var result = TestProcess(card, new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);
@@ -91,7 +91,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, "not important", null);
+            var result = TestProcess(card, null);
 
             // Assert
             Assert.IsNotNull(result);
@@ -109,7 +109,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, "not important", null);
+            var result = TestProcess(card, null);
 
             // Assert
             Assert.IsNotNull(result);
