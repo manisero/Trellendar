@@ -1,29 +1,28 @@
-﻿using System;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.Domain;
+using Trellendar.Logic.CalendarSynchronization.Formatting;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly ICardSummaryFormatter _summaryFormatter;
-        private readonly IParser<Due> _dueParser;
-        private readonly IParser<Location> _locationParser;
-        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly ICardDescriptionFormatter _descriptionFormatter;
+        private readonly ISummaryFormatter<Card> _summaryFormatter;
+        private readonly ITimeFrameFormatter<Card> _timeFrameFormatter;
+        private readonly ILocationFormatter<Card> _locationFormatter;
+        private readonly IDescriptionFormatter<Card> _descriptionFormatter;
+        private readonly IExtendedPropertiesFormatter<Card> _extendedPropertiesFormatter;
 
-        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
-                             IEventTimeFrameCreator eventTimeFrameCreator, ICardDescriptionFormatter descriptionFormatter)
+        public CardProcessor(UserContext userContext, ISummaryFormatter<Card> summaryFormatter, ITimeFrameFormatter<Card> timeFrameFormatter, 
+                             ILocationFormatter<Card> locationFormatter, IDescriptionFormatter<Card> descriptionFormatter,
+                             IExtendedPropertiesFormatter<Card> extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
-            _dueParser = dueParser;
-            _locationParser = locationParser;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
+            _timeFrameFormatter = timeFrameFormatter;
+            _locationFormatter = locationFormatter;
             _descriptionFormatter = descriptionFormatter;
+            _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
 
         public string GetItemID(Card item)
@@ -31,45 +30,28 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             return item.Id;
         }
 
-        public Event Process(Card item, string parentName)
+        public Event Process(Card item)
         {
             if (item.Closed)
             {
                 return null;
             }
 
-            Tuple<TimeStamp, TimeStamp> timeFrame;
+            var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 
-            if (item.Due != null)
+            if (timeFrame == null)
             {
-                timeFrame = _eventTimeFrameCreator.CreateFromUTC(item.Due.Value, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime());
+                return null;
             }
-            else
-            {
-                var due = _dueParser.Parse(item.Description, _userContext.GetUserPreferences());
-
-                if (due == null)
-                {
-                    return null;
-                }
-
-                timeFrame = due.HasTime
-                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime())
-                                : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
-            }
-
-            var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
-            var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
-            var description = _descriptionFormatter.Format(item);
 
             return new Event
                 {
-                    Summary = summary,
+                    Summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences()),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
-                    Location = location != null ? location.Value : null,
-                    Description = description,
-                    ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
+                    Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences()),
+                    ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }
     }

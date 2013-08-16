@@ -1,9 +1,9 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
+using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
+namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
 {
     [TestFixture]
     public class CardDescriptionFormatterTests : TestsBase
@@ -21,7 +21,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
                                     .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<CardDescriptionFormatter>().Format(card);
+            var result = AutoMoqer.Resolve<CardDescriptionFormatter>().Format(card, null);
 
             // Assert
             Assert.AreEqual(expectedDescription, result);

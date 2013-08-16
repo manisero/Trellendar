@@ -1,9 +1,10 @@
 ﻿using Ninject.Modules;
 using Trellendar.DataAccess.Remote;
+using Trellendar.Domain.Trello;
 using Trellendar.Logic;
 using Trellendar.Logic.CalendarSynchronization;
-using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.CalendarSynchronization.Formatters._Impl;
+using Trellendar.Logic.CalendarSynchronization.Formatting;
+using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
 using Trellendar.Logic.CalendarSynchronization.Parsers;
 using Trellendar.Logic.CalendarSynchronization._Impl;
 using Trellendar.Logic.DataAccess;
@@ -35,9 +36,16 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IParser<Location>>().To<LocationParser>();
 
             // Calendar Synchronization > Formatters
-            Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
-            Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
-            Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
+            Bind<ITimeFrameFormatter<Card>>().To<CardTimeFrameFormatter>();
+            Bind<ISummaryFormatter<Card>>().To<CardSummaryFormatter>();
+            Bind<ILocationFormatter<Card>>().To<CardLocationFormatter>();
+            Bind<IDescriptionFormatter<Card>>().To<CardDescriptionFormatter>();
+            Bind<IExtendedPropertiesFormatter<Card>>().To<CardExtendedPropertiesFormatter>();
+            Bind<ITimeFrameFormatter<CheckItem>>().To<CheckItemTimeFrameFormatter>();
+            Bind<ISummaryFormatter<CheckItem>>().To<CheckItemSummaryFormatter>();
+            Bind<ILocationFormatter<CheckItem>>().To<CheckItemLocationFormatter>();
+            Bind<IDescriptionFormatter<CheckItem>>().To<CheckItemDescriptionFormatter>();
+            Bind<IExtendedPropertiesFormatter<CheckItem>>().To<CheckItemExtendedPropertiesFormatter>();
 
             // User Profile Synchronization
             Bind<IUserProfileService>().To<UserProfileService>();

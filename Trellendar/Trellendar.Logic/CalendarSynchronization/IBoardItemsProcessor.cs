@@ -5,6 +5,6 @@ namespace Trellendar.Logic.CalendarSynchronization
 {
     public interface IBoardItemsProcessor
     {
-        void Process<TItem>(IEnumerable<TItem> items, string itemParentName, IEnumerable<Event> calendarEvents);
+        void Process<TItem>(IEnumerable<TItem> items, IEnumerable<Event> calendarEvents);
     }
 }

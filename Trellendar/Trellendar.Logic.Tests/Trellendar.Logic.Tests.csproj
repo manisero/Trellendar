@@ -74,9 +74,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSynchronization\Formatters\CardDescriptionFormatterTests.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\CardSummaryFormatterTests.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\CheckItemDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CardDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CardExtendedPropertiesFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CardLocationFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CardSummaryFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CardTimeFrameFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CheckItemDescriptionFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CheckItemExtendedPropertiesFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CheckItemLocationFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CheckItemSummaryFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatting\CheckItemTimeFrameFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParserTests.cs" />
     <Compile Include="CalendarSynchronization\Parsers\DueParserTests.cs" />
     <Compile Include="CalendarSynchronization\EventTimeFrameCreatorTests.cs" />
@@ -88,22 +95,7 @@
     </Compile>
     <Compile Include="CalendarSynchronization\Parsers\LocationParserTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests.cs" />
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventLocationSetting.cs">
-      <DependentUpon>CardProcessorTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventTimeFrameSetting.cs">
-      <DependentUpon>CardProcessorTests.cs</DependentUpon>
-    </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests.cs" />
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventLocationSetting.cs">
-      <DependentUpon>CheckItemProcessorTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventSummaryFormatting.cs">
-      <DependentUpon>CheckItemProcessorTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests_EventTimeFrameSetting.cs">
-      <DependentUpon>CheckItemProcessorTests.cs</DependentUpon>
-    </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsBase.cs" />

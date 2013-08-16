@@ -1,29 +1,28 @@
-﻿using Trellendar.Core.Extensions;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.Domain;
+using Trellendar.Logic.CalendarSynchronization.Formatting;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CheckItemProcessor : ISingleBoardItemProcessor<CheckItem>
     {
         private readonly UserContext _userContext;
-        private readonly IParser<BoardItemName> _boardItemNameParser;
-        private readonly IParser<Due> _dueParser;
-        private readonly IParser<Location> _locationParser;
-        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
+        private readonly ISummaryFormatter<CheckItem> _summaryFormatter;
+        private readonly ITimeFrameFormatter<CheckItem> _timeFrameFormatter;
+        private readonly ILocationFormatter<CheckItem> _locationFormatter;
+        private readonly IDescriptionFormatter<CheckItem> _descriptionFormatter;
+        private readonly IExtendedPropertiesFormatter<CheckItem> _extendedPropertiesFormatter;
 
-        public CheckItemProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IParser<Location> locationParser,
-                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemDescriptionFormatter descriptionFormatter)
+        public CheckItemProcessor(UserContext userContext, ISummaryFormatter<CheckItem> summaryFormatter, ITimeFrameFormatter<CheckItem> timeFrameFormatter,
+                                  ILocationFormatter<CheckItem> locationFormatter, IDescriptionFormatter<CheckItem> descriptionFormatter,
+                                  IExtendedPropertiesFormatter<CheckItem> extendedPropertiesFormatter)
         {
             _userContext = userContext;
-            _boardItemNameParser = boardItemNameParser;
-            _dueParser = dueParser;
-            _locationParser = locationParser;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
+            _summaryFormatter = summaryFormatter;
+            _timeFrameFormatter = timeFrameFormatter;
+            _locationFormatter = locationFormatter;
             _descriptionFormatter = descriptionFormatter;
+            _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
 
         public string GetItemID(CheckItem item)
@@ -31,54 +30,24 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             return item.Id;
         }
 
-        public Event Process(CheckItem item, string parentName)
+        public Event Process(CheckItem item)
         {
-            var due = _dueParser.Parse(item.Name, _userContext.GetUserPreferences());
+            var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 
-            if (due == null)
+            if (timeFrame == null)
             {
                 return null;
             }
 
-            var timeFrame = due.HasTime
-                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime())
-                                : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
-
-            var location = _locationParser.Parse(item.Name, _userContext.GetUserPreferences());
-            var description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences());
-
             return new Event
                 {
-                    Summary = FormatEventSummary(item, parentName),
+                    Summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences()),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
-                    Location = location != null ? location.Value : null,
-                    Description = description,
-                    ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
+                    Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences()),
+                    ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
-        }
-
-        private string FormatEventSummary(CheckItem checkItem, string checkListName)
-        {
-            var eventNameTemplate = _userContext.GetPrefferedCheckListEventNameTemplate();
-
-	        string summary;
-            if (eventNameTemplate != null)
-            {
-                var parsedCheckListName = _boardItemNameParser.Parse(checkListName, _userContext.GetUserPreferences());
-                summary = eventNameTemplate.FormatWith(parsedCheckListName != null ? parsedCheckListName.Value : null, checkItem.Name);
-            }
-            else
-            {
-                summary = checkItem.Name;
-            }
-
-            if (checkItem.IsDone())
-            {
-                summary += _userContext.GetPrefferedCheckListEventDoneSuffix();
-            }
-
-            return summary;
         }
     }
 }
