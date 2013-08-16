@@ -1,16 +1,9 @@
-﻿using System;
+﻿using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.Logic.CalendarSynchronization
 {
-    public class Due
+    public interface IParser<TOutput>
     {
-        public DateTime DueDateTime { get; set; }
-
-        public bool HasTime { get; set; }
-    }
-
-    public interface IDueParser
-    {
-        Due Parse(string textWithDue);
+        TOutput Parse(string text, UserPreferences userPreferences);
     }
 }

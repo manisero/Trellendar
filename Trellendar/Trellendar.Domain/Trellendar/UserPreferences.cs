@@ -8,13 +8,9 @@ namespace Trellendar.Domain.Trellendar
 
         public virtual User User { get; set; }
 
-        public string ListShortcutBeginningMarker { get; set; }
+        public string TrelloItemShortcutBeginningMarker { get; set; }
 
-        public string ListShortcutEndMarker { get; set; }
-
-        public string CheckListShortcutBeginningMarker { get; set; }
-
-        public string CheckListShortcutEndMarker { get; set; }
+        public string TrelloItemShortcutEndMarker { get; set; }
 
         public string CardEventNameTemplate { get; set; }
 
@@ -27,5 +23,9 @@ namespace Trellendar.Domain.Trellendar
         public string DueTextBeginningMarker { get; set; }
 
         public string DueTextEndMarker { get; set; }
+
+        public string LocationTextBeginningMarker { get; set; }
+
+        public string LocationTextEndMarker { get; set; }
     }
 }

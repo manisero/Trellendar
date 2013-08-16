@@ -5,6 +5,7 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
+using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
@@ -89,7 +90,9 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             if (parsedDue != null)
             {
-                AutoMoqer.GetMock<IDueParser>().Setup(x => x.Parse(card.Desc)).Returns(parsedDue);
+                AutoMoqer.GetMock<IParser<Due>>()
+                         .Setup(x => x.Parse(card.Desc, user != null ? user.UserPreferences : null))
+                         .Returns(parsedDue);
             }
 
             if (parsedDue == null)

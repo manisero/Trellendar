@@ -2,9 +2,9 @@
 using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.CalendarSynchronization._Impl;
+using Trellendar.Logic.CalendarSynchronization.Parsers;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization
+namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
 {
     [TestFixture]
     public class DueParserTests : TestsBase
@@ -17,7 +17,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             [Values("text [2013-07-05 10:12:30] text", 
                     "text <due>2012-11-25 03:27:00</due> text",
                     "text [due]2013-07-05 10:12:30[endofdue] text")] 
-                    string textWithDue,
+                    string text,
             [Values("2013-07-05 10:12:30", "2012-11-25 03:27:00", "2013-07-05 10:12:30")] string expectedDue)
         {
             // Arrange
@@ -28,10 +28,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
 
             var due = DateTime.Parse(expectedDue);
 
-            MockUserContext(preferences);
-
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(textWithDue);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
 
             // Assert
             Assert.IsNotNull(result);
@@ -47,7 +45,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             [Values("text [2013-07-05] text",
                     "text <due>2012-11-25</due> text",
                     "text [due]2013-07-05[endofdue] text")] 
-                    string textWithDue,
+                    string text,
             [Values("2013-07-05", "2012-11-25", "2013-07-05")] string expectedDue)
         {
             // Arrange
@@ -58,10 +56,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
 
             var due = DateTime.Parse(expectedDue);
 
-            MockUserContext(preferences);
-
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(textWithDue);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
 
             // Assert
             Assert.IsNotNull(result);
@@ -77,7 +73,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
             [Values("text [2013-07-05 10:12:30] text [not a due] text",
                     "text <due>not a due</due> text <due>2012-11-25 03:27:00</due> text",
                     "text [due]2013-07-05 10:12:30[endofdue] text [due]2012-11-25 03:27:00[endofdue] text")]
-                    string textWithDue,
+                    string text,
             [Values("2013-07-05 10:12:30", "2012-11-25 03:27:00", "2013-07-05 10:12:30")] string expectedDue)
         {
             // Arrange
@@ -88,10 +84,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
 
             var due = DateTime.Parse(expectedDue);
 
-            MockUserContext(preferences);
-
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(textWithDue);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
 
             // Assert
             Assert.IsNotNull(result);
@@ -103,7 +97,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
         public void returns_null_for_unreadable_due(
             [Values(null, "[", "<")] string beginningMarker,
             [Values(null, "]", ">")] string endMarker,
-            [Values("text [not a due] text", "no due")] string textWithDue)
+            [Values("text [not a due] text", "no due")] string text)
         {
             // Arrange
             var preferences = Builder<UserPreferences>.CreateNew()
@@ -111,10 +105,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization
                                                       .With(x => x.DueTextEndMarker = endMarker)
                                                       .Build();
 
-            MockUserContext(preferences);
-
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(textWithDue);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
 
             // Assert
             Assert.IsNull(result);

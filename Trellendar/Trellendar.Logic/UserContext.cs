@@ -25,20 +25,9 @@ namespace Trellendar.Logic
             return userContext.IsFilled() && userContext.User.UserPreferences != null;
         }
 
-        public static Tuple<string, string> GetPrefferedListShortcutMarkers(this UserContext userContext)
+        public static UserPreferences GetUserPreferences(this UserContext userContext)
         {
-            return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.ListShortcutBeginningMarker,
-                                      userContext.User.UserPreferences.ListShortcutEndMarker)
-                       : null;
-        }
-
-        public static Tuple<string, string> GetPrefferedCheckListShortcutMarkers(this UserContext userContext)
-        {
-            return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.CheckListShortcutBeginningMarker,
-                                      userContext.User.UserPreferences.CheckListShortcutEndMarker)
-                       : null;
+            return userContext.HasUserPreferences() ? userContext.User.UserPreferences : null;
         }
 
         public static string GetPrefferedCardEventNameTemplate(this UserContext userContext)
@@ -66,14 +55,6 @@ namespace Trellendar.Logic
         {
             return userContext.HasUserPreferences()
                        ? userContext.User.UserPreferences.WholeDayEventDueTime
-                       : null;
-        }
-
-        public static Tuple<string, string> GetPrefferedDueTextMarkers(this UserContext userContext)
-        {
-            return userContext.HasUserPreferences()
-                       ? Tuple.Create(userContext.User.UserPreferences.DueTextBeginningMarker,
-                                      userContext.User.UserPreferences.DueTextEndMarker)
                        : null;
         }
     }

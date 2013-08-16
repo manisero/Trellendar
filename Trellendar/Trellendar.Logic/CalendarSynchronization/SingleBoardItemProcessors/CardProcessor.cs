@@ -6,17 +6,22 @@ using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CardProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<Card>
+    public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
+        private readonly IParser<BoardItemName> _boardItemNameParser;
+        private readonly IParser<Due> _dueParser;
+        private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
-        private readonly IDueParser _dueParser;
 
-        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator, IDueParser dueParser)
+        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser,
+                             IParser<Location> locationParser, IEventTimeFrameCreator eventTimeFrameCreator)
         {
             _userContext = userContext;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
+            _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
+            _locationParser = locationParser;
+            _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
         public string GetItemID(Card item)
@@ -39,7 +44,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
             }
             else
             {
-                var due = _dueParser.Parse(item.Desc);
+                var due = _dueParser.Parse(item.Desc, _userContext.GetUserPreferences());
 
                 if (due == null)
                 {
@@ -51,11 +56,14 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 
+            var location = _locationParser.Parse(item.Desc, _userContext.GetUserPreferences());
+
             return new Event
                 {
                     Summary = FormatEventSummary(item.Name, parentName),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
+                    Location = location != null ? location.Value : null,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
         }
@@ -64,9 +72,14 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         {
             var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
 
-            return eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(FormatParentName(listName, _userContext.GetPrefferedListShortcutMarkers()), cardName)
-                       : cardName;
+            if (eventNameTemplate == null)
+            {
+                return cardName;
+            }
+
+            var parsedlistName = _boardItemNameParser.Parse(listName, _userContext.GetUserPreferences());
+
+            return eventNameTemplate.FormatWith(parsedlistName != null ? parsedlistName.Value : null, cardName);
         }
     }
 }
