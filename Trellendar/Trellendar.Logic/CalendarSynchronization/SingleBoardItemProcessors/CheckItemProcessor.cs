@@ -1,7 +1,6 @@
 ﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
@@ -10,17 +9,18 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly UserContext _userContext;
         private readonly ICheckItemSummaryFormatter _summaryFormatter;
         private readonly ICheckItemTimeFrameFormatter _timeFrameFormatter;
-        private readonly IParser<Location> _locationParser;
+        private readonly ILocationFormatter<CheckItem> _locationFormatter;
         private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
         private readonly ICheckItemExtendedPropertiesFormatter _extendedPropertiesFormatter;
 
-        public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, ICheckItemTimeFrameFormatter timeFrameFormatter, IParser<Location> locationParser,
-                                  ICheckItemDescriptionFormatter descriptionFormatter, ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
+        public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, ICheckItemTimeFrameFormatter timeFrameFormatter,
+                                  ILocationFormatter<CheckItem> locationFormatter, ICheckItemDescriptionFormatter descriptionFormatter,
+                                  ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
             _timeFrameFormatter = timeFrameFormatter;
-            _locationParser = locationParser;
+            _locationFormatter = locationFormatter;
             _descriptionFormatter = descriptionFormatter;
             _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
@@ -39,17 +39,13 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
-            var location = _locationParser.Parse(item.Name, _userContext.GetUserPreferences());
-            var description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences());
-
             return new Event
                 {
-                    Summary = summary,
+                    Summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences()),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
-                    Location = location != null ? location.Value : null,
-                    Description = description,
+                    Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences()),
                     ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }

@@ -10,18 +10,18 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         private readonly UserContext _userContext;
         private readonly ICardSummaryFormatter _summaryFormatter;
         private readonly ICardTimeFrameFormatter _timeFrameFormatter;
-        private readonly IParser<Location> _locationParser;
+        private readonly ILocationFormatter<Card> _locationFormatter;
         private readonly ICardDescriptionFormatter _descriptionFormatter;
         private readonly ICardExtendedPropertiesFormatter _extendedPropertiesFormatter;
 
         public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, ICardTimeFrameFormatter timeFrameFormatter, 
-                             IParser<Location> locationParser, ICardDescriptionFormatter descriptionFormatter,
+                             ILocationFormatter<Card> locationFormatter, ICardDescriptionFormatter descriptionFormatter,
                              ICardExtendedPropertiesFormatter extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
             _timeFrameFormatter = timeFrameFormatter;
-            _locationParser = locationParser;
+            _locationFormatter = locationFormatter;
             _descriptionFormatter = descriptionFormatter;
             _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
@@ -45,17 +45,13 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
-            var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
-            var description = _descriptionFormatter.Format(item);
-
             return new Event
                 {
-                    Summary = summary,
+                    Summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences()),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
-                    Location = location != null ? location.Value : null,
-                    Description = description,
+                    Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Description = _descriptionFormatter.Format(item),
                     ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }

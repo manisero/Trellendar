@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using Trellendar.DataAccess.Remote;
+using Trellendar.Domain.Trello;
 using Trellendar.Logic;
 using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
@@ -37,10 +38,12 @@ namespace Trellendar.Service.Ninject.Modules
             // Calendar Synchronization > Formatters
             Bind<ICardTimeFrameFormatter>().To<CardTimeFrameFormatter>();
             Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
+            Bind<ILocationFormatter<Card>>().To<CardLocationFormatter>();
             Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
             Bind<ICardExtendedPropertiesFormatter>().To<CardExtendedPropertiesFormatter>();
             Bind<ICheckItemTimeFrameFormatter>().To<CheckItemTimeFrameFormatter>();
             Bind<ICheckItemSummaryFormatter>().To<CheckItemSummaryFormatter>();
+            Bind<ILocationFormatter<CheckItem>>().To<CheckItemLocationFormatter>();
             Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
             Bind<ICheckItemExtendedPropertiesFormatter>().To<CheckItemExtendedPropertiesFormatter>();
 

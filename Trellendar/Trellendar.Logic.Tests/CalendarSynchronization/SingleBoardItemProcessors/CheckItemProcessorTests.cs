@@ -68,6 +68,25 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         [Test]
+        public void sets_event_location()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var location = "location";
+
+            AutoMoqer.GetMock<ILocationFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(location);
+            MockTimeFrameFormatting();
+
+            // Act
+            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(location, result.Location);
+        }
+
+        [Test]
         public void sets_event_description()
         {
             // Arrange
