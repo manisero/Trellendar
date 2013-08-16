@@ -36,16 +36,16 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IParser<Location>>().To<LocationParser>();
 
             // Calendar Synchronization > Formatters
-            Bind<ICardTimeFrameFormatter>().To<CardTimeFrameFormatter>();
-            Bind<ICardSummaryFormatter>().To<CardSummaryFormatter>();
+            Bind<ITimeFrameFormatter<Card>>().To<CardTimeFrameFormatter>();
+            Bind<ISummaryFormatter<Card>>().To<CardSummaryFormatter>();
             Bind<ILocationFormatter<Card>>().To<CardLocationFormatter>();
-            Bind<ICardDescriptionFormatter>().To<CardDescriptionFormatter>();
-            Bind<ICardExtendedPropertiesFormatter>().To<CardExtendedPropertiesFormatter>();
-            Bind<ICheckItemTimeFrameFormatter>().To<CheckItemTimeFrameFormatter>();
-            Bind<ICheckItemSummaryFormatter>().To<CheckItemSummaryFormatter>();
+            Bind<IDescriptionFormatter<Card>>().To<CardDescriptionFormatter>();
+            Bind<IExtendedPropertiesFormatter<Card>>().To<CardExtendedPropertiesFormatter>();
+            Bind<ITimeFrameFormatter<CheckItem>>().To<CheckItemTimeFrameFormatter>();
+            Bind<ISummaryFormatter<CheckItem>>().To<CheckItemSummaryFormatter>();
             Bind<ILocationFormatter<CheckItem>>().To<CheckItemLocationFormatter>();
-            Bind<ICheckItemDescriptionFormatter>().To<CheckItemDescriptionFormatter>();
-            Bind<ICheckItemExtendedPropertiesFormatter>().To<CheckItemExtendedPropertiesFormatter>();
+            Bind<IDescriptionFormatter<CheckItem>>().To<CheckItemDescriptionFormatter>();
+            Bind<IExtendedPropertiesFormatter<CheckItem>>().To<CheckItemExtendedPropertiesFormatter>();
 
             // User Profile Synchronization
             Bind<IUserProfileService>().To<UserProfileService>();

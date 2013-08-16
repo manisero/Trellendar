@@ -21,7 +21,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
                                     .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<CardDescriptionFormatter>().Format(card);
+            var result = AutoMoqer.Resolve<CardDescriptionFormatter>().Format(card, null);
 
             // Assert
             Assert.AreEqual(expectedDescription, result);

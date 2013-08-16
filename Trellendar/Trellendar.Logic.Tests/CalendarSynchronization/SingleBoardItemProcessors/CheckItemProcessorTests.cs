@@ -11,7 +11,7 @@ using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
     [TestFixture]
-    public partial class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
+    public class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
     {
         [Test]
         public void returns_null_for_null_time_frame()
@@ -20,7 +20,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var user = Builder<User>.CreateNew().Build();
 
-            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
+            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
 
             // Act
             var result = TestProcess(checkItem, user);
@@ -37,7 +37,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var user = Builder<User>.CreateNew().Build();
             var timeFrame = new Tuple<TimeStamp, TimeStamp>(new TimeStamp(), new TimeStamp());
             
-            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns(timeFrame);
+            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, user)).Returns(timeFrame);
 
             // Act
             var result = TestProcess(checkItem, user);
@@ -56,7 +56,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var summary = "summary";
 
-            AutoMoqer.GetMock<ICheckItemSummaryFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(summary);
+            AutoMoqer.GetMock<ISummaryFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(summary);
             MockTimeFrameFormatting();
 
             // Act
@@ -93,8 +93,8 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var descritpion = "descritpion";
-            
-            AutoMoqer.GetMock<ICheckItemDescriptionFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(descritpion);
+
+            AutoMoqer.GetMock<IDescriptionFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(descritpion);
             MockTimeFrameFormatting();
 
             // Act
@@ -112,7 +112,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
 
-            AutoMoqer.GetMock<ICheckItemExtendedPropertiesFormatter>().Setup(x => x.Format(checkItem)).Returns(extendedProperties);
+            AutoMoqer.GetMock<IExtendedPropertiesFormatter<CheckItem>>().Setup(x => x.Format(checkItem)).Returns(extendedProperties);
             MockTimeFrameFormatting();
 
             // Act
@@ -130,7 +130,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
         private void MockTimeFrameFormatting()
         {
-            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>()
+            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>()
                      .Setup(x => x.Format(It.IsAny<CheckItem>(), It.IsAny<User>()))
                      .Returns(new Tuple<TimeStamp, TimeStamp>(null, null));
         }

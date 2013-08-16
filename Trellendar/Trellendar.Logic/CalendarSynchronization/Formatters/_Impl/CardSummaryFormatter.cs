@@ -5,7 +5,7 @@ using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
 {
-    public class CardSummaryFormatter : ICardSummaryFormatter
+    public class CardSummaryFormatter : ISummaryFormatter<Card>
     {
         private readonly IParser<BoardItemName> _listNameParser;
 
@@ -14,16 +14,16 @@ namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
             _listNameParser = listNameParser;
         }
 
-        public string Format(Card card, UserPreferences userPreferences)
+        public string Format(Card entity, UserPreferences userPreferences)
         {
-            if (card.List == null || userPreferences == null || userPreferences.CardEventNameTemplate == null)
+            if (entity.List == null || userPreferences == null || userPreferences.CardEventNameTemplate == null)
             {
-                return card.Name;
+                return entity.Name;
             }
 
-            var listName = _listNameParser.Parse(card.List.Name, userPreferences);
+            var listName = _listNameParser.Parse(entity.List.Name, userPreferences);
 
-            return userPreferences.CardEventNameTemplate.FormatWith(listName != null ? listName.Value : null, card.Name);
+            return userPreferences.CardEventNameTemplate.FormatWith(listName != null ? listName.Value : null, entity.Name);
         }
     }
 }

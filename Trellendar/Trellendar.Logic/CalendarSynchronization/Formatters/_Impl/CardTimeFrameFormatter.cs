@@ -6,7 +6,7 @@ using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
 {
-    public class CardTimeFrameFormatter : ICardTimeFrameFormatter
+    public class CardTimeFrameFormatter : ITimeFrameFormatter<Card>
     {
         private readonly IParser<Due> _dueParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
@@ -17,23 +17,23 @@ namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
             _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
-        public Tuple<TimeStamp, TimeStamp> Format(Card card, User user)
+        public Tuple<TimeStamp, TimeStamp> Format(Card entity, User user)
         {
-            if (card == null || user == null)
+            if (entity == null || user == null)
             {
                 return null;
             }
 
             Tuple<TimeStamp, TimeStamp> timeFrame;
 
-            if (card.Due != null)
+            if (entity.Due != null)
             {
-                timeFrame = _eventTimeFrameCreator.CreateFromUTC(card.Due.Value, user.CalendarTimeZone,
+                timeFrame = _eventTimeFrameCreator.CreateFromUTC(entity.Due.Value, user.CalendarTimeZone,
                                                                  user.UserPreferences != null ? user.UserPreferences.WholeDayEventDueTime : null);
             }
             else
             {
-                var due = _dueParser.Parse(card.Description, user.UserPreferences);
+                var due = _dueParser.Parse(entity.Description, user.UserPreferences);
 
                 if (due == null)
                 {

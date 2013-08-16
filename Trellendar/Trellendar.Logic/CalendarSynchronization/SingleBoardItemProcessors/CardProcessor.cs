@@ -1,22 +1,21 @@
 ﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly ICardSummaryFormatter _summaryFormatter;
-        private readonly ICardTimeFrameFormatter _timeFrameFormatter;
+        private readonly ISummaryFormatter<Card> _summaryFormatter;
+        private readonly ITimeFrameFormatter<Card> _timeFrameFormatter;
         private readonly ILocationFormatter<Card> _locationFormatter;
-        private readonly ICardDescriptionFormatter _descriptionFormatter;
-        private readonly ICardExtendedPropertiesFormatter _extendedPropertiesFormatter;
+        private readonly IDescriptionFormatter<Card> _descriptionFormatter;
+        private readonly IExtendedPropertiesFormatter<Card> _extendedPropertiesFormatter;
 
-        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, ICardTimeFrameFormatter timeFrameFormatter, 
-                             ILocationFormatter<Card> locationFormatter, ICardDescriptionFormatter descriptionFormatter,
-                             ICardExtendedPropertiesFormatter extendedPropertiesFormatter)
+        public CardProcessor(UserContext userContext, ISummaryFormatter<Card> summaryFormatter, ITimeFrameFormatter<Card> timeFrameFormatter, 
+                             ILocationFormatter<Card> locationFormatter, IDescriptionFormatter<Card> descriptionFormatter,
+                             IExtendedPropertiesFormatter<Card> extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
@@ -51,7 +50,7 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
-                    Description = _descriptionFormatter.Format(item),
+                    Description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences()),
                     ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }

@@ -126,7 +126,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
             // Arrange
             if (checkItem.CheckList != null)
             {
-                AutoMoqer.GetMock<ICardSummaryFormatter>().Setup(x => x.Format(checkItem.CheckList.Card, preferences)).Returns(cardSummary);
+                AutoMoqer.GetMock<ISummaryFormatter<Card>>().Setup(x => x.Format(checkItem.CheckList.Card, preferences)).Returns(cardSummary);
             }
 
             // Act

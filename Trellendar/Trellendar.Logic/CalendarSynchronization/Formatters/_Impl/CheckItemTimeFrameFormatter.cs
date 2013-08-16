@@ -6,7 +6,7 @@ using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
 {
-    public class CheckItemTimeFrameFormatter : ICheckItemTimeFrameFormatter
+    public class CheckItemTimeFrameFormatter : ITimeFrameFormatter<CheckItem>
     {
         private readonly IParser<Due> _dueParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
@@ -17,14 +17,14 @@ namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
             _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
-        public Tuple<TimeStamp, TimeStamp> Format(CheckItem checkItem, User user)
+        public Tuple<TimeStamp, TimeStamp> Format(CheckItem entity, User user)
         {
-            if (checkItem == null || user == null)
+            if (entity == null || user == null)
             {
                 return null;
             }
 
-            var due = _dueParser.Parse(checkItem.Name, user.UserPreferences);
+            var due = _dueParser.Parse(entity.Name, user.UserPreferences);
 
             if (due == null)
             {

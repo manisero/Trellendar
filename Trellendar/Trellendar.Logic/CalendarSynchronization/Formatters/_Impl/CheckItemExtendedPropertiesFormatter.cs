@@ -4,11 +4,11 @@ using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.Formatters._Impl
 {
-    public class CheckItemExtendedPropertiesFormatter : ICheckItemExtendedPropertiesFormatter
+    public class CheckItemExtendedPropertiesFormatter : IExtendedPropertiesFormatter<CheckItem>
     {
-        public EventExtendedProperties Format(CheckItem checkItem)
+        public EventExtendedProperties Format(CheckItem entity)
         {
-            return EventExtensions.CreateExtendedProperties(checkItem.Id);
+            return EventExtensions.CreateExtendedProperties(entity.Id);
         }
     }
 }

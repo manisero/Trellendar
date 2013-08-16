@@ -7,15 +7,15 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     public class CheckItemProcessor : ISingleBoardItemProcessor<CheckItem>
     {
         private readonly UserContext _userContext;
-        private readonly ICheckItemSummaryFormatter _summaryFormatter;
-        private readonly ICheckItemTimeFrameFormatter _timeFrameFormatter;
+        private readonly ISummaryFormatter<CheckItem> _summaryFormatter;
+        private readonly ITimeFrameFormatter<CheckItem> _timeFrameFormatter;
         private readonly ILocationFormatter<CheckItem> _locationFormatter;
-        private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
-        private readonly ICheckItemExtendedPropertiesFormatter _extendedPropertiesFormatter;
+        private readonly IDescriptionFormatter<CheckItem> _descriptionFormatter;
+        private readonly IExtendedPropertiesFormatter<CheckItem> _extendedPropertiesFormatter;
 
-        public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, ICheckItemTimeFrameFormatter timeFrameFormatter,
-                                  ILocationFormatter<CheckItem> locationFormatter, ICheckItemDescriptionFormatter descriptionFormatter,
-                                  ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
+        public CheckItemProcessor(UserContext userContext, ISummaryFormatter<CheckItem> summaryFormatter, ITimeFrameFormatter<CheckItem> timeFrameFormatter,
+                                  ILocationFormatter<CheckItem> locationFormatter, IDescriptionFormatter<CheckItem> descriptionFormatter,
+                                  IExtendedPropertiesFormatter<CheckItem> extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;

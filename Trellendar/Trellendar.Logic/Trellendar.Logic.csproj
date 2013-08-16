@@ -51,14 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarSynchronization\Formatters\ICardDescriptionFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICardSummaryFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICardTimeFrameFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICheckItemDescriptionFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICheckItemExtendedPropertiesFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICheckItemSummaryFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICardExtendedPropertiesFormatter.cs" />
-    <Compile Include="CalendarSynchronization\Formatters\ICheckItemTimeFrameFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\IDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ISummaryFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ITimeFrameFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\IExtendedPropertiesFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\ILocationFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardExtendedPropertiesFormatter.cs" />
