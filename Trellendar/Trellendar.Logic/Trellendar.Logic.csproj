@@ -58,6 +58,7 @@
     <Compile Include="CalendarSynchronization\Formatters\ICheckItemExtendedPropertiesFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\ICheckItemSummaryFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\ICardExtendedPropertiesFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ICheckItemTimeFrameFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardExtendedPropertiesFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardSummaryFormatter.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemExtendedPropertiesFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemSummaryFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemTimeFrameFormatter.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\ParserBase.cs" />
     <Compile Include="Domain\Due.cs" />

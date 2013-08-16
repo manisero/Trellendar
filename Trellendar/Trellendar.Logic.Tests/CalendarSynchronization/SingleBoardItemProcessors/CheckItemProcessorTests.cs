@@ -1,12 +1,12 @@
-﻿using FizzWare.NBuilder;
+﻿using System;
+using FizzWare.NBuilder;
+using Moq;
 using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {
@@ -14,19 +14,50 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
     public partial class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
     {
         [Test]
-        public void sets_event_summary_properly()
+        public void returns_null_for_null_time_frame()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var user = Builder<User>.CreateNew().Build();
+
+            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
+
+            // Act
+            var result = TestProcess(checkItem, "not important", user);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void sets_event_start_and_end()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var user = Builder<User>.CreateNew().Build();
+            var timeFrame = new Tuple<TimeStamp, TimeStamp>(new TimeStamp(), new TimeStamp());
+            
+            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>().Setup(x => x.Format(checkItem, user)).Returns(timeFrame);
+
+            // Act
+            var result = TestProcess(checkItem, "not important", user);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreSame(timeFrame.Item1, result.Start);
+            Assert.AreSame(timeFrame.Item2, result.End);
+        }
+
+        [Test]
+        public void sets_event_summary()
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var summary = "summary";
 
-            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
-
             AutoMoqer.GetMock<ICheckItemSummaryFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(summary);
-
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
-            MockTimeFrameCreation_WholeDay(due.DueDateTime);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
@@ -37,19 +68,15 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         [Test]
-        public void sets_event_description_properly()
+        public void sets_event_description()
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var preferences = Builder<UserPreferences>.CreateNew().Build();
             var descritpion = "descritpion";
-
-            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
             
             AutoMoqer.GetMock<ICheckItemDescriptionFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(descritpion);
-
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
-            MockTimeFrameCreation_WholeDay(due.DueDateTime);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
@@ -60,17 +87,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         [Test]
-        public void sets_event_extended_properties_properly()
+        public void sets_event_extended_properties()
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
-            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
             var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
 
             AutoMoqer.GetMock<ICheckItemExtendedPropertiesFormatter>().Setup(x => x.Format(checkItem)).Returns(extendedProperties);
-
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
-            MockTimeFrameCreation_WholeDay(due.DueDateTime);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(checkItem, "not important", null);
@@ -83,6 +107,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         protected override object GetExptectedItemKey(CheckItem item)
         {
             return item.Id;
+        }
+
+        private void MockTimeFrameFormatting()
+        {
+            AutoMoqer.GetMock<ICheckItemTimeFrameFormatter>()
+                     .Setup(x => x.Format(It.IsAny<CheckItem>(), It.IsAny<User>()))
+                     .Returns(new Tuple<TimeStamp, TimeStamp>(null, null));
         }
     }
 }

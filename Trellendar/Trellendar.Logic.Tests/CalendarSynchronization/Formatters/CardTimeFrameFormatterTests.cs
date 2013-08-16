@@ -133,7 +133,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
             Assert.AreSame(end, result.Item2);
         }
 
-        protected void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
             var timeZone = user != null ? user.CalendarTimeZone : null;
 
@@ -146,7 +146,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
-        protected void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
             var timeZone = user != null ? user.CalendarTimeZone : null;
 
@@ -159,7 +159,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatters
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
-        protected void MockTimeFrameCreation_WholeDay(DateTime dueDateTime, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_WholeDay(DateTime dueDateTime, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
                      .Setup(x => x.CreateWholeDayTimeFrame(dueDateTime))

@@ -1,6 +1,5 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
-using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization;
@@ -18,15 +17,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var user = Builder<User>.CreateNew().With(x => x.UserPreferences = new UserPreferences()).Build();
             var expectedLocation = "location";
 
-            var due = Builder<Due>.CreateNew().With(x => x.HasTime = true).Build();
-
             AutoMoqer.GetMock<IParser<Location>>()
                      .Setup(x => x.Parse(checkItem.Name, user.UserPreferences))
                      .Returns(new Location { Value = expectedLocation });
 
             MockUserContext(user);
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, user.UserPreferences)).Returns(due);
-            MockTimeFrameCreation_FromLocal(due.DueDateTime, user);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(checkItem, "not important", user);
@@ -43,15 +39,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var user = Builder<User>.CreateNew().With(x => x.UserPreferences = new UserPreferences()).Build();
 
-            var due = Builder<Due>.CreateNew().With(x => x.HasTime = true).Build();
-
             AutoMoqer.GetMock<IParser<Location>>()
                      .Setup(x => x.Parse(checkItem.Name, user.UserPreferences))
                      .Returns((Location)null);
 
             MockUserContext(user);
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, user.UserPreferences)).Returns(due);
-            MockTimeFrameCreation_FromLocal(due.DueDateTime, user);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(checkItem, "not important", user);

@@ -9,21 +9,18 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     {
         private readonly UserContext _userContext;
         private readonly ICheckItemSummaryFormatter _summaryFormatter;
-        private readonly IParser<Due> _dueParser;
+        private readonly ICheckItemTimeFrameFormatter _timeFrameFormatter;
         private readonly IParser<Location> _locationParser;
-        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
         private readonly ICheckItemDescriptionFormatter _descriptionFormatter;
         private readonly ICheckItemExtendedPropertiesFormatter _extendedPropertiesFormatter;
 
-        public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
-                                  IEventTimeFrameCreator eventTimeFrameCreator, ICheckItemDescriptionFormatter descriptionFormatter,
-                                  ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
+        public CheckItemProcessor(UserContext userContext, ICheckItemSummaryFormatter summaryFormatter, ICheckItemTimeFrameFormatter timeFrameFormatter, IParser<Location> locationParser,
+                                  ICheckItemDescriptionFormatter descriptionFormatter, ICheckItemExtendedPropertiesFormatter extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
-            _dueParser = dueParser;
+            _timeFrameFormatter = timeFrameFormatter;
             _locationParser = locationParser;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
             _descriptionFormatter = descriptionFormatter;
             _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
@@ -35,16 +32,12 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 
         public Event Process(CheckItem item, string parentName)
         {
-            var due = _dueParser.Parse(item.Name, _userContext.GetUserPreferences());
+            var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 
-            if (due == null)
+            if (timeFrame == null)
             {
                 return null;
             }
-
-            var timeFrame = due.HasTime
-                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime())
-                                : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
 
             var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());
             var location = _locationParser.Parse(item.Name, _userContext.GetUserPreferences());
