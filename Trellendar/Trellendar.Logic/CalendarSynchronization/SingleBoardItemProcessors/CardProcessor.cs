@@ -1,5 +1,4 @@
-﻿using System;
-using Trellendar.Domain.Calendar;
+﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
@@ -10,21 +9,19 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
     {
         private readonly UserContext _userContext;
         private readonly ICardSummaryFormatter _summaryFormatter;
-        private readonly IParser<Due> _dueParser;
+        private readonly ICardTimeFrameFormatter _timeFrameFormatter;
         private readonly IParser<Location> _locationParser;
-        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
         private readonly ICardDescriptionFormatter _descriptionFormatter;
         private readonly ICardExtendedPropertiesFormatter _extendedPropertiesFormatter;
 
-        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
-                             IEventTimeFrameCreator eventTimeFrameCreator, ICardDescriptionFormatter descriptionFormatter,
+        public CardProcessor(UserContext userContext, ICardSummaryFormatter summaryFormatter, ICardTimeFrameFormatter timeFrameFormatter, 
+                             IParser<Location> locationParser, ICardDescriptionFormatter descriptionFormatter,
                              ICardExtendedPropertiesFormatter extendedPropertiesFormatter)
         {
             _userContext = userContext;
             _summaryFormatter = summaryFormatter;
-            _dueParser = dueParser;
+            _timeFrameFormatter = timeFrameFormatter;
             _locationParser = locationParser;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
             _descriptionFormatter = descriptionFormatter;
             _extendedPropertiesFormatter = extendedPropertiesFormatter;
         }
@@ -41,24 +38,11 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                 return null;
             }
 
-            Tuple<TimeStamp, TimeStamp> timeFrame;
+            var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
 
-            if (item.Due != null)
+            if (timeFrame == null)
             {
-                timeFrame = _eventTimeFrameCreator.CreateFromUTC(item.Due.Value, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime());
-            }
-            else
-            {
-                var due = _dueParser.Parse(item.Description, _userContext.GetUserPreferences());
-
-                if (due == null)
-                {
-                    return null;
-                }
-
-                timeFrame = due.HasTime
-                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, _userContext.GetCalendarTimeZone(), _userContext.GetPrefferedWholeDayEventDueTime())
-                                : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
+                return null;
             }
 
             var summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences());

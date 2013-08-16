@@ -77,6 +77,7 @@
     <Compile Include="CalendarSynchronization\Formatters\CardDescriptionFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CardExtendedPropertiesFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CardSummaryFormatterTests.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\CardTimeFrameFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CheckItemDescriptionFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CheckItemExtendedPropertiesFormatterTests.cs" />
     <Compile Include="CalendarSynchronization\Formatters\CheckItemSummaryFormatterTests.cs" />
@@ -92,9 +93,6 @@
     <Compile Include="CalendarSynchronization\Parsers\LocationParserTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventLocationSetting.cs">
-      <DependentUpon>CardProcessorTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessorTests_EventTimeFrameSetting.cs">
       <DependentUpon>CardProcessorTests.cs</DependentUpon>
     </Compile>
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessorTests.cs" />

@@ -1,4 +1,6 @@
-﻿using FizzWare.NBuilder;
+﻿using System;
+using FizzWare.NBuilder;
+using Moq;
 using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
@@ -25,7 +27,42 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         }
 
         [Test]
-        public void sets_event_summary_properly()
+        public void returns_null_for_null_time_frame()
+        {
+            // Arrange
+            var card = Builder<Card>.CreateNew().Build();
+            var user = Builder<User>.CreateNew().Build();
+
+            AutoMoqer.GetMock<ICardTimeFrameFormatter>().Setup(x => x.Format(card, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
+
+            // Act
+            var result = TestProcess(card, "not important");
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void sets_event_start_and_end()
+        {
+            // Arrange
+            var card = Builder<Card>.CreateNew().Build();
+            var user = Builder<User>.CreateNew().Build();
+            var timeFrame = Tuple.Create(new TimeStamp(), new TimeStamp());
+
+            AutoMoqer.GetMock<ICardTimeFrameFormatter>().Setup(x => x.Format(card, user)).Returns(timeFrame);
+
+            // Act
+            var result = TestProcess(card, "not important", user);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreSame(timeFrame.Item1, result.Start);
+            Assert.AreSame(timeFrame.Item2, result.End);
+        }
+
+        [Test]
+        public void sets_event_summary()
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
@@ -33,45 +70,43 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             var summary = "summary";
 
             AutoMoqer.GetMock<ICardSummaryFormatter>().Setup(x => x.Format(card, preferences)).Returns(summary);
-
-            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(card, "not important", new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(summary, result.Summary);
+            Assert.AreSame(summary, result.Summary);
         }
 
         [Test]
-        public void sets_event_description_properly()
+        public void sets_event_description()
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
             var description = "description";
 
             AutoMoqer.GetMock<ICardDescriptionFormatter>().Setup(x => x.Format(card)).Returns(description);
-
-            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(card, "not important", null);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(description, result.Description);
+            Assert.AreSame(description, result.Description);
         }
 
         [Test]
-        public void sets_event_extended_properties_properly()
+        public void sets_event_extended_properties()
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
             var extendedProperties = Builder<EventExtendedProperties>.CreateNew().Build();
 
             AutoMoqer.GetMock<ICardExtendedPropertiesFormatter>().Setup(x => x.Format(card)).Returns(extendedProperties);
-            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
+            MockTimeFrameFormatting();
 
             // Act
             var result = TestProcess(card, "not important", null);
@@ -84,6 +119,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         protected override object GetExptectedItemKey(Card item)
         {
             return item.Id;
+        }
+
+        private void MockTimeFrameFormatting()
+        {
+            AutoMoqer.GetMock<ICardTimeFrameFormatter>()
+                     .Setup(x => x.Format(It.IsAny<Card>(), It.IsAny<User>()))
+                     .Returns(new Tuple<TimeStamp, TimeStamp>(null, null));
         }
     }
 }
