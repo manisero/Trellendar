@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalendarSynchronization\Formatters\ICardEventDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\ICardEventSummaryFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\ICheckItemEventDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CardEventDescriptionFormatter.cs" />
+    <Compile Include="CalendarSynchronization\Formatters\_Impl\CardEventSummaryFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatters\_Impl\CheckItemEventDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Parsers\BoardItemNameParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\ParserBase.cs" />

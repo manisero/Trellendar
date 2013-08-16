@@ -8,6 +8,9 @@ namespace Trellendar.Domain.Trello
         [JsonProperty("id")]
         public string Id { get; set; }
 
+        [JsonIgnore]
+        public List List { get; set; }
+
         [JsonProperty("idList")]
         public string IdList { get; set; }
 

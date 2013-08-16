@@ -1,5 +1,6 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
@@ -21,6 +22,26 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
             // Assert
             Assert.IsNull(result);
+        }
+
+        [Test]
+        public void sets_event_summary_properly()
+        {
+            // Arrange
+            var card = Builder<Card>.CreateNew().Build();
+            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var summary = "summary";
+
+            AutoMoqer.GetMock<ICardEventSummaryFormatter>().Setup(x => x.Format(card, preferences)).Returns(summary);
+
+            MockTimeFrameCreation_FromUTC(card.Due.Value, null);
+
+            // Act
+            var result = TestProcess(card, "not important", new User { UserPreferences = preferences });
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(summary, result.Summary);
         }
 
         [Test]

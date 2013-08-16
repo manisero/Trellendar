@@ -3,24 +3,23 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.CalendarSynchronization.Formatters;
 using Trellendar.Logic.Domain;
-using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly IParser<BoardItemName> _boardItemNameParser;
+        private readonly ICardEventSummaryFormatter _eventSummaryFormatter;
         private readonly IParser<Due> _dueParser;
         private readonly IParser<Location> _locationParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
         private readonly ICardEventDescriptionFormatter _eventDescriptionFormatter;
 
-        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IParser<Location> locationParser,
+        public CardProcessor(UserContext userContext, ICardEventSummaryFormatter eventSummaryFormatter, IParser<Due> dueParser, IParser<Location> locationParser,
                              IEventTimeFrameCreator eventTimeFrameCreator, ICardEventDescriptionFormatter eventDescriptionFormatter)
         {
             _userContext = userContext;
-            _boardItemNameParser = boardItemNameParser;
+            _eventSummaryFormatter = eventSummaryFormatter;
             _dueParser = dueParser;
             _locationParser = locationParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
@@ -59,32 +58,19 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 
+            var summary = _eventSummaryFormatter.Format(item, _userContext.GetUserPreferences());
             var location = _locationParser.Parse(item.Description, _userContext.GetUserPreferences());
             var description = _eventDescriptionFormatter.Format(item);
 
             return new Event
                 {
-                    Summary = FormatEventSummary(item.Name, parentName),
+                    Summary = summary,
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
                     Location = location != null ? location.Value : null,
                     Description = description,
                     ExtendedProperties = EventExtensions.CreateExtendedProperties(item.Id)
                 };
-        }
-
-        private string FormatEventSummary(string cardName, string listName)
-        {
-            var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
-
-            if (eventNameTemplate == null)
-            {
-                return cardName;
-            }
-
-            var parsedlistName = _boardItemNameParser.Parse(listName, _userContext.GetUserPreferences());
-
-            return eventNameTemplate.FormatWith(parsedlistName != null ? parsedlistName.Value : null, cardName);
         }
     }
 }
