@@ -13,27 +13,26 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
     public partial class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>
     {
         [Test]
-        public void sets_event_extended_properties_properly()
+        public void sets_event_summary_properly()
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var summary = "summary";
+
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
 
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
+            AutoMoqer.GetMock<ICheckItemSummaryFormatter>().Setup(x => x.Format(checkItem, preferences)).Returns(summary);
+
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
             MockTimeFrameCreation_WholeDay(due.DueDateTime);
 
             // Act
-            var result = TestProcess(checkItem, "not important", null);
+            var result = TestProcess(checkItem, "not important", new User { UserPreferences = preferences });
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.ExtendedProperties);
-
-            var properties = result.ExtendedProperties.Private;
-            Assert.IsNotNull(properties);
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
-            Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));
-            Assert.AreEqual(checkItem.Id, properties[EventExtensions.SOURCE_ID_PROPERTY_KEY]);
+            Assert.AreEqual(summary, result.Summary);
         }
 
         [Test]
@@ -57,6 +56,30 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(descritpion, result.Description);
+        }
+
+        [Test]
+        public void sets_event_extended_properties_properly()
+        {
+            // Arrange
+            var checkItem = Builder<CheckItem>.CreateNew().Build();
+            var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
+
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, null)).Returns(due);
+            MockTimeFrameCreation_WholeDay(due.DueDateTime);
+
+            // Act
+            var result = TestProcess(checkItem, "not important", null);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ExtendedProperties);
+
+            var properties = result.ExtendedProperties.Private;
+            Assert.IsNotNull(properties);
+            Assert.IsTrue(properties.ContainsKey(EventExtensions.GENERATED_PROPERTY_KEY));
+            Assert.IsTrue(properties.ContainsKey(EventExtensions.SOURCE_ID_PROPERTY_KEY));
+            Assert.AreEqual(checkItem.Id, properties[EventExtensions.SOURCE_ID_PROPERTY_KEY]);
         }
 
         protected override object GetExptectedItemKey(CheckItem item)
