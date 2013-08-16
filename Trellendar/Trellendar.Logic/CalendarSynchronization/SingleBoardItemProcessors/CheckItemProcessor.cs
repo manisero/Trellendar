@@ -5,15 +5,17 @@ using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CheckItemProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<CheckItem>
+    public class CheckItemProcessor : ISingleBoardItemProcessor<CheckItem>
     {
         private readonly UserContext _userContext;
+        private readonly IParser<BoardItemName> _boardItemNameParser;
         private readonly IParser<Due> _dueParser;
         private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
 
-        public CheckItemProcessor(UserContext userContext, IParser<Due> dueParser, IEventTimeFrameCreator eventTimeFrameCreator)
+        public CheckItemProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IEventTimeFrameCreator eventTimeFrameCreator)
         {
             _userContext = userContext;
+            _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
             _eventTimeFrameCreator = eventTimeFrameCreator;
         }
@@ -49,9 +51,16 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         {
             var eventNameTemplate = _userContext.GetPrefferedCheckListEventNameTemplate();
 
-	        var summary = eventNameTemplate != null
-		                      ? eventNameTemplate.FormatWith(FormatParentName(checkListName, _userContext.GetPrefferedBoardItemShortcutMarkers()), checkItem.Name)
-		                      : checkItem.Name;
+	        string summary;
+            if (eventNameTemplate != null)
+            {
+                var parsedCheckListName = _boardItemNameParser.Parse(checkListName, _userContext.GetUserPreferences());
+                summary = eventNameTemplate.FormatWith(parsedCheckListName != null ? parsedCheckListName.Value : null, checkItem.Name);
+            }
+            else
+            {
+                summary = checkItem.Name;
+            }
 
             if (checkItem.IsDone())
             {

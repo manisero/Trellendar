@@ -6,17 +6,19 @@ using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
 {
-    public class CardProcessor : SingleBoardItemProcessorBase, ISingleBoardItemProcessor<Card>
+    public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
         private readonly UserContext _userContext;
-        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
+        private readonly IParser<BoardItemName> _boardItemNameParser;
         private readonly IParser<Due> _dueParser;
+        private readonly IEventTimeFrameCreator _eventTimeFrameCreator;
 
-        public CardProcessor(UserContext userContext, IEventTimeFrameCreator eventTimeFrameCreator, IParser<Due> dueParser)
+        public CardProcessor(UserContext userContext, IParser<BoardItemName> boardItemNameParser, IParser<Due> dueParser, IEventTimeFrameCreator eventTimeFrameCreator)
         {
             _userContext = userContext;
-            _eventTimeFrameCreator = eventTimeFrameCreator;
+            _boardItemNameParser = boardItemNameParser;
             _dueParser = dueParser;
+            _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
         public string GetItemID(Card item)
@@ -64,9 +66,14 @@ namespace Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors
         {
             var eventNameTemplate = _userContext.GetPrefferedCardEventNameTemplate();
 
-            return eventNameTemplate != null
-                       ? eventNameTemplate.FormatWith(FormatParentName(listName, _userContext.GetPrefferedBoardItemShortcutMarkers()), cardName)
-                       : cardName;
+            if (eventNameTemplate == null)
+            {
+                return cardName;
+            }
+
+            var parsedlistName = _boardItemNameParser.Parse(listName, _userContext.GetUserPreferences());
+
+            return eventNameTemplate.FormatWith(parsedlistName != null ? parsedlistName.Value : null, cardName);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 								.Build();
 
 			// Arrange, Act & Assert
-			TestFormatEventSummary(checkItem, null, "not important", expectedSummary);
+			TestFormatEventSummary(checkItem, null, "not important", "not important", expectedSummary);
         }
 
         [Test]
@@ -44,65 +44,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 								.Build();
 
 			// Arrange, Act & Assert
-            TestFormatEventSummary(checkItem, preferences, "not important", expectedSummary);
+            TestFormatEventSummary(checkItem, preferences, "not important", "not important", expectedSummary);
         }
 
 		[Test]
 		[Sequential]
-		public void formats_not_done_event_summary___with_event_name_template___without_checklist_shortcut_markers(
-			[Values("checkList", "things")] string checkListName,
-			[Values("name", "important thing")] string checkItemName,
-			[Values("{0}{1}", "[{0}] {1}")] string eventNameTemplate,
-			[Values("checkListname", "[things] important thing")] string expectedSummary)
-		{
-			// Arrange
-			var checkItem = Builder<CheckItem>.CreateNew()
-								.With(x => x.Name = checkItemName)
-								.With(x => x.State = CheckItemExtensions.STATE_NOT_DONE)
-								.Build();
-
-			var preferences = Builder<UserPreferences>.CreateNew()
-								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.TrelloItemShortcutBeginningMarker = null)
-								.With(x => x.TrelloItemShortcutEndMarker = null)
-								.Build();
-
-			// Arrange, Act & Assert
-			TestFormatEventSummary(checkItem, preferences, checkListName, expectedSummary);
-		}
-
-		[Test]
-		[Sequential]
-		public void formats_done_event_summary___with_event_name_template___without_checklist_shortcut_markers(
-			[Values("checkList", "things")] string checkListName,
-			[Values("name", "important thing")] string checkItemName,
-			[Values("{0}{1}", "[{0}] {1}")] string eventNameTemplate,
-			[Values("suffix", " (done)")] string doneSuffix,
-			[Values("checkListnamesuffix", "[things] important thing (done)")] string expectedSummary)
-		{
-			// Arrange
-			var checkItem = Builder<CheckItem>.CreateNew()
-								.With(x => x.Name = checkItemName)
-								.With(x => x.State = CheckItemExtensions.STATE_DONE)
-								.Build();
-
-			var preferences = Builder<UserPreferences>.CreateNew()
-								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.CheckListEventDoneSuffix = doneSuffix)
-								.With(x => x.TrelloItemShortcutBeginningMarker = null)
-								.With(x => x.TrelloItemShortcutEndMarker = null)
-								.Build();
-
-			// Arrange, Act & Assert
-			TestFormatEventSummary(checkItem, preferences, checkListName, expectedSummary);
-		}
-
-		[Test]
-		[Sequential]
-		public void formats_not_done_event_summary___with_event_name_template___with_checklist_shortcut_markers(
+		public void formats_not_done_event_summary___with_event_name_template(
 			[Values("checkList [ch]", "things <short>th</short>", "checkList")] string checkListName,
-			[Values("[", "<short>", "not_present")] string shortcutBeginningMarker,
-			[Values("]", "</short>", "not present")] string shortcutEndMarker,
+            [Values("ch", "th", "checkList")] string checkListShortcut,
 			[Values("name", "important thing", "name")] string checkItemName,
 			[Values("{0}{1}", "[{0}] {1}", "{0}{1}")] string eventNameTemplate,
 			[Values("chname", "[th] important thing", "checkListname")] string expectedSummary)
@@ -115,20 +64,17 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.TrelloItemShortcutBeginningMarker = shortcutBeginningMarker)
-								.With(x => x.TrelloItemShortcutEndMarker = shortcutEndMarker)
 								.Build();
 
 			// Arrange, Act & Assert
-			TestFormatEventSummary(checkItem, preferences, checkListName, expectedSummary);
+			TestFormatEventSummary(checkItem, preferences, checkListName, checkListShortcut, expectedSummary);
 		}
 
 		[Test]
 		[Sequential]
-		public void formats_done_event_summary___with_event_name_template___with_checklist_shortcut_markers(
+		public void formats_done_event_summary___with_event_name_template(
 			[Values("checkList [ch]", "things <short>th</short>", "checkList")] string checkListName,
-			[Values("[", "<short>", "not_present")] string shortcutBeginningMarker,
-			[Values("]", "</short>", "not present")] string shortcutEndMarker,
+            [Values("ch", "th", "checkList")] string checkListShortcut,
 			[Values("name", "important thing", "name")] string checkItemName,
 			[Values("{0}{1}", "[{0}] {1}", "{0}{1}")] string eventNameTemplate,
 			[Values("suffix", " (done)", "suffix")] string doneSuffix,
@@ -142,21 +88,21 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
 			var preferences = Builder<UserPreferences>.CreateNew()
 								.With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-								.With(x => x.TrelloItemShortcutBeginningMarker = shortcutBeginningMarker)
-								.With(x => x.TrelloItemShortcutEndMarker = shortcutEndMarker)
 								.With(x => x.CheckListEventDoneSuffix = doneSuffix)
 								.Build();
 
 			// Arrange, Act & Assert
-			TestFormatEventSummary(checkItem, preferences, checkListName, expectedSummary);
+			TestFormatEventSummary(checkItem, preferences, checkListName, checkListShortcut, expectedSummary);
 		}
 
-		private void TestFormatEventSummary(CheckItem checkItem, UserPreferences preferences, string checkListName, string expectedSummary)
+		private void TestFormatEventSummary(CheckItem checkItem, UserPreferences preferences, string checkListName, string checkListShortcut, string expectedSummary)
 		{
+            // Arrange
 			var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
 
 			MockUserContext(preferences);
 
+		    AutoMoqer.GetMock<IParser<BoardItemName>>().Setup(x => x.Parse(checkListName, preferences)).Returns(new BoardItemName { Value = checkListShortcut });
 			AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, preferences)).Returns(due);
 			MockTimeFrameCreation_WholeDay(due.DueDateTime);
 

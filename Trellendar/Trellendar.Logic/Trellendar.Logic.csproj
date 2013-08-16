@@ -57,7 +57,6 @@
     <Compile Include="CalendarSynchronization\IDueParser.cs" />
     <Compile Include="CalendarSynchronization\Parsers\LocationParser.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CheckItemProcessor.cs" />
-    <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\SingleBoardItemProcessorBase.cs" />
     <Compile Include="CalendarSynchronization\_Impl\BoardItemsProcessor.cs" />
     <Compile Include="CalendarSynchronization\SingleBoardItemProcessors\CardProcessor.cs" />
     <Compile Include="CalendarSynchronization\ISingleBoardItemProcessorFactory.cs" />

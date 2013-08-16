@@ -4,7 +4,6 @@ using Trellendar.Core.DependencyResolution;
 using Trellendar.Domain.Trello;
 using Trellendar.Core.Extensions;
 using Trellendar.Logic.CalendarSynchronization.SingleBoardItemProcessors;
-using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.CalendarSynchronization._Impl
 {
@@ -18,13 +17,8 @@ namespace Trellendar.Logic.CalendarSynchronization._Impl
         {
             _dependencyResolver = dependencyResolver;
 
-            _processors[typeof(Card)] = () => new CardProcessor(_dependencyResolver.Resolve<UserContext>(),
-                                                                _dependencyResolver.Resolve<IEventTimeFrameCreator>(),
-                                                                _dependencyResolver.Resolve<IParser<Due>>());
-
-            _processors[typeof(CheckItem)] = () => new CheckItemProcessor(_dependencyResolver.Resolve<UserContext>(),
-                                                                          _dependencyResolver.Resolve<IParser<Due>>(),
-                                                                          _dependencyResolver.Resolve<IEventTimeFrameCreator>());
+            _processors[typeof(Card)] = () => _dependencyResolver.Resolve<CardProcessor>();
+            _processors[typeof(CheckItem)] = () => _dependencyResolver.Resolve<CheckItemProcessor>();
         }
 
         public ISingleBoardItemProcessor<TItem> Create<TItem>()
