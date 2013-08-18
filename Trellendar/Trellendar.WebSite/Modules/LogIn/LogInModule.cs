@@ -17,6 +17,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 
             Get["/LogIn"] = LogIn;
             Get[LOG_IN_CALLBACK_ACTION] = LogInCallback;
+            Get["/LogOut"] = LogOut;
         }
 
         public dynamic LogIn(dynamic parameters)
