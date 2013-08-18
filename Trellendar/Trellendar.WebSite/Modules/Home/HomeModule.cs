@@ -11,7 +11,7 @@ namespace Trellendar.WebSite.Modules.Home
 
         public dynamic Index(dynamic parameters)
         {
-            return View["index"];
+            return View["Index"];
         }
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Trellendar.WebSite</title>
+    <title>Trellendar</title>
 
 	<style type="text/css">
 
@@ -18,8 +18,17 @@
     <div>
         This view was rendered using the Nancy Razor view engine
     </div>
-    <div>
-        <a href="/LogIn">Log in with Google</a>
-    </div>
+    @if (!Html.IsAuthenticated)
+    {
+        <div>
+            <a href="~/LogIn">Log in with Google</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <a href="~/LogOut">Log out</a>
+        </div>
+    }
 </body>
 </html>
