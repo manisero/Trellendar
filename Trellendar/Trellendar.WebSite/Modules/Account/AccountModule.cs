@@ -7,6 +7,7 @@ namespace Trellendar.WebSite.Modules.Account
 {
     public class AccountModule : NancyModule
     {
+        private const string LOG_IN_CALLBACK_ACTION = "/Account/LogInCallback";
         private const string AUTHORIZATION_STATE = "state";
 
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
@@ -15,16 +16,18 @@ namespace Trellendar.WebSite.Modules.Account
         {
             _calendarAuthorizationApi = calendarAuthorizationApi;
 
-            Get["/Create"] = Create;
-            Get["/OAuthCallback"] = OAuthCallback;
+            Get["/LogIn"] = LogIn;
+            Get["/LogInCallback"] = LogInCallback;
         }
 
-        public dynamic Create(dynamic parameters)
+        public dynamic LogIn(dynamic parameters)
         {
-            return new RedirectResponse(_calendarAuthorizationApi.GetAuthorizationUri("http://localhost:12116/Account/OAuthCallback", AUTHORIZATION_STATE));
+            var authorizationUri = _calendarAuthorizationApi.GetAuthorizationUri(GetAuthorizationRedirectUri(), AUTHORIZATION_STATE);
+
+            return new RedirectResponse(authorizationUri);
         }
 
-        public dynamic OAuthCallback(dynamic parameters)
+        public dynamic LogInCallback(dynamic parameters)
         {
             var state = Context.Request.Query["state"];
             
@@ -45,10 +48,15 @@ namespace Trellendar.WebSite.Modules.Account
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            var token = _calendarAuthorizationApi.GetToken(authorizationCode.Value, "http://localhost:12116/Account/OAuthCallback");
+            var token = _calendarAuthorizationApi.GetToken(authorizationCode.Value, GetAuthorizationRedirectUri());
             var userInfo = _calendarAuthorizationApi.GetUserInfo(token.IdToken);
 
             return "Welcome, " + userInfo.Email;
+        }
+
+        private string GetAuthorizationRedirectUri()
+        {
+            return Request.Url.SiteBase + LOG_IN_CALLBACK_ACTION;
         }
     }
 }
