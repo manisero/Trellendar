@@ -4,7 +4,7 @@ namespace Trellendar.DataAccess.Remote.Calendar
 {
     public interface ICalendarAuthorizationAPI
     {
-        string GetAuthorizationUri(string redirectUri);
+        string GetAuthorizationUri(string redirectUri, string state = null);
 
         Token GetToken(string authorizationCode, string redirectUri);
 
