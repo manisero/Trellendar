@@ -6,7 +6,7 @@ namespace Trellendar.WebSite.Modules.Home
     {
         public HomeModule()
         {
-            Get["/"] = parameters => View["index"];
+            Get["/"] = _ => View["index"];
         }
     }
 }

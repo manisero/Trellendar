@@ -1,11 +1,14 @@
-﻿namespace Trellendar.WebSite
-{
-    using Nancy;
+﻿using Nancy.Bootstrappers.Ninject;
+using Ninject;
+using Trellendar.WebSite.Ninject;
 
-    public class Bootstrapper : DefaultNancyBootstrapper
+namespace Trellendar.WebSite
+{
+    public class Bootstrapper : NinjectNancyBootstrapper
     {
-        // The bootstrapper enables you to reconfigure the composition of the framework,
-        // by overriding the various methods and properties.
-        // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
+        protected override void ConfigureApplicationContainer(IKernel existingContainer)
+        {
+            new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
+        }
     }
 }

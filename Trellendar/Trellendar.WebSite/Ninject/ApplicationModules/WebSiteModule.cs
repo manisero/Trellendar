@@ -3,15 +3,14 @@ using Trellendar.Core.DependencyResolution;
 using Trellendar.Logic.DataAccess;
 using Trellendar.Logic.UserProfileSynchronization;
 
-namespace Trellendar.Service.Ninject.Modules
+namespace Trellendar.WebSite.Ninject.ApplicationModules
 {
-    public class ServiceModule : NinjectModule
+    public class WebSiteModule : NinjectModule
     {
         public override void Load()
         {
             Bind<IDataAccessSettingsProvider>().To<SettingsProvider>();
             Bind<IUserProfileSynchronizaionSettingsProvider>().To<SettingsProvider>();
-            Bind<ITrellendarServiceSettingsProvider>().To<SettingsProvider>();
 
             // Ninject
             Bind<IDependencyResolver>().To<NinjectDependencyResolver>();
