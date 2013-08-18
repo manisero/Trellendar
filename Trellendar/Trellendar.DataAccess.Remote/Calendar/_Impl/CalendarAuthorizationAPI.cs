@@ -28,10 +28,11 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
         {
             var parameters = new Dictionary<string, object>
                 {
-                    { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
                     { "response_type", "code" },
+                    { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                    { "redirect_uri", redirectUri },
                     { "scope", "openid email https://www.googleapis.com/auth/calendar" },
-                    { "redirect_uri", redirectUri }
+                    { "access_type", "offline" }
                 };
 
             if (state != null)

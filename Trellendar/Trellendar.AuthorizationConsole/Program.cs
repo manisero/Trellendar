@@ -15,7 +15,7 @@ namespace Trellendar.AuthorizationConsole
 {
     public class Program
     {
-        private const string CALENDAR_AUTHORIZATION_REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob";
+        private const string CALENDAR_AUTHORIZATION_REDIRECT_URI = "http://localhost";
 
         static void Main(string[] args)
         {
@@ -34,7 +34,7 @@ namespace Trellendar.AuthorizationConsole
             var trelloUri = trelloAuthorization.GetAuthorizationUri();
             Process.Start(trelloUri);
 
-            Console.WriteLine("Plase paste the token here:");
+            Console.WriteLine("Please paste the token here:");
             var trelloToken = Console.ReadLine();
 
             Console.WriteLine();
@@ -50,7 +50,7 @@ namespace Trellendar.AuthorizationConsole
             var caledndarUri = calendarAuthorization.GetAuthorizationUri(CALENDAR_AUTHORIZATION_REDIRECT_URI);
             Process.Start(caledndarUri);
 
-            Console.WriteLine("Plase paste the code here:");
+            Console.WriteLine("Please paste the code here:");
             var calendarCode = Console.ReadLine();
             var calendarToken = calendarAuthorization.GetToken(calendarCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
             var userInfo = calendarAuthorization.GetUserInfo(calendarToken.IdToken);

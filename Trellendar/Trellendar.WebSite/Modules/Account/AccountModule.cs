@@ -45,7 +45,10 @@ namespace Trellendar.WebSite.Modules.Account
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            return authorizationCode.Value;
+            var token = _calendarAuthorizationApi.GetToken(authorizationCode.Value, "http://localhost:12116/Account/OAuthCallback");
+            var userInfo = _calendarAuthorizationApi.GetUserInfo(token.IdToken);
+
+            return "Welcome, " + userInfo.Email;
         }
     }
 }
