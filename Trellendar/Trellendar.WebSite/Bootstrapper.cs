@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Ninject;
 using Ninject;
@@ -13,6 +14,12 @@ namespace Trellendar.WebSite
         protected override void ApplicationStartup(IKernel container, IPipelines pipelines)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
+
+            FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
+                {
+                    RedirectUrl = "~/Account/LogIn",
+                    UserMapper = container.Get<IUserMapper>()
+                });
 
             base.ApplicationStartup(container, pipelines);
         }

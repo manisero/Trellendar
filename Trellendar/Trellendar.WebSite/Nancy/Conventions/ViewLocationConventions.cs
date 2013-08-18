@@ -2,7 +2,7 @@
 using Nancy.Conventions;
 using Trellendar.Core.Extensions;
 
-namespace Trellendar.WebSite.Conventions
+namespace Trellendar.WebSite.Nancy.Conventions
 {
     public class ViewLocationConventions : IConvention
     {

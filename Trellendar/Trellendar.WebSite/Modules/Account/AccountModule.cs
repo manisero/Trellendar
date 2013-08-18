@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Responses;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.UserManagement;
 using Nancy.Authentication.Forms;
 
@@ -52,9 +53,9 @@ namespace Trellendar.WebSite.Modules.Account
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            var user = _userService.GetOrCreateUser(authorizationCode.Value, GetAuthorizationRedirectUri());
+            User user = _userService.GetOrCreateUser(authorizationCode.Value, GetAuthorizationRedirectUri());
 
-            return this.LoginAndRedirect(Guid.NewGuid());
+            return this.LoginAndRedirect(user.UserID);
         }
 
         private string GetAuthorizationRedirectUri()

@@ -101,9 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Conventions\ViewLocationConventions.cs" />
+    <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
     <Compile Include="Modules\Account\AccountModule.cs" />
     <Compile Include="Modules\Home\HomeModule.cs" />
+    <Compile Include="Nancy\UserMapper.cs" />
     <Compile Include="Ninject\ApplicationModules\CoreModule.cs" />
     <Compile Include="Ninject\ApplicationModules\DataAccessModule.cs" />
     <Compile Include="Ninject\ApplicationModules\LogicModule.cs" />
