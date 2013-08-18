@@ -75,12 +75,12 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Conventions\ViewLocationConventions.cs" />
-    <Compile Include="Modules\Index\IndexModule.cs" />
+    <Compile Include="Modules\Home\HomeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Modules\Index\Views\index.cshtml" />
+    <Content Include="Modules\Home\Views\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
