@@ -102,7 +102,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
-    <Compile Include="Modules\Account\AccountModule.cs" />
+    <Compile Include="Modules\LogIn\LogInModule.cs" />
     <Compile Include="Modules\Home\HomeModule.cs" />
     <Compile Include="Nancy\UserMapper.cs" />
     <Compile Include="Ninject\ApplicationModules\CoreModule.cs" />

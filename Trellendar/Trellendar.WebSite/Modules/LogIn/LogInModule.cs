@@ -6,17 +6,17 @@ using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.UserManagement;
 using Nancy.Authentication.Forms;
 
-namespace Trellendar.WebSite.Modules.Account
+namespace Trellendar.WebSite.Modules.LogIn
 {
     public class AccountModule : NancyModule
     {
-        private const string LOG_IN_CALLBACK_ACTION = "/Account/LogInCallback";
+        private const string LOG_IN_CALLBACK_ACTION = "/LogInCallback";
         private const string AUTHORIZATION_STATE = "state";
 
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
         private readonly IUserService _userService;
 
-        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi, IUserService userService) : base("Account")
+        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi, IUserService userService)
         {
             _calendarAuthorizationApi = calendarAuthorizationApi;
             _userService = userService;
