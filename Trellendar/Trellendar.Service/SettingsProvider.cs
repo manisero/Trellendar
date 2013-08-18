@@ -9,22 +9,27 @@ namespace Trellendar.Service
     {
         public int CalendarAccessTokenExpirationReserve
         {
-            get { return int.Parse(GetSetting()); }
+            get { return GetIntSetting(); }
         }
 
         public string TrellendarConfigurationTrelloCardName
         {
-            get { return GetSetting(); }
+            get { return GetStringSetting(); }
         }
 
         public int WorkInterval
         {
-            get { return int.Parse(GetSetting()); }
+            get { return GetIntSetting(); }
         }
 
-        private string GetSetting([CallerMemberName] string key = null)
+        private string GetStringSetting([CallerMemberName] string key = null)
         {
             return ConfigurationManager.AppSettings[key];
+        }
+
+        private int GetIntSetting([CallerMemberName] string key = null)
+        {
+            return int.Parse(GetStringSetting(key));
         }
     }
 }
