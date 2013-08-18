@@ -11,7 +11,7 @@ namespace Trellendar.WebSite.Modules.LogIn
     public class AccountModule : NancyModule
     {
         private const string LOG_IN_CALLBACK_ACTION = "/LogInCallback";
-        private const string AUTHORIZATION_STATE = "state";
+        private const string AUTHORIZATION_STATE_PARAMETER_NAME = "state";
 
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
         private readonly IUserService _userService;
@@ -22,12 +22,15 @@ namespace Trellendar.WebSite.Modules.LogIn
             _userService = userService;
 
             Get["/LogIn"] = LogIn;
-            Get["/LogInCallback"] = LogInCallback;
+            Get[LOG_IN_CALLBACK_ACTION] = LogInCallback;
         }
 
         public dynamic LogIn(dynamic parameters)
         {
-            var authorizationUri = _calendarAuthorizationApi.GetAuthorizationUri(GetAuthorizationRedirectUri(), AUTHORIZATION_STATE);
+            var authorizationState = Guid.NewGuid().ToString();
+
+            Session[AUTHORIZATION_STATE_PARAMETER_NAME] = authorizationState;
+            var authorizationUri = _calendarAuthorizationApi.GetAuthorizationUri(GetAuthorizationRedirectUri(), authorizationState);
 
             return new RedirectResponse(authorizationUri);
         }
@@ -35,13 +38,16 @@ namespace Trellendar.WebSite.Modules.LogIn
         public dynamic LogInCallback(dynamic parameters)
         {
             var state = Context.Request.Query["state"];
-            
+            var expectedState = Session[AUTHORIZATION_STATE_PARAMETER_NAME] as string;
+
+            Session.Delete(AUTHORIZATION_STATE_PARAMETER_NAME);
+
             if (!state.HasValue)
             {
                 throw new InvalidOperationException("The request query should contain 'state' parameter");
             }
 
-            if (state.Value != AUTHORIZATION_STATE)
+            if (expectedState == null || state.Value != expectedState)
             {
                 throw new InvalidOperationException("The state specified does not match the expected state");
             }

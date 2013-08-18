@@ -2,6 +2,7 @@
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Ninject;
+using Nancy.Session;
 using Ninject;
 using Trellendar.DataAccess.Local;
 using Trellendar.DataAccess.Local.Migrations;
@@ -15,12 +16,13 @@ namespace Trellendar.WebSite
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
 
+            CookieBasedSessions.Enable(pipelines);
             FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
                 {
                     RedirectUrl = "~/LogIn",
                     UserMapper = container.Get<IUserMapper>()
                 });
-
+            
             base.ApplicationStartup(container, pipelines);
         }
 
