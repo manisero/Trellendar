@@ -24,7 +24,7 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
             _jsonSerializer = jsonSerializer;
         }
 
-        public string GetAuthorizationUri()
+        public string GetAuthorizationUri(string redirectUri)
         {
             return CalendarClient.FormatRequestUri("https://accounts.google.com/o/oauth2/auth",
                                                    new Dictionary<string, object>
@@ -32,11 +32,11 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
                                                            { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
                                                            { "response_type", "code" },
                                                            { "scope", "openid email https://www.googleapis.com/auth/calendar" },
-                                                           { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI }
+                                                           { "redirect_uri", redirectUri }
                                                        });
         }
 
-        public Token GetToken(string authorizationCode)
+        public Token GetToken(string authorizationCode, string redirectUri)
         {
             var timeStamp = DateTime.UtcNow;
             var tokenJson = CalendarClient.Post("https://accounts.google.com/o/oauth2/token",
@@ -45,7 +45,7 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
                                                         { "code", authorizationCode },
                                                         { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
                                                         { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
-                                                        { "redirect_uri", ApplicationKeys.GOOGLE_API_REDIRECT_URI },
+                                                        { "redirect_uri", redirectUri },
                                                         { "grant_type", "authorization_code" }
                                                     });
 

@@ -8,11 +8,16 @@ namespace Trellendar.WebSite.Modules.Account
     {
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
 
-        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi) : base("account")
+        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi) : base("Account")
         {
             _calendarAuthorizationApi = calendarAuthorizationApi;
 
-            Get["/Create"] = _ => new RedirectResponse(_calendarAuthorizationApi.GetAuthorizationUri());
+            Get["/Create"] = Create;
+        }
+
+        public dynamic Create(dynamic parameters)
+        {
+            return new RedirectResponse(_calendarAuthorizationApi.GetAuthorizationUri("urn:ietf:wg:oauth:2.0:oob"));
         }
     }
 }
