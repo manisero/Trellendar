@@ -17,7 +17,7 @@ namespace Trellendar.WebSite
 
             FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
                 {
-                    RedirectUrl = "~/Account/LogIn",
+                    RedirectUrl = "~/LogIn",
                     UserMapper = container.Get<IUserMapper>()
                 });
 

@@ -58,6 +58,11 @@ namespace Trellendar.WebSite.Modules.LogIn
             return this.LoginAndRedirect(user.UserID);
         }
 
+        public dynamic LogOut(dynamic parameters)
+        {
+            return this.Logout("/");
+        }
+
         private string GetAuthorizationRedirectUri()
         {
             return Request.Url.SiteBase + LOG_IN_CALLBACK_ACTION;
