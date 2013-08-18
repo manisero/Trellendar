@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Responses;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.WebSite.Modules.Account
 {
@@ -11,10 +12,12 @@ namespace Trellendar.WebSite.Modules.Account
         private const string AUTHORIZATION_STATE = "state";
 
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
+        private readonly IUserService _userService;
 
-        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi) : base("Account")
+        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi, IUserService userService) : base("Account")
         {
             _calendarAuthorizationApi = calendarAuthorizationApi;
+            _userService = userService;
 
             Get["/LogIn"] = LogIn;
             Get["/LogInCallback"] = LogInCallback;
@@ -48,10 +51,9 @@ namespace Trellendar.WebSite.Modules.Account
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            var token = _calendarAuthorizationApi.GetToken(authorizationCode.Value, GetAuthorizationRedirectUri());
-            var userInfo = _calendarAuthorizationApi.GetUserInfo(token.IdToken);
+            var user = _userService.GetOrCreateUser(authorizationCode.Value, GetAuthorizationRedirectUri());
 
-            return "Welcome, " + userInfo.Email;
+            return "Welcome, " + user.Email;
         }
 
         private string GetAuthorizationRedirectUri()
