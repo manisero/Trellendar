@@ -26,7 +26,7 @@ namespace Trellendar.Logic.UserManagement._Impl
             var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
 
             var userRepository = _repositoryFactory.Create<User>();
-            var user = userRepository.GetAll().SingleOrDefault(x => x.Email == userInfo.Email);
+            var user = userRepository.GetSingleOrDefault(x => x.Email == userInfo.Email);
 
             if (user == null)
             {

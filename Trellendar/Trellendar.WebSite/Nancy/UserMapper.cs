@@ -27,7 +27,7 @@ namespace Trellendar.WebSite.Nancy
 
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            var user = _repositoryFactory.Create<User>().GetAll().SingleOrDefault(x => x.UserID == identifier);
+            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.UserID == identifier);
 
             return user != null
                        ? new UserIdentity { UserName = user.Email }
