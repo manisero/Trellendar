@@ -101,6 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Logic\ILogInService.cs" />
+    <Compile Include="Logic\_Impl\LogInService.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
     <Compile Include="Modules\LogIn\LogInModule.cs" />
     <Compile Include="Modules\Home\HomeModule.cs" />

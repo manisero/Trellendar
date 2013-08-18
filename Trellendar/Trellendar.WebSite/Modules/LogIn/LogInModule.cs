@@ -1,25 +1,19 @@
-﻿using System;
-using Nancy;
+﻿using Nancy;
 using Nancy.Responses;
-using Trellendar.DataAccess.Remote.Calendar;
-using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.UserManagement;
 using Nancy.Authentication.Forms;
+using Trellendar.WebSite.Logic;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
     public class AccountModule : NancyModule
     {
         private const string LOG_IN_CALLBACK_ACTION = "/LogInCallback";
-        private const string AUTHORIZATION_STATE_PARAMETER_NAME = "state";
 
-        private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
-        private readonly IUserService _userService;
+        private readonly ILogInService _logInService;
 
-        public AccountModule(ICalendarAuthorizationAPI calendarAuthorizationApi, IUserService userService)
+        public AccountModule(ILogInService logInService)
         {
-            _calendarAuthorizationApi = calendarAuthorizationApi;
-            _userService = userService;
+            _logInService = logInService;
 
             Get["/LogIn"] = LogIn;
             Get[LOG_IN_CALLBACK_ACTION] = LogInCallback;
@@ -27,39 +21,14 @@ namespace Trellendar.WebSite.Modules.LogIn
 
         public dynamic LogIn(dynamic parameters)
         {
-            var authorizationState = Guid.NewGuid().ToString();
-
-            Session[AUTHORIZATION_STATE_PARAMETER_NAME] = authorizationState;
-            var authorizationUri = _calendarAuthorizationApi.GetAuthorizationUri(GetAuthorizationRedirectUri(), authorizationState);
+            var authorizationUri = _logInService.PrepareAuthorizationUri(Session, FormatAuthorizationRedirectUri());
 
             return new RedirectResponse(authorizationUri);
         }
 
         public dynamic LogInCallback(dynamic parameters)
         {
-            var state = Context.Request.Query["state"];
-            var expectedState = Session[AUTHORIZATION_STATE_PARAMETER_NAME] as string;
-
-            Session.Delete(AUTHORIZATION_STATE_PARAMETER_NAME);
-
-            if (!state.HasValue)
-            {
-                throw new InvalidOperationException("The request query should contain 'state' parameter");
-            }
-
-            if (expectedState == null || state.Value != expectedState)
-            {
-                throw new InvalidOperationException("The state specified does not match the expected state");
-            }
-
-            var authorizationCode = Context.Request.Query["code"];
-
-            if (!authorizationCode.HasValue)
-            {
-                throw new InvalidOperationException("The request query should contain 'code' parameter");
-            }
-
-            User user = _userService.GetOrCreateUser(authorizationCode.Value, GetAuthorizationRedirectUri());
+            var user = _logInService.HandleLoginCallback(Context.Request, Session, FormatAuthorizationRedirectUri());
 
             return this.LoginAndRedirect(user.UserID);
         }
@@ -69,7 +38,7 @@ namespace Trellendar.WebSite.Modules.LogIn
             return this.Logout("/");
         }
 
-        private string GetAuthorizationRedirectUri()
+        private string FormatAuthorizationRedirectUri()
         {
             return Request.Url.SiteBase + LOG_IN_CALLBACK_ACTION;
         }
