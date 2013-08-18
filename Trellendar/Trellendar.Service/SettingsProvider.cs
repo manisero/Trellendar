@@ -5,7 +5,7 @@ using Trellendar.Logic.UserProfileSynchronization;
 
 namespace Trellendar.Service
 {
-    public class SettingsProvider : IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider
+    public class SettingsProvider : IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider, ITrellendarServiceSettingsProvider
     {
         public int CalendarAccessTokenExpirationReserve
         {
@@ -15,6 +15,11 @@ namespace Trellendar.Service
         public string TrellendarConfigurationTrelloCardName
         {
             get { return GetSetting(); }
+        }
+
+        public int WorkInterval
+        {
+            get { return int.Parse(GetSetting()); }
         }
 
         private string GetSetting([CallerMemberName] string key = null)
