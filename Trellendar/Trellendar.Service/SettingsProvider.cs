@@ -1,11 +1,11 @@
 ﻿using Trellendar.Core.Settings;
 using Trellendar.Logic.DataAccess;
-using Trellendar.Logic.UserProfileSynchronization;
+using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.Service
 {
     public class SettingsProvider : ConfigurationBasedSettingsProvider,
-                                    IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider, ITrellendarServiceSettingsProvider
+                                    IDataAccessSettingsProvider, IUserSynchronizationSettingsProvider, ITrellendarServiceSettingsProvider
     {
         public int CalendarAccessTokenExpirationReserve
         {

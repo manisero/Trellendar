@@ -1,9 +1,9 @@
 ﻿using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trello;
 
-namespace Trellendar.Logic.UserProfileSynchronization
+namespace Trellendar.Logic.UserManagement
 {
-    public interface IUserProfileService
+    public interface IUserSynchronizationService
     {
         void UpdateUser(Calendar userCalendar);
 

@@ -5,18 +5,18 @@ using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using System.Linq;
 
-namespace Trellendar.Logic.UserProfileSynchronization._Impl
+namespace Trellendar.Logic.UserManagement._Impl
 {
-    public class UserProfileService : IUserProfileService
+    public class UserSynchronizationService : IUserSynchronizationService
     {
         private readonly UserContext _userContext;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IRepositoryFactory _repositoryFactory;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserProfileSynchronizaionSettingsProvider _settingsProvider;
+        private readonly IUserSynchronizationSettingsProvider _settingsProvider;
 
-        public UserProfileService(UserContext userContext, IJsonSerializer jsonSerializer, IRepositoryFactory repositoryFactory,
-                                  IUnitOfWork unitOfWork, IUserProfileSynchronizaionSettingsProvider settingsProvider)
+        public UserSynchronizationService(UserContext userContext, IJsonSerializer jsonSerializer, IRepositoryFactory repositoryFactory,
+                                          IUnitOfWork unitOfWork, IUserSynchronizationSettingsProvider settingsProvider)
         {
             _userContext = userContext;
             _jsonSerializer = jsonSerializer;

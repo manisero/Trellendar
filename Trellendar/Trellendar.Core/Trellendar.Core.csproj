@@ -37,6 +37,7 @@
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,7 @@
     <Compile Include="Serialization\IXmlSerializer.cs" />
     <Compile Include="Serialization\_Impl\JsonSerializer.cs" />
     <Compile Include="Serialization\_Impl\XmlSerializer.cs" />
+    <Compile Include="Settings\ConfigurationBasedSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
