@@ -3,6 +3,7 @@ using Nancy;
 using Nancy.Responses;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Logic.UserManagement;
+using Nancy.Authentication.Forms;
 
 namespace Trellendar.WebSite.Modules.Account
 {
@@ -53,7 +54,7 @@ namespace Trellendar.WebSite.Modules.Account
 
             var user = _userService.GetOrCreateUser(authorizationCode.Value, GetAuthorizationRedirectUri());
 
-            return "Welcome, " + user.Email;
+            return this.LoginAndRedirect(Guid.NewGuid());
         }
 
         private string GetAuthorizationRedirectUri()
