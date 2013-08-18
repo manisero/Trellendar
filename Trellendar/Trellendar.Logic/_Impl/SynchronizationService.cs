@@ -5,7 +5,7 @@ using Trellendar.Domain.Trellendar;
 using System.Linq;
 using Trellendar.Logic.CalendarSynchronization;
 using Trellendar.Logic.Domain;
-using Trellendar.Logic.UserProfileSynchronization;
+using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.Logic._Impl
 {
@@ -14,7 +14,7 @@ namespace Trellendar.Logic._Impl
         private readonly UserContext _userContext;
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarApi;
-        private readonly IUserProfileService _userProfileService;
+        private readonly IUserSynchronizationService _userProfileService;
         private readonly ICalendarService _calendarService;
 
         private User User
@@ -22,7 +22,7 @@ namespace Trellendar.Logic._Impl
             get { return _userContext.User; }
         }
 
-        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, IUserProfileService userProfileService, ICalendarService calendarService)
+        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, IUserSynchronizationService userProfileService, ICalendarService calendarService)
         {
             _userContext = userContext;
             _trelloApi = trelloApi;

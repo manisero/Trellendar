@@ -6,7 +6,12 @@ namespace Trellendar.WebSite.Modules.Home
     {
         public HomeModule()
         {
-            Get["/"] = parameters => View["index"];
+            Get["/"] = Index;
+        }
+
+        public dynamic Index(dynamic parameters)
+        {
+            return View["Index"];
         }
     }
 }

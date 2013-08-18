@@ -4,7 +4,7 @@ namespace Trellendar.Domain.Trellendar
 {
     public class User
     {
-        public int UserID { get; set; }
+        public Guid UserID { get; set; }
 
         public string Email { get; set; }
 

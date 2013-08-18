@@ -12,8 +12,8 @@ using Trellendar.Logic.DataAccess._Impl;
 using Trellendar.Logic.Domain;
 using Trellendar.Logic.TimeZones;
 using Trellendar.Logic.TimeZones._Impl;
-using Trellendar.Logic.UserProfileSynchronization;
-using Trellendar.Logic.UserProfileSynchronization._Impl;
+using Trellendar.Logic.UserManagement;
+using Trellendar.Logic.UserManagement._Impl;
 using Trellendar.Logic._Impl;
 
 namespace Trellendar.Service.Ninject.Modules
@@ -48,7 +48,7 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IExtendedPropertiesFormatter<CheckItem>>().To<CheckItemExtendedPropertiesFormatter>();
 
             // User Profile Synchronization
-            Bind<IUserProfileService>().To<UserProfileService>();
+            Bind<IUserSynchronizationService>().To<UserSynchronizationService>();
 
             // Data Access
             Bind<IAccessTokenProviderFactory>().To<AccessTokenProviderFactory>();

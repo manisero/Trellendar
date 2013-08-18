@@ -1,11 +1,11 @@
-﻿using System.Configuration;
-using System.Runtime.CompilerServices;
+﻿using Trellendar.Core.Settings;
 using Trellendar.Logic.DataAccess;
-using Trellendar.Logic.UserProfileSynchronization;
+using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.Service
 {
-    public class SettingsProvider : IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider, ITrellendarServiceSettingsProvider
+    public class SettingsProvider : ConfigurationBasedSettingsProvider,
+                                    IDataAccessSettingsProvider, IUserSynchronizationSettingsProvider, ITrellendarServiceSettingsProvider
     {
         public int CalendarAccessTokenExpirationReserve
         {
@@ -20,16 +20,6 @@ namespace Trellendar.Service
         public int WorkInterval
         {
             get { return GetIntSetting(); }
-        }
-
-        private string GetStringSetting([CallerMemberName] string key = null)
-        {
-            return ConfigurationManager.AppSettings[key];
-        }
-
-        private int GetIntSetting([CallerMemberName] string key = null)
-        {
-            return int.Parse(GetStringSetting(key));
         }
     }
 }

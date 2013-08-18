@@ -65,7 +65,7 @@
     <Compile Include="Ninject\Modules\DataAccessModule.cs" />
     <Compile Include="Ninject\Modules\LogicModule.cs" />
     <Compile Include="Ninject\Modules\ServiceModule.cs" />
-    <Compile Include="Ninject\DependencyResolver.cs" />
+    <Compile Include="Ninject\NinjectDependencyResolver.cs" />
     <Compile Include="SettingsProvider.cs" />
     <Compile Include="TrellendarService.cs">
       <SubType>Component</SubType>

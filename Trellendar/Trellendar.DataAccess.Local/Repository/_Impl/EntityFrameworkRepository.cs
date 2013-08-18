@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Trellendar.DataAccess.Local.Repository._Impl
 {
@@ -22,6 +24,16 @@ namespace Trellendar.DataAccess.Local.Repository._Impl
         public IReadOnlyCollection<TEntity> GetAll()
         {
             return EntitySet.ToList();
+        }
+
+        public TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        {
+            return EntitySet.SingleOrDefault(predicate);
+        }
+
+        public IReadOnlyCollection<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate)
+        {
+            return EntitySet.Where(predicate).ToList();
         }
 
         public void Add(TEntity entity)

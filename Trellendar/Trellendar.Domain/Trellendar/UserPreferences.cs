@@ -4,7 +4,7 @@ namespace Trellendar.Domain.Trellendar
 {
     public class UserPreferences
     {
-        public int UserID { get; set; }
+        public Guid UserID { get; set; }
 
         public virtual User User { get; set; }
 

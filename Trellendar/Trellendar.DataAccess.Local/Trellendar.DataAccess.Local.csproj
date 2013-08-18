@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201308152355503_TrelloItemShortcutMarkers.Designer.cs">
       <DependentUpon>201308152355503_TrelloItemShortcutMarkers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308181941433_UserIdAsGuid.cs" />
+    <Compile Include="Migrations\201308181941433_UserIdAsGuid.Designer.cs">
+      <DependentUpon>201308181941433_UserIdAsGuid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308152355503_TrelloItemShortcutMarkers.resx">
       <DependentUpon>201308152355503_TrelloItemShortcutMarkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308181941433_UserIdAsGuid.resx">
+      <DependentUpon>201308181941433_UserIdAsGuid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

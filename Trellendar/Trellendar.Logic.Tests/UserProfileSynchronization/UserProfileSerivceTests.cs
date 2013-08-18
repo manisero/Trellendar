@@ -5,8 +5,8 @@ using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.UserProfileSynchronization;
-using Trellendar.Logic.UserProfileSynchronization._Impl;
+using Trellendar.Logic.UserManagement;
+using Trellendar.Logic.UserManagement._Impl;
 
 namespace Trellendar.Logic.Tests.UserProfileSynchronization
 {
@@ -27,7 +27,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act
-            AutoMoqer.Resolve<UserProfileService>().UpdateUser(calendar);
+            AutoMoqer.Resolve<UserSynchronizationService>().UpdateUser(calendar);
 
             // Assert
             Assert.AreEqual(calendar.TimeZone, user.CalendarTimeZone);
@@ -51,7 +51,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
 
             MockUserContext(user);
 
-            AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
+            AutoMoqer.GetMock<IUserSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
                      .Returns(configurationCard.Name);
 
@@ -67,12 +67,12 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act
-            AutoMoqer.Resolve<UserProfileService>().UpdateUserPreferences(board);
+            AutoMoqer.Resolve<UserSynchronizationService>().UpdateUserPreferences(board);
 
             // Assert
             Assert.AreSame(newPreferences, user.UserPreferences);
 
-            VerifyMock<IUserProfileSynchronizaionSettingsProvider>();
+            VerifyMock<IUserSynchronizationSettingsProvider>();
             VerifyMock<IJsonSerializer>();
             VerifyMock<IUnitOfWork>();
         }
@@ -93,7 +93,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             MockUserContext(user);
 
             // Act
-            AutoMoqer.Resolve<UserProfileService>().UpdateUserPreferences(board);
+            AutoMoqer.Resolve<UserSynchronizationService>().UpdateUserPreferences(board);
 
             // Assert
             Assert.AreSame(preferences, user.UserPreferences);
@@ -114,17 +114,17 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
 
             MockUserContext(user);
 
-            AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
+            AutoMoqer.GetMock<IUserSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
                      .Returns("configuration card");
 
             // Act
-            AutoMoqer.Resolve<UserProfileService>().UpdateUserPreferences(board);
+            AutoMoqer.Resolve<UserSynchronizationService>().UpdateUserPreferences(board);
 
             // Assert
             Assert.AreSame(preferences, user.UserPreferences);
 
-            VerifyMock<IUserProfileSynchronizaionSettingsProvider>();
+            VerifyMock<IUserSynchronizationSettingsProvider>();
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
 
             MockUserContext(user);
 
-            AutoMoqer.GetMock<IUserProfileSynchronizaionSettingsProvider>()
+            AutoMoqer.GetMock<IUserSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
                      .Returns(configurationCard.Name);
 
@@ -154,12 +154,12 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act
-            AutoMoqer.Resolve<UserProfileService>().UpdateUserPreferences(board);
+            AutoMoqer.Resolve<UserSynchronizationService>().UpdateUserPreferences(board);
 
             // Assert
             Assert.AreSame(preferences, user.UserPreferences);
 
-            VerifyMock<IUserProfileSynchronizaionSettingsProvider>();
+            VerifyMock<IUserSynchronizationSettingsProvider>();
             VerifyMock<IJsonSerializer>();
         }
     }

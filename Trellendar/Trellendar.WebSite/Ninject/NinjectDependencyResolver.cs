@@ -1,13 +1,13 @@
 ﻿using Ninject;
 using Trellendar.Core.DependencyResolution;
 
-namespace Trellendar.Service.Ninject
+namespace Trellendar.WebSite.Ninject
 {
-    public class DependencyResolver : IDependencyResolver
+    public class NinjectDependencyResolver : IDependencyResolver
     {
         private readonly IKernel _kernel;
 
-        public DependencyResolver(IKernel kernel)
+        public NinjectDependencyResolver(IKernel kernel)
         {
             _kernel = kernel;
         }

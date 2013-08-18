@@ -1,7 +1,7 @@
 ﻿using Ninject.Modules;
 using Trellendar.Core.DependencyResolution;
 using Trellendar.Logic.DataAccess;
-using Trellendar.Logic.UserProfileSynchronization;
+using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.Service.Ninject.Modules
 {
@@ -10,11 +10,11 @@ namespace Trellendar.Service.Ninject.Modules
         public override void Load()
         {
             Bind<IDataAccessSettingsProvider>().To<SettingsProvider>();
-            Bind<IUserProfileSynchronizaionSettingsProvider>().To<SettingsProvider>();
+            Bind<IUserSynchronizationSettingsProvider>().To<SettingsProvider>();
             Bind<ITrellendarServiceSettingsProvider>().To<SettingsProvider>();
 
             // Ninject
-            Bind<IDependencyResolver>().To<DependencyResolver>();
+            Bind<IDependencyResolver>().To<NinjectDependencyResolver>();
         }
     }
 }

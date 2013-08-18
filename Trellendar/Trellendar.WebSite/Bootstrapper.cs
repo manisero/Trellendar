@@ -1,11 +1,34 @@
-﻿namespace Trellendar.WebSite
-{
-    using Nancy;
+﻿using System.Data.Entity;
+using Nancy.Authentication.Forms;
+using Nancy.Bootstrapper;
+using Nancy.Bootstrappers.Ninject;
+using Nancy.Session;
+using Ninject;
+using Trellendar.DataAccess.Local;
+using Trellendar.DataAccess.Local.Migrations;
+using Trellendar.WebSite.Ninject;
 
-    public class Bootstrapper : DefaultNancyBootstrapper
+namespace Trellendar.WebSite
+{
+    public class Bootstrapper : NinjectNancyBootstrapper
     {
-        // The bootstrapper enables you to reconfigure the composition of the framework,
-        // by overriding the various methods and properties.
-        // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
+        protected override void ApplicationStartup(IKernel container, IPipelines pipelines)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
+
+            CookieBasedSessions.Enable(pipelines);
+            FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
+                {
+                    RedirectUrl = "~/LogIn",
+                    UserMapper = container.Get<IUserMapper>()
+                });
+            
+            base.ApplicationStartup(container, pipelines);
+        }
+
+        protected override void ConfigureApplicationContainer(IKernel existingContainer)
+        {
+            new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
+        }
     }
 }
