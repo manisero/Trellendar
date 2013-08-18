@@ -5,21 +5,31 @@ using Trellendar.Logic.UserProfileSynchronization;
 
 namespace Trellendar.Service
 {
-    public class SettingsProvider : IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider
+    public class SettingsProvider : IDataAccessSettingsProvider, IUserProfileSynchronizaionSettingsProvider, ITrellendarServiceSettingsProvider
     {
         public int CalendarAccessTokenExpirationReserve
         {
-            get { return int.Parse(GetSetting()); }
+            get { return GetIntSetting(); }
         }
 
         public string TrellendarConfigurationTrelloCardName
         {
-            get { return GetSetting(); }
+            get { return GetStringSetting(); }
         }
 
-        private string GetSetting([CallerMemberName] string key = null)
+        public int WorkInterval
+        {
+            get { return GetIntSetting(); }
+        }
+
+        private string GetStringSetting([CallerMemberName] string key = null)
         {
             return ConfigurationManager.AppSettings[key];
+        }
+
+        private int GetIntSetting([CallerMemberName] string key = null)
+        {
+            return int.Parse(GetStringSetting(key));
         }
     }
 }

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITrellendarServiceSettingsProvider.cs" />
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Ninject\Modules\CoreModule.cs" />
     <Compile Include="Ninject\Modules\DataAccessModule.cs" />

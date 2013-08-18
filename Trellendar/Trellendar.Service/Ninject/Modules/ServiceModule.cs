@@ -11,6 +11,7 @@ namespace Trellendar.Service.Ninject.Modules
         {
             Bind<IDataAccessSettingsProvider>().To<SettingsProvider>();
             Bind<IUserProfileSynchronizaionSettingsProvider>().To<SettingsProvider>();
+            Bind<ITrellendarServiceSettingsProvider>().To<SettingsProvider>();
 
             // Ninject
             Bind<IDependencyResolver>().To<DependencyResolver>();
