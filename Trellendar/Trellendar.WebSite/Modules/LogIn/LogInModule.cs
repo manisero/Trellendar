@@ -5,13 +5,13 @@ using Trellendar.WebSite.Logic;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
-    public class AccountModule : NancyModule
+    public class LogInModule : NancyModule
     {
         private const string LOG_IN_CALLBACK_ACTION = "/LogInCallback";
 
         private readonly ILogInService _logInService;
 
-        public AccountModule(ILogInService logInService)
+        public LogInModule(ILogInService logInService)
         {
             _logInService = logInService;
 
