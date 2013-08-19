@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
@@ -6,6 +7,7 @@ namespace Trellendar.WebSite.Modules.LogIn
     {
         public Guid UserID { get; set; }
 
+        [Required]
         public string AccessToken { get; set; }
     }
 }

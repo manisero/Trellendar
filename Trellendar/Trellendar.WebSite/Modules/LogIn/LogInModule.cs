@@ -5,6 +5,7 @@ using Nancy.Authentication.Forms;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.WebSite.Logic;
 using Nancy.ModelBinding;
+using System.Linq;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
@@ -56,7 +57,13 @@ namespace Trellendar.WebSite.Modules.LogIn
 
         public dynamic TrelloLogInCallback(dynamic parameters)
         {
-            var model = this.Bind<TrelloLogInResultModel>();
+            var model = this.BindAndValidate<TrelloLogInResultModel>();
+
+            if (!ModelValidationResult.IsValid)
+            {
+                throw new InvalidOperationException(ModelValidationResult.Errors.Select(x => x.GetMessage(x.MemberNames.First())).First());
+            }
+            
             var userId = _logInService.RegisterUser(model.UserID, model.AccessToken);
 
             return this.LoginAndRedirect(userId);
