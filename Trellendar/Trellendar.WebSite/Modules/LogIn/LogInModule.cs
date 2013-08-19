@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Responses;
 using Nancy.Authentication.Forms;
+using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.WebSite.Logic;
 using Nancy.ModelBinding;
 
@@ -12,10 +13,12 @@ namespace Trellendar.WebSite.Modules.LogIn
         private const string GOOGLE_LOG_IN_CALLBACK_ACTION = "/GoogleLogInCallback";
 
         private readonly ILogInService _logInService;
+        private readonly ITrelloAuthorizationAPI _trelloAuthorizationApi;
 
-        public LogInModule(ILogInService logInService)
+        public LogInModule(ILogInService logInService, ITrelloAuthorizationAPI trelloAuthorizationApi)
         {
             _logInService = logInService;
+            _trelloAuthorizationApi = trelloAuthorizationApi;
 
             Get["/LogIn"] = LogIn;
             Get[GOOGLE_LOG_IN_CALLBACK_ACTION] = GoogleLogInCallback;
@@ -41,13 +44,19 @@ namespace Trellendar.WebSite.Modules.LogIn
             }
             else
             {
-                return View["TrelloLogIn", userId.ToString()];
+                var model = new TrelloLogInModel
+                {
+                    AuthorizationUrl = _trelloAuthorizationApi.GetAuthorizationUri(),
+                    UserID = userId.ToString()
+                };
+
+                return View["TrelloLogIn", model];
             }
         }
 
         public dynamic TrelloLogInCallback(dynamic parameters)
         {
-            var model = this.Bind<TrelloLogInModel>();
+            var model = this.Bind<TrelloLogInResultModel>();
             var userId = _logInService.RegisterUser(model.UserID, model.AccessToken);
 
             return this.LoginAndRedirect(userId);

@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Trellendar.WebSite.Modules.LogIn
+﻿namespace Trellendar.WebSite.Modules.LogIn
 {
     public class TrelloLogInModel
     {
-        public Guid UserID { get; set; }
+        public string AuthorizationUrl { get; set; }
 
-        public string AccessToken { get; set; }
+        public string UserID { get; set; }
     }
 }

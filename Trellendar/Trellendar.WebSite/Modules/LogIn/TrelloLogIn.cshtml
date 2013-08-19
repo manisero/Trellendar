@@ -12,9 +12,15 @@
 </head>
 <body>
     <form action="~/TrelloLogInCallback">
-        <input type="hidden" name="UserID" value="@Model" />
+        <input type="hidden" name="UserID" value="@Model.UserID" />
         <input type="text" name="AccessToken" />
         <input type="submit" />
     </form>
 </body>
 </html>
+
+<script type="text/javascript">
+
+    window.open('@Model.AuthorizationUrl', '_blank');
+
+</script>
