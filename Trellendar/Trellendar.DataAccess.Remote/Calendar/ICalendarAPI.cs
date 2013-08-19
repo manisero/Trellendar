@@ -4,6 +4,8 @@ namespace Trellendar.DataAccess.Remote.Calendar
 {
     public interface ICalendarAPI
     {
+        object GetCalendars();
+
         Domain.Calendar.Calendar GetCalendar(string calendarId);
 
         CalendarEvents GetEvents(string calendarId);

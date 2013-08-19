@@ -2,7 +2,6 @@ using System;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Trellendar;
-using System.Linq;
 using Trellendar.Logic.Domain;
 
 namespace Trellendar.Logic.UserManagement._Impl
@@ -10,12 +9,15 @@ namespace Trellendar.Logic.UserManagement._Impl
     public class UserService : IUserService
     {
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationAPI;
+        private readonly ICalendarAPI _calendarAPI;
         private readonly IRepositoryFactory _repositoryFactory;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(ICalendarAuthorizationAPI calendarAuthorizationAPI, IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork)
+        public UserService(ICalendarAuthorizationAPI calendarAuthorizationAPI, ICalendarAPI calendarAPI,
+                           IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork)
         {
             _calendarAuthorizationAPI = calendarAuthorizationAPI;
+            _calendarAPI = calendarAPI;
             _repositoryFactory = repositoryFactory;
             _unitOfWork = unitOfWork;
         }
@@ -44,6 +46,16 @@ namespace Trellendar.Logic.UserManagement._Impl
             }
 
             return user;
+        }
+
+        public User GetUser(string userEmail)
+        {
+            return _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
+        }
+
+        public object GetAvailableCalendars()
+        {
+            return _calendarAPI.GetCalendars();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿<!doctype html>
+﻿@using Trellendar.WebSite.Modules.UserProfile.Models
+@inherits NancyRazorViewBase<IndexModel>
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,6 +14,6 @@
 	</style>
 </head>
 <body>
-    Your profile...
+    @Model.Email's profile...
 </body>
 </html>
