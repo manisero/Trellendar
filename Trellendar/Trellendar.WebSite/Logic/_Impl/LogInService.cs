@@ -32,8 +32,6 @@ namespace Trellendar.WebSite.Logic._Impl
             var state = request.Query["state"];
             var expectedState = session[AUTHORIZATION_STATE_PARAMETER_NAME] as string;
 
-            session.Delete(AUTHORIZATION_STATE_PARAMETER_NAME);
-
             if (!state.HasValue)
             {
                 throw new InvalidOperationException("The request query should contain 'state' parameter");

@@ -50,7 +50,7 @@ namespace Trellendar.WebSite.Modules.LogIn
                     UserID = userId.ToString()
                 };
 
-                return View["TrelloLogIn", model];
+                return View[model];
             }
         }
 
