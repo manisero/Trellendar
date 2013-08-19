@@ -30,7 +30,7 @@ namespace Trellendar.Logic.UserManagement._Impl
             var token = _calendarAuthorizationAPI.GetToken(authorizationCode, authorizationRedirectUri);
             var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
 
-            var user = GetUser(userInfo.Email);
+            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userInfo.Email);
 
             if (user != null)
             {
@@ -54,11 +54,6 @@ namespace Trellendar.Logic.UserManagement._Impl
                 userId = newUser.UnregisteredUserID;
                 return false;
             }
-        }
-
-        public User GetUser(string userEmail)
-        {
-            return _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
         }
 
         public Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken)
