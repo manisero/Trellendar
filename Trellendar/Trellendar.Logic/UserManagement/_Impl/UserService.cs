@@ -24,30 +24,35 @@ namespace Trellendar.Logic.UserManagement._Impl
             _unitOfWork = unitOfWork;
         }
 
-        public User GetOrCreateUser(string authorizationCode, string authorizationRedirectUri)
+        public bool TryGetUserID(string authorizationCode, string authorizationRedirectUri, out Guid userId)
         {
             var token = _calendarAuthorizationAPI.GetToken(authorizationCode, authorizationRedirectUri);
             var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
 
-            var userRepository = _repositoryFactory.Create<User>();
-            var user = userRepository.GetSingleOrDefault(x => x.Email == userInfo.Email);
+            var user = GetUser(userInfo.Email);
 
-            if (user == null)
+            if (user != null)
             {
-                user = new User
+                userId = user.UserID;
+                return true;
+            }
+            else
+            {
+                var newUser = new UnregisteredUser
                     {
                         Email = userInfo.Email,
-                        CalendarAccessToken = token.AccessToken,
-                        CalendarAccessTokenExpirationTS = token.GetExpirationTS(),
-                        CalendarRefreshToken = token.RefreshToken,
-                        LastSynchronizationTS = new DateTime(1900, 1, 1)
+                        GoogleAccessToken = token.AccessToken,
+                        GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
+                        GoogleRefreshToken = token.RefreshToken,
+                        CreateTS = DateTime.UtcNow
                     };
 
-                userRepository.Add(user);
+                _repositoryFactory.Create<UnregisteredUser>().Add(newUser);
                 _unitOfWork.SaveChanges();
-            }
 
-            return user;
+                userId = newUser.UnregisteredUserID;
+                return false;
+            }
         }
 
         public User GetUser(string userEmail)

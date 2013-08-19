@@ -12,6 +12,7 @@
 </head>
 <body>
     <form action="~/TrelloLoginCallback">
+        <input type="hidden" name="UserID" value="@Model" />
         <input type="text" name="Token" />
         <input type="submit" />
     </form>

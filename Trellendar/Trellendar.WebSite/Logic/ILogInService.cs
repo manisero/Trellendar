@@ -1,6 +1,6 @@
-﻿using Nancy;
+﻿using System;
+using Nancy;
 using Nancy.Session;
-using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.WebSite.Logic
 {
@@ -8,6 +8,6 @@ namespace Trellendar.WebSite.Logic
     {
         string PrepareAuthorizationUri(ISession session, string redirectUri);
 
-        User HandleLoginCallback(Request request, ISession session, string redirectUri);
+        bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId);
     }
 }

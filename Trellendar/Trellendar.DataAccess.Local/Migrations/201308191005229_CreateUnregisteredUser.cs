@@ -16,7 +16,7 @@ namespace Trellendar.DataAccess.Local.Migrations
                         GoogleAccessToken = c.String(nullable: false, maxLength: 100),
                         GoogleAccessTokenExpirationTS = c.DateTime(nullable: false),
                         GoogleRefreshToken = c.String(nullable: false, maxLength: 100),
-                        CreateTS = c.DateTime(nullable: false),
+                        CreateTS = c.DateTime(nullable: false, defaultValueSql: "getutcdate()"),
                     })
                 .PrimaryKey(t => t.UnregisteredUserID);
             

@@ -2,7 +2,6 @@ using System;
 using Nancy;
 using Nancy.Session;
 using Trellendar.DataAccess.Remote.Calendar;
-using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.WebSite.Logic._Impl
@@ -28,7 +27,7 @@ namespace Trellendar.WebSite.Logic._Impl
             return _calendarAuthorizationApi.GetAuthorizationUri(redirectUri, authorizationState);
         }
 
-        public User HandleLoginCallback(Request request, ISession session, string redirectUri)
+        public bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId)
         {
             var state = request.Query["state"];
             var expectedState = session[AUTHORIZATION_STATE_PARAMETER_NAME] as string;
@@ -52,7 +51,7 @@ namespace Trellendar.WebSite.Logic._Impl
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            return _userService.GetOrCreateUser(authorizationCode.Value, redirectUri);
+            return _userService.TryGetUserID(authorizationCode.Value, redirectUri, out userId);
         }
     }
 }

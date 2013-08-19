@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using System;
+using Nancy;
 using Nancy.Responses;
 using Nancy.Authentication.Forms;
 using Trellendar.WebSite.Logic;
@@ -7,7 +8,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 {
     public class LogInModule : NancyModule
     {
-        private const string LOG_IN_CALLBACK_ACTION = "/LogInCallback";
+        private const string GOOGLE_LOG_IN_CALLBACK_ACTION = "/GoogleLogInCallback";
 
         private readonly ILogInService _logInService;
 
@@ -16,7 +17,7 @@ namespace Trellendar.WebSite.Modules.LogIn
             _logInService = logInService;
 
             Get["/LogIn"] = LogIn;
-            Get[LOG_IN_CALLBACK_ACTION] = LogInCallback;
+            Get[GOOGLE_LOG_IN_CALLBACK_ACTION] = GoogleLogInCallback;
             Get["/LogOut"] = LogOut;
         }
 
@@ -27,11 +28,18 @@ namespace Trellendar.WebSite.Modules.LogIn
             return new RedirectResponse(authorizationUri);
         }
 
-        public dynamic LogInCallback(dynamic parameters)
+        public dynamic GoogleLogInCallback(dynamic parameters)
         {
-            var user = _logInService.HandleLoginCallback(Context.Request, Session, FormatAuthorizationRedirectUri());
+            Guid userId;
 
-            return this.LoginAndRedirect(user.UserID);
+            if (_logInService.TryLogUserIn(Context.Request, Session, FormatAuthorizationRedirectUri(), out userId))
+            {
+                return this.LoginAndRedirect(userId);
+            }
+            else
+            {
+                return View["TrelloLogIn", userId.ToString()];
+            }
         }
 
         public dynamic LogOut(dynamic parameters)
@@ -41,7 +49,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 
         private string FormatAuthorizationRedirectUri()
         {
-            return Request.Url.SiteBase + LOG_IN_CALLBACK_ACTION;
+            return Request.Url.SiteBase + GOOGLE_LOG_IN_CALLBACK_ACTION;
         }
     }
 }
