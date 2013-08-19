@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201308191139309_UserIdentity.Designer.cs">
       <DependentUpon>201308191139309_UserIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308191149392_UserEmailIndex.cs" />
+    <Compile Include="Migrations\201308191149392_UserEmailIndex.Designer.cs">
+      <DependentUpon>201308191149392_UserEmailIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UnregisteredUserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
@@ -172,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308191139309_UserIdentity.resx">
       <DependentUpon>201308191139309_UserIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308191149392_UserEmailIndex.resx">
+      <DependentUpon>201308191149392_UserEmailIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
