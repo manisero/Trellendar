@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 
@@ -6,9 +7,11 @@ namespace Trellendar.Logic.UserManagement
 {
     public interface IUserService
     {
-        User GetOrCreateUser(string authorizationCode, string authorizationRedirectUri);
+        bool TryGetUserID(string authorizationCode, string authorizationRedirectUri, out Guid userId);
 
         User GetUser(string userEmail);
+
+        Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken);
 
         IList<Calendar> GetAvailableCalendars();
     }

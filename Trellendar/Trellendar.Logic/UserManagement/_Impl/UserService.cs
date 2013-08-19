@@ -5,6 +5,7 @@ using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.UserManagement._Impl
 {
@@ -24,35 +25,69 @@ namespace Trellendar.Logic.UserManagement._Impl
             _unitOfWork = unitOfWork;
         }
 
-        public User GetOrCreateUser(string authorizationCode, string authorizationRedirectUri)
+        public bool TryGetUserID(string authorizationCode, string authorizationRedirectUri, out Guid userId)
         {
             var token = _calendarAuthorizationAPI.GetToken(authorizationCode, authorizationRedirectUri);
             var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
 
-            var userRepository = _repositoryFactory.Create<User>();
-            var user = userRepository.GetSingleOrDefault(x => x.Email == userInfo.Email);
+            var user = GetUser(userInfo.Email);
 
-            if (user == null)
+            if (user != null)
             {
-                user = new User
+                userId = user.UserID;
+                return true;
+            }
+            else
+            {
+                var newUser = new UnregisteredUser
                     {
                         Email = userInfo.Email,
-                        CalendarAccessToken = token.AccessToken,
-                        CalendarAccessTokenExpirationTS = token.GetExpirationTS(),
-                        CalendarRefreshToken = token.RefreshToken,
-                        LastSynchronizationTS = new DateTime(1900, 1, 1)
+                        GoogleAccessToken = token.AccessToken,
+                        GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
+                        GoogleRefreshToken = token.RefreshToken,
+                        CreateTS = DateTime.UtcNow
                     };
 
-                userRepository.Add(user);
+                _repositoryFactory.Create<UnregisteredUser>().Add(newUser);
                 _unitOfWork.SaveChanges();
-            }
 
-            return user;
+                userId = newUser.UnregisteredUserID;
+                return false;
+            }
         }
 
         public User GetUser(string userEmail)
         {
             return _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
+        }
+
+        public Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken)
+        {
+            var unregisteredUserRepository = _repositoryFactory.Create<UnregisteredUser>();
+            var unregisteredUser = unregisteredUserRepository.GetSingleOrDefault(x => x.UnregisteredUserID == unregisteredUserId);
+
+            if (unregisteredUser == null)
+            {
+                throw new InvalidOperationException("Unregistered User of ID '{0}' does not exist in the database".FormatWith(unregisteredUserId));
+            }
+
+            var user = new User
+                {
+                    Email = unregisteredUser.Email,
+                    TrelloAccessToken = trelloAccessToken,
+                    TrelloBoardID = "TODO",
+                    CalendarAccessToken = unregisteredUser.GoogleAccessToken,
+                    CalendarAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
+                    CalendarRefreshToken = unregisteredUser.GoogleRefreshToken,
+                    CalendarID = "TODO",
+                    LastSynchronizationTS = new DateTime(1900, 1, 1)
+                };
+
+            _repositoryFactory.Create<User>().Add(user);
+            unregisteredUserRepository.Remove(unregisteredUser);
+            _unitOfWork.SaveChanges();
+
+            return user.UserID;
         }
 
         public IList<Calendar> GetAvailableCalendars()
