@@ -19,6 +19,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 
             Get["/LogIn"] = LogIn;
             Get[GOOGLE_LOG_IN_CALLBACK_ACTION] = GoogleLogInCallback;
+            Get["/TrelloLogInCallback"] = TrelloLogInCallback;
             Post["/TrelloLogInCallback"] = TrelloLogInCallback;
             Get["/LogOut"] = LogOut;
         }

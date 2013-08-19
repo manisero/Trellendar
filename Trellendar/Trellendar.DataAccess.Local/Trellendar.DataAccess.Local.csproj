@@ -101,6 +101,14 @@
     <Compile Include="Migrations\201308191005229_CreateUnregisteredUser.Designer.cs">
       <DependentUpon>201308191005229_CreateUnregisteredUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308191125471_UnregisteredUserIdentity.cs" />
+    <Compile Include="Migrations\201308191125471_UnregisteredUserIdentity.Designer.cs">
+      <DependentUpon>201308191125471_UnregisteredUserIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308191139309_UserIdentity.cs" />
+    <Compile Include="Migrations\201308191139309_UserIdentity.Designer.cs">
+      <DependentUpon>201308191139309_UserIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UnregisteredUserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
@@ -158,6 +166,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308191005229_CreateUnregisteredUser.resx">
       <DependentUpon>201308191005229_CreateUnregisteredUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308191125471_UnregisteredUserIdentity.resx">
+      <DependentUpon>201308191125471_UnregisteredUserIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308191139309_UserIdentity.resx">
+      <DependentUpon>201308191139309_UserIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

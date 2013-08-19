@@ -73,7 +73,6 @@ namespace Trellendar.Logic.UserManagement._Impl
 
             var user = new User
                 {
-                    UserID = unregisteredUserId,
                     Email = unregisteredUser.Email,
                     TrelloAccessToken = trelloAccessToken,
                     TrelloBoardID = "TODO",
@@ -81,7 +80,7 @@ namespace Trellendar.Logic.UserManagement._Impl
                     CalendarAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
                     CalendarRefreshToken = unregisteredUser.GoogleRefreshToken,
                     CalendarID = "TODO",
-                    LastSynchronizationTS = DateTime.MinValue
+                    LastSynchronizationTS = new DateTime(1900, 1, 1)
                 };
 
             _repositoryFactory.Create<User>().Add(user);
