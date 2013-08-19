@@ -104,6 +104,7 @@
     <Compile Include="Logic\ILogInService.cs" />
     <Compile Include="Logic\IUserContextRegistrar.cs" />
     <Compile Include="Logic\_Impl\LogInService.cs" />
+    <Compile Include="Modules\LogIn\TrelloLogInModel.cs" />
     <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
     <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />

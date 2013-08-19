@@ -53,5 +53,10 @@ namespace Trellendar.WebSite.Logic._Impl
 
             return _userService.TryGetUserID(authorizationCode.Value, redirectUri, out userId);
         }
+
+        public Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken)
+        {
+            return Guid.NewGuid();
+        }
     }
 }

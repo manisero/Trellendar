@@ -32,7 +32,8 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
                     { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
                     { "redirect_uri", redirectUri },
                     { "scope", "openid email https://www.googleapis.com/auth/calendar" },
-                    { "access_type", "offline" }
+                    { "access_type", "offline" },
+                    {"prompt","consent"}
                 };
 
             if (state != null)

@@ -9,5 +9,7 @@ namespace Trellendar.WebSite.Logic
         string PrepareAuthorizationUri(ISession session, string redirectUri);
 
         bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId);
+
+        Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken);
     }
 }

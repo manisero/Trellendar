@@ -3,6 +3,7 @@ using Nancy;
 using Nancy.Responses;
 using Nancy.Authentication.Forms;
 using Trellendar.WebSite.Logic;
+using Nancy.ModelBinding;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
@@ -18,6 +19,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 
             Get["/LogIn"] = LogIn;
             Get[GOOGLE_LOG_IN_CALLBACK_ACTION] = GoogleLogInCallback;
+            Post["/TrelloLogInCallback"] = TrelloLogInCallback;
             Get["/LogOut"] = LogOut;
         }
 
@@ -40,6 +42,14 @@ namespace Trellendar.WebSite.Modules.LogIn
             {
                 return View["TrelloLogIn", userId.ToString()];
             }
+        }
+
+        public dynamic TrelloLogInCallback(dynamic parameters)
+        {
+            var model = this.Bind<TrelloLogInModel>();
+            var userId = _logInService.RegisterUser(model.UserID, model.AccessToken);
+
+            return this.LoginAndRedirect(userId);
         }
 
         public dynamic LogOut(dynamic parameters)

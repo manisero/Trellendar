@@ -11,6 +11,8 @@ namespace Trellendar.Logic.UserManagement
 
         User GetUser(string userEmail);
 
+        Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken);
+
         IList<Calendar> GetAvailableCalendars();
     }
 }
