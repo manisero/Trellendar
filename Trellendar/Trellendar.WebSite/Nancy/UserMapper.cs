@@ -5,7 +5,6 @@ using Nancy.Authentication.Forms;
 using Nancy.Security;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
-using System.Linq;
 
 namespace Trellendar.WebSite.Nancy
 {

@@ -6,7 +6,9 @@ namespace Trellendar.WebSite.Logic
 {
     public interface ILogInService
     {
-        string PrepareAuthorizationUri(ISession session, string redirectUri);
+        string PrepareGoogleAuthorizationUri(ISession session, string redirectUri);
+
+        string GetTrelloAuthorizationUri();
 
         bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId);
 

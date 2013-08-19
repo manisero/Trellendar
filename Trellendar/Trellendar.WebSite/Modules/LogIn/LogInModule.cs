@@ -6,6 +6,7 @@ using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.WebSite.Logic;
 using Nancy.ModelBinding;
 using System.Linq;
+using Trellendar.WebSite.Modules.LogIn.Models;
 
 namespace Trellendar.WebSite.Modules.LogIn
 {
@@ -14,12 +15,10 @@ namespace Trellendar.WebSite.Modules.LogIn
         private const string GOOGLE_LOG_IN_CALLBACK_ACTION = "/GoogleLogInCallback";
 
         private readonly ILogInService _logInService;
-        private readonly ITrelloAuthorizationAPI _trelloAuthorizationApi;
 
-        public LogInModule(ILogInService logInService, ITrelloAuthorizationAPI trelloAuthorizationApi)
+        public LogInModule(ILogInService logInService)
         {
             _logInService = logInService;
-            _trelloAuthorizationApi = trelloAuthorizationApi;
 
             Get["/LogIn"] = LogIn;
             Get[GOOGLE_LOG_IN_CALLBACK_ACTION] = GoogleLogInCallback;
@@ -30,7 +29,7 @@ namespace Trellendar.WebSite.Modules.LogIn
 
         public dynamic LogIn(dynamic parameters)
         {
-            var authorizationUri = _logInService.PrepareAuthorizationUri(Session, FormatAuthorizationRedirectUri());
+            var authorizationUri = _logInService.PrepareGoogleAuthorizationUri(Session, FormatAuthorizationRedirectUri());
 
             return new RedirectResponse(authorizationUri);
         }
@@ -47,7 +46,7 @@ namespace Trellendar.WebSite.Modules.LogIn
             {
                 var model = new TrelloLogInModel
                 {
-                    AuthorizationUrl = _trelloAuthorizationApi.GetAuthorizationUri(),
+                    AuthorizationUrl = _logInService.GetTrelloAuthorizationUri(),
                     UserID = userId.ToString()
                 };
 
