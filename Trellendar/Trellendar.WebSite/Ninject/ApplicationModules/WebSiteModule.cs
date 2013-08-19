@@ -22,6 +22,7 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
 
             // Ninject
             Bind<IDependencyResolver>().To<NinjectDependencyResolver>();
+            Bind<IUserContextRegistrar>().To<NinjectUserContextRegistrar>();
         }
     }
 }

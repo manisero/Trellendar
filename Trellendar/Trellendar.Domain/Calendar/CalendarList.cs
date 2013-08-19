@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Trellendar.Domain.Calendar
 {
-    public class CalendarEvents : Calendar
+    public class CalendarList
     {
         [JsonProperty("items")]
-        public IList<Event> Items { get; set; }
+        public IList<Calendar> Items { get; set; }
     }
 }

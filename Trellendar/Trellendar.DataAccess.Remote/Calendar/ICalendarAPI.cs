@@ -1,9 +1,12 @@
-﻿using Trellendar.Domain.Calendar;
+﻿using System.Collections.Generic;
+using Trellendar.Domain.Calendar;
 
 namespace Trellendar.DataAccess.Remote.Calendar
 {
     public interface ICalendarAPI
     {
+        IList<Domain.Calendar.Calendar> GetCalendars();
+
         Domain.Calendar.Calendar GetCalendar(string calendarId);
 
         CalendarEvents GetEvents(string calendarId);

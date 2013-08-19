@@ -23,6 +23,14 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
             _jsonSerializer = jsonSerializer;
         }
 
+        public IList<Domain.Calendar.Calendar> GetCalendars()
+        {
+            var calendarsJson = CalendarClient.Get("users/me/calendarList");
+            var calendarList = _jsonSerializer.Deserialize<CalendarList>(calendarsJson);
+
+            return calendarList != null ? calendarList.Items : null;
+        }
+
         public Domain.Calendar.Calendar GetCalendar(string calendarId)
         {
             var calendarJson = CalendarClient.Get("calendars/{0}".FormatWith(calendarId));

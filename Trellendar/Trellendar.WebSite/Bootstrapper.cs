@@ -12,6 +12,11 @@ namespace Trellendar.WebSite
 {
     public class Bootstrapper : NinjectNancyBootstrapper
     {
+        protected override void ConfigureApplicationContainer(IKernel existingContainer)
+        {
+            new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
+        }
+
         protected override void ApplicationStartup(IKernel container, IPipelines pipelines)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
@@ -22,13 +27,8 @@ namespace Trellendar.WebSite
                     RedirectUrl = "~/LogIn",
                     UserMapper = container.Get<IUserMapper>()
                 });
-            
-            base.ApplicationStartup(container, pipelines);
-        }
 
-        protected override void ConfigureApplicationContainer(IKernel existingContainer)
-        {
-            new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
+            base.ApplicationStartup(container, pipelines);
         }
     }
 }

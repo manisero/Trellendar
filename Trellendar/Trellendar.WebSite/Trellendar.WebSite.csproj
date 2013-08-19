@@ -102,7 +102,10 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Logic\ILogInService.cs" />
+    <Compile Include="Logic\IUserContextRegistrar.cs" />
     <Compile Include="Logic\_Impl\LogInService.cs" />
+    <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
+    <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
     <Compile Include="Modules\LogIn\LogInModule.cs" />
     <Compile Include="Modules\Home\HomeModule.cs" />
@@ -113,12 +116,14 @@
     <Compile Include="Ninject\ApplicationModules\WebSiteModule.cs" />
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
+    <Compile Include="Ninject\NinjectUserContextRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Modules\Home\Views\Index.cshtml" />
+    <Content Include="Modules\UserProfile\Views\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
