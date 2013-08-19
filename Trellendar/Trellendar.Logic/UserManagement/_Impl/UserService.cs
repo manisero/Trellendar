@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
 
@@ -53,7 +55,7 @@ namespace Trellendar.Logic.UserManagement._Impl
             return _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
         }
 
-        public object GetAvailableCalendars()
+        public IList<Calendar> GetAvailableCalendars()
         {
             return _calendarAPI.GetCalendars();
         }

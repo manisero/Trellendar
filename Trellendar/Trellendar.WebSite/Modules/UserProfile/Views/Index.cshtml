@@ -1,7 +1,4 @@
-﻿@using Trellendar.WebSite.Modules.UserProfile.Models
-@inherits NancyRazorViewBase<IndexModel>
-
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -14,6 +11,14 @@
 	</style>
 </head>
 <body>
-    @Model.Email's profile...
+    @Model.Email's calendars:
+    <ul>
+        @foreach (var calendarSummary in Model.AvailableCalendars.Values)
+        {
+            <li>
+                @calendarSummary
+            </li>
+        }
+    </ul>
 </body>
 </html>

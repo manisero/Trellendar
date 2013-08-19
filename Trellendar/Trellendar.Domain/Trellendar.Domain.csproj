@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Calendar\Calendar.cs" />
     <Compile Include="Calendar\CalendarEvents.cs" />
+    <Compile Include="Calendar\CalendarList.cs" />
     <Compile Include="Calendar\Event.cs" />
     <Compile Include="Calendar\TimeStamp.cs" />
     <Compile Include="Calendar\Token.cs" />

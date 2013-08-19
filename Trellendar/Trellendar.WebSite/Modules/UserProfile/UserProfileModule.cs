@@ -3,6 +3,7 @@ using Nancy.Security;
 using Trellendar.Logic.UserManagement;
 using Trellendar.WebSite.Logic;
 using Trellendar.WebSite.Modules.UserProfile.Models;
+using System.Linq;
 
 namespace Trellendar.WebSite.Modules.UserProfile
 {
@@ -34,7 +35,11 @@ namespace Trellendar.WebSite.Modules.UserProfile
             var user = _userService.GetUser(Context.CurrentUser.UserName);
             var calendars = _userService.GetAvailableCalendars();
 
-            var model = new IndexModel { Email = user.Email };
+            var model = new IndexModel
+                {
+                    Email = user.Email,
+                    AvailableCalendars = calendars.ToDictionary(x => x.Id, x => x.Summary)
+                };
 
             return View[model];
         }

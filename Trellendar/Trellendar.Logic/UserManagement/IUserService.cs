@@ -1,4 +1,6 @@
-﻿using Trellendar.Domain.Trellendar;
+﻿using System.Collections.Generic;
+using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trellendar;
 
 namespace Trellendar.Logic.UserManagement
 {
@@ -8,6 +10,6 @@ namespace Trellendar.Logic.UserManagement
 
         User GetUser(string userEmail);
 
-        object GetAvailableCalendars();
+        IList<Calendar> GetAvailableCalendars();
     }
 }

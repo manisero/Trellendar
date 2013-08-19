@@ -17,15 +17,13 @@ namespace Trellendar.WebSite.Ninject
 
         public void Register(string userEmail)
         {
+            _kernel.Unbind<UserContext>();
+
             var user = _kernel.Get<IRepositoryFactory>().Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
 
             if (user != null)
             {
                 _kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
-            }
-            else
-            {
-                _kernel.Unbind<UserContext>();
             }
         }
     }
