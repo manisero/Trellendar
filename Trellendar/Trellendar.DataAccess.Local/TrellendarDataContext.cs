@@ -6,6 +6,7 @@ namespace Trellendar.DataAccess.Local
 {
     public class TrellendarDataContext : DbContext
     {
+        public DbSet<UnregisteredUser> UnregisteredUsers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserPreferences> UserPreferences { get; set; }
 

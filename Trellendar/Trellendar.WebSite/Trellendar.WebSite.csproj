@@ -124,6 +124,7 @@
     <Content Include="packages.config" />
     <Content Include="Modules\Home\Views\Index.cshtml" />
     <Content Include="Modules\UserProfile\Views\Index.cshtml" />
+    <Content Include="Modules\LogIn\TrelloLogIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

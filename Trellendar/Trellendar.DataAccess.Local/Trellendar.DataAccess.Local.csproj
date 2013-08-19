@@ -97,7 +97,12 @@
     <Compile Include="Migrations\201308181941433_UserIdAsGuid.Designer.cs">
       <DependentUpon>201308181941433_UserIdAsGuid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308191005229_CreateUnregisteredUser.cs" />
+    <Compile Include="Migrations\201308191005229_CreateUnregisteredUser.Designer.cs">
+      <DependentUpon>201308191005229_CreateUnregisteredUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelConfiguration\Configurations\UnregisteredUserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\UserPreferencesConfiguration.cs" />
     <Compile Include="ModelConfiguration\EntityConfigurationBase.cs" />
@@ -150,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308181941433_UserIdAsGuid.resx">
       <DependentUpon>201308181941433_UserIdAsGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308191005229_CreateUnregisteredUser.resx">
+      <DependentUpon>201308191005229_CreateUnregisteredUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
