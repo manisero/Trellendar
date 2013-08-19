@@ -24,7 +24,7 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
             _jsonSerializer = jsonSerializer;
         }
 
-        public string GetAuthorizationUri(string redirectUri, string state = null)
+        public string GetAuthorizationUri(string redirectUri, string state = null, bool requestRefreshToken = false)
         {
             var parameters = new Dictionary<string, object>
                 {
@@ -38,6 +38,11 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
             if (state != null)
             {
                 parameters["state"] = state;
+            }
+
+            if (requestRefreshToken)
+            {
+                parameters["prompt"] = "consent";
             }
 
             return CalendarClient.FormatRequestUri("https://accounts.google.com/o/oauth2/auth", parameters);

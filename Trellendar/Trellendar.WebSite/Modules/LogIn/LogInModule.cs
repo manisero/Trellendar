@@ -2,7 +2,6 @@
 using Nancy;
 using Nancy.Responses;
 using Nancy.Authentication.Forms;
-using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.WebSite.Logic;
 using Nancy.ModelBinding;
 using System.Linq;

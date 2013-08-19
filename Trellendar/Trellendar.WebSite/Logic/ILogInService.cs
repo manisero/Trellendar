@@ -8,9 +8,9 @@ namespace Trellendar.WebSite.Logic
     {
         string PrepareGoogleAuthorizationUri(ISession session, string redirectUri);
 
-        string GetTrelloAuthorizationUri();
-
         bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId);
+
+        string GetTrelloAuthorizationUri();
 
         Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken);
     }

@@ -30,11 +30,6 @@ namespace Trellendar.WebSite.Logic._Impl
             return _calendarAuthorizationApi.GetAuthorizationUri(redirectUri, authorizationState);
         }
 
-        public string GetTrelloAuthorizationUri()
-        {
-            return _trelloAuthorizationApi.GetAuthorizationUri();
-        }
-
         public bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId)
         {
             var state = request.Query["state"];
@@ -58,6 +53,11 @@ namespace Trellendar.WebSite.Logic._Impl
             }
 
             return _userService.TryGetUserID(authorizationCode.Value, redirectUri, out userId);
+        }
+
+        public string GetTrelloAuthorizationUri()
+        {
+            return _trelloAuthorizationApi.GetAuthorizationUri();
         }
 
         public Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken)

@@ -1,7 +1,9 @@
-﻿namespace Trellendar.WebSite.Logic
+﻿using Trellendar.Domain.Trellendar;
+
+namespace Trellendar.WebSite.Logic
 {
     public interface IUserContextRegistrar
     {
-        void Register(string userEmail);
+        void Register(User user);
     }
 }

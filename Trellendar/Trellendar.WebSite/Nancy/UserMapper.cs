@@ -5,6 +5,7 @@ using Nancy.Authentication.Forms;
 using Nancy.Security;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
+using Trellendar.WebSite.Logic;
 
 namespace Trellendar.WebSite.Nancy
 {
@@ -18,15 +19,18 @@ namespace Trellendar.WebSite.Nancy
         }
 
         private readonly IRepositoryFactory _repositoryFactory;
+        private readonly IUserContextRegistrar _userContextRegistrar;
 
-        public UserMapper(IRepositoryFactory repositoryFactory)
+        public UserMapper(IRepositoryFactory repositoryFactory, IUserContextRegistrar userContextRegistrar)
         {
             _repositoryFactory = repositoryFactory;
+            _userContextRegistrar = userContextRegistrar;
         }
 
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
             var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.UserID == identifier);
+            _userContextRegistrar.Register(user);
 
             return user != null
                        ? new UserIdentity { UserName = user.Email }
