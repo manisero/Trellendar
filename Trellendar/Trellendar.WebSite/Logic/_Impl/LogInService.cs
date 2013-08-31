@@ -3,6 +3,7 @@ using Nancy;
 using Nancy.Session;
 using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
+using Trellendar.Domain.Google;
 using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.WebSite.Logic._Impl
@@ -22,15 +23,15 @@ namespace Trellendar.WebSite.Logic._Impl
             _userService = userService;
         }
 
-        public string PrepareGoogleAuthorizationUri(ISession session, string redirectUri)
+        public string PrepareGoogleAuthorizationUri(ISession session, string redirectUri, bool forNewUser = false)
         {
             var authorizationState = Guid.NewGuid().ToString();
             session[AUTHORIZATION_STATE_PARAMETER_NAME] = authorizationState;
 
-            return _calendarAuthorizationApi.GetAuthorizationUri(redirectUri, authorizationState);
+            return _calendarAuthorizationApi.GetAuthorizationUri(redirectUri, authorizationState, forNewUser);
         }
 
-        public bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId)
+        public Token GetToken(Request request, ISession session, string redirectUri)
         {
             var state = request.Query["state"];
             var expectedState = session[AUTHORIZATION_STATE_PARAMETER_NAME] as string;
@@ -52,7 +53,17 @@ namespace Trellendar.WebSite.Logic._Impl
                 throw new InvalidOperationException("The request query should contain 'code' parameter");
             }
 
-            return _userService.TryGetUserID(authorizationCode.Value, redirectUri, out userId);
+            return _calendarAuthorizationApi.GetToken(authorizationCode.Value, redirectUri);
+        }
+
+        public bool TryGetUserID(Token token, out Guid userId)
+        {
+            return _userService.TryGetUserID(token.UserEmail, out userId);
+        }
+
+        public bool TryCreateUnregisteredUser(Token token, out Guid unregisteredUserId)
+        {
+            return _userService.TryCreateUnregisteredUser(token, out unregisteredUserId);
         }
 
         public string GetTrelloAuthorizationUri()

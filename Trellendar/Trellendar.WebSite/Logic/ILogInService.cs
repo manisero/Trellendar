@@ -1,14 +1,19 @@
 ﻿using System;
 using Nancy;
 using Nancy.Session;
+using Trellendar.Domain.Google;
 
 namespace Trellendar.WebSite.Logic
 {
     public interface ILogInService
     {
-        string PrepareGoogleAuthorizationUri(ISession session, string redirectUri);
+        string PrepareGoogleAuthorizationUri(ISession session, string redirectUri, bool forNewUser = false);
 
-        bool TryLogUserIn(Request request, ISession session, string redirectUri, out Guid userId);
+        Token GetToken(Request request, ISession session, string redirectUri);
+
+        bool TryGetUserID(Token token, out Guid userId);
+
+        bool TryCreateUnregisteredUser(Token token, out Guid unregisteredUserId);
 
         string GetTrelloAuthorizationUri();
 
