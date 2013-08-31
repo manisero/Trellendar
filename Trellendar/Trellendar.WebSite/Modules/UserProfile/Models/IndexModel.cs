@@ -6,6 +6,8 @@ namespace Trellendar.WebSite.Modules.UserProfile.Models
     {
         public string Email { get; set; }
 
+        public IDictionary<string, string> AvailableBoards { get; set; }
+
         public IDictionary<string, string> AvailableCalendars { get; set; }
     }
 }

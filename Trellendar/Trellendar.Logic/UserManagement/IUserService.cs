@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.UserManagement
 {
@@ -10,6 +11,8 @@ namespace Trellendar.Logic.UserManagement
 
         Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken);
 
-        IList<Calendar> GetAvailableCalendars();
+        IEnumerable<Board> GetAvailableBoards();
+
+        IEnumerable<Calendar> GetAvailableCalendars();
     }
 }

@@ -25,11 +25,13 @@ namespace Trellendar.WebSite.Modules.UserProfile
 
         public dynamic Index(dynamic parameters)
         {
+            var boards = _userService.GetAvailableBoards();
             var calendars = _userService.GetAvailableCalendars();
 
             var model = new IndexModel
                 {
                     Email = _userContext.User.Email,
+                    AvailableBoards = boards.ToDictionary(x => x.Id, x => x.Name),
                     AvailableCalendars = calendars.ToDictionary(x => x.Id, x => x.Summary)
                 };
 

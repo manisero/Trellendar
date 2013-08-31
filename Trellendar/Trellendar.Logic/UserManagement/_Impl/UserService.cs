@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
+using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
 
@@ -12,14 +14,16 @@ namespace Trellendar.Logic.UserManagement._Impl
     public class UserService : IUserService
     {
         private readonly ICalendarAuthorizationAPI _calendarAuthorizationAPI;
+        private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarAPI;
         private readonly IRepositoryFactory _repositoryFactory;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(ICalendarAuthorizationAPI calendarAuthorizationAPI, ICalendarAPI calendarAPI,
+        public UserService(ICalendarAuthorizationAPI calendarAuthorizationAPI, ITrelloAPI trelloApi, ICalendarAPI calendarAPI,
                            IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork)
         {
             _calendarAuthorizationAPI = calendarAuthorizationAPI;
+            _trelloApi = trelloApi;
             _calendarAPI = calendarAPI;
             _repositoryFactory = repositoryFactory;
             _unitOfWork = unitOfWork;
@@ -85,7 +89,12 @@ namespace Trellendar.Logic.UserManagement._Impl
             return user.UserID;
         }
 
-        public IList<Calendar> GetAvailableCalendars()
+        public IEnumerable<Board> GetAvailableBoards()
+        {
+            return _trelloApi.GetBoards();
+        }
+
+        public IEnumerable<Calendar> GetAvailableCalendars()
         {
             return _calendarAPI.GetCalendars();
         }

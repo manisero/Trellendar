@@ -19,5 +19,8 @@ namespace Trellendar.Domain.Trello
 
         [JsonProperty("checklists")]
         public IList<CheckList> CheckLists { get; set; }
+
+        [JsonProperty("isClosed")]
+        public bool IsClosed { get; set; }
     }
 }
