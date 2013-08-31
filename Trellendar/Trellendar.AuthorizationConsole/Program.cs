@@ -39,7 +39,7 @@ namespace Trellendar.AuthorizationConsole
 
             Console.WriteLine();
             Console.WriteLine("Now paste your Trello Board ID here:");
-            var trelloBoardId = Console.ReadLine();
+            var boardId = Console.ReadLine();
 
             // Get Google API token
             Console.WriteLine();
@@ -63,12 +63,12 @@ namespace Trellendar.AuthorizationConsole
             var user = new User
                 {
                     Email = userInfo.Email,
-                    TrelloBoardID = trelloBoardId,
+                    BoardID = boardId,
                     TrelloAccessToken = trelloToken,
                     CalendarID = calendarId,
-                    CalendarAccessToken = calendarToken.AccessToken,
-                    CalendarAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
-                    CalendarRefreshToken = calendarToken.RefreshToken,
+                    GoogleAccessToken = calendarToken.AccessToken,
+                    GoogleAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
+                    GoogleRefreshToken = calendarToken.RefreshToken,
                     LastSynchronizationTS = new DateTime(1900, 1, 1),
 					UserPreferences = new UserPreferences()
                 };

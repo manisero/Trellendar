@@ -21,15 +21,15 @@ namespace Trellendar.Logic.DataAccess._Impl
 
         public bool IsTokenExpired(User user)
         {
-            return user.CalendarAccessTokenExpirationTS < DateTime.UtcNow.AddSeconds(_settingsProvider.CalendarAccessTokenExpirationReserve);
+            return user.GoogleAccessTokenExpirationTS < DateTime.UtcNow.AddSeconds(_settingsProvider.CalendarAccessTokenExpirationReserve);
         }
 
         public void RefreshToken(User user)
         {
-            var newToken = _calendarAuthorizationAPI.GetNewToken(user.CalendarRefreshToken);
+            var newToken = _calendarAuthorizationAPI.GetNewToken(user.GoogleRefreshToken);
 
-            user.CalendarAccessToken = newToken.AccessToken;
-            user.CalendarAccessTokenExpirationTS = newToken.GetExpirationTS();
+            user.GoogleAccessToken = newToken.AccessToken;
+            user.GoogleAccessTokenExpirationTS = newToken.GetExpirationTS();
 
             _unitOfWork.SaveChanges();
         }

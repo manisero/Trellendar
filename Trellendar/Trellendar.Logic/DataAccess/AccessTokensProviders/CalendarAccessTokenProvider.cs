@@ -25,7 +25,7 @@ namespace Trellendar.Logic.DataAccess.AccessTokensProviders
                 _tokenExpirationHandler.RefreshToken(_userContext.User);
             }
 
-            return _userContext.User.CalendarAccessToken;
+            return _userContext.User.GoogleAccessToken;
         }
     }
 }

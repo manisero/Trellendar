@@ -34,7 +34,7 @@ namespace Trellendar.Logic._Impl
 
         public void Synchronize()
         {
-            var board = _trelloApi.GetBoard(User.TrelloBoardID);
+            var board = _trelloApi.GetBoard(User.BoardID);
 
             if (board.Lists.IsNullOrEmpty() || board.Cards.IsNullOrEmpty())
             {
