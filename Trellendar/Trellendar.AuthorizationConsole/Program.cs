@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Local;
 using Trellendar.DataAccess.Local.Migrations;
-using Trellendar.DataAccess.Remote.Calendar._Impl;
+using Trellendar.DataAccess.Remote.Google._Impl;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 using Trellendar.Domain.Trellendar;
@@ -23,7 +23,7 @@ namespace Trellendar.AuthorizationConsole
 
             var restClientFactory = new RestClientFactory(null);
             var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
-            var calendarAuthorization = new CalendarAuthorizationAPI(restClientFactory, new JsonSerializer());
+            var calendarAuthorization = new GoogleAuthorizationAPI(restClientFactory, new JsonSerializer());
             var dataContext = new TrellendarDataContext();
 
             // Get Trello token

@@ -7,7 +7,7 @@ namespace Trellendar.WebSite.Ninject
     {
         public void RegisterApplicationModules(IKernel kernel)
         {
-            kernel.Load(new CoreModule(), new LogicModule(), new DataAccessModule(), new WebSiteModule());
+            kernel.Load(new CoreModule(), new DataAccessModule(), new LogicModule(), new WebSiteModule());
         }
     }
 }

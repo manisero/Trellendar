@@ -1,8 +1,8 @@
 ﻿using Trellendar.Domain.Calendar;
 
-namespace Trellendar.DataAccess.Remote.Calendar
+namespace Trellendar.DataAccess.Remote.Google
 {
-    public interface ICalendarAuthorizationAPI
+    public interface IGoogleAuthorizationAPI
     {
         string GetAuthorizationUri(string redirectUri, string state = null, bool requestRefreshToken = false);
 

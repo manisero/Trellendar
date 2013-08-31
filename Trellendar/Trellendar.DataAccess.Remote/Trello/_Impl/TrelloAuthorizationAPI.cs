@@ -28,8 +28,7 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
                                                          { "name", ApplicationConstants.APPLICATION_NAME },
                                                          { "expiration", "never" },
                                                          { "response_type", "token" }
-                                                     },
-                                                 true);
+                                                     });
         }
     }
 }

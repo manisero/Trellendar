@@ -5,20 +5,20 @@ using Trellendar.Domain;
 using Trellendar.Domain.Calendar;
 using System.Linq;
 
-namespace Trellendar.DataAccess.Remote.Calendar._Impl
+namespace Trellendar.DataAccess.Remote.Google._Impl
 {
-    public class CalendarAuthorizationAPI : ICalendarAuthorizationAPI
+    public class GoogleAuthorizationAPI : IGoogleAuthorizationAPI
     {
         private readonly IRestClientFactory _restClientFactory;
         private readonly IJsonSerializer _jsonSerializer;
 
-        private IRestClient _calendarClient;
-        private IRestClient CalendarClient
+        private IRestClient _googleClient;
+        private IRestClient GoogleClient
         {
-            get { return _calendarClient ?? (_calendarClient = _restClientFactory.CreateClient(DomainType.Calendar)); }
+            get { return _googleClient ?? (_googleClient = _restClientFactory.CreateClient(DomainType.Calendar)); }
         }
 
-        public CalendarAuthorizationAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)
+        public GoogleAuthorizationAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)
         {
             _restClientFactory = restClientFactory;
             _jsonSerializer = jsonSerializer;
@@ -45,21 +45,21 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
                 parameters["prompt"] = "consent";
             }
 
-            return CalendarClient.FormatRequestUri("https://accounts.google.com/o/oauth2/auth", parameters);
+            return GoogleClient.FormatRequestUri("auth", parameters);
         }
 
         public Token GetToken(string authorizationCode, string redirectUri)
         {
             var timeStamp = DateTime.UtcNow;
-            var tokenJson = CalendarClient.Post("https://accounts.google.com/o/oauth2/token",
-                                                new Dictionary<string, object>
-                                                    {
-                                                        { "code", authorizationCode },
-                                                        { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
-                                                        { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
-                                                        { "redirect_uri", redirectUri },
-                                                        { "grant_type", "authorization_code" }
-                                                    });
+            var tokenJson = GoogleClient.Post("token",
+                                              new Dictionary<string, object>
+                                                  {
+                                                      { "code", authorizationCode },
+                                                      { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                      { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
+                                                      { "redirect_uri", redirectUri },
+                                                      { "grant_type", "authorization_code" }
+                                                  });
 
             var token = _jsonSerializer.Deserialize<Token>(tokenJson);
             token.CreationTS = timeStamp;
@@ -70,14 +70,14 @@ namespace Trellendar.DataAccess.Remote.Calendar._Impl
         public Token GetNewToken(string refreshToken)
         {
             var timeStamp = DateTime.UtcNow;
-            var tokenJson = CalendarClient.Post("https://accounts.google.com/o/oauth2/token",
-                                                new Dictionary<string, object>
-                                                    {
-                                                        { "refresh_token", refreshToken },
-                                                        { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
-                                                        { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
-                                                        { "grant_type", "refresh_token" }
-                                                    });
+            var tokenJson = GoogleClient.Post("token",
+                                              new Dictionary<string, object>
+                                                  {
+                                                      { "refresh_token", refreshToken },
+                                                      { "client_id", ApplicationKeys.GOOGLE_API_CLIENT_ID },
+                                                      { "client_secret", ApplicationKeys.GOOGLE_API_CLIENT_SECRET },
+                                                      { "grant_type", "refresh_token" }
+                                                  });
 
             var token = _jsonSerializer.Deserialize<Token>(tokenJson);
             token.CreationTS = timeStamp;

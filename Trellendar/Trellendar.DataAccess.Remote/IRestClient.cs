@@ -4,7 +4,7 @@ namespace Trellendar.DataAccess.Remote
 {
     public interface IRestClient
     {
-        string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = false);
+        string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = true);
 
         string Get(string resource, IDictionary<string, object> parameters = null);
 

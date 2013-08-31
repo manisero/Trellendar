@@ -6,6 +6,8 @@ using Trellendar.DataAccess.Local.Repository._Impl;
 using Trellendar.DataAccess.Remote;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Calendar._Impl;
+using Trellendar.DataAccess.Remote.Google;
+using Trellendar.DataAccess.Remote.Google._Impl;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
@@ -29,7 +31,7 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
             Bind<ITrelloAPI>().To<TrelloAPI>();
 
             // Calendar
-            Bind<ICalendarAuthorizationAPI>().To<CalendarAuthorizationAPI>();
+            Bind<IGoogleAuthorizationAPI>().To<GoogleAuthorizationAPI>();
             Bind<ICalendarAPI>().To<CalendarAPI>();
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
@@ -13,13 +14,13 @@ namespace Trellendar.Logic.UserManagement._Impl
 {
     public class UserService : IUserService
     {
-        private readonly ICalendarAuthorizationAPI _calendarAuthorizationAPI;
+        private readonly IGoogleAuthorizationAPI _calendarAuthorizationAPI;
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarAPI;
         private readonly IRepositoryFactory _repositoryFactory;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(ICalendarAuthorizationAPI calendarAuthorizationAPI, ITrelloAPI trelloApi, ICalendarAPI calendarAPI,
+        public UserService(IGoogleAuthorizationAPI calendarAuthorizationAPI, ITrelloAPI trelloApi, ICalendarAPI calendarAPI,
                            IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork)
         {
             _calendarAuthorizationAPI = calendarAuthorizationAPI;

@@ -1,7 +1,7 @@
 using System;
 using Nancy;
 using Nancy.Session;
-using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Logic.UserManagement;
 
@@ -11,11 +11,11 @@ namespace Trellendar.WebSite.Logic._Impl
     {
         private const string AUTHORIZATION_STATE_PARAMETER_NAME = "authorization_state";
 
-        private readonly ICalendarAuthorizationAPI _calendarAuthorizationApi;
+        private readonly IGoogleAuthorizationAPI _calendarAuthorizationApi;
         private readonly ITrelloAuthorizationAPI _trelloAuthorizationApi;
         private readonly IUserService _userService;
 
-        public LogInService(ICalendarAuthorizationAPI calendarAuthorizationApi, ITrelloAuthorizationAPI trelloAuthorizationApi, IUserService userService)
+        public LogInService(IGoogleAuthorizationAPI calendarAuthorizationApi, ITrelloAuthorizationAPI trelloAuthorizationApi, IUserService userService)
         {
             _calendarAuthorizationApi = calendarAuthorizationApi;
             _trelloAuthorizationApi = trelloAuthorizationApi;
