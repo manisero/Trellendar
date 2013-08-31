@@ -23,7 +23,7 @@ namespace Trellendar.AuthorizationConsole
 
             var restClientFactory = new RestClientFactory(null);
             var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
-            var calendarAuthorization = new GoogleAuthorizationAPI(restClientFactory, new JsonSerializer());
+            var googleAuthorization = new GoogleAuthorizationAPI(restClientFactory, new JsonSerializer());
             var dataContext = new TrellendarDataContext();
 
             // Get Trello token
@@ -47,12 +47,12 @@ namespace Trellendar.AuthorizationConsole
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
 
-            var caledndarUri = calendarAuthorization.GetAuthorizationUri(CALENDAR_AUTHORIZATION_REDIRECT_URI);
-            Process.Start(caledndarUri);
+            var googleUri = googleAuthorization.GetAuthorizationUri(CALENDAR_AUTHORIZATION_REDIRECT_URI);
+            Process.Start(googleUri);
 
             Console.WriteLine("Please paste the code here:");
-            var calendarCode = Console.ReadLine();
-            var calendarToken = calendarAuthorization.GetToken(calendarCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
+            var googleCode = Console.ReadLine();
+            var googleToken = googleAuthorization.GetToken(googleCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
 
             Console.WriteLine();
             Console.WriteLine("Now paste your Google Calendar ID here:");
@@ -61,13 +61,13 @@ namespace Trellendar.AuthorizationConsole
             // Create User
             var user = new User
                 {
-                    Email = calendarToken.UserEmail,
-                    BoardID = boardId,
+                    Email = googleToken.UserEmail,
+                    GoogleAccessToken = googleToken.AccessToken,
+                    GoogleAccessTokenExpirationTS = googleToken.GetExpirationTS(),
+                    GoogleRefreshToken = googleToken.RefreshToken,
                     TrelloAccessToken = trelloToken,
+                    BoardID = boardId,
                     CalendarID = calendarId,
-                    GoogleAccessToken = calendarToken.AccessToken,
-                    GoogleAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
-                    GoogleRefreshToken = calendarToken.RefreshToken,
                     LastSynchronizationTS = new DateTime(1900, 1, 1),
 					UserPreferences = new UserPreferences()
                 };
