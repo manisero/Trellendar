@@ -1,5 +1,7 @@
-﻿using System.Data.Entity;
-using Trellendar.DataAccess.Local.ModelConfiguration.Configurations;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.DataAccess.Local.ModelConfiguration
 {
@@ -7,9 +9,11 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration
     {
         public void Configure(DbModelBuilder modelBuilder)
         {
-            new UnregisteredUserConfiguration().Configure(modelBuilder);
-            new UserConfiguration().Configure(modelBuilder);
-            new UserPreferencesConfiguration().Configure(modelBuilder);
+            var types = GetType().Assembly.DefinedTypes.Where(x => x.Namespace == "{0}.Configurations".FormatWith(GetType().Namespace));
+
+            var configurations = types.Select(x => x.GetConstructor(new Type[0]).Invoke(new object[0]) as IEntityConfiguration);
+
+            configurations.ForEach(x => x.Configure(modelBuilder));
         }
     }
 }

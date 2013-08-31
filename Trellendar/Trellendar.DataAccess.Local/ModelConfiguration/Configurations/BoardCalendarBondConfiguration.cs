@@ -7,6 +7,10 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
     {
         protected override void ConfigureEntity(EntityTypeConfiguration<BoardCalendarBond> entity)
         {
+            entity.HasKey(x => new { x.UserID, x.BoardID, x.CalendarID });
+
+            entity.Property(x => x.BoardID).HasMaxLength(100);
+            entity.Property(x => x.CalendarID).HasMaxLength(100);
             entity.Property(x => x.CalendarTimeZone).HasMaxLength(50);
         }
     }

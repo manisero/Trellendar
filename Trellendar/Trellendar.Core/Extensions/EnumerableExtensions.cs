@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Trellendar.Core.Extensions
@@ -14,5 +15,13 @@ namespace Trellendar.Core.Extensions
          {
              return collection != null && collection.Any();
          }
+
+        public static void ForEach<TItem>(this IEnumerable<TItem> collection, Action<TItem> action)
+        {
+            foreach (var item in collection)
+            {
+                action(item);
+            }
+        }
     }
 }
