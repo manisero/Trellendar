@@ -15,8 +15,8 @@ namespace Trellendar.DataAccess.Remote._Impl
 
         public RestClientFactory(IDependencyResolver dependencyResolver)
         {
+            _clients[DomainType.Google] = () => new GoogleClient();
             _clients[DomainType.Trello] = () => new TrelloClient();
-            _clients[DomainType.Calendar] = () => new GoogleClient();
 
             _authorizedClients[DomainType.Trello] = () => new AuthorizedTrelloClient(dependencyResolver.Resolve<IAccessTokenProviderFactory>());
             _authorizedClients[DomainType.Calendar] = () => new CalendarClient(dependencyResolver.Resolve<IAccessTokenProviderFactory>());

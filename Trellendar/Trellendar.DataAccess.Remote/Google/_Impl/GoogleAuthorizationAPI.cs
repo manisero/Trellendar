@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Trellendar.Core.Serialization;
 using Trellendar.Domain;
-using Trellendar.Domain.Calendar;
 using System.Linq;
+using Trellendar.Domain.Google;
 
 namespace Trellendar.DataAccess.Remote.Google._Impl
 {
@@ -15,7 +15,7 @@ namespace Trellendar.DataAccess.Remote.Google._Impl
         private IRestClient _googleClient;
         private IRestClient GoogleClient
         {
-            get { return _googleClient ?? (_googleClient = _restClientFactory.CreateClient(DomainType.Calendar)); }
+            get { return _googleClient ?? (_googleClient = _restClientFactory.CreateClient(DomainType.Google)); }
         }
 
         public GoogleAuthorizationAPI(IRestClientFactory restClientFactory, IJsonSerializer jsonSerializer)

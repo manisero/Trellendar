@@ -3,6 +3,7 @@
     public enum DomainType
     {
         Trellendar,
+        Google,
         Trello,
         Calendar
     }

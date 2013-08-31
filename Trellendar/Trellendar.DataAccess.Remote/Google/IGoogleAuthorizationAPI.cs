@@ -1,4 +1,5 @@
 ﻿using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Google;
 
 namespace Trellendar.DataAccess.Remote.Google
 {

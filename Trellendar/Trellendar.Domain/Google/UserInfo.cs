@@ -1,4 +1,4 @@
-﻿namespace Trellendar.Domain.Calendar
+﻿namespace Trellendar.Domain.Google
 {
     public class UserInfo
     {

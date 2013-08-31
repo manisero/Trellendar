@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Trellendar.Domain.Calendar
+namespace Trellendar.Domain.Google
 {
     public class Token
     {
