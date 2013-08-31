@@ -107,8 +107,8 @@
     <Compile Include="Logic\ILogInService.cs" />
     <Compile Include="Logic\IUserContextRegistrar.cs" />
     <Compile Include="Logic\_Impl\LogInService.cs" />
-    <Compile Include="Modules\LogIn\TrelloLogInModel.cs" />
-    <Compile Include="Modules\LogIn\TrelloLogInResultModel.cs" />
+    <Compile Include="Modules\LogIn\Models\TrelloLogInModel.cs" />
+    <Compile Include="Modules\LogIn\Models\TrelloLogInResultModel.cs" />
     <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
     <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
@@ -129,7 +129,7 @@
     <Content Include="packages.config" />
     <Content Include="Modules\Home\Views\Index.cshtml" />
     <Content Include="Modules\UserProfile\Views\Index.cshtml" />
-    <Content Include="Modules\LogIn\TrelloLogIn.cshtml" />
+    <Content Include="Modules\LogIn\Views\TrelloLogIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

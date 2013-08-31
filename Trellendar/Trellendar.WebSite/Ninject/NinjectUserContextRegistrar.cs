@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Trellendar.WebSite.Logic;
@@ -15,11 +14,9 @@ namespace Trellendar.WebSite.Ninject
             _kernel = kernel;
         }
 
-        public void Register(string userEmail)
+        public void Register(User user)
         {
             _kernel.Unbind<UserContext>();
-
-            var user = _kernel.Get<IRepositoryFactory>().Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
 
             if (user != null)
             {

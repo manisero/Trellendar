@@ -1,4 +1,4 @@
-﻿namespace Trellendar.WebSite.Modules.LogIn
+﻿namespace Trellendar.WebSite.Modules.LogIn.Models
 {
     public class TrelloLogInModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Trellendar.WebSite.Modules.LogIn
+namespace Trellendar.WebSite.Modules.LogIn.Models
 {
     public class TrelloLogInResultModel
     {

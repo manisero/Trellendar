@@ -1,7 +1,7 @@
 ﻿using Nancy;
 using Nancy.Security;
+using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
-using Trellendar.WebSite.Logic;
 using Trellendar.WebSite.Modules.UserProfile.Models;
 using System.Linq;
 
@@ -9,35 +9,27 @@ namespace Trellendar.WebSite.Modules.UserProfile
 {
     public class UserProfileModule : NancyModule
     {
-        private readonly IUserContextRegistrar _userContextRegistrar;
+        private readonly UserContext _userContext;
         private readonly IUserService _userService;
 
-        public UserProfileModule(IUserContextRegistrar userContextRegistrar, IUserService userService)
+        public UserProfileModule(UserContext userContext, IUserService userService)
             : base("UserProfile")
         {
-            _userContextRegistrar = userContextRegistrar;
+            _userContext = userContext;
             _userService = userService;
 
             this.RequiresAuthentication();
-            Before += RegisterUserContext;
 
             Get["/"] = Index;
         }
 
-        private Response RegisterUserContext(NancyContext context)
-        {
-            _userContextRegistrar.Register(context.CurrentUser.UserName);
-            return null;
-        }
-
         public dynamic Index(dynamic parameters)
         {
-            var user = _userService.GetUser(Context.CurrentUser.UserName);
             var calendars = _userService.GetAvailableCalendars();
 
             var model = new IndexModel
                 {
-                    Email = user.Email,
+                    Email = _userContext.User.Email,
                     AvailableCalendars = calendars.ToDictionary(x => x.Id, x => x.Summary)
                 };
 
