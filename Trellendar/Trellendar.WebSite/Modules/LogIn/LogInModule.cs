@@ -37,19 +37,27 @@ namespace Trellendar.WebSite.Modules.LogIn
         {
             Guid userId;
 
-            if (_logInService.TryLogUserIn(Context.Request, Session, FormatAuthorizationRedirectUri(), out userId))
+            var token = _logInService.GetToken(Context.Request, Session, FormatAuthorizationRedirectUri());
+
+            if (_logInService.TryGetUserID(token, out userId))
             {
                 return this.LoginAndRedirect(userId);
             }
-            else
+            else if (_logInService.TryCreateUnregisteredUser(token, out userId))
             {
                 var model = new TrelloLogInModel
-                {
-                    AuthorizationUrl = _logInService.GetTrelloAuthorizationUri(),
-                    UserID = userId.ToString()
-                };
+                    {
+                        AuthorizationUrl = _logInService.GetTrelloAuthorizationUri(),
+                        UserID = userId.ToString()
+                    };
 
                 return View[model];
+            }
+            else
+            {
+                var authorizationUri = _logInService.PrepareGoogleAuthorizationUri(Session, FormatAuthorizationRedirectUri(), true);
+
+                return new RedirectResponse(authorizationUri);   
             }
         }
 

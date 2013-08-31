@@ -8,19 +8,19 @@ namespace Trellendar.Domain.Trellendar
 
         public string Email { get; set; }
 
-        public string TrelloBoardID { get; set; }
+        public string GoogleAccessToken { get; set; }
+
+        public DateTime GoogleAccessTokenExpirationTS { get; set; }
+
+        public string GoogleRefreshToken { get; set; }
 
         public string TrelloAccessToken { get; set; }
+
+        public string BoardID { get; set; }
 
         public string CalendarID { get; set; }
 
         public string CalendarTimeZone { get; set; }
-
-        public string CalendarAccessToken { get; set; }
-
-        public DateTime CalendarAccessTokenExpirationTS { get; set; }
-
-        public string CalendarRefreshToken { get; set; }
 
         public DateTime LastSynchronizationTS { get; set; }
 

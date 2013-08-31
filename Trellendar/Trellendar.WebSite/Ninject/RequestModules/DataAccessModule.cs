@@ -12,25 +12,25 @@ using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 
-namespace Trellendar.Service.Ninject.Modules
+namespace Trellendar.WebSite.Ninject.RequestModules
 {
     internal class DataAccessModule : NinjectModule
     {
         public override void Load()
         {
-            // Local
-            Bind<DbContext>().ToConstant(new TrellendarDataContext());
-            Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>();
-            Bind<IRepositoryFactory>().To<EntityFrameworkRepositoryFactory>();
+            // Local // There are for request-scope operation (all business logic actions)
+            Rebind<DbContext>().ToConstant(new TrellendarDataContext());
+            Rebind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>();
+            Rebind<IRepositoryFactory>().To<EntityFrameworkRepositoryFactory>();
 
             // Remote
             Bind<IRestClientFactory>().To<RestClientFactory>();
 
-            // Trello
+            // Remote > Trello
             Bind<ITrelloAuthorizationAPI>().To<TrelloAuthorizationAPI>();
             Bind<ITrelloAPI>().To<TrelloAPI>();
 
-            // Calendar
+            // Remote > Calendar
             Bind<IGoogleAuthorizationAPI>().To<GoogleAuthorizationAPI>();
             Bind<ICalendarAPI>().To<CalendarAPI>();
         }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
 using Trellendar.DataAccess.Local;
 using Trellendar.DataAccess.Local.Migrations;
-using Trellendar.DataAccess.Remote.Calendar._Impl;
+using Trellendar.DataAccess.Remote.Google._Impl;
 using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 using Trellendar.Domain.Trellendar;
@@ -23,7 +23,7 @@ namespace Trellendar.AuthorizationConsole
 
             var restClientFactory = new RestClientFactory(null);
             var trelloAuthorization = new TrelloAuthorizationAPI(restClientFactory);
-            var calendarAuthorization = new CalendarAuthorizationAPI(restClientFactory, new JsonSerializer());
+            var googleAuthorization = new GoogleAuthorizationAPI(restClientFactory, new JsonSerializer());
             var dataContext = new TrellendarDataContext();
 
             // Get Trello token
@@ -39,7 +39,7 @@ namespace Trellendar.AuthorizationConsole
 
             Console.WriteLine();
             Console.WriteLine("Now paste your Trello Board ID here:");
-            var trelloBoardId = Console.ReadLine();
+            var boardId = Console.ReadLine();
 
             // Get Google API token
             Console.WriteLine();
@@ -47,13 +47,12 @@ namespace Trellendar.AuthorizationConsole
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
 
-            var caledndarUri = calendarAuthorization.GetAuthorizationUri(CALENDAR_AUTHORIZATION_REDIRECT_URI);
-            Process.Start(caledndarUri);
+            var googleUri = googleAuthorization.GetAuthorizationUri(CALENDAR_AUTHORIZATION_REDIRECT_URI);
+            Process.Start(googleUri);
 
             Console.WriteLine("Please paste the code here:");
-            var calendarCode = Console.ReadLine();
-            var calendarToken = calendarAuthorization.GetToken(calendarCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
-            var userInfo = calendarAuthorization.GetUserInfo(calendarToken.IdToken);
+            var googleCode = Console.ReadLine();
+            var googleToken = googleAuthorization.GetToken(googleCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
 
             Console.WriteLine();
             Console.WriteLine("Now paste your Google Calendar ID here:");
@@ -62,13 +61,13 @@ namespace Trellendar.AuthorizationConsole
             // Create User
             var user = new User
                 {
-                    Email = userInfo.Email,
-                    TrelloBoardID = trelloBoardId,
+                    Email = googleToken.UserEmail,
+                    GoogleAccessToken = googleToken.AccessToken,
+                    GoogleAccessTokenExpirationTS = googleToken.GetExpirationTS(),
+                    GoogleRefreshToken = googleToken.RefreshToken,
                     TrelloAccessToken = trelloToken,
+                    BoardID = boardId,
                     CalendarID = calendarId,
-                    CalendarAccessToken = calendarToken.AccessToken,
-                    CalendarAccessTokenExpirationTS = calendarToken.GetExpirationTS(),
-                    CalendarRefreshToken = calendarToken.RefreshToken,
                     LastSynchronizationTS = new DateTime(1900, 1, 1),
 					UserPreferences = new UserPreferences()
                 };

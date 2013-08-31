@@ -1,40 +1,40 @@
 ﻿<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Trellendar</title>
+    <head>
+        <meta charset="utf-8">
+        <title>Trellendar</title>
 
-	<style type="text/css">
-		body {
-			text-align: center;
-		}
-	</style>
-</head>
-<body>
-	<img src="~/Content/nancy-logo.png" alt="Nancy logo" /><br />
-    <div>
-        This view was rendered using the Nancy Razor view engine
-    </div>
+        <style type="text/css">
+            body {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="~/Content/nancy-logo.png" alt="Nancy logo" /><br />
+        <div>
+            This view was rendered using the Nancy Razor view engine
+        </div>
 
-    @if (!Html.IsAuthenticated)
-    {
-        <div>
-            <a href="~/LogIn">Log in with Google</a>
-        </div>
-    }
-    else
-    {
-        <div>
-            Hello, @Html.CurrentUser.UserName
-            <ul>
-                <li>
-                    <a href="~/UserProfile">View your profile</a>
-                </li>
-                <li>
-                    <a href="~/LogOut">Log out</a>
-                </li>
-            </ul>
-        </div>
-    }
-</body>
+        @if (!Html.IsAuthenticated)
+        {
+            <div>
+                <a href="~/LogIn">Log in with Google</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                Hello, @Html.CurrentUser.UserName
+                <ul>
+                    <li>
+                        <a href="~/UserProfile">View your profile</a>
+                    </li>
+                    <li>
+                        <a href="~/LogOut">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        }
+    </body>
 </html>

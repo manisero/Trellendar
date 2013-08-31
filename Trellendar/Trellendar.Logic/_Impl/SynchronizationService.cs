@@ -1,5 +1,6 @@
 using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Trellendar;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Trellendar.Logic._Impl
 
         public void Synchronize()
         {
-            var board = _trelloApi.GetBoard(User.TrelloBoardID);
+            var board = _trelloApi.GetBoard(User.BoardID);
 
             if (board.Lists.IsNullOrEmpty() || board.Cards.IsNullOrEmpty())
             {

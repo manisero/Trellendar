@@ -4,6 +4,7 @@ using Trellendar.Core.Serialization;
 using Trellendar.Domain;
 using Trellendar.Domain.Trello;
 using Trellendar.Domain.Trello.Extensions;
+using System.Linq;
 
 namespace Trellendar.DataAccess.Remote.Trello._Impl
 {
@@ -22,6 +23,19 @@ namespace Trellendar.DataAccess.Remote.Trello._Impl
         {
             _restClientFactory = restClientFactory;
             _jsonSerializer = jsonSerializer;
+        }
+
+        public IEnumerable<Board> GetBoards()
+        {
+            var boardJson = TrelloClient.Get("members/me/boards",
+                                             new Dictionary<string, object>
+                                                 {
+                                                     { "fields", "name" },
+                                                     { "lists", "open" },
+                                                     { "list_fields", "name" },
+                                                 });
+
+            return _jsonSerializer.Deserialize<IEnumerable<Board>>(boardJson).Select(x => x.SetChildParentRelations());
         }
 
         public Board GetBoard(string boardId)

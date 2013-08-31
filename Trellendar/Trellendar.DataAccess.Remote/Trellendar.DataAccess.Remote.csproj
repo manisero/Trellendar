@@ -50,11 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationKeys.cs" />
-    <Compile Include="Calendar\RestClients\AuthorizedCalendarClient.cs" />
-    <Compile Include="Calendar\_Impl\CalendarAuthorizationAPI.cs" />
-    <Compile Include="Calendar\ICalendarAuthorizationAPI.cs" />
+    <Compile Include="Calendar\CalendarClient.cs" />
+    <Compile Include="Google\_Impl\GoogleAuthorizationAPI.cs" />
+    <Compile Include="Google\IGoogleAuthorizationAPI.cs" />
     <Compile Include="Calendar\_Impl\CalendarAPI.cs" />
-    <Compile Include="Calendar\RestClients\CalendarClient.cs" />
+    <Compile Include="Google\GoogleClient.cs" />
     <Compile Include="Calendar\ICalendarAPI.cs" />
     <Compile Include="IAccessTokenProvider.cs" />
     <Compile Include="IAccessTokenProviderFactory.cs" />

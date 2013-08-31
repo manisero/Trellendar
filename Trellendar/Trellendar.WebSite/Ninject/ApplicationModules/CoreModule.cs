@@ -9,8 +9,8 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
         public override void Load()
         {
             // Serialization
-            Bind<IJsonSerializer>().To<JsonSerializer>();
-            Bind<IXmlSerializer>().To<XmlSerializer>();
+            Bind<IJsonSerializer>().ToConstant(new JsonSerializer());
+            Bind<IXmlSerializer>().ToConstant(new XmlSerializer());
         }
     }
 }

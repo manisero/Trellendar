@@ -16,7 +16,7 @@ namespace Trellendar.DataAccess.Remote
             HttpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         }
 
-        public string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = false)
+        public string FormatRequestUri(string resource, IDictionary<string, object> parameters, bool includeBaseAddress = true)
         {
             var formattedParameters = new List<string>();
 

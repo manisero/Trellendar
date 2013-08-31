@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Trellendar.Core.DependencyResolution;
-using Trellendar.DataAccess.Remote.Calendar.RestClients;
+using Trellendar.DataAccess.Remote.Calendar;
+using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello.RestClients;
 using Trellendar.Domain;
 
@@ -14,11 +15,11 @@ namespace Trellendar.DataAccess.Remote._Impl
 
         public RestClientFactory(IDependencyResolver dependencyResolver)
         {
+            _clients[DomainType.Google] = () => new GoogleClient();
             _clients[DomainType.Trello] = () => new TrelloClient();
-            _clients[DomainType.Calendar] = () => new CalendarClient();
 
             _authorizedClients[DomainType.Trello] = () => new AuthorizedTrelloClient(dependencyResolver.Resolve<IAccessTokenProviderFactory>());
-            _authorizedClients[DomainType.Calendar] = () => new AuthorizedCalendarClient(dependencyResolver.Resolve<IAccessTokenProviderFactory>());
+            _authorizedClients[DomainType.Calendar] = () => new CalendarClient(dependencyResolver.Resolve<IAccessTokenProviderFactory>());
         }
 
         public IRestClient CreateClient(DomainType domainType)

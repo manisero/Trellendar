@@ -10,15 +10,25 @@
 		}
 	</style>
 </head>
-<body>
-    @Model.Email's calendars:
-    <ul>
-        @foreach (var calendarSummary in Model.AvailableCalendars.Values)
-        {
-            <li>
-                @calendarSummary
-            </li>
-        }
-    </ul>
-</body>
+    <body>
+        @Model.Email's boards:
+        <ul>
+            @foreach (var boardName in Model.AvailableBoards.Values)
+            {
+                <li>
+                    @boardName
+                </li>
+            }
+        </ul>
+
+        @Model.Email's calendars:
+        <ul>
+            @foreach (var calendarSummary in Model.AvailableCalendars.Values)
+            {
+                <li>
+                    @calendarSummary
+                </li>
+            }
+        </ul>
+    </body>
 </html>

@@ -1,5 +1,5 @@
 ﻿using System;
-using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Google;
 
 namespace Trellendar.Logic.Domain
 {

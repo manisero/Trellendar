@@ -1,9 +1,9 @@
 ﻿using System.Net.Http.Headers;
 using Trellendar.Domain;
 
-namespace Trellendar.DataAccess.Remote.Calendar.RestClients
+namespace Trellendar.DataAccess.Remote.Calendar
 {
-    public class AuthorizedCalendarClient : CalendarClient
+    public class CalendarClient : RestClientBase
     {
         private readonly IAccessTokenProviderFactory _accessTokenProviderFactory;
 
@@ -13,7 +13,8 @@ namespace Trellendar.DataAccess.Remote.Calendar.RestClients
             get { return _accessTokenProvider ?? (_accessTokenProvider = _accessTokenProviderFactory.Create(DomainType.Calendar)); }
         }
 
-        public AuthorizedCalendarClient(IAccessTokenProviderFactory accessTokenProviderFactory)
+        public CalendarClient(IAccessTokenProviderFactory accessTokenProviderFactory)
+            : base("https://www.googleapis.com/calendar/v3/")
         {
             _accessTokenProviderFactory = accessTokenProviderFactory;
         }
