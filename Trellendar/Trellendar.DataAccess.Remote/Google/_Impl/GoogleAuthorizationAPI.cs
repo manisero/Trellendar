@@ -62,6 +62,7 @@ namespace Trellendar.DataAccess.Remote.Google._Impl
                                                   });
 
             var token = _jsonSerializer.Deserialize<Token>(tokenJson);
+            token.UserEmail = GetUserEmail(token.IdToken);
             token.CreationTS = timeStamp;
 
             return token;
@@ -85,15 +86,12 @@ namespace Trellendar.DataAccess.Remote.Google._Impl
             return token;
         }
 
-        public UserInfo GetUserInfo(string idToken)
+        private string GetUserEmail(string idToken)
         {
             var claims = _jsonSerializer.DeserializeJWT(idToken);
             var emailClaim = claims.SingleOrDefault(x => x.Type == "email");
 
-            return new UserInfo
-                {
-                    Email = emailClaim != null ? emailClaim.Value : null
-                };
+            return emailClaim != null ? emailClaim.Value : null;
         }
     }
 }

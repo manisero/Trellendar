@@ -33,9 +33,7 @@ namespace Trellendar.Logic.UserManagement._Impl
         public bool TryGetUserID(string authorizationCode, string authorizationRedirectUri, out Guid userId)
         {
             var token = _calendarAuthorizationAPI.GetToken(authorizationCode, authorizationRedirectUri);
-            var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
-
-            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userInfo.Email);
+            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == token.UserEmail);
 
             if (user != null)
             {
@@ -46,7 +44,7 @@ namespace Trellendar.Logic.UserManagement._Impl
             {
                 var newUser = new UnregisteredUser
                     {
-                        Email = userInfo.Email,
+                        Email = token.UserEmail,
                         GoogleAccessToken = token.AccessToken,
                         GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
                         GoogleRefreshToken = token.RefreshToken,
