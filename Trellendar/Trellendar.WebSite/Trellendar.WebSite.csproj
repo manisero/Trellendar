@@ -117,8 +117,10 @@
     <Compile Include="Nancy\UserMapper.cs" />
     <Compile Include="Ninject\ApplicationModules\CoreModule.cs" />
     <Compile Include="Ninject\ApplicationModules\DataAccessModule.cs" />
-    <Compile Include="Ninject\ApplicationModules\LogicModule.cs" />
     <Compile Include="Ninject\ApplicationModules\WebSiteModule.cs" />
+    <Compile Include="Ninject\RequestModules\DataAccessModule.cs" />
+    <Compile Include="Ninject\RequestModules\LogicModule.cs" />
+    <Compile Include="Ninject\RequestModules\WebSiteModule.cs" />
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
     <Compile Include="Ninject\NinjectUserContextRegistrar.cs" />
@@ -159,9 +161,7 @@
       <Name>Trellendar.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ninject\RequestModules\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

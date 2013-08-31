@@ -1,5 +1,4 @@
-﻿using Trellendar.Domain.Calendar;
-using Trellendar.Domain.Google;
+﻿using Trellendar.Domain.Google;
 
 namespace Trellendar.DataAccess.Remote.Google
 {
@@ -10,7 +9,5 @@ namespace Trellendar.DataAccess.Remote.Google
         Token GetToken(string authorizationCode, string redirectUri);
 
         Token GetNewToken(string refreshToken);
-
-        UserInfo GetUserInfo(string idToken);
     }
 }

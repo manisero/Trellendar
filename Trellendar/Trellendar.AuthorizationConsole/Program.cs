@@ -53,7 +53,6 @@ namespace Trellendar.AuthorizationConsole
             Console.WriteLine("Please paste the code here:");
             var calendarCode = Console.ReadLine();
             var calendarToken = calendarAuthorization.GetToken(calendarCode, CALENDAR_AUTHORIZATION_REDIRECT_URI);
-            var userInfo = calendarAuthorization.GetUserInfo(calendarToken.IdToken);
 
             Console.WriteLine();
             Console.WriteLine("Now paste your Google Calendar ID here:");
@@ -62,7 +61,7 @@ namespace Trellendar.AuthorizationConsole
             // Create User
             var user = new User
                 {
-                    Email = userInfo.Email,
+                    Email = calendarToken.UserEmail,
                     BoardID = boardId,
                     TrelloAccessToken = trelloToken,
                     CalendarID = calendarId,

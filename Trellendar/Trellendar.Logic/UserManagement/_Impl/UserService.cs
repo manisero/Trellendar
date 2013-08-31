@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
-using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Google;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Domain;
@@ -14,49 +14,55 @@ namespace Trellendar.Logic.UserManagement._Impl
 {
     public class UserService : IUserService
     {
-        private readonly IGoogleAuthorizationAPI _calendarAuthorizationAPI;
-        private readonly ITrelloAPI _trelloApi;
-        private readonly ICalendarAPI _calendarAPI;
         private readonly IRepositoryFactory _repositoryFactory;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ITrelloAPI _trelloApi;
+        private readonly ICalendarAPI _calendarAPI;
 
-        public UserService(IGoogleAuthorizationAPI calendarAuthorizationAPI, ITrelloAPI trelloApi, ICalendarAPI calendarAPI,
-                           IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork)
+        public UserService(IRepositoryFactory repositoryFactory, IUnitOfWork unitOfWork, ITrelloAPI trelloApi, ICalendarAPI calendarAPI)
         {
-            _calendarAuthorizationAPI = calendarAuthorizationAPI;
-            _trelloApi = trelloApi;
-            _calendarAPI = calendarAPI;
             _repositoryFactory = repositoryFactory;
             _unitOfWork = unitOfWork;
+            _trelloApi = trelloApi;
+            _calendarAPI = calendarAPI;
         }
 
-        public bool TryGetUserID(string authorizationCode, string authorizationRedirectUri, out Guid userId)
+        public bool TryGetUserID(string userEmail, out Guid userId)
         {
-            var token = _calendarAuthorizationAPI.GetToken(authorizationCode, authorizationRedirectUri);
-            var userInfo = _calendarAuthorizationAPI.GetUserInfo(token.IdToken);
+            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userEmail);
 
-            var user = _repositoryFactory.Create<User>().GetSingleOrDefault(x => x.Email == userInfo.Email);
-
-            if (user != null)
+            if (user == null)
             {
-                userId = user.UserID;
-                return true;
+                userId = new Guid();
+                return false;
             }
-            else
-            {
-                var newUser = new UnregisteredUser
-                    {
-                        Email = userInfo.Email,
-                        GoogleAccessToken = token.AccessToken,
-                        GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
-                        GoogleRefreshToken = token.RefreshToken,
-                        CreateTS = DateTime.UtcNow
-                    };
+            
+            userId = user.UserID;
+            return true;
+        }
 
-                _repositoryFactory.Create<UnregisteredUser>().Add(newUser);
+        public bool TryCreateUnregisteredUser(Token token, out Guid unregisteredUserId)
+        {
+            var unregisteredUser = new UnregisteredUser
+            {
+                Email = token.UserEmail,
+                GoogleAccessToken = token.AccessToken,
+                GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
+                GoogleRefreshToken = token.RefreshToken,
+                CreateTS = DateTime.UtcNow
+            };
+
+            try
+            {
+                _repositoryFactory.Create<UnregisteredUser>().Add(unregisteredUser);
                 _unitOfWork.SaveChanges();
 
-                userId = newUser.UnregisteredUserID;
+                unregisteredUserId = unregisteredUser.UnregisteredUserID;
+                return true;
+            }
+            catch (Exception exception)
+            {
+                unregisteredUserId = new Guid();
                 return false;
             }
         }

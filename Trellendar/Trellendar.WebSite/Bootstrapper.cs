@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Ninject;
@@ -29,6 +30,11 @@ namespace Trellendar.WebSite
                 });
 
             base.ApplicationStartup(container, pipelines);
+        }
+
+        protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
+        {
+            new NinjectBootstrapper().RegisterRequestModules(container);
         }
     }
 }

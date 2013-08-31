@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using Trellendar.WebSite.Ninject.ApplicationModules;
 
 namespace Trellendar.WebSite.Ninject
 {
@@ -7,7 +6,12 @@ namespace Trellendar.WebSite.Ninject
     {
         public void RegisterApplicationModules(IKernel kernel)
         {
-            kernel.Load(new CoreModule(), new DataAccessModule(), new LogicModule(), new WebSiteModule());
+            kernel.Load(new ApplicationModules.CoreModule(), new ApplicationModules.DataAccessModule(), new ApplicationModules.WebSiteModule());
+        }
+
+        public void RegisterRequestModules(IKernel kernel)
+        {
+            kernel.Load(new RequestModules.DataAccessModule(), new RequestModules.LogicModule(), new RequestModules.WebSiteModule());
         }
     }
 }
