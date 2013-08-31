@@ -3,7 +3,6 @@ using Ninject.Modules;
 using Trellendar.Core.DependencyResolution;
 using Trellendar.Logic.DataAccess;
 using Trellendar.WebSite.Logic;
-using Trellendar.WebSite.Logic._Impl;
 using Trellendar.WebSite.Nancy;
 
 namespace Trellendar.WebSite.Ninject.ApplicationModules
@@ -12,16 +11,13 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
     {
         public override void Load()
         {
-            Bind<IDataAccessSettingsProvider>().To<SettingsProvider>();
-
-            // Logic
-            Bind<ILogInService>().To<LogInService>();
+            Bind<IDataAccessSettingsProvider>().ToConstant(new SettingsProvider());
 
             // Nancy
             Bind<IUserMapper>().To<UserMapper>();
 
             // Ninject
-            Bind<IDependencyResolver>().To<NinjectDependencyResolver>();
+            Bind<IDependencyResolver>().ToConstant(new NinjectDependencyResolver(Kernel));
             Bind<IUserContextRegistrar>().To<NinjectUserContextRegistrar>();
         }
     }

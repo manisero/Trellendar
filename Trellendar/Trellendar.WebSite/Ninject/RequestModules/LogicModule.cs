@@ -5,7 +5,7 @@ using Trellendar.Logic.DataAccess._Impl;
 using Trellendar.Logic.UserManagement;
 using Trellendar.Logic.UserManagement._Impl;
 
-namespace Trellendar.WebSite.Ninject.ApplicationModules
+namespace Trellendar.WebSite.Ninject.RequestModules
 {
     public class LogicModule : NinjectModule
     {
