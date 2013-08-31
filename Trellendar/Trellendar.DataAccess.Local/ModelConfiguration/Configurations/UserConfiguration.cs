@@ -11,12 +11,12 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
             entity.Property(x => x.UserID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             entity.Property(x => x.Email).IsRequired().HasMaxLength(256);
-            entity.Property(x => x.BoardID).IsRequired().HasMaxLength(100);
-            entity.Property(x => x.TrelloAccessToken).IsRequired().HasMaxLength(100);
-            entity.Property(x => x.CalendarID).IsRequired().HasMaxLength(100);
-            entity.Property(x => x.CalendarTimeZone).HasMaxLength(50);
             entity.Property(x => x.GoogleAccessToken).IsRequired().HasMaxLength(100);
             entity.Property(x => x.GoogleRefreshToken).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.TrelloAccessToken).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.BoardID).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarID).IsRequired().HasMaxLength(100);
+            entity.Property(x => x.CalendarTimeZone).HasMaxLength(50);
         }
     }
 }
