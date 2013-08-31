@@ -47,8 +47,8 @@
     <Compile Include="Calendar\CalendarList.cs" />
     <Compile Include="Calendar\Event.cs" />
     <Compile Include="Calendar\TimeStamp.cs" />
-    <Compile Include="Calendar\Token.cs" />
-    <Compile Include="Calendar\UserInfo.cs" />
+    <Compile Include="Google\Token.cs" />
+    <Compile Include="Google\UserInfo.cs" />
     <Compile Include="DomainType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trellendar\UnregisteredUser.cs" />
