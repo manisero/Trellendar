@@ -9,18 +9,19 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
 {
     public class BoardItemsProcessor : IBoardItemsProcessor
     {
-        private readonly UserContext _userContext;
+        private readonly BoardCalendarContext _boardCalendarContext;
         private readonly ISingleBoardItemProcessorFactory _singleBoardItemProcessorFactory;
         private readonly ICalendarAPI _calendarApi;
 
-        protected User User
+        protected BoardCalendarBond BoardCalendarBond
         {
-            get { return _userContext.User; }
+            get { return _boardCalendarContext.BoardCalendarBond; }
         }
 
-        public BoardItemsProcessor(UserContext userContext, ISingleBoardItemProcessorFactory singleBoardItemProcessorFactory, ICalendarAPI calendarApi)
+        public BoardItemsProcessor(BoardCalendarContext boardCalendarContext, ISingleBoardItemProcessorFactory singleBoardItemProcessorFactory, 
+                                   ICalendarAPI calendarApi)
         {
-            _userContext = userContext;
+            _boardCalendarContext = boardCalendarContext;
             _singleBoardItemProcessorFactory = singleBoardItemProcessorFactory;
             _calendarApi = calendarApi;
         }
@@ -40,7 +41,7 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
                 {
                     if (existingEvent != null)
                     {
-                        _calendarApi.DeleteEvent(User.CalendarID, existingEvent);
+                        _calendarApi.DeleteEvent(BoardCalendarBond.CalendarID, existingEvent);
                     }
 
                     continue;
@@ -48,13 +49,13 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
 
                 if (existingEvent == null)
                 {
-                    _calendarApi.CreateEvent(User.CalendarID, newEvent);
+                    _calendarApi.CreateEvent(BoardCalendarBond.CalendarID, newEvent);
                 }
                 else
                 {
                     newEvent.Id = existingEvent.Id;
                     newEvent.Sequence = existingEvent.Sequence + 1;
-                    _calendarApi.UpdateEvent(User.CalendarID, newEvent);
+                    _calendarApi.UpdateEvent(BoardCalendarBond.CalendarID, newEvent);
                 }
             }
         }

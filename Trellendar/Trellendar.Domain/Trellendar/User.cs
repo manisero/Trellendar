@@ -27,8 +27,6 @@ namespace Trellendar.Domain.Trellendar
 
         public string TrelloAccessToken { get; set; }
 
-        public DateTime LastSynchronizationTS { get; set; }
-
         public virtual IList<BoardCalendarBond> BoardCalendarBonds { get; set; }
 
         public virtual UserPreferences UserPreferences { get; set; }

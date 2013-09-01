@@ -1,24 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Trellendar.Domain.Calendar;
-using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
 {
     public class CalendarSynchronizationService : ICalendarSynchronizationService
     {
-        private readonly UserContext _userContext;
+        private readonly BoardCalendarContext _boardCalendarContext;
         private readonly IBoardItemsProcessor _boardItemsProcessor;
 
-        private User User
+        public CalendarSynchronizationService(BoardCalendarContext boardCalendarContext, IBoardItemsProcessor boardItemsProcessor)
         {
-            get { return _userContext.User; }
-        }
-
-        public CalendarSynchronizationService(UserContext userContext, IBoardItemsProcessor boardItemsProcessor)
-        {
-            _userContext = userContext;
+            _boardCalendarContext = boardCalendarContext;
             _boardItemsProcessor = boardItemsProcessor;
         }
 
@@ -26,7 +20,8 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
         {
             foreach (var list in board.Lists)
             {
-                var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
+                var cards = board.Cards.Where(x => x.IdList == list.Id &&
+                                                   x.DateLastActivity > _boardCalendarContext.BoardCalendarBond.LastSynchronizationTS);
 
                 if (cards.Any())
                 {

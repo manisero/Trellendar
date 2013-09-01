@@ -67,13 +67,13 @@ namespace Trellendar.AuthorizationConsole
                     GoogleAccessTokenExpirationTS = googleToken.GetExpirationTS(),
                     GoogleRefreshToken = googleToken.RefreshToken,
                     TrelloAccessToken = trelloToken,
-                    LastSynchronizationTS = new DateTime(1900, 1, 1),
                     BoardCalendarBonds = new List<BoardCalendarBond>
                         {
                             new BoardCalendarBond
                                 {
                                     BoardID = boardId,
                                     CalendarID = calendarId,
+                                    LastSynchronizationTS = new DateTime(1900, 1, 1),
                                     CreateTS = DateTime.UtcNow
                                 }
                         },
