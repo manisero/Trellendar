@@ -1,6 +1,5 @@
 using Trellendar.Core.Extensions;
 using Trellendar.DataAccess.Remote.Calendar;
-using Trellendar.DataAccess.Remote.Google;
 using Trellendar.DataAccess.Remote.Trello;
 using Trellendar.Domain.Trellendar;
 using System.Linq;

@@ -81,11 +81,9 @@ namespace Trellendar.Logic.UserManagement._Impl
                 {
                     Email = unregisteredUser.Email,
                     TrelloAccessToken = trelloAccessToken,
-                    BoardID = "TODO",
                     GoogleAccessToken = unregisteredUser.GoogleAccessToken,
                     GoogleAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
                     GoogleRefreshToken = unregisteredUser.GoogleRefreshToken,
-                    CalendarID = "TODO",
                     LastSynchronizationTS = new DateTime(1900, 1, 1)
                 };
 

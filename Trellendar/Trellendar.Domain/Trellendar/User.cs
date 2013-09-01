@@ -17,12 +17,6 @@ namespace Trellendar.Domain.Trellendar
 
         public string TrelloAccessToken { get; set; }
 
-        public string BoardID { get; set; }
-
-        public string CalendarID { get; set; }
-
-        public string CalendarTimeZone { get; set; }
-
         public DateTime LastSynchronizationTS { get; set; }
 
         public virtual IList<BoardCalendarBond> BoardCalendarBonds { get; set; }
