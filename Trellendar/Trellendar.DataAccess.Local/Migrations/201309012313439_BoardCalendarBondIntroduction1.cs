@@ -7,8 +7,6 @@ namespace Trellendar.DataAccess.Local.Migrations
     {
         public override void Up()
         {
-            //DropForeignKey("dbo.UserPreferences", "UserID", "dbo.Users");
-            //DropIndex("dbo.UserPreferences", new[] { "UserID" });
             CreateTable(
                 "dbo.BoardCalendarBondSettings",
                 c => new

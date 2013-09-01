@@ -63,7 +63,7 @@ namespace Trellendar.DataAccess.Remote.Google._Impl
 
             var token = _jsonSerializer.Deserialize<Token>(tokenJson);
             token.UserEmail = GetUserEmail(token.IdToken);
-            token.CreationTS = timeStamp;
+            token.CreateTS = timeStamp;
 
             return token;
         }
@@ -81,7 +81,7 @@ namespace Trellendar.DataAccess.Remote.Google._Impl
                                                   });
 
             var token = _jsonSerializer.Deserialize<Token>(tokenJson);
-            token.CreationTS = timeStamp;
+            token.CreateTS = timeStamp;
 
             return token;
         }

@@ -125,6 +125,10 @@
     <Compile Include="Migrations\201309012313439_BoardCalendarBondIntroduction1.Designer.cs">
       <DependentUpon>201309012313439_BoardCalendarBondIntroduction1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309012321401_UserCreateTS.cs" />
+    <Compile Include="Migrations\201309012321401_UserCreateTS.Designer.cs">
+      <DependentUpon>201309012321401_UserCreateTS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\BoardCalendarBondConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\BoardCalendarBondSettingsConfiguration.cs" />
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309012313439_BoardCalendarBondIntroduction1.resx">
       <DependentUpon>201309012313439_BoardCalendarBondIntroduction1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309012321401_UserCreateTS.resx">
+      <DependentUpon>201309012321401_UserCreateTS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

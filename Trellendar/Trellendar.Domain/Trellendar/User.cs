@@ -17,6 +17,8 @@ namespace Trellendar.Domain.Trellendar
 
         public string TrelloAccessToken { get; set; }
 
+        public DateTime CreateTS { get; set; }
+
         public virtual IList<BoardCalendarBond> BoardCalendarBonds { get; set; }
     }
 }

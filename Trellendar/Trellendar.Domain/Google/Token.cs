@@ -21,6 +21,6 @@ namespace Trellendar.Domain.Google
         public string RefreshToken { get; set; }
 
         [JsonIgnore]
-        public DateTime CreationTS { get; set; }
+        public DateTime CreateTS { get; set; }
     }
 }

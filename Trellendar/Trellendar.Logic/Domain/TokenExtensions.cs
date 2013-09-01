@@ -7,7 +7,7 @@ namespace Trellendar.Logic.Domain
     {
         public static DateTime GetExpirationTS(this Token token)
         {
-            return token.CreationTS.AddSeconds(token.ExpiresIn);
+            return token.CreateTS.AddSeconds(token.ExpiresIn);
         }
     }
 }
