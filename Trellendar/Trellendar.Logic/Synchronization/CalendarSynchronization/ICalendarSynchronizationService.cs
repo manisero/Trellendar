@@ -4,7 +4,7 @@ using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.Synchronization.CalendarSynchronization
 {
-    public interface ICalendarService
+    public interface ICalendarSynchronizationService
     {
         void UpdateCalendar(Board board, IEnumerable<Event> events);
     }

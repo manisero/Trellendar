@@ -76,7 +76,7 @@
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\BoardItemsProcessor.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\SingleBoardItemProcessors\CardProcessor.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\ISingleBoardItemProcessorFactory.cs" />
-    <Compile Include="Synchronization\CalendarSynchronization\ICalendarService.cs" />
+    <Compile Include="Synchronization\CalendarSynchronization\ICalendarSynchronizationService.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\IBoardItemsProcessor.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\ISingleBoardItemProcessor.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\Parsers\DueParser.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\IBoardCalendarBondSynchronizationService.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\EventTimeFrameCreator.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\SingleBoardItemProcessorFactory.cs" />
-    <Compile Include="Synchronization\CalendarSynchronization\_Impl\CalendarService.cs" />
+    <Compile Include="Synchronization\CalendarSynchronization\_Impl\CalendarSynchronizationService.cs" />
     <Compile Include="UserManagement\_Impl\UserService.cs" />
     <Compile Include="Synchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\_Impl\BoardCalendarBondSynchronizationService.cs" />

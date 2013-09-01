@@ -6,7 +6,7 @@ using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
 {
-    public class CalendarService : ICalendarService
+    public class CalendarSynchronizationService : ICalendarSynchronizationService
     {
         private readonly UserContext _userContext;
         private readonly IBoardItemsProcessor _boardItemsProcessor;
@@ -16,7 +16,7 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
             get { return _userContext.User; }
         }
 
-        public CalendarService(UserContext userContext, IBoardItemsProcessor boardItemsProcessor)
+        public CalendarSynchronizationService(UserContext userContext, IBoardItemsProcessor boardItemsProcessor)
         {
             _userContext = userContext;
             _boardItemsProcessor = boardItemsProcessor;

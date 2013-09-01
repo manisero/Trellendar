@@ -11,40 +11,42 @@ namespace Trellendar.Logic.Synchronization._Impl
 {
     public class SynchronizationService : ISynchronizationService
     {
-        private readonly UserContext _userContext;
+        private readonly BoardCalendarContext _boardCalendarContext;
         private readonly ITrelloAPI _trelloApi;
         private readonly ICalendarAPI _calendarApi;
-        private readonly IBoardCalendarBondSynchronizationService _userProfileService;
-        private readonly ICalendarService _calendarService;
+        private readonly IBoardCalendarBondSynchronizationService _boardCalendarSynchronizationService;
+        private readonly ICalendarSynchronizationService _calendarSynchronizationService;
 
-        private User User
+        private BoardCalendarBond BoardCalendarBond
         {
-            get { return _userContext.User; }
+            get { return _boardCalendarContext.BoardCalendarBond; }
         }
 
-        public SynchronizationService(UserContext userContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi, IBoardCalendarBondSynchronizationService userProfileService, ICalendarService calendarService)
+        public SynchronizationService(BoardCalendarContext boardCalendarContext, ITrelloAPI trelloApi, ICalendarAPI calendarApi,
+                                      IBoardCalendarBondSynchronizationService boardCalendarBondSynchronizationService, 
+                                      ICalendarSynchronizationService calendarSynchronizationService)
         {
-            _userContext = userContext;
+            _boardCalendarContext = boardCalendarContext;
             _trelloApi = trelloApi;
             _calendarApi = calendarApi;
-            _userProfileService = userProfileService;
-            _calendarService = calendarService;
+            _boardCalendarSynchronizationService = boardCalendarBondSynchronizationService;
+            _calendarSynchronizationService = calendarSynchronizationService;
         }
 
         public void Synchronize()
         {
-            var board = _trelloApi.GetBoard(User.BoardID);
+            var board = _trelloApi.GetBoard(BoardCalendarBond.BoardID);
 
             if (board.Lists.IsNullOrEmpty() || board.Cards.IsNullOrEmpty())
             {
                 return;
             }
 
-            var calendarEvents = _calendarApi.GetEvents(User.CalendarID);
+            var calendarEvents = _calendarApi.GetEvents(BoardCalendarBond.CalendarID);
 
-            _userProfileService.UpdateBond(calendarEvents);
-            _userProfileService.UpdateBondSettings(board);
-            _calendarService.UpdateCalendar(board, calendarEvents.Items.Where(x => x.IsGeneratedByTrellendar()));
+            _boardCalendarSynchronizationService.UpdateBond(calendarEvents);
+            _boardCalendarSynchronizationService.UpdateBondSettings(board);
+            _calendarSynchronizationService.UpdateCalendar(board, calendarEvents.Items.Where(x => x.IsGeneratedByTrellendar()));
         }
     }
 }
