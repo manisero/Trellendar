@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardCalendarContext.cs" />
     <Compile Include="CalendarSynchronization\Formatting\IDescriptionFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatting\ISummaryFormatter.cs" />
     <Compile Include="CalendarSynchronization\Formatting\ITimeFrameFormatter.cs" />

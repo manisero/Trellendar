@@ -16,6 +16,6 @@ namespace Trellendar.Domain.Trellendar
 
         public DateTime CreateTS { get; set; }
 
-        public virtual BoardCalendarBondSettings BoardCalendarBondSettings { get; set; }
+        public virtual BoardCalendarBondSettings Settings { get; set; }
     }
 }

@@ -45,12 +45,19 @@ namespace Trellendar.Service
             {
                 _kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
 
-                var synchronizationService = _kernel.Get<ISynchronizationService>();
                 var synchronizationTS = DateTime.UtcNow;
 
-                synchronizationService.Synchronize();
-                user.LastSynchronizationTS = synchronizationTS;
+                foreach (var bond in user.BoardCalendarBonds)
+                {
+                    _kernel.Bind<BoardCalendarContext>().ToConstant(new BoardCalendarContext(bond));
 
+                    var synchronizationService = _kernel.Get<ISynchronizationService>();
+                    synchronizationService.Synchronize();
+
+                    _kernel.Unbind<BoardCalendarContext>();
+                }
+                
+                user.LastSynchronizationTS = synchronizationTS;
                 _kernel.Get<IUnitOfWork>().SaveChanges();
                 _kernel.Unbind<UserContext>();
             }
