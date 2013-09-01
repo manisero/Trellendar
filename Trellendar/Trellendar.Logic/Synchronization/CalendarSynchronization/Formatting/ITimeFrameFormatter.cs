@@ -6,6 +6,6 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting
 {
     public interface ITimeFrameFormatter<TEntity>
     {
-        Tuple<TimeStamp, TimeStamp> Format(TEntity entity, User user);
+        Tuple<TimeStamp, TimeStamp> Format(TEntity entity, BoardCalendarBond boardCalendarBond);
     }
 }

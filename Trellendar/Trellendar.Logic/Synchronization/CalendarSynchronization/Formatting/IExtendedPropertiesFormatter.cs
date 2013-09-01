@@ -4,6 +4,6 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting
 {
     public interface IExtendedPropertiesFormatter<TEntity>
     {
-        EventExtendedProperties Format(TEntity entoty);
+        EventExtendedProperties Format(TEntity entity);
     }
 }

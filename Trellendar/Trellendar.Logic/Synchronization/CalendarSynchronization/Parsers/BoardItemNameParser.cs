@@ -11,9 +11,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers
             return new BoardItemName { Value = text };
         }
 
-        protected override Tuple<string, string> GetOutputTextMarkers(UserPreferences userPreferences)
+        protected override Tuple<string, string> GetOutputTextMarkers(BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            return userPreferences.GetBoardItemShortcutMarkers();
+            return boardCalendarBondSettings.GetBoardItemShortcutMarkers();
         }
 
         protected override bool TryGetOutput(string outputText, out BoardItemName output)

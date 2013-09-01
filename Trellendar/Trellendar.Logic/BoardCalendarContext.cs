@@ -25,7 +25,7 @@ namespace Trellendar.Logic
             return context.IsFilled() && context.BoardCalendarBond.Settings != null;
         }
 
-        public static BoardCalendarBondSettings GetUserPreferences(this BoardCalendarContext context)
+        public static BoardCalendarBondSettings GetSettings(this BoardCalendarContext context)
         {
             return context.HasBondSettings() ? context.BoardCalendarBond.Settings : null;
         }

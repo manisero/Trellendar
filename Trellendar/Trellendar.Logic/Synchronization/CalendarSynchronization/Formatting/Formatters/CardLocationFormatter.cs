@@ -13,9 +13,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _locationParser = locationParser;
         }
 
-        public string Format(Card entity, UserPreferences userPreferences)
+        public string Format(Card entity, BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            var location = _locationParser.Parse(entity.Description, userPreferences);
+            var location = _locationParser.Parse(entity.Description, boardCalendarBondSettings);
 
             return location != null ? location.Value : null;
         }

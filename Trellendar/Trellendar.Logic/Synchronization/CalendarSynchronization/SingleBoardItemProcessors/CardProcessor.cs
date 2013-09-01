@@ -6,18 +6,18 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.SingleBoardIt
 {
     public class CardProcessor : ISingleBoardItemProcessor<Card>
     {
-        private readonly UserContext _userContext;
+        private readonly BoardCalendarContext _boardCalendarContext;
         private readonly ISummaryFormatter<Card> _summaryFormatter;
         private readonly ITimeFrameFormatter<Card> _timeFrameFormatter;
         private readonly ILocationFormatter<Card> _locationFormatter;
         private readonly IDescriptionFormatter<Card> _descriptionFormatter;
         private readonly IExtendedPropertiesFormatter<Card> _extendedPropertiesFormatter;
 
-        public CardProcessor(UserContext userContext, ISummaryFormatter<Card> summaryFormatter, ITimeFrameFormatter<Card> timeFrameFormatter, 
-                             ILocationFormatter<Card> locationFormatter, IDescriptionFormatter<Card> descriptionFormatter,
-                             IExtendedPropertiesFormatter<Card> extendedPropertiesFormatter)
+        public CardProcessor(BoardCalendarContext boardCalendarContext, ISummaryFormatter<Card> summaryFormatter,
+                             ITimeFrameFormatter<Card> timeFrameFormatter, ILocationFormatter<Card> locationFormatter,
+                             IDescriptionFormatter<Card> descriptionFormatter, IExtendedPropertiesFormatter<Card> extendedPropertiesFormatter)
         {
-            _userContext = userContext;
+            _boardCalendarContext = boardCalendarContext;
             _summaryFormatter = summaryFormatter;
             _timeFrameFormatter = timeFrameFormatter;
             _locationFormatter = locationFormatter;
@@ -37,7 +37,7 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.SingleBoardIt
                 return null;
             }
 
-            var timeFrame = _timeFrameFormatter.Format(item, _userContext.User);
+            var timeFrame = _timeFrameFormatter.Format(item, _boardCalendarContext.BoardCalendarBond);
 
             if (timeFrame == null)
             {
@@ -46,11 +46,11 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.SingleBoardIt
 
             return new Event
                 {
-                    Summary = _summaryFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Summary = _summaryFormatter.Format(item, _boardCalendarContext.GetSettings()),
                     Start = timeFrame.Item1,
                     End = timeFrame.Item2,
-                    Location = _locationFormatter.Format(item, _userContext.GetUserPreferences()),
-                    Description = _descriptionFormatter.Format(item, _userContext.GetUserPreferences()),
+                    Location = _locationFormatter.Format(item, _boardCalendarContext.GetSettings()),
+                    Description = _descriptionFormatter.Format(item, _boardCalendarContext.GetSettings()),
                     ExtendedProperties = _extendedPropertiesFormatter.Format(item)
                 };
         }

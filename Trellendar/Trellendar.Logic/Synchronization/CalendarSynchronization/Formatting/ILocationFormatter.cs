@@ -4,6 +4,6 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting
 {
     public interface ILocationFormatter<TEntity>
     {
-        string Format(TEntity entity, UserPreferences userPreferences);
+        string Format(TEntity entity, BoardCalendarBondSettings boardCalendarBondSettings);
     }
 }

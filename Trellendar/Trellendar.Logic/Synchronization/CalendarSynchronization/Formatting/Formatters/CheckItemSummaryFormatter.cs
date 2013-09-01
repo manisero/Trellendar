@@ -14,20 +14,20 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _checkListNameParser = checkListNameParser;
         }
 
-        public string Format(CheckItem entity, UserPreferences userPreferences)
+        public string Format(CheckItem entity, BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            if (userPreferences == null)
+            if (boardCalendarBondSettings == null)
             {
                 return entity.Name;
             }
 
             string summary;
 
-            if (entity.CheckList != null && userPreferences.CheckListEventNameTemplate != null)
+            if (entity.CheckList != null && boardCalendarBondSettings.CheckListEventNameTemplate != null)
             {
-                var checkListName = _checkListNameParser.Parse(entity.CheckList.Name, userPreferences);
+                var checkListName = _checkListNameParser.Parse(entity.CheckList.Name, boardCalendarBondSettings);
                 summary = checkListName != null
-                              ? userPreferences.CheckListEventNameTemplate.FormatWith(checkListName.Value, entity.Name)
+                              ? boardCalendarBondSettings.CheckListEventNameTemplate.FormatWith(checkListName.Value, entity.Name)
                               : entity.Name;
             }
             else
@@ -35,9 +35,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
                 summary = entity.Name;
             }
 
-            if (entity.IsDone() && userPreferences.CheckListEventDoneSuffix != null)
+            if (entity.IsDone() && boardCalendarBondSettings.CheckListEventDoneSuffix != null)
             {
-                summary += userPreferences.CheckListEventDoneSuffix;
+                summary += boardCalendarBondSettings.CheckListEventDoneSuffix;
             }
 
             return summary;

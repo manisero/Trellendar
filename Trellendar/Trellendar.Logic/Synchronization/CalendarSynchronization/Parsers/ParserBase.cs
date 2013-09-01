@@ -5,14 +5,14 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers
 {
     public abstract class ParserBase<TOutput> : IParser<TOutput>
     {
-        public TOutput Parse(string text, UserPreferences userPreferences)
+        public TOutput Parse(string text, BoardCalendarBondSettings boardCalendarBondSettings)
         {
             if (text == null)
             {
                 return default(TOutput);
             }
 
-            var outputTextMarkers = GetOutputTextMarkers(userPreferences);
+            var outputTextMarkers = GetOutputTextMarkers(boardCalendarBondSettings);
 
             if (outputTextMarkers == null || outputTextMarkers.Item1 == null || outputTextMarkers.Item2 == null)
             {
@@ -56,7 +56,7 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers
             return default(TOutput);
         }
 
-        protected abstract Tuple<string, string> GetOutputTextMarkers(UserPreferences userPreferences);
+        protected abstract Tuple<string, string> GetOutputTextMarkers(BoardCalendarBondSettings boardCalendarBondSettings);
 
         protected abstract bool TryGetOutput(string outputText, out TOutput output);
     }

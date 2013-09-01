@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardCalendarContext.cs" />
+    <Compile Include="Domain\BoardCalendarBondSettingsExtensions.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\Formatting\IDescriptionFormatter.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\Formatting\ISummaryFormatter.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\Formatting\ITimeFrameFormatter.cs" />

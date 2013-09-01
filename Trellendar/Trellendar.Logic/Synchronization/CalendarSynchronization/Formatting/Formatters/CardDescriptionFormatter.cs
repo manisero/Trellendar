@@ -8,7 +8,7 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
     {
         private const string DESCRIPTION_FORMAT = "{0}\n\nLink: {1}";
 
-        public string Format(Card entity, UserPreferences userPreferences)
+        public string Format(Card entity, BoardCalendarBondSettings boardCalendarBondSettings)
         {
             return DESCRIPTION_FORMAT.FormatWith(entity.Description, entity.Url);
         }

@@ -17,14 +17,14 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
-        public Tuple<TimeStamp, TimeStamp> Format(CheckItem entity, User user)
+        public Tuple<TimeStamp, TimeStamp> Format(CheckItem entity, BoardCalendarBond boardCalendarBond)
         {
-            if (entity == null || user == null)
+            if (entity == null || boardCalendarBond == null)
             {
                 return null;
             }
 
-            var due = _dueParser.Parse(entity.Name, user.UserPreferences);
+            var due = _dueParser.Parse(entity.Name, boardCalendarBond.Settings);
 
             if (due == null)
             {
@@ -32,8 +32,8 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             }
 
             return due.HasTime
-                       ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, user.CalendarTimeZone,
-                                                                user.UserPreferences != null ? user.UserPreferences.WholeDayEventDueTime : null)
+                       ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, boardCalendarBond.CalendarTimeZone,
+                                                                boardCalendarBond.Settings != null ? boardCalendarBond.Settings.WholeDayEventDueTime : null)
                        : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
         }
     }

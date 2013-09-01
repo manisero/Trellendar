@@ -17,9 +17,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _eventTimeFrameCreator = eventTimeFrameCreator;
         }
 
-        public Tuple<TimeStamp, TimeStamp> Format(Card entity, User user)
+        public Tuple<TimeStamp, TimeStamp> Format(Card entity, BoardCalendarBond boardCalendarBond)
         {
-            if (entity == null || user == null)
+            if (entity == null || boardCalendarBond == null)
             {
                 return null;
             }
@@ -28,12 +28,12 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
 
             if (entity.Due != null)
             {
-                timeFrame = _eventTimeFrameCreator.CreateFromUTC(entity.Due.Value, user.CalendarTimeZone,
-                                                                 user.UserPreferences != null ? user.UserPreferences.WholeDayEventDueTime : null);
+                timeFrame = _eventTimeFrameCreator.CreateFromUTC(entity.Due.Value, boardCalendarBond.CalendarTimeZone,
+                                                                 boardCalendarBond.Settings != null ? boardCalendarBond.Settings.WholeDayEventDueTime : null);
             }
             else
             {
-                var due = _dueParser.Parse(entity.Description, user.UserPreferences);
+                var due = _dueParser.Parse(entity.Description, boardCalendarBond.Settings);
 
                 if (due == null)
                 {
@@ -41,8 +41,8 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
                 }
 
                 timeFrame = due.HasTime
-                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, user.CalendarTimeZone,
-                                                                         user.UserPreferences != null ? user.UserPreferences.WholeDayEventDueTime : null)
+                                ? _eventTimeFrameCreator.CreateFromLocal(due.DueDateTime, boardCalendarBond.CalendarTimeZone,
+                                                                         boardCalendarBond.Settings != null ? boardCalendarBond.Settings.WholeDayEventDueTime : null)
                                 : _eventTimeFrameCreator.CreateWholeDayTimeFrame(due.DueDateTime);
             }
 

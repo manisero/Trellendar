@@ -9,9 +9,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers
     {
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
-        protected override Tuple<string, string> GetOutputTextMarkers(UserPreferences userPreferences)
+        protected override Tuple<string, string> GetOutputTextMarkers(BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            return userPreferences.GetDueTextMarkers();
+            return boardCalendarBondSettings.GetDueTextMarkers();
         }
 
         protected override bool TryGetOutput(string outputText, out Due output)

@@ -14,16 +14,16 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _listNameParser = listNameParser;
         }
 
-        public string Format(Card entity, UserPreferences userPreferences)
+        public string Format(Card entity, BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            if (entity.List == null || userPreferences == null || userPreferences.CardEventNameTemplate == null)
+            if (entity.List == null || boardCalendarBondSettings == null || boardCalendarBondSettings.CardEventNameTemplate == null)
             {
                 return entity.Name;
             }
 
-            var listName = _listNameParser.Parse(entity.List.Name, userPreferences);
+            var listName = _listNameParser.Parse(entity.List.Name, boardCalendarBondSettings);
 
-            return userPreferences.CardEventNameTemplate.FormatWith(listName != null ? listName.Value : null, entity.Name);
+            return boardCalendarBondSettings.CardEventNameTemplate.FormatWith(listName != null ? listName.Value : null, entity.Name);
         }
     }
 }

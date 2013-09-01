@@ -6,9 +6,9 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers
 {
     public class LocationParser : ParserBase<Location>
     {
-        protected override Tuple<string, string> GetOutputTextMarkers(UserPreferences userPreferences)
+        protected override Tuple<string, string> GetOutputTextMarkers(BoardCalendarBondSettings boardCalendarBondSettings)
         {
-            return userPreferences.GetLocationTextMarkers();
+            return boardCalendarBondSettings.GetLocationTextMarkers();
         }
 
         protected override bool TryGetOutput(string outputText, out Location output)

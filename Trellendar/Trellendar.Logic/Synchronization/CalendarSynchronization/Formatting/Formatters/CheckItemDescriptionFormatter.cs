@@ -18,14 +18,14 @@ namespace Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Fo
             _cardSummaryFormatter = cardSummaryFormatter;
         }
 
-        public string Format(CheckItem entity, UserPreferences userPreferences)
+        public string Format(CheckItem entity, BoardCalendarBondSettings boardCalendarBondSettings)
         {
             if (entity.CheckList == null || entity.CheckList.Card == null)
             {
                 return null;
             }
 
-            var cardSummary = _cardSummaryFormatter.Format(entity.CheckList.Card, userPreferences);
+            var cardSummary = _cardSummaryFormatter.Format(entity.CheckList.Card, boardCalendarBondSettings);
             var descriptionLines = new List<string>();
 
             if (cardSummary != null)
