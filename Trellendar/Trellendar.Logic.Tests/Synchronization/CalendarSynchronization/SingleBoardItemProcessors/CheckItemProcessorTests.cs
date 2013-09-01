@@ -8,7 +8,7 @@ using Trellendar.Domain.Trello;
 using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting;
 using Trellendar.Logic.Synchronization.CalendarSynchronization.SingleBoardItemProcessors;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization.SingleBoardItemProcessors
 {
     [TestFixture]
     public class CheckItemProcessorTests : SingleBoardItemProcessorTestsBase<CheckItemProcessor, CheckItem>

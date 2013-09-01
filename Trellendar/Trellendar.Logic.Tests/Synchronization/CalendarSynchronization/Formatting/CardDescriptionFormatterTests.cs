@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Formatters;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization.Formatting
 {
     [TestFixture]
     public class CardDescriptionFormatterTests : TestsBase

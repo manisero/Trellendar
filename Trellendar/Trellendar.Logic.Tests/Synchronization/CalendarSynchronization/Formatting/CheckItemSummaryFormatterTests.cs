@@ -6,7 +6,7 @@ using Trellendar.Logic.Domain;
 using Trellendar.Logic.Synchronization.CalendarSynchronization;
 using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Formatters;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization.Formatting
 {
     [TestFixture]
     public class CheckItemSummaryFormatterTests : TestsBase

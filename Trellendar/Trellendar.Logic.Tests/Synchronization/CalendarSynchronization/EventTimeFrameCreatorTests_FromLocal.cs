@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Trellendar.Logic.TimeZones;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization
 {
     public partial class EventTimeFrameCreatorTests
     {

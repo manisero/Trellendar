@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization.Parsers
 {
     [TestFixture]
     public class LocationParserTests : TestsBase

@@ -7,41 +7,39 @@ using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic.Synchronization.BoardCalendarBondSynchronization;
 using Trellendar.Logic.Synchronization.BoardCalendarBondSynchronization._Impl;
-using Trellendar.Logic.UserManagement;
-using Trellendar.Logic.UserManagement._Impl;
 
-namespace Trellendar.Logic.Tests.UserProfileSynchronization
+namespace Trellendar.Logic.Tests.Synchronization.BoardCalendarBondSynchronization
 {
     [TestFixture]
-    public class UserProfileSerivceTests : TestsBase
+    public class BoardCalendarBondSerivceTests : TestsBase
     {
         [Test]
-        public void updates_user_properly()
+        public void updates_bond_properly()
         {
             // Arrange
             var calendar = Builder<Calendar>.CreateNew()
                                             .With(x => x.TimeZone = "test time zone")
                                             .Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
-            MockUserContext(user);
+            MockBoardCalendarContext(bond);
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act
             AutoMoqer.Resolve<BoardCalendarBondSynchronizationService>().UpdateBond(calendar);
 
             // Assert
-            Assert.AreEqual(calendar.TimeZone, user.CalendarTimeZone);
+            Assert.AreEqual(calendar.TimeZone, bond.CalendarTimeZone);
             VerifyMock<IUnitOfWork>();
         }
 
         [Test]
-        public void updates_user_preferences_properly()
+        public void updates_bond_settings_properly()
         {
             // Arrange
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew().Build())
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                    .With(x => x.Settings = Builder<BoardCalendarBondSettings>.CreateNew().Build())
                                     .Build();
 
             var configurationCard = Builder<Card>.CreateNew().Build();
@@ -49,72 +47,73 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                                       .With(x => x.Cards = new[] { configurationCard })
                                       .Build();
 
-            var newPreferences = Builder<UserPreferences>.CreateNew().Build();
+            var newSettings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
-            MockUserContext(user);
+            MockBoardCalendarContext(bond);
 
             AutoMoqer.GetMock<IBoardCalendarBondSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
                      .Returns(configurationCard.Name);
 
             AutoMoqer.GetMock<IJsonSerializer>()
-                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Description))
-                     .Returns(newPreferences);
+                     .Setup(x => x.Deserialize<BoardCalendarBondSettings>(configurationCard.Description))
+                     .Returns(newSettings);
 
             AutoMoqer.GetMock<IRepositoryFactory>()
-                     .Setup(x => x.Create<UserPreferences>())
-                     .Returns(AutoMoqer.GetMock<IRepository<UserPreferences>>().Object);
+                     .Setup(x => x.Create<BoardCalendarBondSettings>())
+                     .Returns(AutoMoqer.GetMock<IRepository<BoardCalendarBondSettings>>().Object);
 
-            AutoMoqer.GetMock<IRepository<UserPreferences>>().Setup(x => x.Remove(user.UserPreferences));
+            AutoMoqer.GetMock<IRepository<BoardCalendarBondSettings>>().Setup(x => x.Remove(bond.Settings));
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
             // Act
             AutoMoqer.Resolve<BoardCalendarBondSynchronizationService>().UpdateBondSettings(board);
 
             // Assert
-            Assert.AreSame(newPreferences, user.UserPreferences);
+            Assert.AreSame(newSettings, bond.Settings);
 
             VerifyMock<IBoardCalendarBondSynchronizationSettingsProvider>();
             VerifyMock<IJsonSerializer>();
+            VerifyMock<IRepository<BoardCalendarBondSettings>>();
             VerifyMock<IUnitOfWork>();
         }
 
         [Test]
-        public void does_not_touch_preferences_for_null_cards()
+        public void does_not_touch_settings_for_null_cards()
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = preferences)
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                    .With(x => x.Settings = settings)
                                     .Build();
 
             var board = Builder<Board>.CreateNew()
                                       .With(x => x.Cards = null)
                                       .Build();
 
-            MockUserContext(user);
+            MockBoardCalendarContext(bond);
 
             // Act
             AutoMoqer.Resolve<BoardCalendarBondSynchronizationService>().UpdateBondSettings(board);
 
             // Assert
-            Assert.AreSame(preferences, user.UserPreferences);
+            Assert.AreSame(settings, bond.Settings);
         }
 
         [Test]
-        public void does_not_touch_preferences_if_configuration_card_not_found()
+        public void does_not_touch_settings_if_configuration_card_not_found()
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = preferences)
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                    .With(x => x.Settings = settings)
                                     .Build();
 
             var board = Builder<Board>.CreateNew()
                                       .With(x => x.Cards = new[] { Builder<Card>.CreateNew().Build() })
                                       .Build();
 
-            MockUserContext(user);
+            MockBoardCalendarContext(bond);
 
             AutoMoqer.GetMock<IBoardCalendarBondSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
@@ -124,18 +123,18 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             AutoMoqer.Resolve<BoardCalendarBondSynchronizationService>().UpdateBondSettings(board);
 
             // Assert
-            Assert.AreSame(preferences, user.UserPreferences);
+            Assert.AreSame(settings, bond.Settings);
 
             VerifyMock<IBoardCalendarBondSynchronizationSettingsProvider>();
         }
 
         [Test]
-        public void does_not_touch_preferences_if_configuration_card_content_not_deserializable()
+        public void does_not_touch_settings_if_configuration_card_content_not_deserializable()
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = preferences)
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                    .With(x => x.Settings = settings)
                                     .Build();
 
             var configurationCard = Builder<Card>.CreateNew().Build();
@@ -143,15 +142,15 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
                                       .With(x => x.Cards = new[] { configurationCard })
                                       .Build();
 
-            MockUserContext(user);
+            MockBoardCalendarContext(bond);
 
             AutoMoqer.GetMock<IBoardCalendarBondSynchronizationSettingsProvider>()
                      .Setup(x => x.TrellendarConfigurationTrelloCardName)
                      .Returns(configurationCard.Name);
 
             AutoMoqer.GetMock<IJsonSerializer>()
-                     .Setup(x => x.Deserialize<UserPreferences>(configurationCard.Description))
-                     .Returns((UserPreferences)null);
+                     .Setup(x => x.Deserialize<BoardCalendarBondSettings>(configurationCard.Description))
+                     .Returns((BoardCalendarBondSettings)null);
 
             AutoMoqer.GetMock<IUnitOfWork>().Setup(x => x.SaveChanges());
 
@@ -159,7 +158,7 @@ namespace Trellendar.Logic.Tests.UserProfileSynchronization
             AutoMoqer.Resolve<BoardCalendarBondSynchronizationService>().UpdateBondSettings(board);
 
             // Assert
-            Assert.AreSame(preferences, user.UserPreferences);
+            Assert.AreSame(settings, bond.Settings);
 
             VerifyMock<IBoardCalendarBondSynchronizationSettingsProvider>();
             VerifyMock<IJsonSerializer>();

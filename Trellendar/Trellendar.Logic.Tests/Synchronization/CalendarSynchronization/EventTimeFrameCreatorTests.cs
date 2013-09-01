@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Trellendar.Logic.Synchronization.CalendarSynchronization._Impl;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization
 {
     [TestFixture]
     public partial class EventTimeFrameCreatorTests : TestsBase

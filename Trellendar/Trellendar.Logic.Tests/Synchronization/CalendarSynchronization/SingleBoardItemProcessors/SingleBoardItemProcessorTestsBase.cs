@@ -5,12 +5,18 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Synchronization.CalendarSynchronization;
 
-namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
+namespace Trellendar.Logic.Tests.Synchronization.CalendarSynchronization.SingleBoardItemProcessors
 {
     [TestFixture]
     public abstract class SingleBoardItemProcessorTestsBase<TProcessor, TItem> : TestsBase
         where TProcessor : ISingleBoardItemProcessor<TItem>
     {
+        [SetUp]
+        public void TestSetUp()
+        {
+            MockBoardCalendarContext((BoardCalendarBond)null);
+        }
+
         [Test]
         public void returns_proper_item_id()
         {
