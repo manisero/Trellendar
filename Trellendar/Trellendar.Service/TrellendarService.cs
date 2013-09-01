@@ -43,7 +43,7 @@ namespace Trellendar.Service
 
             foreach (var user in userRepository.GetAll())
             {
-                _kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
+                _kernel.Bind<UserContext>().ToConstant(new UserContext(user));
 
                 var synchronizationTS = DateTime.UtcNow;
 

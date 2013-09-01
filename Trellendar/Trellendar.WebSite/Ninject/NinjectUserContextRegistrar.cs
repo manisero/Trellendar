@@ -20,7 +20,7 @@ namespace Trellendar.WebSite.Ninject
 
             if (user != null)
             {
-                _kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
+                _kernel.Bind<UserContext>().ToConstant(new UserContext(user));
             }
         }
     }

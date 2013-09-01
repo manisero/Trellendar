@@ -69,7 +69,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         protected Event TestProcess(TItem item, User user)
         {
             // Arrange
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            AutoMoqer.SetInstance(new UserContext(user));
 
             // Act
             return AutoMoqer.Resolve<TProcessor>().Process(item);

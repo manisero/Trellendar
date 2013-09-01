@@ -17,15 +17,12 @@ namespace Trellendar.Logic.Tests
 
         protected void MockUserContext(User user)
         {
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            AutoMoqer.SetInstance(new UserContext(user));
         }
 
         protected void MockUserContext(UserPreferences userPreferences)
         {
-            AutoMoqer.SetInstance(new UserContext
-                {
-                    User = new User { UserPreferences = userPreferences }
-                });
+            AutoMoqer.SetInstance(new UserContext(new User { UserPreferences = userPreferences }));
         }
 
         protected void VerifyMock<TMock>() where TMock : class
