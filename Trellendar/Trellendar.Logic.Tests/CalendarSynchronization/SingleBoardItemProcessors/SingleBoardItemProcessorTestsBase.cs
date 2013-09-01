@@ -27,12 +27,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
 
         protected abstract object GetExptectedItemKey(TItem item);
 
-        protected void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        protected void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, BoardCalendarBond boardCalendarBond, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
-            var timeZone = user != null ? user.CalendarTimeZone : null;
+            var timeZone = boardCalendarBond != null ? boardCalendarBond.CalendarTimeZone : null;
 
-            var wholeDayIndicator = user != null && user.UserPreferences != null
-                                        ? user.UserPreferences.WholeDayEventDueTime
+            var wholeDayIndicator = boardCalendarBond != null && boardCalendarBond.Settings != null
+                                        ? boardCalendarBond.Settings.WholeDayEventDueTime
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
@@ -40,12 +40,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
-        protected void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        protected void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, BoardCalendarBond boardCalendarBond, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
-            var timeZone = user != null ? user.CalendarTimeZone : null;
+            var timeZone = boardCalendarBond != null ? boardCalendarBond.CalendarTimeZone : null;
 
-            var wholeDayIndicator = user != null && user.UserPreferences != null
-                                        ? user.UserPreferences.WholeDayEventDueTime
+            var wholeDayIndicator = boardCalendarBond != null && boardCalendarBond.Settings != null
+                                        ? boardCalendarBond.Settings.WholeDayEventDueTime
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
@@ -66,10 +66,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
             return AutoMoqer.Resolve<TProcessor>().Process(item);
         }
 
-        protected Event TestProcess(TItem item, User user)
+        protected Event TestProcess(TItem item, BoardCalendarBond boardCalendarBond)
         {
             // Arrange
-            AutoMoqer.SetInstance(new UserContext(user));
+            AutoMoqer.SetInstance(new BoardCalendarContext(boardCalendarBond));
 
             // Act
             return AutoMoqer.Resolve<TProcessor>().Process(item);

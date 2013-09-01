@@ -20,13 +20,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("somewhere", "elsewhere", "somewhere else")] string expectedLocation)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.LocationTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.LocationTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.LocationTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.LocationTextEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<LocationParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<LocationParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -44,13 +44,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("location1", "location1")] string expectedLocation)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.LocationTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.LocationTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.LocationTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.LocationTextEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<LocationParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<LocationParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);

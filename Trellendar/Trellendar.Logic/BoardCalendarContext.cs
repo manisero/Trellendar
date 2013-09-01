@@ -30,28 +30,28 @@ namespace Trellendar.Logic
             return context.HasBondSettings() ? context.BoardCalendarBond.Settings : null;
         }
 
-        public static string GetPrefferedCardEventNameTemplate(this BoardCalendarContext context)
+        public static string GetCardEventNameTemplateSetting(this BoardCalendarContext context)
         {
             return context.HasBondSettings()
                        ? context.BoardCalendarBond.Settings.CardEventNameTemplate
                        : null;
         }
 
-        public static string GetPrefferedCheckListEventNameTemplate(this BoardCalendarContext context)
+        public static string GetCheckListEventNameTemplateSetting(this BoardCalendarContext context)
         {
             return context.HasBondSettings()
                        ? context.BoardCalendarBond.Settings.CheckListEventNameTemplate
                        : null;
         }
 
-        public static string GetPrefferedCheckListEventDoneSuffix(this BoardCalendarContext context)
+        public static string GetCheckListEventDoneSuffixSetting(this BoardCalendarContext context)
         {
             return context.HasBondSettings()
                        ? context.BoardCalendarBond.Settings.CheckListEventDoneSuffix
                        : null;
         }
 
-        public static TimeSpan? GetPrefferedWholeDayEventDueTime(this BoardCalendarContext context)
+        public static TimeSpan? GetWholeDayEventDueTimeSetting(this BoardCalendarContext context)
         {
             return context.HasBondSettings()
                        ? context.BoardCalendarBond.Settings.WholeDayEventDueTime

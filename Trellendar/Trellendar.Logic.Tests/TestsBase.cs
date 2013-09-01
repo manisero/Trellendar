@@ -25,6 +25,16 @@ namespace Trellendar.Logic.Tests
             AutoMoqer.SetInstance(new UserContext(new User { UserPreferences = userPreferences }));
         }
 
+        protected void MockBoardCalendarContext(BoardCalendarBond boardCalendarBond)
+        {
+            AutoMoqer.SetInstance(new BoardCalendarContext(boardCalendarBond));
+        }
+
+        protected void MockBoardCalendarContext(BoardCalendarBondSettings boardCalendarBondSettings)
+        {
+            AutoMoqer.SetInstance(new BoardCalendarContext(new BoardCalendarBond { Settings = boardCalendarBondSettings }));
+        }
+
         protected void VerifyMock<TMock>() where TMock : class
         {
             AutoMoqer.GetMock<TMock>().VerifyAll();

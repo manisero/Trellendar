@@ -17,14 +17,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         public void returns_null_for_null_check_item()
         {
             // Act
-            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(null, new User());
+            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(null, new BoardCalendarBond());
 
             // Assert
             Assert.IsNull(result);
         }
 
         [Test]
-        public void returns_null_for_null_user()
+        public void returns_null_for_null_bond()
         {
             // Act
             var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(new CheckItem(), null);
@@ -38,16 +38,16 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew().Build())
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                    .With(x => x.Settings = Builder<BoardCalendarBondSettings>.CreateNew().Build())
                                     .Build();
 
             AutoMoqer.GetMock<IParser<Due>>()
-                     .Setup(x => x.Parse(checkItem.Name, user.UserPreferences))
+                     .Setup(x => x.Parse(checkItem.Name, bond.Settings))
                      .Returns((Due)null);
 
             // Act
-            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, user);
+            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, bond);
 
             // Assert
             Assert.IsNull(result);
@@ -60,17 +60,17 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = true).Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
             var start = Builder<TimeStamp>.CreateNew().Build();
             var end = Builder<TimeStamp>.CreateNew().Build();
 
-            MockUserContext(user);
-            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, user.UserPreferences)).Returns(due);
-            MockTimeFrameCreation_FromLocal(due.DueDateTime, user, start, end);
+            MockBoardCalendarContext(bond);
+            AutoMoqer.GetMock<IParser<Due>>().Setup(x => x.Parse(checkItem.Name, bond.Settings)).Returns(due);
+            MockTimeFrameCreation_FromLocal(due.DueDateTime, bond, start, end);
 
             // Act
-            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, user);
+            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, bond);
 
             // Assert
             Assert.IsNotNull(result);
@@ -85,7 +85,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             var checkItem = Builder<CheckItem>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
             var start = Builder<TimeStamp>.CreateNew().Build();
             var end = Builder<TimeStamp>.CreateNew().Build();
@@ -94,7 +94,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             MockTimeFrameCreation_WholeDay(due.DueDateTime, start, end);
 
             // Act
-            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, user);
+            var result = AutoMoqer.Resolve<CheckItemTimeFrameFormatter>().Format(checkItem, bond);
 
             // Assert
             Assert.IsNotNull(result);
@@ -102,12 +102,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             Assert.AreSame(end, result.Item2);
         }
 
-        private void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, BoardCalendarBond boardCalendarBond, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
-            var timeZone = user != null ? user.CalendarTimeZone : null;
+            var timeZone = boardCalendarBond != null ? boardCalendarBond.CalendarTimeZone : null;
 
-            var wholeDayIndicator = user != null && user.UserPreferences != null
-                                        ? user.UserPreferences.WholeDayEventDueTime
+            var wholeDayIndicator = boardCalendarBond != null && boardCalendarBond.Settings != null
+                                        ? boardCalendarBond.Settings.WholeDayEventDueTime
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()

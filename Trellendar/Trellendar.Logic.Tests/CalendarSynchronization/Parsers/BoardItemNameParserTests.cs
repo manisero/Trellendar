@@ -19,13 +19,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("text text", "text text text")] string expectedName)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
-                                                      .With(x => x.TrelloItemShortcutEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
+                                                             .With(x => x.TrelloItemShortcutEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -44,13 +44,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("shortcut", "shortcut", "other shortcut")] string expectedName)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
-                                                      .With(x => x.TrelloItemShortcutEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
+                                                             .With(x => x.TrelloItemShortcutEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -68,13 +68,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("shortcut1", "shortcut1")] string expectedName)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
-                                                      .With(x => x.TrelloItemShortcutEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.TrelloItemShortcutBeginningMarker = beginningMarker)
+                                                             .With(x => x.TrelloItemShortcutEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<BoardItemNameParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);

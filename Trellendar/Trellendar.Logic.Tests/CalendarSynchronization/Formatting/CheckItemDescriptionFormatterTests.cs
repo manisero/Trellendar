@@ -27,10 +27,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .Build())
                             .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
             // Arrange, Act & Assert
-            TestFormat(checkItem, preferences, cardSummary, expectedDescription);
+            TestFormat(checkItem, settings, cardSummary, expectedDescription);
         }
 
         [Test]
@@ -48,10 +48,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .Build())
                             .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
             // Arrange, Act & Assert
-            TestFormat(checkItem, preferences, null, expectedDescription);
+            TestFormat(checkItem, settings, null, expectedDescription);
         }
 
         [Test]
@@ -70,10 +70,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .Build())
                             .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
             // Arrange, Act & Assert
-            TestFormat(checkItem, preferences, cardSummary, expectedDescription);
+            TestFormat(checkItem, settings, cardSummary, expectedDescription);
         }
 
         [Test]
@@ -89,10 +89,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .Build())
                             .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
             // Arrange, Act & Assert
-            TestFormat(checkItem, preferences, null, null);
+            TestFormat(checkItem, settings, null, null);
         }
 
         [Test]
@@ -121,16 +121,16 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             TestFormat(checkItem, null, null, null);
         }
 
-        private void TestFormat(CheckItem checkItem, UserPreferences preferences, string cardSummary, string expectedDescription)
+        private void TestFormat(CheckItem checkItem, BoardCalendarBondSettings settings, string cardSummary, string expectedDescription)
         {
             // Arrange
             if (checkItem.CheckList != null)
             {
-                AutoMoqer.GetMock<ISummaryFormatter<Card>>().Setup(x => x.Format(checkItem.CheckList.Card, preferences)).Returns(cardSummary);
+                AutoMoqer.GetMock<ISummaryFormatter<Card>>().Setup(x => x.Format(checkItem.CheckList.Card, settings)).Returns(cardSummary);
             }
 
             // Act
-            var result = AutoMoqer.Resolve<CheckItemDescriptionFormatter>().Format(checkItem, preferences);
+            var result = AutoMoqer.Resolve<CheckItemDescriptionFormatter>().Format(checkItem, settings);
 
             // Assert
             Assert.AreEqual(expectedDescription, result);

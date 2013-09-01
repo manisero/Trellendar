@@ -17,14 +17,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         public void returns_null_for_null_card()
         {
             // Act
-            var result = AutoMoqer.Resolve<CardTimeFrameFormatter>().Format(null, new User());
+            var result = AutoMoqer.Resolve<CardTimeFrameFormatter>().Format(null, new BoardCalendarBond());
 
             // Assert
             Assert.IsNull(result);
         }
 
         [Test]
-        public void returns_null_for_null_user()
+        public void returns_null_for_null_bond()
         {
             // Act
             var result = AutoMoqer.Resolve<CardTimeFrameFormatter>().Format(new Card(), null);
@@ -37,64 +37,64 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         public void formats_time_frame___null_calendar_time_zone()
         {
             // Arrange
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.CalendarTimeZone = null)
-                                    .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew().Build())
-                                    .Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                                 .With(x => x.CalendarTimeZone = null)
+                                                 .With(x => x.Settings = Builder<BoardCalendarBondSettings>.CreateNew().Build())
+                                                 .Build();
 
             // Act & Assert
-            TestEventTimeFrameSetting(user);
+            TestEventTimeFrameSetting(bond);
         }
 
         [Test]
-        public void formats_time_frame___null_user_preferences()
+        public void formats_time_frame___null_bond_settings()
         {
             // Arrange
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = null)
-                                    .Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                                 .With(x => x.Settings = null)
+                                                 .Build();
 
             // Act & Assert
-            TestEventTimeFrameSetting(user);
+            TestEventTimeFrameSetting(bond);
         }
 
         [Test]
-        public void formats_time_frame___null_preferred_WholeDayEventDueTime()
+        public void formats_time_frame___null_WholeDayEventDueTime_setting()
         {
             // Arrange
-            var user = Builder<User>.CreateNew()
-                                    .With(x => x.UserPreferences = Builder<UserPreferences>.CreateNew()
-                                        .With(preferences => preferences.WholeDayEventDueTime = null)
-                                        .Build())
-                                    .Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew()
+                                                 .With(x => x.Settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                     .With(preferences => preferences.WholeDayEventDueTime = null)
+                                                     .Build())
+                                                 .Build();
 
             // Act & Assert
-            TestEventTimeFrameSetting(user);
+            TestEventTimeFrameSetting(bond);
         }
 
         [Test]
         public void formats_time_frame_from_parsed_due___non_whole_day()
         {
             // Arrange
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = true).Build();
 
             // Act & Assert
-            TestEventTimeFrameSetting(user, due);
+            TestEventTimeFrameSetting(bond, due);
         }
 
         [Test]
         public void formats_time_frame_from_parsed_due___whole_day()
         {
             // Arrange
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
             var due = Builder<Due>.CreateNew().With(x => x.HasTime = false).Build();
 
             // Act & Assert
-            TestEventTimeFrameSetting(user, due);
+            TestEventTimeFrameSetting(bond, due);
         }
 
-        private void TestEventTimeFrameSetting(User user, Due parsedDue = null)
+        private void TestEventTimeFrameSetting(BoardCalendarBond boardCalendarBond, Due parsedDue = null)
         {
             // Arrange
             var card = Builder<Card>.CreateNew()
@@ -107,17 +107,17 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             if (parsedDue != null)
             {
                 AutoMoqer.GetMock<IParser<Due>>()
-                         .Setup(x => x.Parse(card.Description, user != null ? user.UserPreferences : null))
+                         .Setup(x => x.Parse(card.Description, boardCalendarBond != null ? boardCalendarBond.Settings : null))
                          .Returns(parsedDue);
             }
 
             if (parsedDue == null)
             {
-                MockTimeFrameCreation_FromUTC(card.Due.Value, user, start, end);
+                MockTimeFrameCreation_FromUTC(card.Due.Value, boardCalendarBond, start, end);
             }
             else if (parsedDue.HasTime)
             {
-                MockTimeFrameCreation_FromLocal(parsedDue.DueDateTime, user, start, end);
+                MockTimeFrameCreation_FromLocal(parsedDue.DueDateTime, boardCalendarBond, start, end);
             }
             else
             {
@@ -125,7 +125,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             }
 
             // Act
-            var result = AutoMoqer.Resolve<CardTimeFrameFormatter>().Format(card, user);
+            var result = AutoMoqer.Resolve<CardTimeFrameFormatter>().Format(card, boardCalendarBond);
 
             // Assert
             Assert.IsNotNull(result);
@@ -133,12 +133,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
             Assert.AreSame(end, result.Item2);
         }
 
-        private void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_FromUTC(DateTime dueDateTime, BoardCalendarBond boardCalendarBond, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
-            var timeZone = user != null ? user.CalendarTimeZone : null;
+            var timeZone = boardCalendarBond != null ? boardCalendarBond.CalendarTimeZone : null;
 
-            var wholeDayIndicator = user != null && user.UserPreferences != null
-                                        ? user.UserPreferences.WholeDayEventDueTime
+            var wholeDayIndicator = boardCalendarBond != null && boardCalendarBond.Settings != null
+                                        ? boardCalendarBond.Settings.WholeDayEventDueTime
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()
@@ -146,12 +146,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                      .Returns(new Tuple<TimeStamp, TimeStamp>(eventStart, eventEnd));
         }
 
-        private void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, User user, TimeStamp eventStart = null, TimeStamp eventEnd = null)
+        private void MockTimeFrameCreation_FromLocal(DateTime dueDateTime, BoardCalendarBond boardCalendarBond, TimeStamp eventStart = null, TimeStamp eventEnd = null)
         {
-            var timeZone = user != null ? user.CalendarTimeZone : null;
+            var timeZone = boardCalendarBond != null ? boardCalendarBond.CalendarTimeZone : null;
 
-            var wholeDayIndicator = user != null && user.UserPreferences != null
-                                        ? user.UserPreferences.WholeDayEventDueTime
+            var wholeDayIndicator = boardCalendarBond != null && boardCalendarBond.Settings != null
+                                        ? boardCalendarBond.Settings.WholeDayEventDueTime
                                         : null;
 
             AutoMoqer.GetMock<IEventTimeFrameCreator>()

@@ -31,9 +31,9 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
-            AutoMoqer.GetMock<ITimeFrameFormatter<Card>>().Setup(x => x.Format(card, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
+            AutoMoqer.GetMock<ITimeFrameFormatter<Card>>().Setup(x => x.Format(card, bond)).Returns((Tuple<TimeStamp, TimeStamp>)null);
 
             // Act
             var result = TestProcess(card);
@@ -47,13 +47,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
             var timeFrame = Tuple.Create(new TimeStamp(), new TimeStamp());
 
-            AutoMoqer.GetMock<ITimeFrameFormatter<Card>>().Setup(x => x.Format(card, user)).Returns(timeFrame);
+            AutoMoqer.GetMock<ITimeFrameFormatter<Card>>().Setup(x => x.Format(card, bond)).Returns(timeFrame);
 
             // Act
-            var result = TestProcess(card, user);
+            var result = TestProcess(card, bond);
 
             // Assert
             Assert.IsNotNull(result);
@@ -66,14 +66,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var summary = "summary";
 
-            AutoMoqer.GetMock<ISummaryFormatter<Card>>().Setup(x => x.Format(card, preferences)).Returns(summary);
+            AutoMoqer.GetMock<ISummaryFormatter<Card>>().Setup(x => x.Format(card, settings)).Returns(summary);
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, new User { UserPreferences = preferences });
+            var result = TestProcess(card, new BoardCalendarBond { Settings = settings });
 
             // Assert
             Assert.IsNotNull(result);
@@ -85,14 +85,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var location = "location";
 
-            AutoMoqer.GetMock<ILocationFormatter<Card>>().Setup(x => x.Format(card, preferences)).Returns(location);
+            AutoMoqer.GetMock<ILocationFormatter<Card>>().Setup(x => x.Format(card, settings)).Returns(location);
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(card, new User { UserPreferences = preferences });
+            var result = TestProcess(card, new BoardCalendarBond { Settings = settings });
 
             // Assert
             Assert.IsNotNull(result);
@@ -143,7 +143,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         private void MockTimeFrameFormatting()
         {
             AutoMoqer.GetMock<ITimeFrameFormatter<Card>>()
-                     .Setup(x => x.Format(It.IsAny<Card>(), It.IsAny<User>()))
+                     .Setup(x => x.Format(It.IsAny<Card>(), It.IsAny<BoardCalendarBond>()))
                      .Returns(new Tuple<TimeStamp, TimeStamp>(null, null));
         }
     }

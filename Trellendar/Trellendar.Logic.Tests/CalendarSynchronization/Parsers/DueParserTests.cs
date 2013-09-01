@@ -21,15 +21,15 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("2013-07-05 10:12:30", "2012-11-25 03:27:00", "2013-07-05 10:12:30")] string expectedDue)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.DueTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.DueTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.DueTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.DueTextEndMarker = endMarker)
+                                                             .Build();
 
             var due = DateTime.Parse(expectedDue);
 
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -49,15 +49,15 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("2013-07-05", "2012-11-25", "2013-07-05")] string expectedDue)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.DueTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.DueTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.DueTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.DueTextEndMarker = endMarker)
+                                                             .Build();
 
             var due = DateTime.Parse(expectedDue);
 
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -77,15 +77,15 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("2013-07-05 10:12:30", "2012-11-25 03:27:00", "2013-07-05 10:12:30")] string expectedDue)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.DueTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.DueTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.DueTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.DueTextEndMarker = endMarker)
+                                                             .Build();
 
             var due = DateTime.Parse(expectedDue);
 
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -100,13 +100,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
             [Values("text [not a due] text", "no due")] string text)
         {
             // Arrange
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.DueTextBeginningMarker = beginningMarker)
-                                                      .With(x => x.DueTextEndMarker = endMarker)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.DueTextBeginningMarker = beginningMarker)
+                                                             .With(x => x.DueTextEndMarker = endMarker)
+                                                             .Build();
 
             // Act
-            var result = AutoMoqer.Resolve<DueParser>().Parse(text, preferences);
+            var result = AutoMoqer.Resolve<DueParser>().Parse(text, settings);
 
             // Assert
             Assert.IsNull(result);

@@ -13,7 +13,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
     {
         [Test]
         [Sequential]
-        public void formats_summary_for_not_null_preffered_event_name_template___not_null_list(
+        public void formats_summary_for_not_null_event_name_template_setting___not_null_list(
             [Values("shortcut", "shortcut")] string listShortcut,
             [Values("card name", "card name")] string cardName,
             [Values("{0} {1}", "[{0}] {1}")] string eventNameTemplate,
@@ -25,12 +25,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                     .With(x => x.List = Builder<Trellendar.Domain.Trello.List>.CreateNew().Build())
                                     .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                                      .With(x => x.CardEventNameTemplate = eventNameTemplate)
-                                                      .Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                             .With(x => x.CardEventNameTemplate = eventNameTemplate)
+                                                             .Build();
 
             // Arrange, Act & Assert
-            TestFormat(card, preferences, listShortcut, expectedSummary);
+            TestFormat(card, settings, listShortcut, expectedSummary);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         }
 
         [Test]
-        public void formats_summary_for_null_preffered_event_name_template___null_preferences()
+        public void formats_summary_for_null_event_name_template_setting___null_preferences()
         {
             // Arrange
             var card = Builder<Card>.CreateNew()
@@ -56,46 +56,46 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         }
 
         [Test]
-        public void formats_summary_for_null_preffered_event_name_template___null_template()
+        public void formats_summary_for_null_event_name_template_setting___null_template()
         {
             // Arrange
             var card = Builder<Card>.CreateNew()
                                     .With(x => x.List = Builder<Trellendar.Domain.Trello.List>.CreateNew().Build())
                                     .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().With(x => x.CardEventNameTemplate = null).Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().With(x => x.CardEventNameTemplate = null).Build();
 
             // Arrange, Act & Assert
-            TestFormat(card, preferences, null, card.Name);
+            TestFormat(card, settings, null, card.Name);
         }
 
         [Test]
         [Sequential]
-        public void formats_summary_for_not_null_preffered_event_name_template___null_list()
+        public void formats_summary_for_not_null_event_name_template_setting___null_list()
         {
             // Arrange
             var card = Builder<Card>.CreateNew()
                                     .With(x => x.List = null)
                                     .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
             // Arrange, Act & Assert
-            TestFormat(card, preferences, null, card.Name);
+            TestFormat(card, settings, null, card.Name);
         }
 
-        private void TestFormat(Card card, UserPreferences preferences, string listShortcut, string expectedSummary)
+        private void TestFormat(Card card, BoardCalendarBondSettings settings, string listShortcut, string expectedSummary)
         {
             // Arrange
             if (listShortcut != null)
             {
                 AutoMoqer.GetMock<IParser<BoardItemName>>()
-                         .Setup(x => x.Parse(card.List.Name, preferences))
+                         .Setup(x => x.Parse(card.List.Name, settings))
                          .Returns(new BoardItemName { Value = listShortcut });
             }
 
             // Act
-            var result = AutoMoqer.Resolve<CardSummaryFormatter>().Format(card, preferences);
+            var result = AutoMoqer.Resolve<CardSummaryFormatter>().Format(card, settings);
 
             // Assert
             Assert.AreEqual(expectedSummary, result);

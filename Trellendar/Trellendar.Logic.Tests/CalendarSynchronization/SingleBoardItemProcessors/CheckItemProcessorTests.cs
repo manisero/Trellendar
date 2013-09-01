@@ -25,10 +25,10 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                                   .Build())
                                               .Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
             // Act
-            var result = TestProcess(checkItem, user);
+            var result = TestProcess(checkItem, bond);
 
             // Assert
             Assert.IsNull(result);
@@ -44,12 +44,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                     .Build())
                                 .Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
 
-            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, user)).Returns((Tuple<TimeStamp, TimeStamp>)null);
+            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, bond)).Returns((Tuple<TimeStamp, TimeStamp>)null);
 
             // Act
-            var result = TestProcess(checkItem, user);
+            var result = TestProcess(checkItem, bond);
 
             // Assert
             Assert.IsNull(result);
@@ -65,13 +65,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                     .Build())
                                 .Build();
 
-            var user = Builder<User>.CreateNew().Build();
+            var bond = Builder<BoardCalendarBond>.CreateNew().Build();
             var timeFrame = new Tuple<TimeStamp, TimeStamp>(new TimeStamp(), new TimeStamp());
             
-            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, user)).Returns(timeFrame);
+            AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>().Setup(x => x.Format(checkItem, bond)).Returns(timeFrame);
 
             // Act
-            var result = TestProcess(checkItem, user);
+            var result = TestProcess(checkItem, bond);
 
             // Assert
             Assert.IsNotNull(result);
@@ -89,14 +89,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                     .Build())
                                 .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var summary = "summary";
 
-            AutoMoqer.GetMock<ISummaryFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(summary);
+            AutoMoqer.GetMock<ISummaryFormatter<CheckItem>>().Setup(x => x.Format(checkItem, settings)).Returns(summary);
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
+            var result = TestProcess(checkItem, new BoardCalendarBond { Settings = settings });
 
             // Assert
             Assert.IsNotNull(result);
@@ -113,14 +113,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                     .Build())
                                 .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var location = "location";
 
-            AutoMoqer.GetMock<ILocationFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(location);
+            AutoMoqer.GetMock<ILocationFormatter<CheckItem>>().Setup(x => x.Format(checkItem, settings)).Returns(location);
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
+            var result = TestProcess(checkItem, new BoardCalendarBond { Settings = settings });
 
             // Assert
             Assert.IsNotNull(result);
@@ -137,14 +137,14 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
                                     .Build())
                                 .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var descritpion = "descritpion";
 
-            AutoMoqer.GetMock<IDescriptionFormatter<CheckItem>>().Setup(x => x.Format(checkItem, preferences)).Returns(descritpion);
+            AutoMoqer.GetMock<IDescriptionFormatter<CheckItem>>().Setup(x => x.Format(checkItem, settings)).Returns(descritpion);
             MockTimeFrameFormatting();
 
             // Act
-            var result = TestProcess(checkItem, new User { UserPreferences = preferences });
+            var result = TestProcess(checkItem, new BoardCalendarBond { Settings = settings });
 
             // Assert
             Assert.IsNotNull(result);
@@ -182,7 +182,7 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcesso
         private void MockTimeFrameFormatting()
         {
             AutoMoqer.GetMock<ITimeFrameFormatter<CheckItem>>()
-                     .Setup(x => x.Format(It.IsAny<CheckItem>(), It.IsAny<User>()))
+                     .Setup(x => x.Format(It.IsAny<CheckItem>(), It.IsAny<BoardCalendarBond>()))
                      .Returns(new Tuple<TimeStamp, TimeStamp>(null, null));
         }
     }

@@ -16,13 +16,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var userPreferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var location = Builder<Location>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, userPreferences)).Returns(location);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, settings)).Returns(location);
 
             // Acr
-            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, userPreferences);
+            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -34,12 +34,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         {
             // Arrange
             var card = Builder<Card>.CreateNew().Build();
-            var userPreferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, userPreferences)).Returns((Location)null);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(card.Description, settings)).Returns((Location)null);
 
             // Acr
-            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, userPreferences);
+            var result = AutoMoqer.Resolve<CardLocationFormatter>().Format(card, settings);
 
             // Assert
             Assert.IsNull(result);

@@ -15,13 +15,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
-            var userPreferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
             var location = Builder<Location>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, userPreferences)).Returns(location);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, settings)).Returns(location);
 
             // Acr
-            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, userPreferences);
+            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, settings);
 
             // Assert
             Assert.IsNotNull(result);
@@ -33,12 +33,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
         {
             // Arrange
             var checkItem = Builder<CheckItem>.CreateNew().Build();
-            var userPreferences = Builder<UserPreferences>.CreateNew().Build();
+            var settings = Builder<BoardCalendarBondSettings>.CreateNew().Build();
 
-            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, userPreferences)).Returns((Location)null);
+            AutoMoqer.GetMock<IParser<Location>>().Setup(x => x.Parse(checkItem.Name, settings)).Returns((Location)null);
 
             // Acr
-            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, userPreferences);
+            var result = AutoMoqer.Resolve<CheckItemLocationFormatter>().Format(checkItem, settings);
 
             // Assert
             Assert.IsNull(result);

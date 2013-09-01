@@ -40,13 +40,13 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                             .With(x => x.State = CheckItemExtensions.STATE_DONE)
                             .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                .With(x => x.CheckListEventDoneSuffix = doneSuffix)
-                                .With(x => x.CheckListEventNameTemplate = null)
-                                .Build();
+            var setting = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                            .With(x => x.CheckListEventDoneSuffix = doneSuffix)
+                                                            .With(x => x.CheckListEventNameTemplate = null)
+                                                            .Build();
 
             // Arrange, Act & Assert
-            TestFormatEventSummary(checkItem, preferences, "not important", expectedSummary);
+            TestFormatEventSummary(checkItem, setting, "not important", expectedSummary);
         }
 
         [Test]
@@ -67,12 +67,12 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .With(x => x.State = CheckItemExtensions.STATE_NOT_DONE)
                                 .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                .With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-                                .Build();
+            var setting = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                            .With(x => x.CheckListEventNameTemplate = eventNameTemplate)
+                                                            .Build();
 
             // Arrange, Act & Assert
-            TestFormatEventSummary(checkItem, preferences, checkListShortcut, expectedSummary);
+            TestFormatEventSummary(checkItem, setting, checkListShortcut, expectedSummary);
         }
 
         [Test]
@@ -94,27 +94,27 @@ namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
                                 .With(x => x.State = CheckItemExtensions.STATE_DONE)
                                 .Build();
 
-            var preferences = Builder<UserPreferences>.CreateNew()
-                                .With(x => x.CheckListEventNameTemplate = eventNameTemplate)
-                                .With(x => x.CheckListEventDoneSuffix = doneSuffix)
-                                .Build();
+            var setting = Builder<BoardCalendarBondSettings>.CreateNew()
+                                                            .With(x => x.CheckListEventNameTemplate = eventNameTemplate)
+                                                            .With(x => x.CheckListEventDoneSuffix = doneSuffix)
+                                                            .Build();
 
             // Arrange, Act & Assert
-            TestFormatEventSummary(checkItem, preferences, checkListShortcut, expectedSummary);
+            TestFormatEventSummary(checkItem, setting, checkListShortcut, expectedSummary);
         }
 
-        private void TestFormatEventSummary(CheckItem checkItem, UserPreferences preferences, string checkListShortcut, string expectedSummary)
+        private void TestFormatEventSummary(CheckItem checkItem, BoardCalendarBondSettings settings, string checkListShortcut, string expectedSummary)
         {
             // Arrange
             if (checkItem.CheckList != null)
             {
                 AutoMoqer.GetMock<IParser<BoardItemName>>()
-                         .Setup(x => x.Parse(checkItem.CheckList.Name, preferences))
+                         .Setup(x => x.Parse(checkItem.CheckList.Name, settings))
                          .Returns(new BoardItemName { Value = checkListShortcut });
             }
 
             // Act
-            var result = AutoMoqer.Resolve<CheckItemSummaryFormatter>().Format(checkItem, preferences);
+            var result = AutoMoqer.Resolve<CheckItemSummaryFormatter>().Format(checkItem, settings);
 
             // Assert
             Assert.AreEqual(expectedSummary, result);
