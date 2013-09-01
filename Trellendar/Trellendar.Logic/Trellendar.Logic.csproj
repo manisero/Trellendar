@@ -84,7 +84,6 @@
     <Compile Include="Domain\CheckItemExtensions.cs" />
     <Compile Include="Domain\BoardItemName.cs" />
     <Compile Include="Domain\Location.cs" />
-    <Compile Include="Domain\UserPreferencesExtensions.cs" />
     <Compile Include="UserManagement\IUserService.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\IBoardCalendarBondSynchronizationSettingsProvider.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\IBoardCalendarBondSynchronizationService.cs" />

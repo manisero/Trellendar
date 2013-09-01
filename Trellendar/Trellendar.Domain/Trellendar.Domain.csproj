@@ -54,7 +54,6 @@
     <Compile Include="Trellendar\BoardCalendarBondSettings.cs" />
     <Compile Include="Trellendar\UnregisteredUser.cs" />
     <Compile Include="Trellendar\User.cs" />
-    <Compile Include="Trellendar\UserPreferences.cs" />
     <Compile Include="Trello\Board.cs" />
     <Compile Include="Trello\Card.cs" />
     <Compile Include="Trello\CheckList.cs" />
