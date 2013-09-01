@@ -2,7 +2,7 @@
 using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.CalendarSynchronization.Parsers;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.Parsers
 {

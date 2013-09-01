@@ -1,7 +1,7 @@
 ﻿using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Formatters;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
 {

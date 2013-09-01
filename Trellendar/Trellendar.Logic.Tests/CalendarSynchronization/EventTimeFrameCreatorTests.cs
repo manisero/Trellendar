@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Trellendar.Logic.CalendarSynchronization._Impl;
+using Trellendar.Logic.Synchronization.CalendarSynchronization._Impl;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization
 {

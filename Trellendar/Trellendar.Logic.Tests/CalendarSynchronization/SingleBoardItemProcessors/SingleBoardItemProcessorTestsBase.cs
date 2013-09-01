@@ -3,7 +3,7 @@ using FizzWare.NBuilder;
 using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.CalendarSynchronization;
+using Trellendar.Logic.Synchronization.CalendarSynchronization;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.SingleBoardItemProcessors
 {

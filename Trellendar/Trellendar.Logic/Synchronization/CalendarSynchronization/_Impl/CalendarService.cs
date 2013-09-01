@@ -1,0 +1,45 @@
+using System.Collections.Generic;
+using System.Linq;
+using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trellendar;
+using Trellendar.Domain.Trello;
+
+namespace Trellendar.Logic.Synchronization.CalendarSynchronization._Impl
+{
+    public class CalendarService : ICalendarService
+    {
+        private readonly UserContext _userContext;
+        private readonly IBoardItemsProcessor _boardItemsProcessor;
+
+        private User User
+        {
+            get { return _userContext.User; }
+        }
+
+        public CalendarService(UserContext userContext, IBoardItemsProcessor boardItemsProcessor)
+        {
+            _userContext = userContext;
+            _boardItemsProcessor = boardItemsProcessor;
+        }
+
+        public void UpdateCalendar(Board board, IEnumerable<Event> events)
+        {
+            foreach (var list in board.Lists)
+            {
+                var cards = board.Cards.Where(x => x.IdList == list.Id && x.DateLastActivity > User.LastSynchronizationTS);
+
+                if (cards.Any())
+                {
+                    _boardItemsProcessor.Process(cards, events);
+                }
+
+                var checklists = board.CheckLists.Where(x => cards.Any(card => card.Id == x.IdCard));
+
+                foreach (var checklist in checklists)
+                {
+                    _boardItemsProcessor.Process(checklist.CheckItems, events);
+                }
+            }
+        }
+    }
+}

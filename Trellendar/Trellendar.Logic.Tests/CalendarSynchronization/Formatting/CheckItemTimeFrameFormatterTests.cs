@@ -4,9 +4,9 @@ using NUnit.Framework;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic.CalendarSynchronization;
-using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
 using Trellendar.Logic.Domain;
+using Trellendar.Logic.Synchronization.CalendarSynchronization;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Formatters;
 
 namespace Trellendar.Logic.Tests.CalendarSynchronization.Formatting
 {
