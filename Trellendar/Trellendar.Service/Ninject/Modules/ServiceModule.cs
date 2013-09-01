@@ -1,6 +1,7 @@
 ﻿using Ninject.Modules;
 using Trellendar.Core.DependencyResolution;
 using Trellendar.Logic.DataAccess;
+using Trellendar.Logic.Synchronization.BoardCalendarBondSynchronization;
 using Trellendar.Logic.UserManagement;
 
 namespace Trellendar.Service.Ninject.Modules
@@ -10,7 +11,7 @@ namespace Trellendar.Service.Ninject.Modules
         public override void Load()
         {
             Bind<IDataAccessSettingsProvider>().To<SettingsProvider>();
-            Bind<IUserSynchronizationSettingsProvider>().To<SettingsProvider>();
+            Bind<IBoardCalendarBondSynchronizationSettingsProvider>().To<SettingsProvider>();
             Bind<ITrellendarServiceSettingsProvider>().To<SettingsProvider>();
 
             // Ninject

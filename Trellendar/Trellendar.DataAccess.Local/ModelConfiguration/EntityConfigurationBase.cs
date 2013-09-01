@@ -3,7 +3,8 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Trellendar.DataAccess.Local.ModelConfiguration
 {
-    public abstract class EntityConfigurationBase<TEntity> where TEntity : class
+    public abstract class EntityConfigurationBase<TEntity> : IEntityConfiguration
+        where TEntity : class
     {
         public void Configure(DbModelBuilder modelBuilder)
         {

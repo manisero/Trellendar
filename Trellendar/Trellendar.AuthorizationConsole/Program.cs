@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics;
 using Trellendar.Core.Serialization._Impl;
@@ -9,7 +10,6 @@ using Trellendar.DataAccess.Remote.Trello._Impl;
 using Trellendar.DataAccess.Remote._Impl;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
-using UserPreferences = Trellendar.Domain.Trellendar.UserPreferences;
 
 namespace Trellendar.AuthorizationConsole
 {
@@ -66,10 +66,16 @@ namespace Trellendar.AuthorizationConsole
                     GoogleAccessTokenExpirationTS = googleToken.GetExpirationTS(),
                     GoogleRefreshToken = googleToken.RefreshToken,
                     TrelloAccessToken = trelloToken,
-                    BoardID = boardId,
-                    CalendarID = calendarId,
-                    LastSynchronizationTS = new DateTime(1900, 1, 1),
-					UserPreferences = new UserPreferences()
+                    BoardCalendarBonds = new List<BoardCalendarBond>
+                        {
+                            new BoardCalendarBond
+                                {
+                                    BoardID = boardId,
+                                    CalendarID = calendarId,
+                                    LastSynchronizationTS = new DateTime(1900, 1, 1),
+                                    CreateTS = DateTime.UtcNow
+                                }
+                        }
                 };
 
             dataContext.Users.Add(user);

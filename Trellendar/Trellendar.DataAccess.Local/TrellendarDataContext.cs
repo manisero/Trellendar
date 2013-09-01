@@ -8,7 +8,8 @@ namespace Trellendar.DataAccess.Local
     {
         public DbSet<UnregisteredUser> UnregisteredUsers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserPreferences> UserPreferences { get; set; }
+        public DbSet<BoardCalendarBond> BoardCalendarBonds { get; set; }
+        public DbSet<BoardCalendarBondSettings> BoardCalendarBondSettings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

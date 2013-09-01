@@ -17,15 +17,17 @@ namespace Trellendar.Logic.Tests
 
         protected void MockUserContext(User user)
         {
-            AutoMoqer.SetInstance(new UserContext { User = user });
+            AutoMoqer.SetInstance(new UserContext(user));
         }
 
-        protected void MockUserContext(UserPreferences userPreferences)
+        protected void MockBoardCalendarContext(BoardCalendarBond boardCalendarBond)
         {
-            AutoMoqer.SetInstance(new UserContext
-                {
-                    User = new User { UserPreferences = userPreferences }
-                });
+            AutoMoqer.SetInstance(new BoardCalendarContext(boardCalendarBond));
+        }
+
+        protected void MockBoardCalendarContext(BoardCalendarBondSettings boardCalendarBondSettings)
+        {
+            AutoMoqer.SetInstance(new BoardCalendarContext(new BoardCalendarBond { Settings = boardCalendarBondSettings }));
         }
 
         protected void VerifyMock<TMock>() where TMock : class

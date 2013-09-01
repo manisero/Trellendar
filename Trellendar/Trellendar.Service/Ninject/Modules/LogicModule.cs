@@ -2,19 +2,22 @@
 using Trellendar.DataAccess.Remote;
 using Trellendar.Domain.Trello;
 using Trellendar.Logic;
-using Trellendar.Logic.CalendarSynchronization;
-using Trellendar.Logic.CalendarSynchronization.Formatting;
-using Trellendar.Logic.CalendarSynchronization.Formatting.Formatters;
-using Trellendar.Logic.CalendarSynchronization.Parsers;
-using Trellendar.Logic.CalendarSynchronization._Impl;
 using Trellendar.Logic.DataAccess;
 using Trellendar.Logic.DataAccess._Impl;
 using Trellendar.Logic.Domain;
+using Trellendar.Logic.Synchronization;
+using Trellendar.Logic.Synchronization.BoardCalendarBondSynchronization;
+using Trellendar.Logic.Synchronization.BoardCalendarBondSynchronization._Impl;
+using Trellendar.Logic.Synchronization.CalendarSynchronization;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Formatting.Formatters;
+using Trellendar.Logic.Synchronization.CalendarSynchronization.Parsers;
+using Trellendar.Logic.Synchronization.CalendarSynchronization._Impl;
+using Trellendar.Logic.Synchronization._Impl;
 using Trellendar.Logic.TimeZones;
 using Trellendar.Logic.TimeZones._Impl;
 using Trellendar.Logic.UserManagement;
 using Trellendar.Logic.UserManagement._Impl;
-using Trellendar.Logic._Impl;
 
 namespace Trellendar.Service.Ninject.Modules
 {
@@ -25,7 +28,7 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<ISynchronizationService>().To<SynchronizationService>();
 
             // Calendar Synchronization
-            Bind<ICalendarService>().To<CalendarService>();
+            Bind<ICalendarSynchronizationService>().To<CalendarSynchronizationService>();
             Bind<IBoardItemsProcessor>().To<BoardItemsProcessor>();
             Bind<ISingleBoardItemProcessorFactory>().To<SingleBoardItemProcessorFactory>();
             Bind<IEventTimeFrameCreator>().To<EventTimeFrameCreator>();
@@ -48,7 +51,7 @@ namespace Trellendar.Service.Ninject.Modules
             Bind<IExtendedPropertiesFormatter<CheckItem>>().To<CheckItemExtendedPropertiesFormatter>();
 
             // User Profile Synchronization
-            Bind<IUserSynchronizationService>().To<UserSynchronizationService>();
+            Bind<IBoardCalendarBondSynchronizationService>().To<BoardCalendarBondSynchronizationService>();
 
             // Data Access
             Bind<IAccessTokenProviderFactory>().To<AccessTokenProviderFactory>();

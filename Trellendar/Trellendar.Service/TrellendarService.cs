@@ -8,6 +8,7 @@ using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Ninject;
+using Trellendar.Logic.Synchronization;
 using Trellendar.Service.Ninject;
 
 namespace Trellendar.Service
@@ -43,15 +44,22 @@ namespace Trellendar.Service
 
             foreach (var user in userRepository.GetAll())
             {
-                _kernel.Bind<UserContext>().ToConstant(new UserContext { User = user });
+                _kernel.Bind<UserContext>().ToConstant(new UserContext(user));
 
-                var synchronizationService = _kernel.Get<ISynchronizationService>();
-                var synchronizationTS = DateTime.UtcNow;
+                foreach (var bond in user.BoardCalendarBonds)
+                {
+                    _kernel.Bind<BoardCalendarContext>().ToConstant(new BoardCalendarContext(bond));
 
-                synchronizationService.Synchronize();
-                user.LastSynchronizationTS = synchronizationTS;
+                    var synchronizationTS = DateTime.UtcNow;
 
-                _kernel.Get<IUnitOfWork>().SaveChanges();
+                    _kernel.Get<ISynchronizationService>().Synchronize();
+
+                    bond.LastSynchronizationTS = synchronizationTS;
+                    _kernel.Get<IUnitOfWork>().SaveChanges();
+
+                    _kernel.Unbind<BoardCalendarContext>();
+                }
+                
                 _kernel.Unbind<UserContext>();
             }
         }
