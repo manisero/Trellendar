@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Trellendar.DataAccess.Remote.Calendar;
-using Trellendar.DataAccess.Remote.Google;
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;

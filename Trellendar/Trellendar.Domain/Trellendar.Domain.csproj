@@ -51,6 +51,7 @@
     <Compile Include="DomainType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trellendar\BoardCalendarBond.cs" />
+    <Compile Include="Trellendar\BoardCalendarBondSettings.cs" />
     <Compile Include="Trellendar\UnregisteredUser.cs" />
     <Compile Include="Trellendar\User.cs" />
     <Compile Include="Trellendar\UserPreferences.cs" />
