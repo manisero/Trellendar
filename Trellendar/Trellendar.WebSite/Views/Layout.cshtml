@@ -1,0 +1,11 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@(IsSectionDefined("title") ? RenderSection("Title") : "Trellendar")</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
+</head>
+	<body>
+		@RenderBody()
+	</body>
+</html>

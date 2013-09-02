@@ -1,29 +1,21 @@
-﻿<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>User profile</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
-</head>
-	<body>
-		<div class="floatleft">
-			@Model.Email's boards:
-			@foreach (var boardName in Model.AvailableBoards.Values)
-			{
-				<div>
-					@boardName
-				</div>
-			}
-		</div>
-		<div class="floatright">
-			@Model.Email's calendars:
-			@foreach (var calendarSummary in Model.AvailableCalendars.Values)
-			{
-				<div>
-					@calendarSummary
-				</div>
-			}
-		</div>
-		<div class="floatnone"></div>
-	</body>
-</html>
+﻿@{ Layout = "Layout"; }
+
+<div class="floatleft">
+    @Model.Email's boards:
+    @foreach (var boardName in Model.AvailableBoards.Values)
+    {
+        <div>
+            @boardName
+        </div>
+    }
+</div>
+<div class="floatright">
+    @Model.Email's calendars:
+    @foreach (var calendarSummary in Model.AvailableCalendars.Values)
+    {
+        <div>
+            @calendarSummary
+        </div>
+    }
+</div>
+<div class="floatnone"></div>

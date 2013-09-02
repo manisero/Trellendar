@@ -432,6 +432,7 @@
     <Compile Include="Ninject\NinjectUserContextRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsProvider.cs" />
+    <None Include="Views\Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
