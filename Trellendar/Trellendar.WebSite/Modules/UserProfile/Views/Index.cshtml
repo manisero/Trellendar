@@ -3,15 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>User profile</title>
-
-	<style type="text/css">
-		body {
-			text-align: center;
-		}
-	</style>
+    <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
 </head>
 	<body>
-		<div style="float: left">
+		<div class="floatleft">
 			@Model.Email's boards:
 			@foreach (var boardName in Model.AvailableBoards.Values)
 			{
@@ -20,7 +15,7 @@
 				</div>
 			}
 		</div>
-		<div style="float: right">
+		<div class="floatright">
 			@Model.Email's calendars:
 			@foreach (var calendarSummary in Model.AvailableCalendars.Values)
 			{
@@ -29,6 +24,6 @@
 				</div>
 			}
 		</div>
-		<div style="float: none"></div>
+		<div class="floatnone"></div>
 	</body>
 </html>

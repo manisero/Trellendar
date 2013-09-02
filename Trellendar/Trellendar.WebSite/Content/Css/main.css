@@ -1,0 +1,15 @@
+﻿body {
+    text-align: center;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+.floatnone {
+    float: none;
+}
