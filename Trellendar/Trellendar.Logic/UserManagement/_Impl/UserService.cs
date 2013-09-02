@@ -83,7 +83,8 @@ namespace Trellendar.Logic.UserManagement._Impl
                     TrelloAccessToken = trelloAccessToken,
                     GoogleAccessToken = unregisteredUser.GoogleAccessToken,
                     GoogleAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
-                    GoogleRefreshToken = unregisteredUser.GoogleRefreshToken
+                    GoogleRefreshToken = unregisteredUser.GoogleRefreshToken,
+					CreateTS = DateTime.UtcNow
                 };
 
             _repositoryFactory.Create<User>().Add(user);

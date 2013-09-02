@@ -66,6 +66,7 @@ namespace Trellendar.AuthorizationConsole
                     GoogleAccessTokenExpirationTS = googleToken.GetExpirationTS(),
                     GoogleRefreshToken = googleToken.RefreshToken,
                     TrelloAccessToken = trelloToken,
+					CreateTS = DateTime.UtcNow,
                     BoardCalendarBonds = new List<BoardCalendarBond>
                         {
                             new BoardCalendarBond
