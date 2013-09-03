@@ -9,7 +9,7 @@ namespace Trellendar.TestsCore
         protected AutoMoqer AutoMoqer { get; private set; }
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             AutoMoqer = new AutoMoqer();
         }
