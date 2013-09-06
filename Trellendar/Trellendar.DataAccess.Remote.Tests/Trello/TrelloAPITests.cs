@@ -11,7 +11,7 @@ namespace Trellendar.DataAccess.Remote.Tests.Trello
 	[TestFixture]
 	public class TrelloAPITests : TestsBase
 	{
-		private const string ACCESS_TOKEN = "confidential";
+		private const string ACCESS_TOKEN = "16638490314345dea35f480c55f83786d9a6b2186a4810fd62a6462f4784d514";
 
 		[SetUp]
 		public override void SetUp()
@@ -35,19 +35,16 @@ namespace Trellendar.DataAccess.Remote.Tests.Trello
 
 			// Assert
 			Assert.IsNotNull(result);
-			Assert.AreEqual(5, result.Count());
-			Assert.IsNotNull(result.SingleOrDefault(x => x.Name == "Private"));
-			Assert.IsNotNull(result.SingleOrDefault(x => x.Name == "Semestr VIII"));
-			Assert.IsNotNull(result.SingleOrDefault(x => x.Name == "Test"));
-			Assert.IsNotNull(result.SingleOrDefault(x => x.Name == "Trellendar"));
-			Assert.IsNotNull(result.SingleOrDefault(x => x.Name == "Welcome Board"));
+			Assert.AreEqual(2, result.Count());
+			Assert.IsNotNull(result.SingleOrDefault(x => x.Id == "5225a72859447646530060b8" && x.Name == "UnitTestsBoard"));
+			Assert.IsNotNull(result.SingleOrDefault(x => x.Id == "5225a6f46a25183531005b8c" && x.Name == "Welcome Board"));
 		}
 
 		[Test]
 		public void gets_board()
 		{
 			// Arrange
-			var boardId = "confidential";
+			var boardId = "5225a72859447646530060b8";
 
 			// Act
 			var result = AutoMoqer.Resolve<TrelloAPI>().GetBoard(boardId);
@@ -55,7 +52,7 @@ namespace Trellendar.DataAccess.Remote.Tests.Trello
 			// Assert
 			Assert.IsNotNull(result);
 			Assert.AreEqual(boardId, result.Id);
-			Assert.AreEqual("Private", result.Name);
+			Assert.AreEqual("UnitTestsBoard", result.Name);
 			Assert.AreEqual(false, result.IsClosed);
 
 			Assert.IsNotNull(result.Lists);
