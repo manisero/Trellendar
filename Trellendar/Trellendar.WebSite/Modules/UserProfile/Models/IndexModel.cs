@@ -6,8 +6,10 @@ namespace Trellendar.WebSite.Modules.UserProfile.Models
     {
         public string Email { get; set; }
 
-        public IDictionary<string, string> AvailableBoards { get; set; }
+        public IEnumerable<BoardCalendarBondModel> BoardCalendarBonds { get; set; }
 
-        public IDictionary<string, string> AvailableCalendars { get; set; }
+        public IEnumerable<BoardModel> AvailableBoards { get; set; }
+
+        public IEnumerable<CalendarModel> AvailableCalendars { get; set; }
     }
 }

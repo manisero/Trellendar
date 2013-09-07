@@ -7,8 +7,12 @@
                          ? title + " - Trellendar"
                          : "Trellendar";
 
-    var ngControllerValue = ngController != null ?
-                                string.Format("ng-controller='{0}'", ngController)
+    var ngAppValue = ngModule != null
+                         ? string.Format("ng-app='{0}'", ngModule)
+                         : "ng-app";
+
+    var ngControllerValue = ngController != null
+                                ? string.Format("ng-controller='{0}'", ngController)
                                 : string.Empty;
 }
 
@@ -28,18 +32,7 @@
             <script src='~/Scripts/_custom/Modules/@(ngModule).js'></script>
         }
     </head>
-    <body ng-app @ngControllerValue>
+    <body @ngAppValue @ngControllerValue>
         @RenderBody()
     </body>
 </html>
-
-@if (ngModule != null)
-{
-    <script type="text/javascript">
-
-        angular.element(document).ready(function() {
-            angular.bootstrap(document, ['@ngModule']);
-        });
-
-    </script>
-}

@@ -31,8 +31,21 @@ namespace Trellendar.WebSite.Modules.UserProfile
             var model = new IndexModel
                 {
                     Email = _userContext.User.Email,
-                    AvailableBoards = boards.ToDictionary(x => x.Id, x => x.Name),
-                    AvailableCalendars = calendars.ToDictionary(x => x.Id, x => x.Summary)
+                    BoardCalendarBonds = _userContext.User.BoardCalendarBonds.Select(x => new BoardCalendarBondModel
+                        {
+                            BoardID = x.BoardID,
+                            CalendarID = x.CalendarID
+                        }),
+                    AvailableBoards = boards.Select(x => new BoardModel
+                        {
+                            ID = x.Id,
+                            Name = x.Name
+                        }),
+                    AvailableCalendars = calendars.Select(x => new CalendarModel
+                        {
+                            ID = x.Id,
+                            Name = x.Summary
+                        })
                 };
 
             return View[model];

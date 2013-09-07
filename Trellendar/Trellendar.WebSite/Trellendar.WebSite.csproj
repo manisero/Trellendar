@@ -406,6 +406,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\Modules\UserProfile.js" />
     <Content Include="Scripts\_custom\Modules\LogIn.js" />
     <Content Include="Scripts\_custom\Modules\utils.js" />
     <Content Include="Scripts\_custom\utils.js" />
@@ -418,6 +419,9 @@
     <Compile Include="Logic\_Impl\LogInService.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInModel.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInResultModel.cs" />
+    <Compile Include="Modules\UserProfile\Models\BoardCalendarBondModel.cs" />
+    <Compile Include="Modules\UserProfile\Models\BoardModel.cs" />
+    <Compile Include="Modules\UserProfile\Models\CalendarModel.cs" />
     <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
     <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
     <Compile Include="Nancy\Conventions\StaticContentConventions.cs" />

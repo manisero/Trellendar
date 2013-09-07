@@ -1,30 +1,28 @@
 ﻿@using Trellendar.WebSite.Nancy.Extensions
 @{
-    this.Initialize("Your profile");
+    this.Initialize("Your profile", "UserProfile", "Controller");
 }
 
 <div class="floatleft">
     @Model.Email's boards:
-    @foreach (var boardName in Model.AvailableBoards.Values)
+    <div ng-repeat="board in AvailableBoards">
+        {{board.Name}}
+    </div>
+
+    @foreach (var board in Model.AvailableBoards)
     {
         <div>
-            @boardName
+            @board.Name
         </div>
     }
 </div>
 <div class="floatright">
     @Model.Email's calendars:
-    @foreach (var calendarSummary in Model.AvailableCalendars.Values)
+    @foreach (var calendar in Model.AvailableCalendars)
     {
         <div>
-            @calendarSummary
+            @calendar.Name
         </div>
     }
 </div>
 <div class="floatnone"></div>
-
-<script type="text/javascript">
-    
-
-
-</script>
