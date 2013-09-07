@@ -1,4 +1,5 @@
-﻿using Nancy.ViewEngines.Razor;
+﻿using Nancy.Json;
+using Nancy.ViewEngines.Razor;
 
 namespace Trellendar.WebSite.Nancy.Extensions
 {
@@ -10,6 +11,11 @@ namespace Trellendar.WebSite.Nancy.Extensions
             view.ViewBag.Title = title;
             view.ViewBag.NgModule = ngModule;
             view.ViewBag.NgController = ngController;
+        }
+
+        public static IHtmlString SerializeModel(this NancyRazorViewBase view)
+        {
+            return view.Html.Raw(new JavaScriptSerializer().Serialize(view.Model));
         }
     }
 }

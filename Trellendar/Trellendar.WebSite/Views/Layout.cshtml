@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Trellendar.WebSite.Nancy.Extensions
+@{
     var title = (string)ViewBag.Title;
     var ngModule = (string)ViewBag.NgModule;
     var ngController = (string)ViewBag.NgController;
@@ -36,3 +37,15 @@
         @RenderBody()
     </body>
 </html>
+
+@if (ngModule != null && Model != null)
+{
+    <script type="text/javascript">
+
+        angular.module('@ngModule')
+            .factory('Model', function() {
+                return @this.SerializeModel();
+            });
+        
+    </script>
+}

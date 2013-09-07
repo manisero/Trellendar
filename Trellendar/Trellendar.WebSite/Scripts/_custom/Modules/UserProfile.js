@@ -1,7 +1,5 @@
 ﻿angular.module('UserProfile', [])
-    .controller("Controller", function($scope) {
-        $scope.AvailableBoards = [
-            { Name: 'board1' },
-            { Name: 'board2' }
-        ];
-    });
+    .controller("Controller", ['$scope', 'Model', function($scope, model) {
+        $scope.AvailableBoards = model.AvailableBoards;
+        $scope.AvailableCalendars = model.AvailableCalendars;
+    }]);
