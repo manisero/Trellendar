@@ -1,18 +1,26 @@
 ﻿@{
-    var title = ViewBag.Title;
-    var ngController = ViewBag.NgController;
+    var title = (string)ViewBag.Title;
+    var ngController = (string)ViewBag.NgController;
+
+    var titleValue = title != null
+                         ? title + " - Trellendar"
+                         : "Trellendar";
+
+    var ngControllerValue = ngController != null ?
+                                string.Format("ng-controller='{0}'", ngController)
+                                : string.Empty;
 }
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>@(title != null ? title + " - Trellendar" : "Trellendar")</title>
+        <title>@titleValue</title>
         <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
         <script src="~/Scripts/_custom/utils.js"></script>
         <script src="~/Scripts/angular.js"></script>
     </head>
-    <body ng-app @(ngController != null ? string.Format("ng-controller='{0}'", ngController) : string.Empty)>
+    <body ng-app @ngControllerValue>
         @RenderBody()
     </body>
 </html>
