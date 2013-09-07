@@ -1,5 +1,7 @@
-﻿@{ Layout = "Layout"; }
-@section Title{ Your Profile }
+﻿@using Trellendar.WebSite.Nancy.Extensions
+@{
+    this.Initialize("Your profile");
+}
 
 <div class="floatleft">
     @Model.Email's boards:

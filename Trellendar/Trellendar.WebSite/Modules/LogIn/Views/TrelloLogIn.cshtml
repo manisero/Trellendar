@@ -1,6 +1,7 @@
-﻿@{ Layout = "Layout"; }
-@section Title{ Trello Log In }
-@{ ViewBag.NgController = "Controller"; }
+﻿@using Trellendar.WebSite.Nancy.Extensions
+@{
+    this.Initialize("Trello Log In", "Controller");
+}
 
 <div>
     Click <a href="#" ng-click="authorize()">here</a>
