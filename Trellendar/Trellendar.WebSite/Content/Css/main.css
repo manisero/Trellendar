@@ -13,3 +13,7 @@
 .floatnone {
     float: none;
 }
+
+.selected {
+    background: red;
+}

@@ -5,14 +5,20 @@
 
 <div class="floatleft">
     @Model.Email's boards:
-    <div ng-repeat="board in AvailableBoards">
-        {{board.Name}}
-    </div>
+    @foreach (var board in Model.AvailableBoards)
+    {
+        <div board="@board.ID">
+            @board.Name
+        </div>
+    }
 </div>
 <div class="floatright">
     @Model.Email's calendars:
-    <div ng-repeat="calendar in AvailableCalendars">
-        {{calendar.Name}}
-    </div>
+    @foreach (var calendar in Model.AvailableCalendars)
+    {
+        <div calendar="@calendar.ID">
+            @calendar.Name
+        </div>
+    }
 </div>
 <div class="floatnone"></div>
