@@ -406,6 +406,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +418,7 @@
     <Compile Include="Modules\LogIn\Models\TrelloLogInResultModel.cs" />
     <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
     <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
+    <Compile Include="Nancy\Conventions\StaticContentConventions.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
     <Compile Include="Modules\LogIn\LogInModule.cs" />
     <Compile Include="Modules\Home\HomeModule.cs" />

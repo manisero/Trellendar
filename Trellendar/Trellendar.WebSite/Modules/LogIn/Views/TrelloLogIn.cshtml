@@ -1,7 +1,9 @@
 ﻿@{ Layout = "Layout"; }
+@section Title{ Trello Log In }
+@{ ViewBag.NgController = "Controller"; }
 
 <div>
-    Click <a href="@Html.Raw(Model.AuthorizationUrl)" onclick="return redirect(this.href)">here</a>
+    Click <a href="#" ng-click="authorize()">here</a>
     to retrieve a token allowing Trellendar to read your Trello data.
 </div>
 <div>
@@ -15,9 +17,10 @@
 
 <script type="text/javascript">
 
-    var redirect = function(url) {
-        window.open(url, '_blank');
-        return false;
+    var Controller = function ($scope) {
+        $scope.authorize = function() {
+            redirect('@Html.Raw(Model.AuthorizationUrl)');
+        };
     };
 
 </script>

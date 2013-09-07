@@ -1,11 +1,17 @@
-﻿<!doctype html>
+﻿@{
+    var ngController = ViewBag.NgController;
+}
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>@(IsSectionDefined("title") ? RenderSection("Title") : "Trellendar")</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
-</head>
-	<body>
-		@RenderBody()
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <title>@(IsSectionDefined("Title") ? RenderSection("Title") + " - Trellendar" : "Trellendar")</title>
+        <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
+        <script src="~/Scripts/_custom/utils.js"></script>
+        <script src="~/Scripts/angular.js"></script>
+    </head>
+    <body ng-app @(ngController != null ? string.Format("ng-controller='{0}'", ngController) : string.Empty)>
+        @RenderBody()
+    </body>
 </html>
