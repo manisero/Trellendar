@@ -406,6 +406,8 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\Modules\LogIn.js" />
+    <Content Include="Scripts\_custom\Modules\utils.js" />
     <Content Include="Scripts\_custom\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>

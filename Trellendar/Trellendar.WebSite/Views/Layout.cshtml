@@ -1,5 +1,6 @@
 ﻿@{
     var title = (string)ViewBag.Title;
+    var ngModule = (string)ViewBag.NgModule;
     var ngController = (string)ViewBag.NgController;
 
     var titleValue = title != null
@@ -17,10 +18,28 @@
         <meta charset="utf-8">
         <title>@titleValue</title>
         <link rel="stylesheet" type="text/css" href="~/Content/Css/main.css"/>
+
         <script src="~/Scripts/_custom/utils.js"></script>
         <script src="~/Scripts/angular.js"></script>
+        
+        @if (ngModule != null)
+        {
+            <script src="~/Scripts/_custom/Modules/utils.js"></script>
+            <script src='~/Scripts/_custom/Modules/@(ngModule).js'></script>
+        }
     </head>
     <body ng-app @ngControllerValue>
         @RenderBody()
     </body>
 </html>
+
+@if (ngModule != null)
+{
+    <script type="text/javascript">
+
+        angular.element(document).ready(function() {
+            angular.bootstrap(document, ['@ngModule']);
+        });
+
+    </script>
+}

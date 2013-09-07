@@ -1,10 +1,10 @@
 ﻿@using Trellendar.WebSite.Nancy.Extensions
 @{
-    this.Initialize("Trello Log In", "Controller");
+    this.Initialize("Trello Log In", "LogIn");
 }
 
 <div>
-    Click <a href="#" ng-click="authorize()">here</a>
+    Click <a href="#" redirect="@Html.Raw(Model.AuthorizationUrl)">here</a>
     to retrieve a token allowing Trellendar to read your Trello data.
 </div>
 <div>
@@ -15,13 +15,3 @@
     <input type="text" name="AccessToken" />
     <input type="submit" />
 </form>
-
-<script type="text/javascript">
-
-    var Controller = function ($scope) {
-        $scope.authorize = function() {
-            redirect('@Html.Raw(Model.AuthorizationUrl)');
-        };
-    };
-
-</script>
