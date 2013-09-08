@@ -1,5 +1,5 @@
-﻿angular.module('UserProfile', [])
-    .controller("Controller", ['$scope', 'Model', '$http', function($scope, model, $http) {
+﻿angular.module('UserProfile', ['http'])
+    .controller("Controller", ['$scope', 'Model', '$http', 'AjaxService', function($scope, model, $http, ajaxService) {
         $scope.Bonds = model.BoardCalendarBonds;
         $scope.SelectedBoard = model.BoardCalendarBonds[0].BoardID;
         $scope.SelectedCalendar = null;
@@ -73,16 +73,12 @@
             }
         };
         $scope.Save = function() {
-            $http.post("/UserProfile/Save", $scope.Bonds)
-                .success(function (data) {
-                    if (data.Success) {
-                        $scope.Message = 'Profile saved successfully';
-                    } else {
-                        $scope.Message = data.ErrorMessage;
-                    }
-                })
-                .error(function () {
-                    $scope.Message = 'Unknown error';
+            ajaxService.send($http.post("/UserProfile/Save", $scope.Bonds),
+                function() {
+                    $scope.Message = 'Profile saved successfully';
+                },
+                function(errorMessage) {
+                    $scope.Message = errorMessage;
                 });
         };
     }]);
