@@ -10,18 +10,14 @@
     float: right;
 }
 
-.floatnone {
-    float: none;
+.clear {
+    clear: both;
 }
 
 .hidden {
-    visibility: hidden
+    display: none
 }
 
 .selected {
-    background: red;
-}
-
-.selected div {
     background: red;
 }

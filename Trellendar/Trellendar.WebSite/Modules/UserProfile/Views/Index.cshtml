@@ -7,17 +7,19 @@
     @Model.Email's boards:
     @foreach (var board in Model.AvailableBoards)
     {
-        <div board="@board.ID">
-            <div class="floatleft">
+        <div>
+            <div board="@board.ID" class="floatleft">
                 @board.Name
             </div>
-            <a href="#" bind-board="@board.ID" class="floatright">
-                bind
-            </a>
-            <a href="#" unbind-board="@board.ID" class="floatright">
-                unbind
-            </a>
-            <div class="floatnone"></div>
+            <div class="floatright">
+                <a href="#" bind-board="@board.ID">
+                    bind
+                </a>
+                <a href="#" unbind-board="@board.ID">
+                    unbind
+                </a>
+            </div>
+            <div class="clear"></div>
         </div>
     }
 </div>
@@ -25,18 +27,20 @@
     @Model.Email's calendars:
     @foreach (var calendar in Model.AvailableCalendars)
     {
-        <div calendar="@calendar.ID">
-            <div class="floatleft">
+        <div>
+            <div calendar="@calendar.ID" class="floatleft">
                 @calendar.Name
             </div>
-            <a href="#" bind-calendar="@calendar.ID" class="floatright">
-                bind
-            </a>
-            <a href="#" unbind-calendar="@calendar.ID" class="floatright">
-                unbind
-            </a>
-            <div class="floatnone"></div>
+            <div class="floatright">
+                <a href="#" bind-calendar="@calendar.ID">
+                    bind
+                </a>
+                <a href="#" unbind-calendar="@calendar.ID">
+                    unbind
+                </a>
+            </div>
+            <div class="clear"></div>
         </div>
     }
 </div>
-<div class="floatnone"></div>
+<div class="clear"></div>
