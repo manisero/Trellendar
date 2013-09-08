@@ -7,7 +7,8 @@ namespace Trellendar.WebSite.Nancy.Conventions
     {
         public void Initialise(NancyConventions conventions)
         {
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Scripts", "Scripts"));
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Css", "Css", "css"));
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Scripts", "Scripts", "js"));
         }
 
         public Tuple<bool, string> Validate(NancyConventions conventions)
