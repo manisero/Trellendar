@@ -21,6 +21,17 @@
                     iElement.removeClass('selected');
                 }
             });
+            
+            scope.$watch("SelectedCalendar", function (newValue) {
+                for (var i = 0; i != scope.Bonds.length; i++) {
+                    if (scope.Bonds[i].BoardID == boardId && scope.Bonds[i].CalendarID == newValue) {
+                        iElement.addClass('selected');
+                        return;
+                    }
+                }
+
+                iElement.removeClass('selected');
+            });
         };
     })
     .directive("calendar", function () {
@@ -39,6 +50,17 @@
                 } else {
                     iElement.removeClass('selected');
                 }
+            });
+            
+            scope.$watch("SelectedBoard", function (newValue) {
+                for (var i = 0; i != scope.Bonds.length; i++) {
+                    if (scope.Bonds[i].CalendarID == calendarId && scope.Bonds[i].BoardID == newValue) {
+                        iElement.addClass('selected');
+                        return;
+                    }
+                }
+
+                iElement.removeClass('selected');
             });
         };
     });
