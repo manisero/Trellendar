@@ -1,9 +1,12 @@
-﻿using Nancy;
+﻿using System.Collections.Generic;
+using Nancy;
 using Nancy.Security;
 using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
 using Trellendar.WebSite.Modules.UserProfile.Models;
 using System.Linq;
+using Nancy.ModelBinding;
+using Trellendar.WebSite.Modules._Shared;
 
 namespace Trellendar.WebSite.Modules.UserProfile
 {
@@ -54,7 +57,9 @@ namespace Trellendar.WebSite.Modules.UserProfile
 
         public dynamic Save(dynamic parameters)
         {
-            return true;
+            var model = this.Bind<IEnumerable<BoardCalendarBondModel>>();
+
+            return new AjaxResponse { Success = true };
         }
     }
 }

@@ -3,6 +3,7 @@
         $scope.Bonds = model.BoardCalendarBonds;
         $scope.SelectedBoard = model.BoardCalendarBonds[0].BoardID;
         $scope.SelectedCalendar = null;
+        $scope.Message = '';
         $scope.SelectBoard = function(boardId) {
             $scope.SelectedBoard = boardId;
             $scope.SelectedCalendar = null;
@@ -72,6 +73,16 @@
             }
         };
         $scope.Save = function() {
-            $http.post("/UserProfile/Save");
+            $http.post("/UserProfile/Save", $scope.Bonds)
+                .success(function (data) {
+                    if (data.Success) {
+                        $scope.Message = 'Profile saved successfully';
+                    } else {
+                        $scope.Message = data.ErrorMessage;
+                    }
+                })
+                .error(function () {
+                    $scope.Message = 'Unknown error';
+                });
         };
     }]);

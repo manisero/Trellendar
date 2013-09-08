@@ -424,6 +424,7 @@
     <Compile Include="Modules\UserProfile\Models\CalendarModel.cs" />
     <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
     <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
+    <Compile Include="Modules\_Shared\AjaxResponse.cs" />
     <Compile Include="Nancy\Conventions\StaticContentConventions.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
     <Compile Include="Modules\LogIn\LogInModule.cs" />
