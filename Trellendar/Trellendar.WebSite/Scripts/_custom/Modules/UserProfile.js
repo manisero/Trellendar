@@ -11,11 +11,18 @@
             $scope.SelectedBoard = null;
             $scope.SelectedCalendar = calendarId;
         };
-        $scope.BindBoard = function(boardId) {
+        $scope.IsBoardBound = function (boardId) {
             for (var i = 0; i != $scope.Bonds.length; i++) {
                 if ($scope.Bonds[i].BoardID == boardId && $scope.Bonds[i].CalendarID == $scope.SelectedCalendar) {
-                    return;
+                    return true;
                 }
+            }
+
+            return false;
+        };
+        $scope.BindBoard = function(boardId) {
+            if ($scope.IsBoardBound(boardId)) {
+                return;
             }
 
             $scope.Bonds.push({
@@ -31,11 +38,18 @@
                 }
             }
         };
-        $scope.BindCalendar = function(calendarId) {
+        $scope.IsCalendarBound = function(calendarId) {
             for (var i = 0; i != $scope.Bonds.length; i++) {
                 if ($scope.Bonds[i].CalendarID == calendarId && $scope.Bonds[i].BoardID == $scope.SelectedBoard) {
-                    return;
+                    return true;
                 }
+            }
+
+            return false;
+        };
+        $scope.BindCalendar = function(calendarId) {
+            if ($scope.IsCalendarBound(calendarId)) {
+                return;
             }
 
             $scope.Bonds.push({
@@ -64,52 +78,38 @@
                 }
             });
 
-            scope.$watch("SelectedCalendar", function(newValue) {
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].BoardID == boardId && scope.Bonds[i].CalendarID == newValue) {
-                        iElement.addClass('selected');
-                        return;
-                    }
+            scope.$watch("SelectedCalendar", function () {
+                if (scope.IsBoardBound(boardId)) {
+                    iElement.addClass('selected');
+                } else {
+                    iElement.removeClass('selected');
                 }
-
-                iElement.removeClass('selected');
             });
         };
     })
     .directive("bindBoard", function() {
         return function(scope, iElement, iAttrs) {
-            var boardId = iAttrs.bindBoard;
-
             scope.$watch("SelectedCalendar", function(newValue) {
-                if (scope.SelectedCalendar == null) {
+                if (newValue == null) {
                     iElement.addClass('hidden');
-                    return;
-                }
-
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].BoardID == boardId && scope.Bonds[i].CalendarID == newValue) {
+                } else {
+                    if (scope.IsBoardBound(iAttrs.bindBoard)) {
                         iElement.addClass('hidden');
-                        return;
+                    } else {
+                        iElement.removeClass('hidden');
                     }
                 }
-
-                iElement.removeClass('hidden');
             });
         };
     })
     .directive("unbindBoard", function() {
         return function(scope, iElement, iAttrs) {
-            var boardId = iAttrs.unbindBoard;
-
-            scope.$watch("SelectedCalendar", function(newValue) {
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].BoardID == boardId && scope.Bonds[i].CalendarID == newValue) {
-                        iElement.removeClass('hidden');
-                        return;
-                    }
+            scope.$watch("SelectedCalendar", function () {
+                if (scope.IsBoardBound(iAttrs.unbindBoard)) {
+                    iElement.removeClass('hidden');
+                } else {
+                    iElement.addClass('hidden');
                 }
-
-                iElement.addClass('hidden');
             });
         };
     })
@@ -125,52 +125,38 @@
                 }
             });
 
-            scope.$watch("SelectedBoard", function(newValue) {
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].CalendarID == calendarId && scope.Bonds[i].BoardID == newValue) {
-                        iElement.addClass('selected');
-                        return;
-                    }
+            scope.$watch("SelectedBoard", function () {
+                if (scope.IsCalendarBound(calendarId)) {
+                    iElement.addClass('selected');
+                } else {
+                    iElement.removeClass('selected');
                 }
-
-                iElement.removeClass('selected');
             });
         };
     })
     .directive("bindCalendar", function() {
         return function(scope, iElement, iAttrs) {
-            var calendarId = iAttrs.bindCalendar;
-
             scope.$watch("SelectedBoard", function(newValue) {
-                if (scope.SelectedBoard == null) {
+                if (newValue == null) {
                     iElement.addClass('hidden');
-                    return;
-                }
-
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].CalendarID == calendarId && scope.Bonds[i].BoardID == newValue) {
+                } else {
+                    if (scope.IsCalendarBound(iAttrs.bindCalendar)) {
                         iElement.addClass('hidden');
-                        return;
+                    } else {
+                        iElement.removeClass('hidden');
                     }
                 }
-
-                iElement.removeClass('hidden');
             });
         };
     })
     .directive("unbindCalendar", function() {
         return function(scope, iElement, iAttrs) {
-            var calendarId = iAttrs.unbindCalendar;
-
-            scope.$watch("SelectedBoard", function(newValue) {
-                for (var i = 0; i != scope.Bonds.length; i++) {
-                    if (scope.Bonds[i].CalendarID == calendarId && scope.Bonds[i].BoardID == newValue) {
-                        iElement.removeClass('hidden');
-                        return;
-                    }
+            scope.$watch("SelectedBoard", function () {
+                if (scope.IsCalendarBound(iAttrs.unbindCalendar)) {
+                    iElement.removeClass('hidden');
+                } else {
+                    iElement.addClass('hidden');
                 }
-
-                iElement.addClass('hidden');
             });
         };
     });
