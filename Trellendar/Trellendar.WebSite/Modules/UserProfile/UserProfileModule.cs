@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Nancy;
 using Nancy.Security;
 using Trellendar.Logic;
@@ -58,6 +59,17 @@ namespace Trellendar.WebSite.Modules.UserProfile
         public dynamic Save(dynamic parameters)
         {
             var model = this.Bind<IEnumerable<BoardCalendarBondModel>>();
+
+            if (model == null)
+            {
+                return new AjaxResponse
+                    {
+                        Success = false,
+                        ErrorMessage = "Invalid request"
+                    };
+            }
+
+            _userService.UpdateBoardCalendarBonds(model.ToDictionary(x => x.BoardID, x => x.CalendarID));
 
             return new AjaxResponse { Success = true };
         }

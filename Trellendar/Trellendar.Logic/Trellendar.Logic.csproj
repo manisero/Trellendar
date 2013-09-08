@@ -86,13 +86,14 @@
     <Compile Include="Domain\CheckItemExtensions.cs" />
     <Compile Include="Domain\BoardItemName.cs" />
     <Compile Include="Domain\Location.cs" />
-    <Compile Include="UserManagement\IUserService.cs" />
+    <Compile Include="UserManagement\IUserRegistrationService.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\IBoardCalendarBondSynchronizationSettingsProvider.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\IBoardCalendarBondSynchronizationService.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\EventTimeFrameCreator.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\SingleBoardItemProcessorFactory.cs" />
     <Compile Include="Synchronization\CalendarSynchronization\_Impl\CalendarSynchronizationService.cs" />
-    <Compile Include="UserManagement\_Impl\UserService.cs" />
+    <Compile Include="UserManagement\IUserService.cs" />
+    <Compile Include="UserManagement\_Impl\UserRegistrationService.cs" />
     <Compile Include="Synchronization\_Impl\SynchronizationService.cs" />
     <Compile Include="Synchronization\BoardCalendarBondSynchronization\_Impl\BoardCalendarBondSynchronizationService.cs" />
     <Compile Include="DataAccess\AccessTokensProviders\CalendarAccessTokenProvider.cs" />
@@ -117,6 +118,7 @@
     </Compile>
     <Compile Include="TimeZones\_Impl\TimeZoneService.cs" />
     <Compile Include="UserContext.cs" />
+    <Compile Include="UserManagement\_Impl\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trellendar.Core\Trellendar.Core.csproj">

@@ -12,6 +12,7 @@ namespace Trellendar.WebSite.Ninject.RequestModules
         public override void Load()
         {
             // User Management
+            Bind<IUserRegistrationService>().To<UserRegistrationService>();
             Bind<IUserService>().To<UserService>();
 
             // Data Access

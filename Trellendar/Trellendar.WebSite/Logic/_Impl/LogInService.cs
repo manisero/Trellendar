@@ -14,13 +14,14 @@ namespace Trellendar.WebSite.Logic._Impl
 
         private readonly IGoogleAuthorizationAPI _googleAuthorizationApi;
         private readonly ITrelloAuthorizationAPI _trelloAuthorizationApi;
-        private readonly IUserService _userService;
+        private readonly IUserRegistrationService _userRegistrationService;
 
-        public LogInService(IGoogleAuthorizationAPI googleAuthorizationApi, ITrelloAuthorizationAPI trelloAuthorizationApi, IUserService userService)
+        public LogInService(IGoogleAuthorizationAPI googleAuthorizationApi, ITrelloAuthorizationAPI trelloAuthorizationApi,
+                            IUserRegistrationService userRegistrationService)
         {
             _googleAuthorizationApi = googleAuthorizationApi;
             _trelloAuthorizationApi = trelloAuthorizationApi;
-            _userService = userService;
+            _userRegistrationService = userRegistrationService;
         }
 
         public string PrepareGoogleAuthorizationUri(ISession session, string redirectUri, bool forNewUser = false)
@@ -58,12 +59,12 @@ namespace Trellendar.WebSite.Logic._Impl
 
         public bool TryGetUserID(Token token, out Guid userId)
         {
-            return _userService.TryGetUserID(token.UserEmail, out userId);
+            return _userRegistrationService.TryGetUserID(token.UserEmail, out userId);
         }
 
         public bool TryCreateUnregisteredUser(Token token, out Guid unregisteredUserId)
         {
-            return _userService.TryCreateUnregisteredUser(token, out unregisteredUserId);
+            return _userRegistrationService.TryCreateUnregisteredUser(token, out unregisteredUserId);
         }
 
         public string GetTrelloAuthorizationUri()
@@ -73,7 +74,7 @@ namespace Trellendar.WebSite.Logic._Impl
 
         public Guid RegisterUser(Guid unregisteredUserId, string trelloAccessToken)
         {
-            return _userService.RegisterUser(unregisteredUserId, trelloAccessToken);
+            return _userRegistrationService.RegisterUser(unregisteredUserId, trelloAccessToken);
         }
     }
 }
