@@ -11,9 +11,9 @@ namespace Trellendar.WebSite.Ninject.RequestModules
         {
             // Logic
             Bind<ILogInService>().To<LogInService>();
-            
+
             // Ninject
-            Bind<IDependencyResolver>().ToConstant(new NinjectDependencyResolver(Kernel));
+            Rebind<IDependencyResolver>().ToConstant(new NinjectDependencyResolver(Kernel));
         }
     }
 }

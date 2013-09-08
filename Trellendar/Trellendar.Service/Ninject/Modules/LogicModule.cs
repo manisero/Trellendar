@@ -1,7 +1,6 @@
 ﻿using Ninject.Modules;
 using Trellendar.DataAccess.Remote;
 using Trellendar.Domain.Trello;
-using Trellendar.Logic;
 using Trellendar.Logic.DataAccess;
 using Trellendar.Logic.DataAccess._Impl;
 using Trellendar.Logic.Domain;
@@ -16,8 +15,6 @@ using Trellendar.Logic.Synchronization.CalendarSynchronization._Impl;
 using Trellendar.Logic.Synchronization._Impl;
 using Trellendar.Logic.TimeZones;
 using Trellendar.Logic.TimeZones._Impl;
-using Trellendar.Logic.UserManagement;
-using Trellendar.Logic.UserManagement._Impl;
 
 namespace Trellendar.Service.Ninject.Modules
 {

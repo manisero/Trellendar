@@ -1,0 +1,19 @@
+﻿body {
+    text-align: center;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.selected {
+    background: red;
+}

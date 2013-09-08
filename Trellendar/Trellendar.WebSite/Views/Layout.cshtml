@@ -1,0 +1,53 @@
+﻿@using Trellendar.Core.Extensions
+@using Trellendar.WebSite.Nancy.Extensions
+@{
+    var title = (string)ViewBag.Title;
+    var ngModule = (string)ViewBag.NgModule;
+    var ngController = (string)ViewBag.NgController;
+
+    var titleValue = title != null
+                         ? title + " - Trellendar"
+                         : "Trellendar";
+
+    var ngAppAttribute = ngModule != null
+                         ? "ng-app='{0}'".FormatWith(ngModule)
+                         : "ng-app";
+
+    var ngControllerAttribute = ngController != null
+                                    ? "ng-controller='{0}'".FormatWith(ngController)
+                                    : string.Empty;
+}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>@titleValue</title>
+        <link rel="stylesheet" type="text/css" href="~/Css/main.css"/>
+
+        <script src="~/Scripts/_custom/utils.js"></script>
+        <script src="~/Scripts/angular.js"></script>
+        
+        @if (ngModule != null)
+        {
+            <script src="~/Scripts/_custom/Modules/utils.js"></script>
+            <script src="~/Scripts/_custom/Modules/http.js"></script>
+            <script src='~/Scripts/_custom/Modules/@(ngModule).js'></script>
+        }
+    </head>
+    <body @ngAppAttribute @ngControllerAttribute>
+        @RenderBody()
+    </body>
+</html>
+
+@if (ngModule != null && Model != null)
+{
+    <script type="text/javascript">
+
+        angular.module('@ngModule')
+            .factory('Model', function() {
+                return @this.SerializeModel();
+            });
+        
+    </script>
+}

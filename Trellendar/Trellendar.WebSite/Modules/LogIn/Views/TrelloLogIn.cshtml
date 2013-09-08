@@ -1,36 +1,17 @@
-﻿<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Trellendar</title>
+﻿@using Trellendar.WebSite.Nancy.Extensions
+@{
+    this.Initialize("Trello Log In", "LogIn");
+}
 
-        <style type="text/css">
-            body {
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            Click <a href="@Html.Raw(Model.AuthorizationUrl)" onclick="return redirect(this.href)">here</a>
-            to retrieve a token allowing Trellendar to read your Trello data.
-        </div>
-        <div>
-            Please paste the token here and click "submit" button:
-        </div>
-        <form action="~/TrelloLogInCallback">
-            <input type="hidden" name="UserID" value="@Model.UserID" />
-            <input type="text" name="AccessToken" />
-            <input type="submit" />
-        </form>
-    </body>
-</html>
-
-<script type="text/javascript">
-
-    var redirect = function(url) {
-        window.open(url, '_blank');
-        return false;
-    };
-
-</script>
+<div>
+    Click <a href="" redirect="@Html.Raw(Model.AuthorizationUrl)">here</a>
+    to retrieve a token allowing Trellendar to read your Trello data.
+</div>
+<div>
+    Please paste the token here and click "submit" button:
+</div>
+<form action="~/TrelloLogInCallback">
+    <input type="hidden" name="UserID" value="@Model.UserID" />
+    <input type="text" name="AccessToken" />
+    <input type="submit" />
+</form>

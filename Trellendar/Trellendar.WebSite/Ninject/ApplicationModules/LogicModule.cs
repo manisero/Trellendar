@@ -5,13 +5,14 @@ using Trellendar.Logic.DataAccess._Impl;
 using Trellendar.Logic.UserManagement;
 using Trellendar.Logic.UserManagement._Impl;
 
-namespace Trellendar.WebSite.Ninject.RequestModules
+namespace Trellendar.WebSite.Ninject.ApplicationModules
 {
     public class LogicModule : NinjectModule
     {
         public override void Load()
         {
             // User Management
+            Bind<IUserRegistrationService>().To<UserRegistrationService>();
             Bind<IUserService>().To<UserService>();
 
             // Data Access

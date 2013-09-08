@@ -1,34 +1,61 @@
-﻿<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>User profile</title>
+﻿@using Trellendar.WebSite.Nancy.Extensions
+@{
+    this.Initialize("Your profile", "UserProfile", "Controller");
+}
 
-	<style type="text/css">
-		body {
-			text-align: center;
-		}
-	</style>
-</head>
-    <body>
-        @Model.Email's boards:
-        <ul>
-            @foreach (var boardName in Model.AvailableBoards.Values)
-            {
-                <li>
-                    @boardName
-                </li>
-            }
-        </ul>
-
-        @Model.Email's calendars:
-        <ul>
-            @foreach (var calendarSummary in Model.AvailableCalendars.Values)
-            {
-                <li>
-                    @calendarSummary
-                </li>
-            }
-        </ul>
-    </body>
-</html>
+<div>
+    @Model.Email
+</div>
+<div class="floatleft">
+    <div>
+        Boards:
+    </div>
+    @foreach (var board in Model.AvailableBoards)
+    {
+        <div>
+            <div ng-click="SelectBoard('@board.ID')" ng-class="{selected: IsBoardSelectedOrBound('@board.ID')}" class="floatleft">
+                @board.Name
+            </div>
+            <div class="floatright">
+                <a href="" ng-click="BindBoard('@board.ID')" ng-hide="SelectedCalendar == null || IsBoardBound('@board.ID')">
+                    bind
+                </a>
+                <a href="" ng-click="UnbindBoard('@board.ID')" ng-hide="!IsBoardBound('@board.ID')">
+                    unbind
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    }
+</div>
+<div class="floatright">
+    <div>
+        Calendars:
+    </div>
+    @foreach (var calendar in Model.AvailableCalendars)
+    {
+        <div>
+            <div ng-click="SelectCalendar('@calendar.ID')" ng-class="{selected: IsCalendarSelectedOrBound('@calendar.ID')}" class="floatleft">
+                @calendar.Name
+            </div>
+            <div class="floatright">
+                <a href="" ng-click="BindCalendar('@calendar.ID')" ng-hide="SelectedBoard == null || IsCalendarBound('@calendar.ID')">
+                    bind
+                </a>
+                <a href="" ng-click="UnbindCalendar('@calendar.ID')" ng-hide="!IsCalendarBound('@calendar.ID')">
+                    unbind
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    }
+</div>
+<div class="clear"></div>
+<div>
+    <a href="" ng-click="Save()">
+        Save
+    </a>
+    <div>
+        {{Message}}
+    </div>
+</div>
