@@ -8,14 +8,14 @@
     @foreach (var board in Model.AvailableBoards)
     {
         <div>
-            <div board="@board.ID" ng-click="SelectBoard('@board.ID')" class="floatleft">
+            <div ng-click="SelectBoard('@board.ID')" ng-class="{selected: IsBoardSelectedOrBound('@board.ID')}" class="floatleft">
                 @board.Name
             </div>
             <div class="floatright">
-                <a href="#" bind-board="@board.ID" ng-click="BindBoard('@board.ID')">
+                <a href="#" ng-click="BindBoard('@board.ID')" ng-hide="IsBoardBound('@board.ID')">
                     bind
                 </a>
-                <a href="#" unbind-board="@board.ID" ng-click="UnbindBoard('@board.ID')">
+                <a href="#" ng-click="UnbindBoard('@board.ID')" ng-hide="!IsBoardBound('@board.ID')">
                     unbind
                 </a>
             </div>
@@ -28,14 +28,14 @@
     @foreach (var calendar in Model.AvailableCalendars)
     {
         <div>
-            <div calendar="@calendar.ID" ng-click="SelectCalendar('@calendar.ID')" class="floatleft">
+            <div ng-click="SelectCalendar('@calendar.ID')" ng-class="{selected: IsCalendarSelectedOrBound('@calendar.ID')}" class="floatleft">
                 @calendar.Name
             </div>
             <div class="floatright">
-                <a href="#" bind-calendar="@calendar.ID" ng-click="BindCalendar('@calendar.ID')">
+                <a href="#" ng-click="BindCalendar('@calendar.ID')" ng-hide="IsCalendarBound('@calendar.ID')">
                     bind
                 </a>
-                <a href="#" unbind-calendar="@calendar.ID" ng-click="UnbindCalendar('@calendar.ID')">
+                <a href="#" ng-click="UnbindCalendar('@calendar.ID')" ng-hide="!IsCalendarBound('@calendar.ID')">
                     unbind
                 </a>
             </div>

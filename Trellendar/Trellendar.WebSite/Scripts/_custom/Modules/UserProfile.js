@@ -11,7 +11,7 @@
             $scope.SelectedBoard = null;
             $scope.SelectedCalendar = calendarId;
         };
-        $scope.IsBoardBound = function (boardId) {
+        $scope.IsBoardBound = function(boardId) {
             for (var i = 0; i != $scope.Bonds.length; i++) {
                 if ($scope.Bonds[i].BoardID == boardId && $scope.Bonds[i].CalendarID == $scope.SelectedCalendar) {
                     return true;
@@ -19,6 +19,9 @@
             }
 
             return false;
+        };
+        $scope.IsBoardSelectedOrBound = function(boardId) {
+            return $scope.SelectedBoard == boardId || $scope.IsBoardBound(boardId);
         };
         $scope.BindBoard = function(boardId) {
             if ($scope.IsBoardBound(boardId)) {
@@ -47,6 +50,9 @@
 
             return false;
         };
+        $scope.IsCalendarSelectedOrBound = function(calendarId) {
+            return $scope.SelectedCalendar == calendarId || $scope.IsCalendarBound(calendarId);
+        };
         $scope.BindCalendar = function(calendarId) {
             if ($scope.IsCalendarBound(calendarId)) {
                 return;
@@ -65,98 +71,4 @@
                 }
             }
         };
-    }])
-    .directive("board", function() {
-        return function(scope, iElement, iAttrs) {
-            var boardId = iAttrs.board;
-
-            scope.$watch("SelectedBoard", function(newValue) {
-                if (newValue == boardId) {
-                    iElement.addClass('selected');
-                } else {
-                    iElement.removeClass('selected');
-                }
-            });
-
-            scope.$watch("SelectedCalendar", function () {
-                if (scope.IsBoardBound(boardId)) {
-                    iElement.addClass('selected');
-                } else {
-                    iElement.removeClass('selected');
-                }
-            });
-        };
-    })
-    .directive("bindBoard", function() {
-        return function(scope, iElement, iAttrs) {
-            scope.$watch("SelectedCalendar", function(newValue) {
-                if (newValue == null) {
-                    iElement.addClass('hidden');
-                } else {
-                    if (scope.IsBoardBound(iAttrs.bindBoard)) {
-                        iElement.addClass('hidden');
-                    } else {
-                        iElement.removeClass('hidden');
-                    }
-                }
-            });
-        };
-    })
-    .directive("unbindBoard", function() {
-        return function(scope, iElement, iAttrs) {
-            scope.$watch("SelectedCalendar", function () {
-                if (scope.IsBoardBound(iAttrs.unbindBoard)) {
-                    iElement.removeClass('hidden');
-                } else {
-                    iElement.addClass('hidden');
-                }
-            });
-        };
-    })
-    .directive("calendar", function() {
-        return function(scope, iElement, iAttrs) {
-            var calendarId = iAttrs.calendar;
-
-            scope.$watch("SelectedCalendar", function(newValue) {
-                if (newValue == calendarId) {
-                    iElement.addClass('selected');
-                } else {
-                    iElement.removeClass('selected');
-                }
-            });
-
-            scope.$watch("SelectedBoard", function () {
-                if (scope.IsCalendarBound(calendarId)) {
-                    iElement.addClass('selected');
-                } else {
-                    iElement.removeClass('selected');
-                }
-            });
-        };
-    })
-    .directive("bindCalendar", function() {
-        return function(scope, iElement, iAttrs) {
-            scope.$watch("SelectedBoard", function(newValue) {
-                if (newValue == null) {
-                    iElement.addClass('hidden');
-                } else {
-                    if (scope.IsCalendarBound(iAttrs.bindCalendar)) {
-                        iElement.addClass('hidden');
-                    } else {
-                        iElement.removeClass('hidden');
-                    }
-                }
-            });
-        };
-    })
-    .directive("unbindCalendar", function() {
-        return function(scope, iElement, iAttrs) {
-            scope.$watch("SelectedBoard", function () {
-                if (scope.IsCalendarBound(iAttrs.unbindCalendar)) {
-                    iElement.removeClass('hidden');
-                } else {
-                    iElement.addClass('hidden');
-                }
-            });
-        };
-    });
+    }]);
