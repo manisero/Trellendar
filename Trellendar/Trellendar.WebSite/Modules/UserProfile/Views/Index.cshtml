@@ -8,7 +8,16 @@
     @foreach (var board in Model.AvailableBoards)
     {
         <div board="@board.ID">
-            @board.Name
+            <div class="floatleft">
+                @board.Name
+            </div>
+            <a href="#" bind-board="@board.ID" class="floatright">
+                bind
+            </a>
+            <a href="#" unbind-board="@board.ID" class="floatright">
+                unbind
+            </a>
+            <div class="floatnone"></div>
         </div>
     }
 </div>
@@ -17,7 +26,16 @@
     @foreach (var calendar in Model.AvailableCalendars)
     {
         <div calendar="@calendar.ID">
-            @calendar.Name
+            <div class="floatleft">
+                @calendar.Name
+            </div>
+            <a href="#" bind-calendar="@calendar.ID" class="floatright">
+                bind
+            </a>
+            <a href="#" unbind-calendar="@calendar.ID" class="floatright">
+                unbind
+            </a>
+            <div class="floatnone"></div>
         </div>
     }
 </div>
