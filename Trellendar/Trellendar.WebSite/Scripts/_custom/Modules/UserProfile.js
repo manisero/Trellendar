@@ -36,7 +36,7 @@
         $scope.UnbindBoard = function(boardId) {
             for (var i = 0; i != $scope.Bonds.length; i++) {
                 if ($scope.Bonds[i].BoardID == boardId && $scope.Bonds[i].CalendarID == $scope.SelectedCalendar) {
-                    $scope.Bonds.pop($scope.Bonds[i]);
+                    $scope.Bonds.splice(i, 1);
                     return;
                 }
             }
@@ -66,7 +66,7 @@
         $scope.UnbindCalendar = function(calendarId) {
             for (var i = 0; i != $scope.Bonds.length; i++) {
                 if ($scope.Bonds[i].CalendarID == calendarId && $scope.Bonds[i].BoardID == $scope.SelectedBoard) {
-                    $scope.Bonds.pop($scope.Bonds[i]);
+                    $scope.Bonds.splice(i, 1);
                     return;
                 }
             }

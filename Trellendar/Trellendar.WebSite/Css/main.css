@@ -14,10 +14,6 @@
     clear: both;
 }
 
-.hidden {
-    display: none
-}
-
 .selected {
     background: red;
 }
