@@ -21,13 +21,7 @@ namespace Trellendar.WebSite
         protected override void ApplicationStartup(IKernel container, IPipelines pipelines)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
-
             CookieBasedSessions.Enable(pipelines);
-            FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
-                {
-                    RedirectUrl = "~/LogIn",
-                    UserMapper = container.Get<IUserMapper>()
-                });
 
             base.ApplicationStartup(container, pipelines);
         }
@@ -35,6 +29,15 @@ namespace Trellendar.WebSite
         protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
         {
             new NinjectBootstrapper().RegisterRequestModules(container);
+        }
+
+        protected override void RequestStartup(IKernel container, IPipelines pipelines, NancyContext context)
+        {
+            FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
+            {
+                RedirectUrl = "~/LogIn",
+                UserMapper = container.Get<IUserMapper>()
+            });
         }
     }
 }

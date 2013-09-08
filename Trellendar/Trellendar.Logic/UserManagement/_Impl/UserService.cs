@@ -7,7 +7,6 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using System.Linq;
-using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.UserManagement._Impl
 {
@@ -48,6 +47,7 @@ namespace Trellendar.Logic.UserManagement._Impl
 
             foreach (var bond in toAdd)
             {
+                bond.LastSynchronizationTS = new DateTime(1900, 1, 1);
                 bond.CreateTS = DateTime.UtcNow;
                 existingBonds.Add(bond);
             }

@@ -436,7 +436,7 @@
     <Compile Include="Ninject\ApplicationModules\DataAccessModule.cs" />
     <Compile Include="Ninject\ApplicationModules\WebSiteModule.cs" />
     <Compile Include="Ninject\RequestModules\DataAccessModule.cs" />
-    <Compile Include="Ninject\RequestModules\LogicModule.cs" />
+    <Compile Include="Ninject\ApplicationModules\LogicModule.cs" />
     <Compile Include="Ninject\RequestModules\WebSiteModule.cs" />
     <Compile Include="Ninject\NinjectBootstrapper.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
