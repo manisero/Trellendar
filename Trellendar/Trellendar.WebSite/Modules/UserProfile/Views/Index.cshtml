@@ -3,8 +3,13 @@
     this.Initialize("Your profile", "UserProfile", "Controller");
 }
 
+<div>
+    @Model.Email
+</div>
 <div class="floatleft">
-    @Model.Email's boards:
+    <div>
+        Boards:
+    </div>
     @foreach (var board in Model.AvailableBoards)
     {
         <div>
@@ -24,7 +29,9 @@
     }
 </div>
 <div class="floatright">
-    @Model.Email's calendars:
+    <div>
+        Calendars:
+    </div>
     @foreach (var calendar in Model.AvailableCalendars)
     {
         <div>
@@ -44,3 +51,8 @@
     }
 </div>
 <div class="clear"></div>
+<div>
+    <a href="" ng-click="Save()">
+        Save
+    </a>
+</div>

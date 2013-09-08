@@ -21,6 +21,7 @@ namespace Trellendar.WebSite.Modules.UserProfile
             this.RequiresAuthentication();
 
             Get["/"] = Index;
+            Post["/Save"] = Save;
         }
 
         public dynamic Index(dynamic parameters)
@@ -49,6 +50,11 @@ namespace Trellendar.WebSite.Modules.UserProfile
                 };
 
             return View[model];
+        }
+
+        public dynamic Save(dynamic parameters)
+        {
+            return true;
         }
     }
 }

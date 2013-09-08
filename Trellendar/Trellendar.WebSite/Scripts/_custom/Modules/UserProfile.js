@@ -1,5 +1,5 @@
 ﻿angular.module('UserProfile', [])
-    .controller("Controller", ['$scope', 'Model', function($scope, model) {
+    .controller("Controller", ['$scope', 'Model', '$http', function($scope, model, $http) {
         $scope.Bonds = model.BoardCalendarBonds;
         $scope.SelectedBoard = model.BoardCalendarBonds[0].BoardID;
         $scope.SelectedCalendar = null;
@@ -70,5 +70,8 @@
                     return;
                 }
             }
+        };
+        $scope.Save = function() {
+            $http.post("/UserProfile/Save");
         };
     }]);
