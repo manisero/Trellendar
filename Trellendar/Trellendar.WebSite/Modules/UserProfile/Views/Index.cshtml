@@ -8,14 +8,14 @@
     @foreach (var board in Model.AvailableBoards)
     {
         <div>
-            <div board="@board.ID" class="floatleft">
+            <div board="@board.ID" ng-click="SelectBoard('@board.ID')" class="floatleft">
                 @board.Name
             </div>
             <div class="floatright">
-                <a href="#" bind-board="@board.ID">
+                <a href="#" bind-board="@board.ID" ng-click="BindBoard('@board.ID')">
                     bind
                 </a>
-                <a href="#" unbind-board="@board.ID">
+                <a href="#" unbind-board="@board.ID" ng-click="UnbindBoard('@board.ID')">
                     unbind
                 </a>
             </div>
@@ -28,14 +28,14 @@
     @foreach (var calendar in Model.AvailableCalendars)
     {
         <div>
-            <div calendar="@calendar.ID" class="floatleft">
+            <div calendar="@calendar.ID" ng-click="SelectCalendar('@calendar.ID')" class="floatleft">
                 @calendar.Name
             </div>
             <div class="floatright">
-                <a href="#" bind-calendar="@calendar.ID">
+                <a href="#" bind-calendar="@calendar.ID" ng-click="BindCalendar('@calendar.ID')">
                     bind
                 </a>
-                <a href="#" unbind-calendar="@calendar.ID">
+                <a href="#" unbind-calendar="@calendar.ID" ng-click="UnbindCalendar('@calendar.ID')">
                     unbind
                 </a>
             </div>
