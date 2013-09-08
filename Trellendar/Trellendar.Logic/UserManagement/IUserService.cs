@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Trellendar.Domain.Calendar;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 
 namespace Trellendar.Logic.UserManagement
@@ -10,6 +11,6 @@ namespace Trellendar.Logic.UserManagement
 
         IEnumerable<Calendar> GetAvailableCalendars();
 
-        void UpdateBoardCalendarBonds(IDictionary<string, string> bonds);
+        void UpdateBoardCalendarBonds(IEnumerable<BoardCalendarBond> bonds);
     }
 }

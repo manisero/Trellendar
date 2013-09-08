@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nancy;
 using Nancy.Security;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
 using Trellendar.WebSite.Modules.UserProfile.Models;
@@ -69,7 +69,11 @@ namespace Trellendar.WebSite.Modules.UserProfile
                     };
             }
 
-            _userService.UpdateBoardCalendarBonds(model.ToDictionary(x => x.BoardID, x => x.CalendarID));
+            _userService.UpdateBoardCalendarBonds(model.Select(x => new BoardCalendarBond
+                {
+                    BoardID = x.BoardID,
+                    CalendarID = x.CalendarID
+                }));
 
             return new AjaxResponse { Success = true };
         }
