@@ -117,10 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BindAction" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+  <data name="BoardsItem" xml:space="preserve">
+    <value>Boards</value>
+  </data>
+  <data name="CalendarsItem" xml:space="preserve">
+    <value>Calendars</value>
+  </data>
+  <data name="ClickAction" xml:space="preserve">
+    <value>Click</value>
+  </data>
+  <data name="GoogleLogInAction" xml:space="preserve">
+    <value>Log in with Google</value>
+  </data>
+  <data name="LogOutAction" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="SaveAction" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="TrelloAuthorizationPrompt" xml:space="preserve">
+    <value>Click here to retrieve a token allowing Trellendar to read your Trello data:</value>
+  </data>
   <data name="TrelloLogInPageTitle" xml:space="preserve">
     <value>Trello Log In</value>
   </data>
+  <data name="TrelloTokenPrompt" xml:space="preserve">
+    <value>Please paste the token here and click "submit" button:</value>
+  </data>
+  <data name="UnbindAction" xml:space="preserve">
+    <value>Unbind</value>
+  </data>
+  <data name="UserGreeting" xml:space="preserve">
+    <value>Hello, {0}</value>
+  </data>
   <data name="UserProfilePageTitle" xml:space="preserve">
     <value>Your Profile</value>
+  </data>
+  <data name="ViewProfileAction" xml:space="preserve">
+    <value>View your profile</value>
   </data>
 </root>

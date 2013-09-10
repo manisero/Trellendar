@@ -61,6 +61,78 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bind.
+        /// </summary>
+        public static string BindAction {
+            get {
+                return ResourceManager.GetString("BindAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boards.
+        /// </summary>
+        public static string BoardsItem {
+            get {
+                return ResourceManager.GetString("BoardsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendars.
+        /// </summary>
+        public static string CalendarsItem {
+            get {
+                return ResourceManager.GetString("CalendarsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click.
+        /// </summary>
+        public static string ClickAction {
+            get {
+                return ResourceManager.GetString("ClickAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in with Google.
+        /// </summary>
+        public static string GoogleLogInAction {
+            get {
+                return ResourceManager.GetString("GoogleLogInAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        public static string LogOutAction {
+            get {
+                return ResourceManager.GetString("LogOutAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveAction {
+            get {
+                return ResourceManager.GetString("SaveAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to retrieve a token allowing Trellendar to read your Trello data:.
+        /// </summary>
+        public static string TrelloAuthorizationPrompt {
+            get {
+                return ResourceManager.GetString("TrelloAuthorizationPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trello Log In.
         /// </summary>
         public static string TrelloLogInPageTitle {
@@ -70,11 +142,47 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please paste the token here and click &quot;submit&quot; button:.
+        /// </summary>
+        public static string TrelloTokenPrompt {
+            get {
+                return ResourceManager.GetString("TrelloTokenPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unbind.
+        /// </summary>
+        public static string UnbindAction {
+            get {
+                return ResourceManager.GetString("UnbindAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello, {0}.
+        /// </summary>
+        public static string UserGreeting {
+            get {
+                return ResourceManager.GetString("UserGreeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Profile.
         /// </summary>
         public static string UserProfilePageTitle {
             get {
                 return ResourceManager.GetString("UserProfilePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View your profile.
+        /// </summary>
+        public static string ViewProfileAction {
+            get {
+                return ResourceManager.GetString("ViewProfileAction", resourceCulture);
             }
         }
     }
