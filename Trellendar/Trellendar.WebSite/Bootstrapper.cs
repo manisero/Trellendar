@@ -15,19 +15,18 @@ namespace Trellendar.WebSite
     {
         protected override void ConfigureApplicationContainer(IKernel existingContainer)
         {
-            new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
+            //new NinjectBootstrapper().RegisterApplicationModules(existingContainer);
         }
 
         protected override void ApplicationStartup(IKernel container, IPipelines pipelines)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
             CookieBasedSessions.Enable(pipelines);
-
-            base.ApplicationStartup(container, pipelines);
         }
 
         protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
         {
+            new NinjectBootstrapper().RegisterApplicationModules(container); // TODO: Move to ConfigureApplicationContainer and fix resolution issue
             new NinjectBootstrapper().RegisterRequestModules(container);
         }
 

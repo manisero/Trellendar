@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using Ninject.Modules;
-using Trellendar.DataAccess.Local;
+﻿using Ninject.Modules;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Local.Repository._Impl;
 using Trellendar.DataAccess.Remote;
@@ -19,7 +17,6 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
         public override void Load()
         {
             // Local
-            Bind<DbContext>().ToConstant(new TrellendarDataContext());
             Bind<IUnitOfWork>().To<EntityFrameworkUnitOfWork>();
             Bind<IRepositoryFactory>().To<EntityFrameworkRepositoryFactory>();
 

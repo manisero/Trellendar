@@ -9,7 +9,7 @@ namespace Trellendar.WebSite.Ninject.RequestModules
         public override void Load()
         {
             // Local
-            Rebind<DbContext>().ToConstant(new TrellendarDataContext());
+            Bind<DbContext>().ToConstant(new TrellendarDataContext());
         }
     }
 }

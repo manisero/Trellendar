@@ -1,8 +1,8 @@
 ﻿using Nancy.Authentication.Forms;
 using Ninject.Modules;
-using Trellendar.Core.DependencyResolution;
 using Trellendar.Logic.DataAccess;
 using Trellendar.WebSite.Logic;
+using Trellendar.WebSite.Logic._Impl;
 using Trellendar.WebSite.Nancy;
 
 namespace Trellendar.WebSite.Ninject.ApplicationModules
@@ -13,11 +13,13 @@ namespace Trellendar.WebSite.Ninject.ApplicationModules
         {
             Bind<IDataAccessSettingsProvider>().ToConstant(new SettingsProvider());
 
+            // Logic
+            Bind<ILogInService>().To<LogInService>();
+
             // Nancy
             Bind<IUserMapper>().To<UserMapper>();
 
             // Ninject
-            Bind<IDependencyResolver>().ToConstant(new NinjectDependencyResolver(Kernel));
             Bind<IUserContextRegistrar>().To<NinjectUserContextRegistrar>();
         }
     }
