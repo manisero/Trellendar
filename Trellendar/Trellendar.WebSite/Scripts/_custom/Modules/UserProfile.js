@@ -1,7 +1,7 @@
 ﻿angular.module('UserProfile', ['http'])
     .controller("Controller", ['$scope', 'Model', '$http', 'AjaxService', function($scope, model, $http, ajaxService) {
         $scope.Bonds = model.BoardCalendarBonds;
-        $scope.SelectedBoard = model.BoardCalendarBonds[0].BoardID;
+        $scope.SelectedBoard = model.BoardCalendarBonds.length != 0 ? model.BoardCalendarBonds[0].BoardID : null;
         $scope.SelectedCalendar = null;
         $scope.Message = '';
         $scope.SelectBoard = function(boardId) {
