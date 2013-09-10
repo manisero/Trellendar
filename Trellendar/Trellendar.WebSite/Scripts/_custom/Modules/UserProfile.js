@@ -1,4 +1,4 @@
-﻿angular.module('UserProfile', ['localization', 'http'])
+﻿angular.module('UserProfile', ['Base', 'http'])
     .controller("Controller", ['$scope', 'Model', '$http', 'AjaxService', function($scope, model, $http, ajaxService) {
         $scope.Bonds = model.BoardCalendarBonds;
         $scope.SelectedBoard = model.BoardCalendarBonds.length != 0 ? model.BoardCalendarBonds[0].BoardID : null;

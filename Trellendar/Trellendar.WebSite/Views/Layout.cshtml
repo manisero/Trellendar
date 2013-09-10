@@ -9,9 +9,7 @@
                          ? title + " - Trellendar"
                          : "Trellendar";
 
-    var ngAppAttribute = ngModule != null
-                         ? "ng-app='{0}'".FormatWith(ngModule)
-                         : "ng-app";
+    var ngAppAttribute = "ng-app='{0}'".FormatWith(ngModule ?? "Base");
 
     var ngControllerAttribute = ngController != null
                                     ? "ng-controller='{0}'".FormatWith(ngController)
@@ -24,17 +22,18 @@
         <meta charset="utf-8">
         <title>@titleValue</title>
         <link rel="stylesheet" type="text/css" href="~/Css/main.css"/>
-
-        <script src="~/Scripts/_custom/utils.js"></script>
-        <script src="~/Scripts/_custom/resources.js"></script>
+        
         <script src="~/Scripts/angular.js"></script>
+        <script src="~/Scripts/_custom/resources.js"></script>
+        <script src="~/Scripts/_custom/utils.js"></script>
+        <script src="~/Scripts/_custom/modules/base/localization.js"></script>
+        <script src="~/Scripts/_custom/modules/Base.js"></script>
         
         @if (ngModule != null)
         {
-            <script src="~/Scripts/_custom/Modules/utils.js"></script>
-            <script src="~/Scripts/_custom/Modules/localization.js"></script>
-            <script src="~/Scripts/_custom/Modules/http.js"></script>
-            <script src='~/Scripts/_custom/Modules/@(ngModule).js'></script>
+            <script src="~/Scripts/_custom/modules/custom/utils.js"></script>
+            <script src="~/Scripts/_custom/modules/custom/http.js"></script>
+            <script src='~/Scripts/_custom/modules/@(ngModule).js'></script>
         }
     </head>
     <body @ngAppAttribute @ngControllerAttribute>
