@@ -406,6 +406,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\resources.js" />
     <Content Include="Scripts\_custom\Modules\http.js" />
     <Content Include="Scripts\_custom\Modules\localization.js" />
     <Content Include="Scripts\_custom\Modules\UserProfile.js" />

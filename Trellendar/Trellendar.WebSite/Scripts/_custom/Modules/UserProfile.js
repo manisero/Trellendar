@@ -75,7 +75,7 @@
         $scope.Save = function() {
             ajaxService.send($http.post("/UserProfile/Save", $scope.Bonds),
                 function() {
-                    $scope.Message = 'Profile saved successfully';
+                    $scope.Message = resources.ProfileSavedMessage;
                 },
                 function(errorMessage) {
                     $scope.Message = errorMessage;
