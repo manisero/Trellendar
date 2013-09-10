@@ -406,12 +406,13 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\modules\Base.js" />
     <Content Include="Scripts\_custom\resources.js" />
-    <Content Include="Scripts\_custom\Modules\http.js" />
-    <Content Include="Scripts\_custom\Modules\localization.js" />
-    <Content Include="Scripts\_custom\Modules\UserProfile.js" />
-    <Content Include="Scripts\_custom\Modules\LogIn.js" />
-    <Content Include="Scripts\_custom\Modules\utils.js" />
+    <Content Include="Scripts\_custom\modules\custom\http.js" />
+    <Content Include="Scripts\_custom\modules\base\localization.js" />
+    <Content Include="Scripts\_custom\modules\UserProfile.js" />
+    <Content Include="Scripts\_custom\modules\LogIn.js" />
+    <Content Include="Scripts\_custom\modules\custom\utils.js" />
     <Content Include="Scripts\_custom\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -444,6 +445,11 @@
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
     <Compile Include="Ninject\NinjectUserContextRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SettingsProvider.cs" />
     <None Include="Views\Layout.cshtml" />
   </ItemGroup>
@@ -481,7 +487,12 @@
       <Name>Trellendar.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
