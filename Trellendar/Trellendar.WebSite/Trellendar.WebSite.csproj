@@ -405,6 +405,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\_custom\modules\Base.js" />
     <Content Include="Scripts\_custom\resources.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -413,7 +414,7 @@
     <Content Include="Scripts\_custom\modules\custom\http.js" />
     <Content Include="Scripts\_custom\modules\UserProfile.js" />
     <Content Include="Scripts\_custom\modules\LogIn.js" />
-    <Content Include="Scripts\_custom\modules\custom\utils.js" />
+    <Content Include="Scripts\_custom\modules\base\utils.js" />
     <Content Include="Scripts\_custom\utils.js" />
     <Content Include="Web.config" />
   </ItemGroup>
