@@ -135,6 +135,9 @@
   <data name="LogOutAction" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="ProfileSavedMessage" xml:space="preserve">
+    <value>Your profile has been saved successfully</value>
+  </data>
   <data name="SaveAction" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="UnbindAction" xml:space="preserve">
     <value>Unbind</value>
+  </data>
+  <data name="UnknownErrorMessage" xml:space="preserve">
+    <value>Unknown error occured</value>
   </data>
   <data name="UserGreeting" xml:space="preserve">
     <value>Hello, {0}</value>

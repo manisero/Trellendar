@@ -405,7 +405,11 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\_custom\resources.js" />
+    <Content Include="Scripts\_custom\resources.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resources.tt</DependentUpon>
+    </Content>
     <Content Include="Scripts\_custom\modules\custom\http.js" />
     <Content Include="Scripts\_custom\modules\UserProfile.js" />
     <Content Include="Scripts\_custom\modules\LogIn.js" />
@@ -448,6 +452,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SettingsProvider.cs" />
+    <Content Include="Scripts\_custom\resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>resources.js</LastGenOutput>
+    </Content>
     <None Include="Views\Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +500,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
