@@ -1,0 +1,19 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)\bin\Trellendar.WebSite.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".js" #>
+
+<#
+    var resources = typeof(Trellendar.WebSite.Resources).GetProperties()
+                         .Where(x => x.PropertyType == typeof(string))
+                         .ToDictionary(x => x.Name, x => x.GetValue(null));
+#>
+
+var resources = {
+	<# foreach (var resource in resources) {#>
+    <#= resource.Key #>: '<#= resource.Value #>',
+	<# } #>
+}

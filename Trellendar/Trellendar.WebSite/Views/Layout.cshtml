@@ -1,4 +1,5 @@
-﻿@using Trellendar.Core.Extensions
+﻿@using Trellendar.Core
+@using Trellendar.Core.Extensions
 @using Trellendar.WebSite.Nancy.Extensions
 @{
     var title = (string)ViewBag.Title;
@@ -6,12 +7,10 @@
     var ngController = (string)ViewBag.NgController;
 
     var titleValue = title != null
-                         ? title + " - Trellendar"
-                         : "Trellendar";
+                         ? "{0} - {1}".FormatWith(title, ApplicationConstants.APPLICATION_NAME)
+                         : ApplicationConstants.APPLICATION_NAME;
 
-    var ngAppAttribute = ngModule != null
-                         ? "ng-app='{0}'".FormatWith(ngModule)
-                         : "ng-app";
+    var ngAppAttribute = "ng-app='{0}'".FormatWith(ngModule ?? "Base");
 
     var ngControllerAttribute = ngController != null
                                     ? "ng-controller='{0}'".FormatWith(ngController)
@@ -24,15 +23,17 @@
         <meta charset="utf-8">
         <title>@titleValue</title>
         <link rel="stylesheet" type="text/css" href="~/Css/main.css"/>
-
-        <script src="~/Scripts/_custom/utils.js"></script>
+        
         <script src="~/Scripts/angular.js"></script>
+        <script src="~/Scripts/_custom/resources.js"></script>
+        <script src="~/Scripts/_custom/utils.js"></script>
+		<script src="~/Scripts/_custom/modules/base/utils.js"></script>
+		<script src='~/Scripts/_custom/modules/Base.js'></script>
         
         @if (ngModule != null)
         {
-            <script src="~/Scripts/_custom/Modules/utils.js"></script>
-            <script src="~/Scripts/_custom/Modules/http.js"></script>
-            <script src='~/Scripts/_custom/Modules/@(ngModule).js'></script>
+            <script src="~/Scripts/_custom/modules/custom/http.js"></script>
+            <script src='~/Scripts/_custom/modules/@(ngModule).js'></script>
         }
     </head>
     <body @ngAppAttribute @ngControllerAttribute>

@@ -1,6 +1,6 @@
-﻿@using Trellendar.WebSite.Nancy.Extensions
+﻿@inherits NancyRazorViewBase<Trellendar.WebSite.Modules.UserProfile.Models.IndexModel>
 @{
-    this.Initialize("Your profile", "UserProfile", "Controller");
+    this.Initialize(Resources.UserProfilePageTitle, "UserProfile", "Controller");
 }
 
 <div>
@@ -8,7 +8,7 @@
 </div>
 <div class="floatleft">
     <div>
-        Boards:
+        @Resources.BoardsItem:
     </div>
     @foreach (var board in Model.AvailableBoards)
     {
@@ -18,10 +18,10 @@
             </div>
             <div class="floatright">
                 <a href="" ng-click="BindBoard('@board.ID')" ng-hide="SelectedCalendar == null || IsBoardBound('@board.ID')">
-                    bind
+                    @Resources.BindAction
                 </a>
                 <a href="" ng-click="UnbindBoard('@board.ID')" ng-hide="!IsBoardBound('@board.ID')">
-                    unbind
+                    @Resources.UnbindAction
                 </a>
             </div>
             <div class="clear"></div>
@@ -30,7 +30,7 @@
 </div>
 <div class="floatright">
     <div>
-        Calendars:
+        @Resources.CalendarsItem:
     </div>
     @foreach (var calendar in Model.AvailableCalendars)
     {
@@ -40,10 +40,10 @@
             </div>
             <div class="floatright">
                 <a href="" ng-click="BindCalendar('@calendar.ID')" ng-hide="SelectedBoard == null || IsCalendarBound('@calendar.ID')">
-                    bind
+                    @Resources.BindAction
                 </a>
                 <a href="" ng-click="UnbindCalendar('@calendar.ID')" ng-hide="!IsCalendarBound('@calendar.ID')">
-                    unbind
+                    @Resources.UnbindAction
                 </a>
             </div>
             <div class="clear"></div>
@@ -53,7 +53,7 @@
 <div class="clear"></div>
 <div>
     <a href="" ng-click="Save()">
-        Save
+        @Resources.SaveAction
     </a>
     <div>
         {{Message}}

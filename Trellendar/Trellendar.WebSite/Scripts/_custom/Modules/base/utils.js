@@ -1,4 +1,9 @@
 ﻿angular.module('utils', [])
+	.filter('format', function() {
+		return function (text, args) {
+			return format(text, args);
+		};
+	})
     .directive('redirect', function() {
         return {
             restrict: 'A',

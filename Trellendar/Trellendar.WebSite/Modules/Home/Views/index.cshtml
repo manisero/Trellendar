@@ -1,30 +1,23 @@
-﻿@using Trellendar.WebSite.Nancy.Extensions
-@{
+﻿@{
     this.Initialize();
 }
-
-<img src="~/Content/nancy-logo.png" alt="Nancy logo" />
-<br />
-<div>
-    This view was rendered using the Nancy Razor view engine
-</div>
 
 @if (!Html.IsAuthenticated)
 {
     <div>
-        <a href="~/LogIn">Log in with Google</a>
+        <a href="~/LogIn">@Resources.GoogleLogInAction</a>
     </div>
 }
 else
 {
     <div>
-        Hello, @Html.CurrentUser.UserName
+        @Resources.UserGreeting.FormatWith(Html.CurrentUser.UserName)
         <ul>
             <li>
-                <a href="~/UserProfile">View your profile</a>
+                <a href="~/UserProfile">@Resources.ViewProfileAction</a>
             </li>
             <li>
-                <a href="~/LogOut">Log out</a>
+                <a href="~/LogOut">@Resources.LogOutAction</a>
             </li>
         </ul>
     </div>

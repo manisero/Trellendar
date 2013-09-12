@@ -1,14 +1,16 @@
-﻿@using Trellendar.WebSite.Nancy.Extensions
+﻿@inherits NancyRazorViewBase<Trellendar.WebSite.Modules.LogIn.Models.TrelloLogInModel>
 @{
-    this.Initialize("Trello Log In", "LogIn");
+    this.Initialize(Resources.TrelloLogInPageTitle, "LogIn");
 }
 
 <div>
-    Click <a href="" redirect="@Html.Raw(Model.AuthorizationUrl)">here</a>
-    to retrieve a token allowing Trellendar to read your Trello data.
+    @Resources.TrelloAuthorizationPrompt
+    <a href="" redirect="@Html.Raw(Model.AuthorizationUrl)">
+        @Resources.ClickAction
+    </a>
 </div>
 <div>
-    Please paste the token here and click "submit" button:
+    @Resources.TrelloTokenPrompt
 </div>
 <form action="~/TrelloLogInCallback">
     <input type="hidden" name="UserID" value="@Model.UserID" />

@@ -1,4 +1,4 @@
-﻿angular.module('UserProfile', ['http'])
+﻿angular.module('UserProfile', ['Base', 'http'])
     .controller("Controller", ['$scope', 'Model', '$http', 'AjaxService', function($scope, model, $http, ajaxService) {
         $scope.Bonds = model.BoardCalendarBonds;
         $scope.SelectedBoard = model.BoardCalendarBonds.length != 0 ? model.BoardCalendarBonds[0].BoardID : null;
@@ -75,7 +75,7 @@
         $scope.Save = function() {
             ajaxService.send($http.post("/UserProfile/Save", $scope.Bonds),
                 function() {
-                    $scope.Message = 'Profile saved successfully';
+                    $scope.Message = resources.ProfileSavedMessage;
                 },
                 function(errorMessage) {
                     $scope.Message = errorMessage;

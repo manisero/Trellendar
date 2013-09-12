@@ -14,7 +14,7 @@
                     }
                 })
                 .error(function() {
-                    $scope.Message = 'Unknown error';
+                    $scope.Message = resources.UnknownErrorMessage;
                 });
         };
     });
