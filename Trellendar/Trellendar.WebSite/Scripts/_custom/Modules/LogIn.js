@@ -1,1 +1,1 @@
-﻿angular.module('LogIn', ['Base', 'utils']);
+﻿angular.module('LogIn', ['utils']);

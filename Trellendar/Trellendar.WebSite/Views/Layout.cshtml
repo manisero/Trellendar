@@ -10,7 +10,7 @@
                          ? "{0} - {1}".FormatWith(title, ApplicationConstants.APPLICATION_NAME)
                          : ApplicationConstants.APPLICATION_NAME;
 
-    var ngAppAttribute = "ng-app='{0}'".FormatWith(ngModule ?? "Base");
+    var ngAppAttribute = "ng-app='{0}'".FormatWith(ngModule ?? string.Empty);
 
     var ngControllerAttribute = ngController != null
                                     ? "ng-controller='{0}'".FormatWith(ngController)
@@ -27,8 +27,6 @@
         <script src="~/Scripts/angular.js"></script>
         <script src="~/Scripts/_custom/resources.js"></script>
         <script src="~/Scripts/_custom/utils.js"></script>
-        <script src="~/Scripts/_custom/modules/base/localization.js"></script>
-        <script src="~/Scripts/_custom/modules/Base.js"></script>
         
         @if (ngModule != null)
         {

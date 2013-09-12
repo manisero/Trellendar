@@ -405,10 +405,8 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\_custom\modules\Base.js" />
     <Content Include="Scripts\_custom\resources.js" />
     <Content Include="Scripts\_custom\modules\custom\http.js" />
-    <Content Include="Scripts\_custom\modules\base\localization.js" />
     <Content Include="Scripts\_custom\modules\UserProfile.js" />
     <Content Include="Scripts\_custom\modules\LogIn.js" />
     <Content Include="Scripts\_custom\modules\custom\utils.js" />
