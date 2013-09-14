@@ -7,10 +7,6 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
     {
         protected override void ConfigureEntity(EntityTypeConfiguration<BoardCalendarBondSettings> entity)
         {
-            entity.HasKey(x => new { x.UserID, x.BoardID, x.CalendarID });
-
-            entity.HasRequired(x => x.BoardCalendarBond);
-
             entity.Property(x => x.TrelloItemShortcutBeginningMarker).HasMaxLength(10);
             entity.Property(x => x.TrelloItemShortcutEndMarker).HasMaxLength(10);
             entity.Property(x => x.CardEventNameTemplate).HasMaxLength(50);

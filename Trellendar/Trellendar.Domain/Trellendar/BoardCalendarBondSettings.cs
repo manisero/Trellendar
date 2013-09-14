@@ -4,13 +4,7 @@ namespace Trellendar.Domain.Trellendar
 {
     public class BoardCalendarBondSettings
     {
-        public Guid UserID { get; set; }
-
-        public string BoardID { get; set; }
-
-        public string CalendarID { get; set; }
-
-        public virtual BoardCalendarBond BoardCalendarBond { get; set; }
+        public int BoardCalendarBondSettingsID { get; set; }
 
         public string TrelloItemShortcutBeginningMarker { get; set; }
 

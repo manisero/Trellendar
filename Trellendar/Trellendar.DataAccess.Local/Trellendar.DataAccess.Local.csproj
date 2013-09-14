@@ -131,6 +131,14 @@
     <Compile Include="Migrations\201309012321401_UserCreateTS.Designer.cs">
       <DependentUpon>201309012321401_UserCreateTS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309141102143_DefaultBondSettingsIntroduction.cs" />
+    <Compile Include="Migrations\201309141102143_DefaultBondSettingsIntroduction.Designer.cs">
+      <DependentUpon>201309141102143_DefaultBondSettingsIntroduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309141117514_DefaultSettingsBecomeRequired.cs" />
+    <Compile Include="Migrations\201309141117514_DefaultSettingsBecomeRequired.Designer.cs">
+      <DependentUpon>201309141117514_DefaultSettingsBecomeRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiguration\Configurations\BoardCalendarBondConfiguration.cs" />
     <Compile Include="ModelConfiguration\Configurations\BoardCalendarBondSettingsConfiguration.cs" />
@@ -211,6 +219,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309012321401_UserCreateTS.resx">
       <DependentUpon>201309012321401_UserCreateTS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309141102143_DefaultBondSettingsIntroduction.resx">
+      <DependentUpon>201309141102143_DefaultBondSettingsIntroduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309141117514_DefaultSettingsBecomeRequired.resx">
+      <DependentUpon>201309141117514_DefaultSettingsBecomeRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

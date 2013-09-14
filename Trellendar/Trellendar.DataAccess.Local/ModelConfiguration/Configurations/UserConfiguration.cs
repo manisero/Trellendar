@@ -14,6 +14,8 @@ namespace Trellendar.DataAccess.Local.ModelConfiguration.Configurations
             entity.Property(x => x.GoogleAccessToken).IsRequired().HasMaxLength(100);
             entity.Property(x => x.GoogleRefreshToken).IsRequired().HasMaxLength(100);
             entity.Property(x => x.TrelloAccessToken).IsRequired().HasMaxLength(100);
+
+            entity.HasRequired(x => x.DefaultBondSettings);
         }
     }
 }
