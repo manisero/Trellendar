@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
@@ -51,6 +52,14 @@ namespace Trellendar.Logic.UserManagement._Impl
                 bond.CreateTS = DateTime.UtcNow;
                 existingBonds.Add(bond);
             }
+
+            _unitOfWork.SaveChanges();
+        }
+
+        public void UpdateDefaultBoardCalendarBondSettings(BoardCalendarBondSettings settings)
+        {
+            Mapper.Map(settings, _userContext.User.DefaultBondSettings);
+            _userContext.User.DefaultBondSettings.UpdateTS = DateTime.UtcNow;
 
             _unitOfWork.SaveChanges();
         }

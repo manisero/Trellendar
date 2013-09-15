@@ -426,6 +426,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapperBootstrapper.cs" />
+    <Compile Include="AutoMapper\Profiles\DomainProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\WebSiteProfile.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Logic\ILogInService.cs" />
     <Compile Include="Logic\IUserContextRegistrar.cs" />

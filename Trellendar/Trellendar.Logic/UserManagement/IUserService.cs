@@ -12,5 +12,7 @@ namespace Trellendar.Logic.UserManagement
         IEnumerable<Calendar> GetAvailableCalendars();
 
         void UpdateBoardCalendarBonds(IEnumerable<BoardCalendarBond> bonds);
+
+        void UpdateDefaultBoardCalendarBondSettings(BoardCalendarBondSettings settings);
     }
 }

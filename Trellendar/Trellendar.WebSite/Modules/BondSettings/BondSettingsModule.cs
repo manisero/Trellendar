@@ -3,18 +3,22 @@ using Nancy;
 using Nancy.Security;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
+using Trellendar.Logic.UserManagement;
 using Trellendar.WebSite.Modules.BondSettings.Models;
+using Nancy.ModelBinding;
 
 namespace Trellendar.WebSite.Modules.BondSettings
 {
     public class BondSettingsModule : NancyModule
     {
         private readonly UserContext _userContext;
+        private readonly IUserService _userService;
 
-        public BondSettingsModule(UserContext userContext)
+        public BondSettingsModule(UserContext userContext, IUserService userService)
             : base("BondSettings")
         {
             _userContext = userContext;
+            _userService = userService;
             this.RequiresAuthentication();
 
             Get["/"] = Index;
@@ -30,6 +34,10 @@ namespace Trellendar.WebSite.Modules.BondSettings
 
         public dynamic Save(dynamic parameters)
         {
+            var model = this.BindAndValidate<IndexModel>();
+
+            _userService.UpdateDefaultBoardCalendarBondSettings(Mapper.Map<IndexModel, BoardCalendarBondSettings>(model));
+
             return null;
         }
     }
