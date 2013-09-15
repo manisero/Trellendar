@@ -29,5 +29,24 @@ namespace Trellendar.Domain.Trellendar
         public DateTime CreateTS { get; set; }
 
         public DateTime UpdateTS { get; set; }
+
+        public static BoardCalendarBondSettings CreateDefault(DateTime timeStamp)
+        {
+            return new BoardCalendarBondSettings
+                {
+                    TrelloItemShortcutBeginningMarker = "[",
+                    TrelloItemShortcutEndMarker = "]",
+                    CardEventNameTemplate = "[{0}] {1}",
+                    CheckListEventNameTemplate = "[{0}] {1}",
+                    CheckListEventDoneSuffix = " (done)",
+                    WholeDayEventDueTime = new TimeSpan(0, 0, 0),
+                    DueTextBeginningMarker = "[",
+                    DueTextEndMarker = "]",
+                    LocationTextBeginningMarker = "{",
+                    LocationTextEndMarker = "}",
+                    CreateTS = timeStamp,
+                    UpdateTS = timeStamp
+                };
+        }
     }
 }

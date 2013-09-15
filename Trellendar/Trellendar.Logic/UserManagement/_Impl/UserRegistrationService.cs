@@ -75,6 +75,7 @@ namespace Trellendar.Logic.UserManagement._Impl
                     GoogleAccessToken = unregisteredUser.GoogleAccessToken,
                     GoogleAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
                     GoogleRefreshToken = unregisteredUser.GoogleRefreshToken,
+                    DefaultBondSettings = BoardCalendarBondSettings.CreateDefault(DateTime.UtcNow),
 					CreateTS = DateTime.UtcNow
                 };
 
