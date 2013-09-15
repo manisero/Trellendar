@@ -34,14 +34,8 @@ namespace Trellendar.Logic.UserManagement._Impl
 
         public bool TryCreateUnregisteredUser(Token token, out Guid unregisteredUserId)
         {
-            var unregisteredUser = new UnregisteredUser
-            {
-                Email = token.UserEmail,
-                GoogleAccessToken = token.AccessToken,
-                GoogleAccessTokenExpirationTS = token.GetExpirationTS(),
-                GoogleRefreshToken = token.RefreshToken,
-                CreateTS = DateTime.UtcNow
-            };
+            var unregisteredUser = token.MapTo<UnregisteredUser>();
+            unregisteredUser.CreateTS = DateTime.UtcNow;
 
             try
             {
@@ -68,16 +62,10 @@ namespace Trellendar.Logic.UserManagement._Impl
                 throw new InvalidOperationException("Unregistered User of ID '{0}' does not exist in the database".FormatWith(unregisteredUserId));
             }
 
-            var user = new User
-                {
-                    Email = unregisteredUser.Email,
-                    TrelloAccessToken = trelloAccessToken,
-                    GoogleAccessToken = unregisteredUser.GoogleAccessToken,
-                    GoogleAccessTokenExpirationTS = unregisteredUser.GoogleAccessTokenExpirationTS,
-                    GoogleRefreshToken = unregisteredUser.GoogleRefreshToken,
-                    DefaultBondSettings = BoardCalendarBondSettings.CreateDefault(DateTime.UtcNow),
-					CreateTS = DateTime.UtcNow
-                };
+            var user = unregisteredUser.MapTo<User>();
+            user.TrelloAccessToken = trelloAccessToken;
+            user.DefaultBondSettings = BoardCalendarBondSettings.CreateDefault(DateTime.UtcNow);
+            user.CreateTS = DateTime.UtcNow;
 
             _repositoryFactory.Create<User>().Add(user);
             unregisteredUserRepository.Remove(unregisteredUser);

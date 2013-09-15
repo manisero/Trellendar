@@ -6,6 +6,7 @@ using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
 using Trellendar.WebSite.Modules.BondSettings.Models;
 using Nancy.ModelBinding;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.WebSite.Modules.BondSettings
 {
@@ -36,7 +37,7 @@ namespace Trellendar.WebSite.Modules.BondSettings
         {
             var model = this.BindAndValidate<IndexModel>();
 
-            _userService.UpdateDefaultBoardCalendarBondSettings(Mapper.Map<IndexModel, BoardCalendarBondSettings>(model));
+            _userService.UpdateDefaultBoardCalendarBondSettings(model.MapTo<BoardCalendarBondSettings>());
 
             return null;
         }

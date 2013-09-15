@@ -8,6 +8,7 @@ using System.Linq;
 using Nancy.ModelBinding;
 using Trellendar.WebSite.Modules.Bonds.Models;
 using Trellendar.WebSite.Modules._Shared;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.WebSite.Modules.Bonds
 {
@@ -36,11 +37,7 @@ namespace Trellendar.WebSite.Modules.Bonds
             var model = new IndexModel
                 {
                     Email = _userContext.User.Email,
-                    BoardCalendarBonds = _userContext.User.BoardCalendarBonds.Select(x => new BoardCalendarBondModel
-                        {
-                            BoardID = x.BoardID,
-                            CalendarID = x.CalendarID
-                        }),
+                    BoardCalendarBonds = _userContext.User.BoardCalendarBonds.MapTo<BoardCalendarBondModel>(),
                     AvailableBoards = boards.Select(x => new BoardModel
                         {
                             ID = x.Id,

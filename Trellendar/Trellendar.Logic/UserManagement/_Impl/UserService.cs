@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AutoMapper;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
@@ -8,6 +7,7 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using System.Linq;
+using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.UserManagement._Impl
 {
@@ -41,7 +41,6 @@ namespace Trellendar.Logic.UserManagement._Impl
             var existingBonds = _userContext.User.BoardCalendarBonds;
 
             var toRemove = existingBonds.Where(x => !bonds.Any(bond => bond.BoardID == x.BoardID && bond.CalendarID == x.CalendarID)).ToList();
-
             toRemove.ForEach(x => existingBonds.Remove(x));
 
             var toAdd = bonds.Where(x => !existingBonds.Any(bond => bond.BoardID == x.BoardID && bond.CalendarID == x.CalendarID)).ToList();
@@ -58,7 +57,7 @@ namespace Trellendar.Logic.UserManagement._Impl
 
         public void UpdateDefaultBoardCalendarBondSettings(BoardCalendarBondSettings settings)
         {
-            Mapper.Map(settings, _userContext.User.DefaultBondSettings);
+            _userContext.User.DefaultBondSettings.MapFrom(settings);
             _userContext.User.DefaultBondSettings.UpdateTS = DateTime.UtcNow;
 
             _unitOfWork.SaveChanges();

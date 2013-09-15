@@ -7,6 +7,9 @@ namespace Trellendar.WebSite.AutoMapper.Profiles
     {
         protected override void Configure()
         {
+            // Bonds Module
+            Mapper.CreateMap<BoardCalendarBond, Modules.Bonds.Models.BoardCalendarBondModel>();
+
             // BondsSettings Module
             Mapper.CreateMap<BoardCalendarBondSettings, Modules.BondSettings.Models.IndexModel>();
             Mapper.CreateMap<Modules.BondSettings.Models.IndexModel, BoardCalendarBondSettings>();
