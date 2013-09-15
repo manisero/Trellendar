@@ -412,7 +412,7 @@
       <DependentUpon>resources.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\_custom\modules\custom\http.js" />
-    <Content Include="Scripts\_custom\modules\UserProfile.js" />
+    <Content Include="Scripts\_custom\modules\Bonds.js" />
     <Content Include="Scripts\_custom\modules\LogIn.js" />
     <Content Include="Scripts\_custom\modules\base\utils.js" />
     <Content Include="Scripts\_custom\utils.js" />
@@ -425,11 +425,11 @@
     <Compile Include="Logic\_Impl\LogInService.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInModel.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInResultModel.cs" />
-    <Compile Include="Modules\UserProfile\Models\BoardCalendarBondModel.cs" />
-    <Compile Include="Modules\UserProfile\Models\BoardModel.cs" />
-    <Compile Include="Modules\UserProfile\Models\CalendarModel.cs" />
-    <Compile Include="Modules\UserProfile\Models\IndexModel.cs" />
-    <Compile Include="Modules\UserProfile\UserProfileModule.cs" />
+    <Compile Include="Modules\Bonds\Models\BoardCalendarBondModel.cs" />
+    <Compile Include="Modules\Bonds\Models\BoardModel.cs" />
+    <Compile Include="Modules\Bonds\Models\CalendarModel.cs" />
+    <Compile Include="Modules\Bonds\Models\IndexModel.cs" />
+    <Compile Include="Modules\Bonds\BondsModule.cs" />
     <Compile Include="Modules\_Shared\AjaxResponse.cs" />
     <Compile Include="Nancy\Conventions\StaticContentConventions.cs" />
     <Compile Include="Nancy\Conventions\ViewLocationConventions.cs" />
@@ -462,7 +462,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Modules\Home\Views\Index.cshtml" />
-    <Content Include="Modules\UserProfile\Views\Index.cshtml" />
+    <Content Include="Modules\Bonds\Views\Index.cshtml" />
     <Content Include="Modules\LogIn\Views\TrelloLogIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

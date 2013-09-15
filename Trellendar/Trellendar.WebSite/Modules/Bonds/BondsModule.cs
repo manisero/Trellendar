@@ -11,13 +11,13 @@ using Trellendar.WebSite.Modules._Shared;
 
 namespace Trellendar.WebSite.Modules.UserProfile
 {
-    public class UserProfileModule : NancyModule
+    public class BondsModule : NancyModule
     {
         private readonly UserContext _userContext;
         private readonly IUserService _userService;
 
-        public UserProfileModule(UserContext userContext, IUserService userService)
-            : base("UserProfile")
+        public BondsModule(UserContext userContext, IUserService userService)
+            : base("Bonds")
         {
             _userContext = userContext;
             _userService = userService;

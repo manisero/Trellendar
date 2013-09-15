@@ -123,6 +123,12 @@
   <data name="BoardsItem" xml:space="preserve">
     <value>Boards</value>
   </data>
+  <data name="BondsPageTite" xml:space="preserve">
+    <value>Your Bonds</value>
+  </data>
+  <data name="BondsSavedMessage" xml:space="preserve">
+    <value>Your bonds have been saved successfully</value>
+  </data>
   <data name="CalendarsItem" xml:space="preserve">
     <value>Calendars</value>
   </data>
@@ -134,9 +140,6 @@
   </data>
   <data name="LogOutAction" xml:space="preserve">
     <value>Log out</value>
-  </data>
-  <data name="ProfileSavedMessage" xml:space="preserve">
-    <value>Your profile has been saved successfully</value>
   </data>
   <data name="SaveAction" xml:space="preserve">
     <value>Save</value>
