@@ -1,5 +1,7 @@
-﻿using Nancy;
+﻿using AutoMapper;
+using Nancy;
 using Nancy.Security;
+using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Trellendar.WebSite.Modules.BondSettings.Models;
 
@@ -21,9 +23,7 @@ namespace Trellendar.WebSite.Modules.BondSettings
 
         public dynamic Index(dynamic parameters)
         {
-            var model = new IndexModel();
-
-
+            var model = Mapper.Map<BoardCalendarBondSettings, IndexModel>(_userContext.User.DefaultBondSettings);
 
             return View[model];
         }

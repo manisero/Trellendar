@@ -43,6 +43,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -419,10 +425,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperBootstrapper.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Logic\ILogInService.cs" />
     <Compile Include="Logic\IUserContextRegistrar.cs" />
     <Compile Include="Logic\_Impl\LogInService.cs" />
+    <Compile Include="Modules\BondSettings\BondSettingsModule.cs" />
+    <Compile Include="Modules\BondSettings\Models\IndexModel.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInModel.cs" />
     <Compile Include="Modules\LogIn\Models\TrelloLogInResultModel.cs" />
     <Compile Include="Modules\Bonds\Models\BoardCalendarBondModel.cs" />
@@ -461,6 +470,7 @@
       <LastGenOutput>resources.js</LastGenOutput>
     </Content>
     <Content Include="Modules\UserProfile\Views\Index.cshtml" />
+    <Content Include="Modules\BondSettings\Views\Index.cshtml" />
     <None Include="Views\Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>

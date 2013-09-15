@@ -7,6 +7,7 @@ using Nancy.Session;
 using Ninject;
 using Trellendar.DataAccess.Local;
 using Trellendar.DataAccess.Local.Migrations;
+using Trellendar.WebSite.AutoMapper;
 using Trellendar.WebSite.Ninject;
 
 namespace Trellendar.WebSite
@@ -22,6 +23,8 @@ namespace Trellendar.WebSite
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrellendarDataContext, Configuration>());
             CookieBasedSessions.Enable(pipelines);
+
+            new AutoMapperBootstrapper().Bootstrap();
         }
 
         protected override void ConfigureRequestContainer(IKernel container, NancyContext context)

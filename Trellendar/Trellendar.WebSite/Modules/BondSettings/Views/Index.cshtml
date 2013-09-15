@@ -1,0 +1,9 @@
+﻿@inherits NancyRazorViewBase<Trellendar.WebSite.Modules.BondSettings.Models.IndexModel>
+@{
+    this.Initialize(Resources.BondSettingsPageTitle);
+}
+
+<form action="~/BondSettings/Save" method="POST">
+    <input type="text" name="TrelloItemShortcutBeginningMarker" value="@Model.TrelloItemShortcutBeginningMarker" />
+    <input type="submit" />
+</form>

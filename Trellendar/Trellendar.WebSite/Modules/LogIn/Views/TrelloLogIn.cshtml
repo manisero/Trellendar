@@ -12,7 +12,7 @@
 <div>
     @Resources.TrelloTokenPrompt
 </div>
-<form action="~/TrelloLogInCallback">
+<form action="~/TrelloLogInCallback" method="POST">
     <input type="hidden" name="UserID" value="@Model.UserID" />
     <input type="text" name="AccessToken" />
     <input type="submit" />

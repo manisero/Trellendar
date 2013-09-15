@@ -79,6 +79,15 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bond Settings.
+        /// </summary>
+        public static string BondSettingsPageTitle {
+            get {
+                return ResourceManager.GetString("BondSettingsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bonds.
         /// </summary>
         public static string BondsItem {

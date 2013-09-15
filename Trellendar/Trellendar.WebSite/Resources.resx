@@ -123,6 +123,9 @@
   <data name="BoardsItem" xml:space="preserve">
     <value>Boards</value>
   </data>
+  <data name="BondSettingsPageTitle" xml:space="preserve">
+    <value>Bond Settings</value>
+  </data>
   <data name="BondsItem" xml:space="preserve">
     <value>Bonds</value>
   </data>
