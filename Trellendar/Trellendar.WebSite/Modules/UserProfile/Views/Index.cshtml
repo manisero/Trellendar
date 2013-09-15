@@ -1,0 +1,23 @@
+﻿@inherits NancyRazorViewBase<Trellendar.WebSite.Modules.UserProfile.Models.IndexModel>
+@{
+    this.Initialize(Resources.UserProfilePageTitle);
+}
+
+<div>
+    @Model.Email
+</div>
+<div>
+    <div>
+        @Resources.BondsItem:
+    </div>
+    @foreach (var bond in Model.BoardCalendarBonds)
+    {
+        <div>
+            @("{0} - {1}".FormatWith(bond.BoardName, bond.CalendarName))
+        </div>
+    }
+</div>
+
+<a href="~/Bonds">
+    @Resources.EditAction
+</a>

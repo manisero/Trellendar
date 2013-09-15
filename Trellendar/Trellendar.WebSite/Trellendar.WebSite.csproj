@@ -460,6 +460,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>resources.js</LastGenOutput>
     </Content>
+    <Content Include="Modules\UserProfile\Views\Index.cshtml" />
     <None Include="Views\Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>

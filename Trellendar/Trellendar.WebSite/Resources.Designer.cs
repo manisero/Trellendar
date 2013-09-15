@@ -79,6 +79,15 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonds.
+        /// </summary>
+        public static string BondsItem {
+            get {
+                return ResourceManager.GetString("BondsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Bonds.
         /// </summary>
         public static string BondsPageTite {
@@ -115,6 +124,15 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EditAction {
+            get {
+                return ResourceManager.GetString("EditAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in with Google.
         /// </summary>
         public static string GoogleLogInAction {
@@ -129,6 +147,15 @@ namespace Trellendar.WebSite {
         public static string LogOutAction {
             get {
                 return ResourceManager.GetString("LogOutAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your profile.
+        /// </summary>
+        public static string ManageProfileAction {
+            get {
+                return ResourceManager.GetString("ManageProfileAction", resourceCulture);
             }
         }
         
@@ -201,15 +228,6 @@ namespace Trellendar.WebSite {
         public static string UserProfilePageTitle {
             get {
                 return ResourceManager.GetString("UserProfilePageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View your profile.
-        /// </summary>
-        public static string ViewProfileAction {
-            get {
-                return ResourceManager.GetString("ViewProfileAction", resourceCulture);
             }
         }
     }

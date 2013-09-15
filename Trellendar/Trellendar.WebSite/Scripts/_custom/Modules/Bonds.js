@@ -76,6 +76,7 @@
             ajaxService.send($http.post("/Bonds/Save", $scope.Bonds),
                 function() {
                     $scope.Message = resources.BondsSavedMessage;
+                    window.location = "/UserProfile";
                 },
                 function(errorMessage) {
                     $scope.Message = errorMessage;

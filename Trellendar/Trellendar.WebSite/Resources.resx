@@ -123,6 +123,9 @@
   <data name="BoardsItem" xml:space="preserve">
     <value>Boards</value>
   </data>
+  <data name="BondsItem" xml:space="preserve">
+    <value>Bonds</value>
+  </data>
   <data name="BondsPageTite" xml:space="preserve">
     <value>Your Bonds</value>
   </data>
@@ -135,11 +138,17 @@
   <data name="ClickAction" xml:space="preserve">
     <value>Click</value>
   </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="GoogleLogInAction" xml:space="preserve">
     <value>Log in with Google</value>
   </data>
   <data name="LogOutAction" xml:space="preserve">
     <value>Log out</value>
+  </data>
+  <data name="ManageProfileAction" xml:space="preserve">
+    <value>Manage your profile</value>
   </data>
   <data name="SaveAction" xml:space="preserve">
     <value>Save</value>
@@ -164,8 +173,5 @@
   </data>
   <data name="UserProfilePageTitle" xml:space="preserve">
     <value>Your Profile</value>
-  </data>
-  <data name="ViewProfileAction" xml:space="preserve">
-    <value>View your profile</value>
   </data>
 </root>
