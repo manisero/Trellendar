@@ -133,6 +133,15 @@ namespace Trellendar.WebSite {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit default bond settings.
+        /// </summary>
+        public static string EditDefaultBondSettingsAction {
+            get {
+                return ResourceManager.GetString("EditDefaultBondSettingsAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in with Google.
         /// </summary>
         public static string GoogleLogInAction {

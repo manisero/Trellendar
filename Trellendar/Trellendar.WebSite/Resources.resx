@@ -141,6 +141,9 @@
   <data name="EditAction" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditDefaultBondSettingsAction" xml:space="preserve">
+    <value>Edit default bond settings</value>
+  </data>
   <data name="GoogleLogInAction" xml:space="preserve">
     <value>Log in with Google</value>
   </data>
