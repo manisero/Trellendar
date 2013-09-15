@@ -1,4 +1,4 @@
-﻿namespace Trellendar.WebSite.Modules.UserProfile.Models
+﻿namespace Trellendar.WebSite.Modules.Bonds.Models
 {
     public class BoardCalendarBondModel
     {

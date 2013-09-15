@@ -4,12 +4,12 @@ using Nancy.Security;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
-using Trellendar.WebSite.Modules.UserProfile.Models;
 using System.Linq;
 using Nancy.ModelBinding;
+using Trellendar.WebSite.Modules.Bonds.Models;
 using Trellendar.WebSite.Modules._Shared;
 
-namespace Trellendar.WebSite.Modules.UserProfile
+namespace Trellendar.WebSite.Modules.Bonds
 {
     public class BondsModule : NancyModule
     {
