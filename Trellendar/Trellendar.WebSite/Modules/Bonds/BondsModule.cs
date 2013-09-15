@@ -38,16 +38,8 @@ namespace Trellendar.WebSite.Modules.Bonds
                 {
                     Email = _userContext.User.Email,
                     BoardCalendarBonds = _userContext.User.BoardCalendarBonds.MapTo<BoardCalendarBondModel>(),
-                    AvailableBoards = boards.Select(x => new BoardModel
-                        {
-                            ID = x.Id,
-                            Name = x.Name
-                        }),
-                    AvailableCalendars = calendars.Select(x => new CalendarModel
-                        {
-                            ID = x.Id,
-                            Name = x.Summary
-                        })
+                    AvailableBoards = boards.MapTo<BoardModel>(),
+                    AvailableCalendars = calendars.MapTo<CalendarModel>()
                 };
 
             return View[model];
