@@ -10,17 +10,17 @@ namespace Trellendar.WebSite.AutoMapper.Profiles
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Token, UnregisteredUser>()
+            CreateMap<Token, UnregisteredUser>()
                 .Map(x => x.UserEmail, x => x.Email)
                 .Map(x => x.AccessToken, x => x.GoogleAccessToken)
                 .Map(x => x.GetExpirationTS(), x => x.GoogleAccessTokenExpirationTS)
                 .Map(x => x.RefreshToken, x => x.GoogleRefreshToken)
                 .Ignore(x => x.CreateTS);
 
-            Mapper.CreateMap<UnregisteredUser, User>()
+            CreateMap<UnregisteredUser, User>()
                 .Ignore(x => x.CreateTS);
 
-            Mapper.CreateMap<BoardCalendarBondSettings, BoardCalendarBondSettings>()
+            CreateMap<BoardCalendarBondSettings, BoardCalendarBondSettings>()
                 .Ignore(x => x.BoardCalendarBondSettingsID)
                 .Ignore(x => x.CreateTS)
                 .Ignore(x => x.UpdateTS);

@@ -11,14 +11,14 @@ namespace Trellendar.WebSite.AutoMapper.Profiles
         protected override void Configure()
         {
             // Bonds Module
-            Mapper.CreateMap<BoardCalendarBond, Modules.Bonds.Models.BoardCalendarBondModel>();
-            Mapper.CreateMap<Board, Modules.Bonds.Models.BoardModel>();
-            Mapper.CreateMap<Calendar, Modules.Bonds.Models.CalendarModel>()
+            CreateMap<BoardCalendarBond, Modules.Bonds.Models.BoardCalendarBondModel>();
+            CreateMap<Board, Modules.Bonds.Models.BoardModel>();
+            CreateMap<Calendar, Modules.Bonds.Models.CalendarModel>()
                 .Map(x => x.Summary, x => x.Name);
 
             // BondsSettings Module
-            Mapper.CreateMap<BoardCalendarBondSettings, Modules.BondSettings.Models.IndexModel>();
-            Mapper.CreateMap<Modules.BondSettings.Models.IndexModel, BoardCalendarBondSettings>();
+            CreateMap<BoardCalendarBondSettings, Modules.BondSettings.Models.IndexModel>();
+            CreateMap<Modules.BondSettings.Models.IndexModel, BoardCalendarBondSettings>();
         }
     }
 }
