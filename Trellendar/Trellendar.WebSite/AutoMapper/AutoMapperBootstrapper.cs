@@ -7,6 +7,7 @@ namespace Trellendar.WebSite.AutoMapper
     {
         public void Bootstrap()
         {
+            Mapper.AddProfile(new CoreProfile());
             Mapper.AddProfile(new DomainProfile());
             Mapper.AddProfile(new WebSiteProfile());
         }
