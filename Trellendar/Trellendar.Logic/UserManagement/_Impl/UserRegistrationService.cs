@@ -1,8 +1,8 @@
 using System;
+using Trellendar.Core.Extensions.AutoMapper;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.Domain.Google;
 using Trellendar.Domain.Trellendar;
-using Trellendar.Logic.Domain;
 using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.UserManagement._Impl

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Trellendar.Core.Extensions.AutoMapper;
 using Trellendar.DataAccess.Local.Repository;
 using Trellendar.DataAccess.Remote.Calendar;
 using Trellendar.DataAccess.Remote.Trello;
@@ -7,7 +8,6 @@ using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
 using System.Linq;
-using Trellendar.Core.Extensions;
 
 namespace Trellendar.Logic.UserManagement._Impl
 {

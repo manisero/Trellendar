@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 using Nancy.Security;
+using Trellendar.Core.Extensions.AutoMapper;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic;
 using Trellendar.Logic.UserManagement;
@@ -8,7 +9,6 @@ using System.Linq;
 using Nancy.ModelBinding;
 using Trellendar.WebSite.Modules.Bonds.Models;
 using Trellendar.WebSite.Modules._Shared;
-using Trellendar.Core.Extensions;
 
 namespace Trellendar.WebSite.Modules.Bonds
 {

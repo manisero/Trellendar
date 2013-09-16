@@ -2,6 +2,7 @@
 using Trellendar.Domain.Calendar;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Domain.Trello;
+using Trellendar.Core.Extensions.AutoMapper;
 
 namespace Trellendar.WebSite.AutoMapper.Profiles
 {
@@ -13,7 +14,7 @@ namespace Trellendar.WebSite.AutoMapper.Profiles
             Mapper.CreateMap<BoardCalendarBond, Modules.Bonds.Models.BoardCalendarBondModel>();
             Mapper.CreateMap<Board, Modules.Bonds.Models.BoardModel>();
             Mapper.CreateMap<Calendar, Modules.Bonds.Models.CalendarModel>()
-                .ForMember(x => x.Name, o => o.MapFrom(x => x.Summary));
+                .Map(x => x.Summary, x => x.Name);
 
             // BondsSettings Module
             Mapper.CreateMap<BoardCalendarBondSettings, Modules.BondSettings.Models.IndexModel>();

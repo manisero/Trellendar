@@ -2,6 +2,7 @@
 using Trellendar.Domain.Google;
 using Trellendar.Domain.Trellendar;
 using Trellendar.Logic.Domain;
+using Trellendar.Core.Extensions.AutoMapper;
 
 namespace Trellendar.WebSite.AutoMapper.Profiles
 {
@@ -10,19 +11,19 @@ namespace Trellendar.WebSite.AutoMapper.Profiles
         protected override void Configure()
         {
             Mapper.CreateMap<Token, UnregisteredUser>()
-                .ForMember(x => x.Email, o => o.MapFrom(x => x.UserEmail))
-                .ForMember(x => x.GoogleAccessToken, o => o.MapFrom(x => x.AccessToken))
-                .ForMember(x => x.GoogleAccessTokenExpirationTS, o => o.MapFrom(x => x.GetExpirationTS()))
-                .ForMember(x => x.GoogleRefreshToken, o => o.MapFrom(x => x.RefreshToken))
-                .ForMember(x => x.CreateTS, o => o.Ignore());
+                .Map(x => x.UserEmail, x => x.Email)
+                .Map(x => x.AccessToken, x => x.GoogleAccessToken)
+                .Map(x => x.GetExpirationTS(), x => x.GoogleAccessTokenExpirationTS)
+                .Map(x => x.RefreshToken, x => x.GoogleRefreshToken)
+                .Ignore(x => x.CreateTS);
 
             Mapper.CreateMap<UnregisteredUser, User>()
-                .ForMember(x => x.CreateTS, o => o.Ignore());
+                .Ignore(x => x.CreateTS);
 
             Mapper.CreateMap<BoardCalendarBondSettings, BoardCalendarBondSettings>()
-                .ForMember(x => x.BoardCalendarBondSettingsID, o => o.Ignore())
-                .ForMember(x => x.CreateTS, o => o.Ignore())
-                .ForMember(x => x.UpdateTS, o => o.Ignore());
+                .Ignore(x => x.BoardCalendarBondSettingsID)
+                .Ignore(x => x.CreateTS)
+                .Ignore(x => x.UpdateTS);
         }
     }
 }

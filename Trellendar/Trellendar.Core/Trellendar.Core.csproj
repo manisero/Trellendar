@@ -58,7 +58,8 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="DependencyResolution\IDependencyResolver.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
-    <Compile Include="Extensions\AutoMapperExtensions.cs" />
+    <Compile Include="Extensions\AutoMapper\MappingExpressionExtensions.cs" />
+    <Compile Include="Extensions\AutoMapper\MappingExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

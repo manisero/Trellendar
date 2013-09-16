@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using AutoMapper;
 
-namespace Trellendar.Core.Extensions
+namespace Trellendar.Core.Extensions.AutoMapper
 {
-    public static class AutoMapperExtensions
+    public static class MappingExtensions
     {
         public static TDestination MapTo<TDestination>(this object source)
         {
